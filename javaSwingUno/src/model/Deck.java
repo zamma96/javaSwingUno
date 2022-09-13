@@ -92,4 +92,45 @@ public class Deck
 			cards[i] = randomCard;
 		}
 	}
+	
+	public Card drawCard() throws IllegalArgumentException
+	{
+		if (isEmpty())
+			throw new IllegalArgumentException("Cannot draw a card since the deck is empty");
+		return cards[--cardsInDeck];
+	}
+	
+	public Card[] drawCard(int a)
+	{
+		if (a < 0)
+			throw new IllegalArgumentException("Just draw positive cards but tried to draw " + a + " cards.");
+		if (a > cardsInDeck)
+			throw new IllegalArgumentException("Cannot draw " + a + " cards since there are only " + cardsInDeck + " cards left in the deck");
+		
+		Card[] drawn = new Card[a];
+		
+		//Da implementare i casi in cui le carte da pescare siano più di una e le carte rimaste nel deck meno di quelle da pescare.
+		/*
+		 * if ((a == 1) && (cardsInDeck == 1)) 
+		 * { 
+		 * 		drawn[0] = cards[--cardsInDeck]; reset(); shuffle(); 
+		 * }
+		 * if (a > cardsInDeck) 
+		 * {
+		 * 		int flag = cardsInDeck;
+		 * 		while (a <= cardsInDeck)
+		 * 		{
+		 * 			drawn[i] == cards[--cardsInDeck];
+		 * 			reset(); shuffle();
+		 * 		} 
+		 * 		for(int j = flag; j < a; j++)
+		 * 			drawn[j] == cards[--carsInDeck]
+		 * }
+		 */
+		
+		for (int i = 0; i < a; i++)
+			drawn[i] = cards[--cardsInDeck];
+		return drawn;
+		
+	}
 }
