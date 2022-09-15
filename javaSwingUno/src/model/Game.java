@@ -219,6 +219,30 @@ public class Game
 		return getPlayerHand(player).isEmpty();
 	}
 	
+	public boolean hasDrawTwo()
+	{
+		for(int i = 0; i < getPlayerHandSize(players[currentPlayer]); i++)
+			 	if (getPlayerHand(players[currentPlayer]).get(i).toString() == "RED_DRAW_TWO" || getPlayerHand(players[currentPlayer]).get(i).toString() == "BLUE_DRAW_TWO" || getPlayerHand(players[currentPlayer]).get(i).toString() == "YELLOW_DRAW_TWO" || getPlayerHand(players[currentPlayer]).get(i).toString() == "GREEN_DRAW_TWO") 
+			 		return true;
+		return false;
+	}
+	
+	public boolean isDrawTwo()
+	{
+		for(int i = 0; i < getPlayerHandSize(players[currentPlayer]); i++)
+			if (getPlayerHand(players[currentPlayer]).get(i).toString() == "RED_DRAW_TWO" || getPlayerHand(players[currentPlayer]).get(i).toString() == "BLUE_DRAW_TWO" || getPlayerHand(players[currentPlayer]).get(i).toString() == "YELLOW_DRAW_TWO" || getPlayerHand(players[currentPlayer]).get(i).toString() == "GREEN_DRAW_TWO")
+				return true;
+		return false;
+	}
+	
+	public boolean hasDrawFour()
+	{
+		for (int i = 0; i < getPlayerHandSize(players[currentPlayer]); i++)
+			if (getPlayerHand(players[currentPlayer]).get(i).toString() == "WILD_DRAW_FOUR")
+				return true;
+		return false;
+	}
+	
 	public boolean isGameOver()
 	{
 		for(Player player : this.players)
@@ -306,21 +330,15 @@ public class Game
 			validColor = declaredColor;
 		if (card.getValue() == Card.Value.DRAW_TWO)
 		{
-			//have to implement: allow the next player to answer a +2
+			//have to implement: allow the next player to answer a +2 ////NB\\\\ non so se va bene col new Card...
 			/* checkGameDirection(players);
-			 * if (getPlayerHand(players[currentPlayer]).contains(new Card(RED, DRAW_TWO) || getPlayerHand(players[currentPlayer]).contains(new Card(BLUE, DRAW_TWO) || getPlayerHand(players[currentPlayer]).contains(new Card(YELLOW, DRAW_TWO) || getPlayerHand(players[currentPlayer]).contains(new Card(GREEN, DRAW_TWO))
+			 * if (hasDrawTwo())
 			 * for(int i = 0; i < getPlayerHandSize(players[currentPlayer]); i++)
 			 * {
-			 * 		if (getPlayerHand(players[currentPlayer]).get(i).toString() == "RED_DRAW_TWO")
-			 * 			submitPlayerCard(players[currentPlayer], getPlayerHand(players[currentPlayer]).get(i), declaredColor);
-			 * 		else if (getPlayerHand(players[currentPlayer]).get(i).toString() == "BLUE_DRAW_TWO")
-			 * 			submitPlayerCard(players[currentPlayer], getPlayerHand(players[currentPlayer]).get(i), declaredColor);
-			 * 		else if (getPlayerHand(players[currentPlayer]).get(i).toString() == "YELLOW_DRAW_TWO")
-			 * 			submitPlayerCard(players[currentPlayer], getPlayerHand(players[currentPlayer]).get(i), declaredColor);
-			 * 		else if (getPlayerHand(players[currentPlayer]).get(i).toString() == "GREEN_DRAW_TWO")
+			 * 		if (isDrawTwo())
 			 * 			submitPlayerCard(players[currentPlayer], getPlayerHand(players[currentPlayer]).get(i), declaredColor); 
 			 * }
-			 * 
+			 * else{aggiorna il giocatore, pesca carte, mostra popup}
 			 */
 			player = players[currentPlayer];
 			getPlayerHand(player).add(deck.drawCard());
@@ -332,13 +350,13 @@ public class Game
 			//have to implement: allow the next player to answer a +4 ////NB\\\\ non so se va bene col new Card...
 			/*
 			 * checkGameDirection(players);
-			 * if (getPlayerHand(players[currentPlayer]).contains(new Card(Card.Color.WILD, Card.Value.DRAW_FOUR)));
+			 * if (hasDrawFour());
 			 * 		for(int i = 0; i < getPlayerHandSize(players[currentPlayer]), i++)
 			 * 		{
 			 * 			if (getPlayerHand(players[currentPlayer]).get(i).toString() == "WILD_DRAW_FOUR")
 			 * 				submitPlayerCard(players[currentPlayer], getPlayerHand(players[currentPlayer]).get(i), declaredColor); 
 			 * 		}
-			 * 		 
+			 * 	else{aggiorna il giocatore, pesca carte, mostra popup}
 			 */
 			player = players[currentPlayer];
 			getPlayerHand(player).add(deck.drawCard());
