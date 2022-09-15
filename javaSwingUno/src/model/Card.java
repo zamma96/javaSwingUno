@@ -50,4 +50,21 @@ public class Card
 		return color + "_" + value;
 	}
 	
+	//(this.value == Card.Value.ONE)
+    /**
+     * Gets the score based on the faceValue of the card.
+     * Numbered cards are their face value, wild and +4 are worth 50,
+     * and others are worth 20.
+     *
+     * @return The calculated score for this card.
+     */
+    public int getScoreValue() 
+    {
+        if(this.value == Card.Value.ONE || (this.value == Card.Value.TWO) || (this.value == Card.Value.THREE) ||
+        		(this.value == Card.Value.FOUR) || (this.value == Card.Value.FIVE) || (this.value == Card.Value.SIX) ||
+        		(this.value == Card.Value.SEVEN) || (this.value == Card.Value.EIGHT) || (this.value == Card.Value.NINE))
+        	return 10;
+        else if(this.getValue() == Card.Value.DRAW_FOUR || this.getValue() == Card.Value.COLOR_CHANGE) return 50;
+        else return 20;
+    }
 }
