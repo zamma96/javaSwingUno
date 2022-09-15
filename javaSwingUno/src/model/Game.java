@@ -107,6 +107,13 @@ public class Game
 		JOptionPane.showMessageDialog(null, message);
 	}
 	
+	/*
+	 * @param player
+	 * gets the mostFrequentColor on any Player's hand, selected by passing the player.
+	 * with stream takes the list of all the player's hand's cards, splits it by underescore
+	 * then count the most frequent value between the colors, without counting the wild one,
+	 * because this method is needed to help the CPU selecting the card to submit.
+	 */
 	public Card.Color getMostFrequentColor(Player player)
 	{
 		String red = "RED"; String blue = "BLUE"; String yellow = "YELLOW"; String green = "GREEN";
@@ -299,6 +306,22 @@ public class Game
 			validColor = declaredColor;
 		if (card.getValue() == Card.Value.DRAW_TWO)
 		{
+			//have to implement: allow the next player to answer a +2
+			/* checkGameDirection(players);
+			 * if (getPlayerHand(players[currentPlayer]).contains(new Card(RED, DRAW_TWO) || getPlayerHand(players[currentPlayer]).contains(new Card(BLUE, DRAW_TWO) || getPlayerHand(players[currentPlayer]).contains(new Card(YELLOW, DRAW_TWO) || getPlayerHand(players[currentPlayer]).contains(new Card(GREEN, DRAW_TWO))
+			 * for(int i = 0; i < getPlayerHandSize(players[currentPlayer]); i++)
+			 * {
+			 * 		if (getPlayerHand(players[currentPlayer]).get(i).toString() == "RED_DRAW_TWO")
+			 * 			submitPlayerCard(players[currentPlayer], getPlayerHand(players[currentPlayer]).get(i), declaredColor);
+			 * 		else if (getPlayerHand(players[currentPlayer]).get(i).toString() == "BLUE_DRAW_TWO")
+			 * 			submitPlayerCard(players[currentPlayer], getPlayerHand(players[currentPlayer]).get(i), declaredColor);
+			 * 		else if (getPlayerHand(players[currentPlayer]).get(i).toString() == "YELLOW_DRAW_TWO")
+			 * 			submitPlayerCard(players[currentPlayer], getPlayerHand(players[currentPlayer]).get(i), declaredColor);
+			 * 		else if (getPlayerHand(players[currentPlayer]).get(i).toString() == "GREEN_DRAW_TWO")
+			 * 			submitPlayerCard(players[currentPlayer], getPlayerHand(players[currentPlayer]).get(i), declaredColor); 
+			 * }
+			 * 
+			 */
 			player = players[currentPlayer];
 			getPlayerHand(player).add(deck.drawCard());
 			getPlayerHand(player).add(deck.drawCard());
@@ -306,6 +329,17 @@ public class Game
 		}
 		if (card.getValue() == Card.Value.DRAW_FOUR)
 		{
+			//have to implement: allow the next player to answer a +4 ////NB\\\\ non so se va bene col new Card...
+			/*
+			 * checkGameDirection(players);
+			 * if (getPlayerHand(players[currentPlayer]).contains(new Card(Card.Color.WILD, Card.Value.DRAW_FOUR)));
+			 * 		for(int i = 0; i < getPlayerHandSize(players[currentPlayer]), i++)
+			 * 		{
+			 * 			if (getPlayerHand(players[currentPlayer]).get(i).toString() == "WILD_DRAW_FOUR")
+			 * 				submitPlayerCard(players[currentPlayer], getPlayerHand(players[currentPlayer]).get(i), declaredColor); 
+			 * 		}
+			 * 		 
+			 */
 			player = players[currentPlayer];
 			getPlayerHand(player).add(deck.drawCard());
 			getPlayerHand(player).add(deck.drawCard());

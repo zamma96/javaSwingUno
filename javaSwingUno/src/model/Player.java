@@ -16,6 +16,11 @@ public class Player
 		this.human = human; this.playerHand = playerHand;
 	}
 	
+	public int getPlayerId()
+	{
+		return this.playerId;
+	}
+	
 	public ArrayList<Card> getHand()
 	{
 		return this.playerHand;
@@ -35,15 +40,9 @@ public class Player
 	{
 		return this.nickName;
 	}
-
-	/**
-	 * Checks for valid actions that can be taken by this player and
-	 * performs them if there is the ability to.
-	 *
-	 * @param deltaTime Time since last update.
-	 */
-	public void update(int deltaTime) {
-		// nothing
-		
+	
+	public boolean isHuman()
+	{
+		return human;
 	}
 }
