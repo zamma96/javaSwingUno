@@ -173,6 +173,11 @@ public class Game
 		return hand.get(choice);
 	}
 	
+	public Deck getDeck()
+	{
+		return this.deck;
+	}
+	
 	public boolean hasEmptyHand(Player player)
 	{
 		return getPlayerHand(player).isEmpty();
