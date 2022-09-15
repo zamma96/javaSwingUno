@@ -61,6 +61,12 @@ public class User
 		this.level = level;
 	}
 	
+	public void maxLevelReward()
+	{
+		if (this.level == 10);
+			this.avatar = avatar.getMaxLevelAvatar();
+	}
+	
 	//Devo capire dove ficcare il metodo per gestire il livello dell'utente,
 	//capire se per le partite giocate serve una map o basta un'ArrayList
 	//public void setMaxLevelAvatar()
