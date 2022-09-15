@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.stream.Collectors;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -104,6 +105,34 @@ public class Game
 		message.setBackground(new Color(53,101,77));
 		message.setForeground(new Color(255, 145, 164));
 		JOptionPane.showMessageDialog(null, message);
+	}
+	
+	public Card.Color getMostFrequentColor(Player player)
+	{
+		String red = "RED"; String blue = "BLUE"; String yellow = "YELLOW"; String green = "GREEN";
+		int redCounter = 0; int blueCounter = 0; int yellowCounter = 0; int greenCounter = 0;
+		String listString = getPlayerHand(getCurrentPlayer()).stream().map(Object::toString).collect(Collectors.joining("_"));
+        String[] cardNames = listString.split("_");
+        for (int i = 0; i < cardNames.length; i++)
+        {
+        	if (cardNames[i] == red)
+        		redCounter ++;
+        	else if (cardNames[i] == blue)
+        		blueCounter++;
+        	else if (cardNames[i] == yellow)
+        		yellowCounter++;
+        	else if (cardNames[i] == green)
+        		greenCounter++;
+        }
+        if (redCounter > blueCounter && redCounter > yellowCounter && redCounter > greenCounter)
+        	return Card.Color.RED;
+        else if (blueCounter > redCounter && blueCounter > yellowCounter && blueCounter > greenCounter)
+        	return Card.Color.BLUE;
+        else if (yellowCounter > redCounter && yellowCounter > blueCounter && yellowCounter > greenCounter)
+        	return Card.Color.YELLOW;
+        else if (greenCounter > redCounter && greenCounter > blueCounter && greenCounter > yellowCounter)
+        	return Card.Color.GREEN;
+        return Card.Color.WILD;
 	}
 	
 	public void start(Game game)
