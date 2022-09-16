@@ -9,16 +9,16 @@ public class User
 
 	private String nickName;
 	private Avatar avatar;
-	private Map<String, Integer> gamesPlayed;
+	private GamesPlayed gamesPlayed;
 	private int level;
 	
 	//when building the user, the first int index has to be selected from 1 to 9 to select an avatar
-	public User(String nickName, int index, Map<String, Integer> gamesPlayed, int level)
+	public User(String nickName, int index)
 	{
 		this.setNickName(nickName);
-		this.avatar = new Avatar();
-		this.setGamesPlayed(gamesPlayed);
-		this.setLevel(level);
+		this.avatar = new Avatar(index);
+		this.gamesPlayed = new GamesPlayed(this);
+		this.setLevel(1);
 	}
 
 	public String getNickName() 
@@ -41,14 +41,19 @@ public class User
 		this.avatar = new Avatar(index);
 	}
 
-	public Map<String, Integer> getGamesPlayed() 
+	public int getGamesPlayed() 
 	{
-		return this.gamesPlayed;
+		return gamesPlayed.getGamesPlayed(this);
 	}
-
-	public void setGamesPlayed(Map<String, Integer> gamesPlayed) 
+	
+	public int getGamesWon()
 	{
-		this.gamesPlayed = gamesPlayed;
+		return gamesPlayed.getGamesWon(this);
+	}
+	
+	public int getGamesLoss()
+	{
+		return gamesPlayed.getGamesLoss(this);
 	}
 
 	public int getLevel() 
@@ -65,6 +70,31 @@ public class User
 	{
 		if (this.level == 10);
 			this.avatar = avatar.getMaxLevelAvatar();
+	}
+	
+	public void levelUp()
+	{
+		switch(level) {
+		case 1: if(gamesPlayed.getGamesPlayed(this) == 2)
+			level++;
+		case 2: if(gamesPlayed.getGamesPlayed(this) == 4)
+			level++;
+		case 3: if(gamesPlayed.getGamesPlayed(this) == 6)
+			level++;
+		case 4: if(gamesPlayed.getGamesPlayed(this) == 9)
+			level++;
+		case 5: if(gamesPlayed.getGamesPlayed(this) == 12)
+			level++;
+		case 6: if(gamesPlayed.getGamesPlayed(this) == 15)
+			level++;
+		case 7: if(gamesPlayed.getGamesPlayed(this) == 20)
+			level++;
+		case 8: if(gamesPlayed.getGamesPlayed(this) == 25)
+			level++;
+		case 9: if(gamesPlayed.getGamesPlayed(this) == 30)
+			level++;
+		
+		}
 	}
 	
 	//Devo capire dove ficcare il metodo per gestire il livello dell'utente,
