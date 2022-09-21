@@ -35,6 +35,11 @@ public class User
 	{
 		return this.avatar;
 	}
+	
+	public String getAvatarInfo()
+	{
+		return this.avatar.toString();
+	}
 
 	public void setAvatar(int index) 
 	{

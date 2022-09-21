@@ -12,12 +12,14 @@ public class Avatar
 	{
 		Icon icon = new ImageIcon(".\\resources\\Avatars\\default.png");
 		this.avatarIcon = (ImageIcon) icon;
+		avatarIcon.setDescription("default");
 	}
 	
 	//avatar constructor within a pull of avatar icons
 	public Avatar(int index)
 	{
 		this.avatarIcon = new ImageIcon(".\\resources\\Avatars\\" + "Avatar_" + index + ".png");
+		this.avatarIcon.setDescription("Avatar_" + index);
 	}
 	
 	public ImageIcon getAvatar()
@@ -29,6 +31,12 @@ public class Avatar
 	{
 		this.avatarIcon = new ImageIcon(".\\resources\\Avatars\\goldenAvatar.png");
 		return this;
+	}
+	
+	 @Override
+	public String toString()
+	{
+		return this.getAvatar().getDescription();
 	}
 }
 
