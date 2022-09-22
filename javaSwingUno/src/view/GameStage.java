@@ -1,8 +1,16 @@
 package view;
 
-public class GameStage 
-{
+import javax.swing.JFrame;
 
-	public GameStage() {}
+import model.User;
+
+public class GameStage extends JFrame
+{
+	private User user;
+
+	public GameStage(User user) 
+	{
+		this.user = user;
+	}
 	
 }
