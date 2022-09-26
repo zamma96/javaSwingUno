@@ -8,7 +8,11 @@ import model.User;
 
 public class Controller 
 {
-	DataBase dataBase = new DataBase();
+	DataBase dataBase;
+	public Controller()
+	{
+	dataBase = new DataBase();
+	}
 	
 	public void addUser(User user)
 	{		

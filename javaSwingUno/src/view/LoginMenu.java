@@ -9,7 +9,8 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import model.DataBase;
 
-public class LoginMenu extends javax.swing.JFrame {
+public class LoginMenu extends javax.swing.JFrame 
+{
 
 	private DataBase dataBase;
 	private File dataFile;
@@ -51,7 +52,7 @@ public class LoginMenu extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/juno/sources/unoLogo.png"))); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/juno/sources/unoLogo.png")));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -72,17 +73,17 @@ public class LoginMenu extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(53, 101, 77));
 
-        LoginLabel.setFont(new java.awt.Font("Segoe UI", 0, 32)); // NOI18N
+        LoginLabel.setFont(new java.awt.Font("Segoe UI", 0, 32));
         LoginLabel.setForeground(new java.awt.Color(255, 255, 255));
         LoginLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         LoginLabel.setText("Login");
 
-        WelcomeLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        WelcomeLabel.setFont(new java.awt.Font("Segoe UI", 0, 14));
         WelcomeLabel.setForeground(new java.awt.Color(255, 255, 255));
         WelcomeLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         WelcomeLabel.setText("Hello! Let's play!");
 
-        UsernameLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        UsernameLabel.setFont(new java.awt.Font("Segoe UI", 0, 14));
         UsernameLabel.setForeground(new java.awt.Color(255, 255, 255));
         UsernameLabel.setText("Username:");
 
@@ -102,7 +103,7 @@ public class LoginMenu extends javax.swing.JFrame {
         UsernameIconLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         UsernameIconLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/juno/sources/icons8_customer_20px_1.png"))); // NOI18N
 
-        LoginButton.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        LoginButton.setFont(new java.awt.Font("Segoe UI", 1, 14));
         LoginButton.setForeground(new java.awt.Color(53, 101, 77));
         LoginButton.setText("LOGIN");
         LoginButton.addActionListener(new java.awt.event.ActionListener() {
@@ -111,7 +112,7 @@ public class LoginMenu extends javax.swing.JFrame {
             }
         });
 
-        SignUpLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        SignUpLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); 
         SignUpLabel.setForeground(new java.awt.Color(255, 255, 255));
         SignUpLabel.setText("Don't have an account?");
 
@@ -194,7 +195,6 @@ public class LoginMenu extends javax.swing.JFrame {
 
         pack();
         setLocationRelativeTo(null);
-    //end of InitComponent
     }                      
 
     private void LoginButtonActionPerformed(java.awt.event.ActionEvent evt) throws HeadlessException 
