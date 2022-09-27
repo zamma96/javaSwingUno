@@ -29,7 +29,7 @@ public class Avatar
 	
 	public Avatar getMaxLevelAvatar()
 	{
-		this.avatarIcon = new ImageIcon(".\\resources\\Avatars\\goldenAvatar.png");
+		this.avatarIcon = new ImageIcon(".\\resources\\goldenAvatar.png");
 		return this;
 	}
 	

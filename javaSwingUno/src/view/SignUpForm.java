@@ -34,7 +34,7 @@ public class SignUpForm extends javax.swing.JFrame {
 
 	public String[] getImages()
 	{
-		File file = new File(getClass().getResource(".\\resources\\Avatar").getFile());
+		File file = new File(getClass().getResource(".\\resources\\Avatars").getFile());
 	    String[] imageList = file.list();
 	    return imageList;
 	}
@@ -43,7 +43,7 @@ public class SignUpForm extends javax.swing.JFrame {
 	{
 		String[] imagesList = getImages();
 	    String imageName = imagesList[index];
-	    Icon icon = new ImageIcon(".\\resources\\Avatar" + imageName);
+	    Icon icon = new ImageIcon(".\\resources\\Avatars" + imageName);
 	    AvatarImageLabel.setIcon(icon);    
 	}
 	                     
@@ -78,7 +78,7 @@ public class SignUpForm extends javax.swing.JFrame {
 	    AvatarLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 	    AvatarLabel.setText("Avatar:");
 
-	    AvatarImageLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Avatar/default.png")));
+	    AvatarImageLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource(".\\reources\\Avatars\\default.png")));
         UsernameFieldLabel.setBackground(new java.awt.Color(255, 255, 255));
         UsernameFieldLabel.setText("______________________________________________");
         UsernameFieldLabel.setRequestFocusEnabled(false);

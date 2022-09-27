@@ -52,7 +52,7 @@ public class LoginMenu extends javax.swing.JFrame
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/juno/sources/unoLogo.png")));
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource(".\\reources\\LoginImg\\unoLogo.png")));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -101,7 +101,7 @@ public class LoginMenu extends javax.swing.JFrame
         UsernameFieldLabel.setText("________________________________________________________");
 
         UsernameIconLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        UsernameIconLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/juno/sources/icons8_customer_20px_1.png"))); // NOI18N
+        UsernameIconLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource(".\\resources\\LoginImg\\icons8_customer_20px_2.png")));
 
         LoginButton.setFont(new java.awt.Font("Segoe UI", 1, 14));
         LoginButton.setForeground(new java.awt.Color(53, 101, 77));
