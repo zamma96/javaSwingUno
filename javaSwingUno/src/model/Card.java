@@ -2,7 +2,6 @@ package model;
 
 public class Card 
 {	
-	
 	public enum Color
 	{
 		RED, YELLOW, GREEN, BLUE, WILD;
@@ -25,7 +24,6 @@ public class Card
 		}
 	}
 
-	
 	public final Color color;
 	public final Value value;
 	
@@ -50,7 +48,6 @@ public class Card
 		return color + "_" + value;
 	}
 	
-	//(this.value == Card.Value.ONE)
     /**
      * Gets the score based on the faceValue of the card.
      * Numbered cards are their face value, wild and +4 are worth 50,

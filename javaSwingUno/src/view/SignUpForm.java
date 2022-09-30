@@ -23,6 +23,7 @@ public class SignUpForm extends javax.swing.JFrame {
 
 	int pos = 9;
 	Controller controller;
+	User user;
 	File userData = new File(".\\resources\\UserData");
 	
 	public SignUpForm() 
@@ -227,13 +228,14 @@ public class SignUpForm extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "You need a Nickname!");
         else
         {
+        	user = new User(nickName, pos);
         	JLabel message = new JLabel("Welcome to JUno!");
         	message.setFont(new Font("Comic Sans MS", Font.BOLD, 48));
         	message.setBackground(new Color(53, 101, 77));
         	message.setForeground(new Color(255, 145, 164));
             JOptionPane.showMessageDialog(null, message);   
         }
-        controller.addUser(new User(nickName, pos));
+        controller.addUser(user);
         try 
         {
 			controller.saveOnFile(userData);
