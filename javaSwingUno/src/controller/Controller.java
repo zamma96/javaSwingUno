@@ -8,10 +8,12 @@ import model.User;
 
 public class Controller 
 {
-	DataBase dataBase;
-	public Controller()
+	private DataBase dataBase; 
+	private File userData = new File(".\\resources\\UserData");
+	
+	public Controller() throws IOException
 	{
-	dataBase = new DataBase();
+		dataBase = new DataBase();
 	}
 	
 	public void addUser(User user)

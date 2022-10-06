@@ -12,12 +12,13 @@ import java.util.List;
 
 public class DataBase 
 {
+	private File userData = new File(".\\resources\\UserData"); 
 
 	private ArrayList<User> users;
 	
-	public DataBase()
+	public DataBase() throws IOException
 	{
-		users = new ArrayList<User>();
+		loadByFile(userData);
 	}
 	
 	public void addUser(User user)

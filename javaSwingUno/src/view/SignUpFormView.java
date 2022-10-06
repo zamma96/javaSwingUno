@@ -1,38 +1,66 @@
 package view;
 
 
-import java.awt.Color;
-import java.awt.Font;
 import java.io.File;
 import java.io.IOException;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 
-import controller.Controller;
-import model.Avatar;
+import controller.SignUpFormController;
+import model.DataBase;
+import model.LoginModel;
 import model.User;
 
 	/**
 	 *
 	 * @author matte
 	 */
-public class SignUpForm extends javax.swing.JFrame {
+public class SignUpFormView extends javax.swing.JFrame {
 
-	int pos = 9;
-	Controller controller;
-	User user;
-	File userData = new File(".\\resources\\UserData");
+	private LoginModel loginModel;
+	private int pos;
+	private SignUpFormController controller;
+	private User user;
 	
-	public SignUpForm() 
+	public SignUpFormView() throws IOException 
 	{
 	    initComponents();
-	    controller = new Controller();
+	    loginModel = new LoginModel();
+	    pos = loginModel.getPos();
 	    showImage(pos);
 	}
 
+	public void setAvatarImageLabel(Icon icon)
+	{
+		AvatarImageLabel.setIcon(icon);
+	}
+	
+	public int getPos()
+	{
+		return pos;
+	}
+	
+	public void setPos(int pos)
+	{
+		this.pos = pos;
+	}
+	
+	public String getTxtUser()
+	{
+		return txtUser.getText().toString();
+	}
+	
+	public void setUser(User user)
+	{
+		this.user = user;
+	}
+	
+	public User getUser()
+	{
+		return user;
+	}
+	
 	public String[] getImages()
 	{
 		File file = new File(getClass().getResource(".\\resources\\Avatars").getFile());
@@ -88,30 +116,14 @@ public class SignUpForm extends javax.swing.JFrame {
         txtUser.setBorder(null);
 
 	    PreviousButton.setText("Previous");
-	    PreviousButton.addActionListener(new java.awt.event.ActionListener() 
-	    {
-	    	public void actionPerformed(java.awt.event.ActionEvent evt) 
-	    	{
-	            PreviousButtonActionPerformed(evt);
-	        }
-	    });
-
+	    PreviousButton.addActionListener(controller.PreviousButtonListener());
+	    //This controller method should change the model.
 	    NextButton.setText("Next");
-	    NextButton.addActionListener(new java.awt.event.ActionListener() 
-	    {
-	        public void actionPerformed(java.awt.event.ActionEvent evt) 
-	        {
-	            NextButtonActionPerformed(evt);
-	        }
-	    });
-
+	    NextButton.addActionListener(controller.NextButtonListener());
+	    
         SignUpButton.setText("Sign Up");
         SignUpButton.setBorder(null);
-        SignUpButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                SignUpButtonActionPerformed(evt);
-            }
-        });
+        SignUpButton.addActionListener(controller.SignUpButtonListener());
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -207,44 +219,28 @@ public class SignUpForm extends javax.swing.JFrame {
         pack();
     }                       
                                     
-    private void PreviousButtonActionPerformed(java.awt.event.ActionEvent evt) 
-    {                                               
-        pos = pos -1;
-        if (pos < 0)
-            pos = getImages().length -1;
-        showImage(pos);
-    }                                              
-	private void NextButtonActionPerformed(java.awt.event.ActionEvent evt) 
-	{                                           
-        pos = pos +1;
-        if (pos >= getImages().length)
-            pos = 0;
-        showImage(pos);
-    }                                          
-	private void SignUpButtonActionPerformed(java.awt.event.ActionEvent evt) 
-	{                                             
-        String nickName = txtUser.getText().toString();
-        if (nickName == "")
-            JOptionPane.showMessageDialog(null, "You need a Nickname!");
-        else
-        {
-        	user = new User(nickName, pos);
-        	JLabel message = new JLabel("Welcome to JUno!");
-        	message.setFont(new Font("Comic Sans MS", Font.BOLD, 48));
-        	message.setBackground(new Color(53, 101, 77));
-        	message.setForeground(new Color(255, 145, 164));
-            JOptionPane.showMessageDialog(null, message);   
-        }
-        controller.addUser(user);
-        try 
-        {
-			controller.saveOnFile(userData);
-		} catch (IOException e) 
-        {
-			e.printStackTrace();
-		}
-        new GameStage(controller.getUser(nickName)).setVisible(true);
-    }               
+	/* SPOSTATO NELLA RELATIVA CLASSE CONTROLLER
+	 * private void PreviousButtonActionPerformed(java.awt.event.ActionEvent evt) {
+	 * pos = pos -1; if (pos < 0) pos = getImages().length -1; showImage(pos); }
+	 */              
+	
+	/* SPOSTATO NELLA RELATIVA CLASSE CONTROLLER
+	 * private void NextButtonActionPerformed(java.awt.event.ActionEvent evt) { pos
+	 * = pos +1; if (pos >= getImages().length) pos = 0; showImage(pos); }
+	 */    
+	
+	/* SPOSTATO NELLA RELATIVA CLASSE CONTROLLER
+	 * private void SignUpButtonActionPerformed(java.awt.event.ActionEvent evt) {
+	 * String nickName = txtUser.getText().toString(); if (nickName == "")
+	 * JOptionPane.showMessageDialog(null, "You need a Nickname!"); else { user =
+	 * new User(nickName, pos); JLabel message = new JLabel("Welcome to JUno!");
+	 * message.setFont(new Font("Comic Sans MS", Font.BOLD, 48));
+	 * message.setBackground(new Color(53, 101, 77)); message.setForeground(new
+	 * Color(255, 145, 164)); JOptionPane.showMessageDialog(null, message); }
+	 * controller.addUser(user); try { controller.saveOnFile(userData); } catch
+	 * (IOException e) { e.printStackTrace(); } new
+	 * GameStage(controller.getUser(nickName)).setVisible(true); }
+	 */              
 	
 	public static void main(String args[]) 
 	{
@@ -253,7 +249,14 @@ public class SignUpForm extends javax.swing.JFrame {
         {
             public void run() 
             {
-                new SignUpForm().setVisible(true);
+                try 
+                {
+					new SignUpFormView().setVisible(true);
+				} 
+                catch (IOException e) 
+                {
+					e.printStackTrace();
+				}
             }
         });
     }

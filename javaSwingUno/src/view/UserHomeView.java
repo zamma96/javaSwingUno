@@ -1,7 +1,8 @@
 package view;
 
 
-import controller.*;
+import controller.UserHomeController;
+import model.LoginModel;
 import model.User;
 import java.io.File;
 
@@ -12,12 +13,13 @@ import javax.swing.ImageIcon;
  *
  * @author matte
  */
-public class UserHome extends javax.swing.JFrame {
-    
-    File userData = new File(".\\resources\\UserData"); //gestione load e save da e su file da implementare
-    User user;
-    Controller controller;
-    int pos = 0; //in realtà è da ricavare dalla finestra precedente
+public class UserHomeView extends javax.swing.JFrame 
+{
+    LoginModel loginModel;
+    File userData = new File(".\\resources\\UserData");
+    User user = loginModel.getUser();
+    UserHomeController controller;
+    int pos = loginModel.getPos();
     
     public String[] getImages()
     {
@@ -32,16 +34,19 @@ public class UserHome extends javax.swing.JFrame {
         String imageName = imagesList[index];
         Icon icon = new ImageIcon(".\\resources\\Avatar" + imageName);
         AvatarImageLabel.setIcon(icon);
-            
-       }
+    }
+    
+    public void setAvatarImageLabel(Icon icon)
+    {
+    	this.AvatarImageLabel.setIcon(icon);
+    }
     
     /**
-     * Creates new form UserHome
+     * Creates new form UserHomeView
      */
-    public UserHome(User user) {
+    public UserHomeView() 
+    {
         initComponents();
-        this.user = user;
-        Controller controller = new Controller();
         EmptyNickNameLabel.setText(user.getNickName());
         showImage(pos);
     }
@@ -108,32 +113,16 @@ public class UserHome extends javax.swing.JFrame {
         EmptyNickNameLabel.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
 
         PreviousButton.setText("Previous");
-        PreviousButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                PreviousButtonActionPerformed(evt);
-            }
-        });
+        PreviousButton.addActionListener(controller.PreviousButtonListener());
 
         NextButton.setText("Next");
-        NextButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                NextButtonActionPerformed(evt);
-            }
-        });
+        NextButton.addActionListener(controller.NextButtonListener());
 
         playButton.setText("PLAY!");
-        playButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                playButtonActionPerformed(evt);
-            }
-        });
+        playButton.addActionListener(controller.PlayButtonListener());
 
         exitButton.setText("EXIT");
-        exitButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                exitButtonActionPerformed(evt);
-            }
-        });
+        exitButton.addActionListener(controller.ExitButtonListener());
 
         javax.swing.GroupLayout JPanel2Layout = new javax.swing.GroupLayout(JPanel2);
         JPanel2.setLayout(JPanel2Layout);
@@ -211,33 +200,31 @@ public class UserHome extends javax.swing.JFrame {
         pack();
     }                        
 
-    private void PreviousButtonActionPerformed(java.awt.event.ActionEvent evt) {                                               
-        pos = pos -1;
-        if (pos < 0)
-        pos = getImages().length -1;
-        showImage(pos);
-    }                                              
+	/* SPOSTATO NELLA CLASSE USERHOMECONTROLLER
+	 * private void PreviousButtonActionPerformed(java.awt.event.ActionEvent evt) {
+	 * pos = pos -1; if (pos < 0) pos = getImages().length -1; showImage(pos); }
+	 */                                            
 
-    private void NextButtonActionPerformed(java.awt.event.ActionEvent evt) {                                           
-        pos = pos +1;
-        if (pos >= getImages().length)
-        pos = 0;
-        showImage(pos);
-    }                                          
+	/* SPOSTATO NELLA CLASSE USERHOMECONTROLLER
+	 * private void NextButtonActionPerformed(java.awt.event.ActionEvent evt) { pos
+	 * = pos +1; if (pos >= getImages().length) pos = 0; showImage(pos); }
+	 */                                        
 
-    private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {                                           
-        System.exit(0);
-    }                                          
+	/* SPOSTATO NELLA CLASSE USERHOMECONTROLLER
+	 * private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {
+	 * System.exit(0); }
+	 */                                      
 
-    private void playButtonActionPerformed(java.awt.event.ActionEvent evt) {                                           
-        String nickName = user.getNickName();
-        new GameStage(controller.getUser(nickName)).setVisible(true);
-    }                                          
-
+	/* SPOSTATO NELLA CLASSE USERHOMECONTROLLER
+	 * private void playButtonActionPerformed(java.awt.event.ActionEvent evt) {
+	 * String nickName = user.getNickName(); new GameStage(user).setVisible(true); }
+	 */
+    
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    public static void main(String args[]) 
+    {
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -246,26 +233,24 @@ public class UserHome extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(UserHome.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UserHomeView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(UserHome.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UserHomeView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(UserHome.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UserHomeView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(UserHome.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UserHomeView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run(User user) {
-                new UserHome(user).setVisible(true);
+        java.awt.EventQueue.invokeLater(new Runnable() 
+        {
+            public void run() 
+            {
+            	new UserHomeView().setVisible(true);
             }
-			@Override
-			public void run() 
-			{
-				
-			}
-        });
+        }
+            );
     }
 
     // Variables declaration - do not modify                     

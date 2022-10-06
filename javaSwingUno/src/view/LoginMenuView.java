@@ -1,28 +1,30 @@
 package view;
 
-import java.awt.Font;
-import java.awt.HeadlessException;
-import java.io.File;
+
 import java.io.IOException;
 
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
+
+import controller.LoginMenuController;
 import model.DataBase;
+import model.LoginModel;
 
-public class LoginMenu extends javax.swing.JFrame 
+public class LoginMenuView extends javax.swing.JFrame 
 {
-
+	
 	private DataBase dataBase;
-	private File dataFile;
+	private LoginMenuController controller;
+	private LoginModel loginModel;
 
 	
-    public LoginMenu() throws IOException 
+    public LoginMenuView() throws IOException 
     {
     	initComponents();
-        dataBase = new DataBase();
-        dataBase.loadByFile(dataFile);
-        
+        loginModel = new LoginModel();
+        dataBase = loginModel.getDataBase();
     }
+    
+    public LoginModel getLoginModel() {return loginModel;}
                        
     private void initComponents() 
     {
@@ -42,14 +44,8 @@ public class LoginMenu extends javax.swing.JFrame
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(655, 386));
         setResizable(false);
-        addWindowListener(new java.awt.event.WindowAdapter() 
-        {
-            public void windowOpened(java.awt.event.WindowEvent evt) 
-            {
-                formWindowOpened(evt);
-            }
-        });
-
+        addWindowListener(controller.windowListener());//esempio di collegamento tra View e controller [[guardare anche corrispondente classe controller]]
+        //this controller method should change the model
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource(".\\reources\\LoginImg\\unoLogo.png")));
@@ -91,11 +87,6 @@ public class LoginMenu extends javax.swing.JFrame
         txtUser.setFont(txtUser.getFont().deriveFont(txtUser.getFont().getSize()+2f));
         txtUser.setForeground(new java.awt.Color(255, 255, 255));
         txtUser.setBorder(null);
-        txtUser.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtUserActionPerformed(evt);
-            }
-        });
 
         UsernameFieldLabel.setForeground(new java.awt.Color(255, 255, 255));
         UsernameFieldLabel.setText("________________________________________________________");
@@ -106,11 +97,7 @@ public class LoginMenu extends javax.swing.JFrame
         LoginButton.setFont(new java.awt.Font("Segoe UI", 1, 14));
         LoginButton.setForeground(new java.awt.Color(53, 101, 77));
         LoginButton.setText("LOGIN");
-        LoginButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                LoginButtonActionPerformed(evt);
-            }
-        });
+        LoginButton.addActionListener(controller.LoginButtonListener());
 
         SignUpLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); 
         SignUpLabel.setForeground(new java.awt.Color(255, 255, 255));
@@ -120,11 +107,7 @@ public class LoginMenu extends javax.swing.JFrame
         SignUpButton.setForeground(new java.awt.Color(255, 255, 255));
         SignUpButton.setText("Sign Up");
         SignUpButton.setBorder(null);
-        SignUpButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                SignUpButtonActionPerformed(evt);
-            }
-        });
+        SignUpButton.addActionListener(controller.SignUpListener());
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -197,49 +180,35 @@ public class LoginMenu extends javax.swing.JFrame
         setLocationRelativeTo(null);
     }                      
 
-    private void LoginButtonActionPerformed(java.awt.event.ActionEvent evt) throws HeadlessException 
-    {                                            
-         if (txtUser.getText().isEmpty())
-        {
-            JLabel message = new JLabel("Please enter a name");
-            message.setFont(new Font("Comic Sans MS", Font.BOLD, 48) );
-            JOptionPane.showMessageDialog(null, message);
-        }
-        else
-        {
-            if (dataBase.getUser(txtUser.getText())!= null)
-            	new GameStage(dataBase.getUser(txtUser.getText())).setVisible(true);
-            else 
-            {
-                JLabel message = new JLabel("User not found, please sign up!");
-                message.setFont(new Font("Comic Sans MS", Font.BOLD, 48));
-                JOptionPane.showMessageDialog(null, message);
-            }
-        }
-    }                                           
+    public String getTxtUser()
+    {
+    	return txtUser.getText().toString();
+    }
+    public DataBase getDataBase() {return this.dataBase;}
+    
+	/* SPOSTATO NELLA CLASSE LOGINMENUCONTROLLER
+	 * private void LoginButtonActionPerformed(java.awt.event.ActionEvent evt)
+	 * throws HeadlessException { if (txtUser.getText().isEmpty()) { JLabel message
+	 * = new JLabel("Please enter a name"); message.setFont(new
+	 * Font("Comic Sans MS", Font.BOLD, 48) ); JOptionPane.showMessageDialog(null,
+	 * message); } else { if (dataBase.getUser(txtUser.getText())!= null) new
+	 * GameStage(dataBase.getUser(txtUser.getText())).setVisible(true); else {
+	 * JLabel message = new JLabel("User not found, please sign up!");
+	 * message.setFont(new Font("Comic Sans MS", Font.BOLD, 48));
+	 * JOptionPane.showMessageDialog(null, message); } } }
+	 */                                                                    
 
-    private void txtUserActionPerformed(java.awt.event.ActionEvent evt) {}                                       
+	/* SPOSTATO NELLA CLASSE LOGINMENUCONTROLLER
+	 * private void formWindowOpened(java.awt.event.WindowEvent evt) { for (double i
+	 * = 0.0; i <= 1.0; i+= 0.1) { String val = i + ""; float f =
+	 * Float.valueOf(val); this.setOpacity(f); try { Thread.sleep(50); }
+	 * catch(Exception e) {e.printStackTrace();} } }
+	 */                                 
 
-    private void formWindowOpened(java.awt.event.WindowEvent evt) {                                  
-        for (double i = 0.0; i <= 1.0; i+= 0.1)
-        {
-            String val = i + "";
-            float f = Float.valueOf(val);
-            this.setOpacity(f);
-            try
-            {
-                Thread.sleep(50);
-            }
-            catch(Exception e)
-            {e.printStackTrace();}
-        }
-    }                                 
-
-    private void SignUpButtonActionPerformed(java.awt.event.ActionEvent evt) 
-    {                                             
-        new SignUpForm().setVisible(true);
-        this.dispose();
-    }                                            
+	/* SPOSTATO NELLA CLASSE LOGINMENUCONTROLLER
+	 * private void SignUpButtonActionPerformed(java.awt.event.ActionEvent evt)
+	 * throws IOException { new SignUpFormView().setVisible(true); this.dispose(); }
+	 */                                       
 
 
     public static void main(String args[])
@@ -252,13 +221,13 @@ public class LoginMenu extends javax.swing.JFrame
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(LoginMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LoginMenuView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(LoginMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LoginMenuView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(LoginMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LoginMenuView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(LoginMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LoginMenuView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
 
         
@@ -266,7 +235,7 @@ public class LoginMenu extends javax.swing.JFrame
             public void run() {
                 try 
                 {
-					new LoginMenu().setVisible(true);
+					new LoginMenuView().setVisible(true);
 				} 
                 catch (IOException e)
                 {
