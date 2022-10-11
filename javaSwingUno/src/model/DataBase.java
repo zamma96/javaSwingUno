@@ -12,13 +12,24 @@ import java.util.List;
 
 public class DataBase 
 {
-	private File userData = new File(".\\resources\\UserData"); 
-
 	private ArrayList<User> users;
+	private ArrayList<Integer> positions;
 	
-	public DataBase() throws IOException
+	public DataBase(File userData, File posData) throws IOException
 	{
-		loadByFile(userData);
+		loadByFile(userData, posData);
+	}
+	
+	public void addPos(User user, Integer pos)
+	{
+		Integer temp = users.indexOf(user);
+		positions.add(temp, pos);
+	}
+	
+	public Integer getPos(User user)
+	{
+		Integer temp = users.indexOf(user);
+		return positions.get(temp);
 	}
 	
 	public void addUser(User user)
@@ -41,35 +52,49 @@ public class DataBase
 		return null;
 	}
 	
-	public void saveOnFile(File file) throws IOException
+	public void saveOnFile(File userFile, File posFile) throws IOException
 	{
-		FileOutputStream fos = new FileOutputStream(file);
-		ObjectOutputStream oos = new ObjectOutputStream(fos);
+		FileOutputStream fos0 = new FileOutputStream(posFile);
+		ObjectOutputStream oos0 = new ObjectOutputStream(fos0);
+		FileOutputStream fos1 = new FileOutputStream(userFile);
+		ObjectOutputStream oos1 = new ObjectOutputStream(fos1);
 		
 		User[] userArray = users.toArray(new User[users.size()]);
+		Integer[] posArray = positions.toArray(new Integer[positions.size()]);
 		
-		oos.writeObject(userArray);
+		oos1.writeObject(userArray);
+		oos0.writeObject(posArray);
 		
-		oos.close();
-		fos.close();
+		oos1.close();
+		oos0.close();
+		fos1.close();
+		fos0.close();
 	}
 	
-	public void loadByFile(File file) throws IOException
+	public void loadByFile(File userFile, File posFile) throws IOException
 	{
-		FileInputStream fis = new FileInputStream(file);
-		ObjectInputStream ois = new ObjectInputStream(fis);
+		FileInputStream fis0 = new FileInputStream(userFile);
+		FileInputStream fis1 = new FileInputStream(posFile);
+		ObjectInputStream ois0 = new ObjectInputStream(fis0);
+		ObjectInputStream ois1 = new ObjectInputStream(fis1);
 		
 		try 
 		{
-			User[] loadedUsers = (User[]) ois.readObject();
+			User[] loadedUsers = (User[]) ois0.readObject();
+			Integer[] loadedPos = (Integer[]) ois1.readObject();
 			users.clear();
+			positions.clear();
 			users.addAll(Arrays.asList(loadedUsers));
+			positions.addAll(Arrays.asList(loadedPos));
+
 		}
 		catch (ClassNotFoundException e)
 		{
 			e.printStackTrace();
 		}
-		ois.close();
-		fis.close();
+		ois0.close();
+		ois1.close();
+		fis0.close();
+		fis1.close();
 	}
 }
