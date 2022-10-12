@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.util.Observable;
 import java.util.Observer;
 
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
@@ -27,6 +28,7 @@ public class LoginMenuView extends javax.swing.JFrame implements Observer
     {
     	loginModel = model;
     	initComponents();
+    	
     }
     
     //loginModel getter
@@ -56,6 +58,7 @@ public class LoginMenuView extends javax.swing.JFrame implements Observer
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(655, 386));
         setResizable(false);
+/*
         addWindowListener(new WindowAdapter() 
         {
         	public void windowOpened(WindowEvent evt) 
@@ -64,6 +67,7 @@ public class LoginMenuView extends javax.swing.JFrame implements Observer
         	}
         }
         );
+*/        
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource(".\\reources\\LoginImg\\unoLogo.png")));
@@ -115,6 +119,7 @@ public class LoginMenuView extends javax.swing.JFrame implements Observer
         LoginButton.setFont(new java.awt.Font("Segoe UI", 1, 14));
         LoginButton.setForeground(new java.awt.Color(53, 101, 77));
         LoginButton.setText("LOGIN");
+/*
         LoginButton.addActionListener(new ActionListener()
         {
         	public void actionPerformed(ActionEvent evt) 
@@ -122,7 +127,7 @@ public class LoginMenuView extends javax.swing.JFrame implements Observer
         		LoginButtonActionPerformed(evt);
         	}
         });
-
+*/
         SignUpLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); 
         SignUpLabel.setForeground(new java.awt.Color(255, 255, 255));
         SignUpLabel.setText("Don't have an account?");
@@ -131,6 +136,7 @@ public class LoginMenuView extends javax.swing.JFrame implements Observer
         SignUpButton.setForeground(new java.awt.Color(255, 255, 255));
         SignUpButton.setText("Sign Up");
         SignUpButton.setBorder(null);
+/*
         SignUpButton.addActionListener(new ActionListener()
         {
         	public void actionPerformed(ActionEvent evt)
@@ -141,7 +147,7 @@ public class LoginMenuView extends javax.swing.JFrame implements Observer
         		{e.printStackTrace();}
         	}
         });
-
+*/
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -213,6 +219,8 @@ public class LoginMenuView extends javax.swing.JFrame implements Observer
         setLocationRelativeTo(null);
     }                      
 
+    //END OF INIT
+    
     //inputTextGetter
     public String getTxtUser()
     {
@@ -231,6 +239,7 @@ public class LoginMenuView extends javax.swing.JFrame implements Observer
 	 * exists in the dataBase, if not, open a message dialog to tell the user 
 	 * to create an account. Else login and open the UserHome
 	 */
+/*
     private void LoginButtonActionPerformed(java.awt.event.ActionEvent evt) 
     { 
     	if (getTxtUser().isEmpty()) 
@@ -283,7 +292,17 @@ public class LoginMenuView extends javax.swing.JFrame implements Observer
     	loginModel.deleteObserver(this);
     	this.dispose(); 
     }
-	                                        
+*/
+    
+    public JButton getLoginButton()
+    {
+    	return LoginButton;
+    }
+    
+    public JButton getSignUpButton()
+    {
+    	return SignUpButton;
+    }
 
 /*
     public static void main(String args[])

@@ -6,22 +6,23 @@ import java.awt.event.ActionListener;
 import model.Game;
 import view.GameStage;
 
-public class GameController implements ActionListener
+public class GameController 
 {
 	
 	//classe che serve ad amministrare cambiamenti sulla view scatenati dalle interazioni delle IA col model nella partita
-	private Game game;
-	private GameStage gameStage;
+	private Game gameModel;
+	private GameStage gameView;
 	
 	public GameController(Game game, GameStage gameStage)
 	{
-		this.game = game;
-		this.gameStage = gameStage;
+		this.gameModel = game;
+		this.gameView = gameStage;
 	}
-
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		
+	
+	public void gameViewListener(GameStage gameView)
+	{
+		//TODO
+		//implementare qui l'aggiunta dei listener ai button della view.
 	}
+	
 }

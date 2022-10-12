@@ -1,17 +1,15 @@
 package view;
 
-import controller.UserHomeController;
 import model.LoginModel;
 import model.User;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.File;
 import java.util.Observable;
 import java.util.Observer;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 
 /**
  *
@@ -19,31 +17,76 @@ import javax.swing.ImageIcon;
  */
 public class UserHomeView extends javax.swing.JFrame implements Observer
 {
-	LoginModel loginModel;
-	File userData = new File(".\\resources\\UserData");
-	User user = loginModel.getUser();
-	Integer pos = loginModel.getPos();
-
-	public UserHomeView(User user)
+	private LoginModel model;
+	private File userData = new File(".\\resources\\UserData");
+	private User user;
+	private Integer pos;
+	
+	public UserHomeView(User user, LoginModel model)
 	{
-		this.user = user;
+		this.model = model;
+		this.user = model.getUser();
+		this.pos = model.getPos();
 		initComponents();
 		EmptyNickNameLabel.setText(user.getNickName());
 		showImage(pos);
 	}
 	
+	/**
+	 * 
+	 * set this instance's pos field to @param pos;
+	 */
 	public void setPos(Integer pos)
 	{
 		this.pos = pos;
 	}
-	
+	/**
+	 * 
+	 * @return NextButton variable
+	 */
+	public JButton getNextButton()
+	{
+		return NextButton;
+	}
+	/**
+	 * 
+	 * @return PreviousButton variable
+	 */
+	public JButton getPreviousButton()
+	{
+		return PreviousButton;
+	}
+	/**
+	 * 
+	 * @return exitButton variable
+	 */
+	public JButton getExitButton()
+	{
+		return exitButton;
+	}
+	/**
+	 * 
+	 * @return playButton variable
+	 */
+	public JButton getPlayButton()
+	{
+		return playButton;
+	}
+	/**
+	 * 
+	 * @return the stringList of images names.
+	 */
 	public String[] getImages() 
 	{
 		File file = new File(getClass().getResource(".\\resources\\Avatars").getFile());
 		String[] imageList = file.list();
 		return imageList;
 	}
-
+	/**
+	 * 
+	 * @param index
+	 * sets the AvatarImageLabel icon
+	 */
 	public void showImage(Integer index) 
 	{
 		String[] imagesList = getImages();
@@ -52,12 +95,10 @@ public class UserHomeView extends javax.swing.JFrame implements Observer
 		AvatarImageLabel.setIcon(icon);
 	}
 
-	public void setAvatarImageLabel(Icon icon) 
-	{
-		this.AvatarImageLabel.setIcon(icon);
-	}
 
-
+	/**
+	 * initialize all of this frame's components and their settings.
+	 */
 	private void initComponents() 
 	{
 		JPanel1 = new javax.swing.JPanel();
@@ -112,29 +153,33 @@ public class UserHomeView extends javax.swing.JFrame implements Observer
 		EmptyNickNameLabel.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
 
 		PreviousButton.setText("Previous");
+/*
 		PreviousButton.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent evt) {PreviousButtonActionPerformed(evt);}
 		});
-
+*/
 		NextButton.setText("Next");
+/*
 		NextButton.addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent evt) {NextButtonActionPerformed(evt);}
 		});
-
+*/
 		playButton.setText("PLAY!");
+/*
 		playButton.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent evt) {playButtonActionPerformed(evt);}
 		});
-
+*/
 		exitButton.setText("EXIT");
+/*
 		exitButton.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent evt) {exitButtonActionPerformed(evt);}
 		});
-
+*/
 		javax.swing.GroupLayout JPanel2Layout = new javax.swing.GroupLayout(JPanel2);
 		JPanel2.setLayout(JPanel2Layout);
 		JPanel2Layout.setHorizontalGroup(JPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -206,44 +251,6 @@ public class UserHomeView extends javax.swing.JFrame implements Observer
 		pack();
 	}
 
-	
-	  private void PreviousButtonActionPerformed(java.awt.event.ActionEvent evt) 
-	  {
-		  loginModel.setPos(loginModel.getPos()-1);
-		  if (loginModel.getPos() < 0)
-			  loginModel.setPos(getImages().length-1);
-		  this.update(loginModel, pos);
-		  showImage(pos);  
-	  }
-	 
-
-	private void NextButtonActionPerformed(java.awt.event.ActionEvent evt) 
-	{
-		loginModel.setPos(loginModel.getPos()+1);
-		if (loginModel.getPos() >= getImages().length)
-			loginModel.setPos(0);
-		this.update(loginModel, pos);
-		showImage(pos);
-	}
-
-	
-	private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) 
-	{
-		
-		System.exit(0);
-	}
-	
-	private void playButtonActionPerformed(java.awt.event.ActionEvent evt) 
-	{
-		loginModel.setPos(pos);
-		loginModel.saveUserData();
-		GameStage game = new GameStage(user);
-		loginModel.observationRoutine(game, this);
-		game.setVisible(true); 
-		this.dispose();
-	}
-	 
-
 	/*
 	 * public static void main(String args[]) { try { for
 	 * (javax.swing.UIManager.LookAndFeelInfo info :
@@ -264,6 +271,7 @@ public class UserHomeView extends javax.swing.JFrame implements Observer
 	 * Create and display the form java.awt.EventQueue.invokeLater(new Runnable() {
 	 * public void run() { new UserHomeView().setVisible(true); } } ); }
 	 */
+	
 
 	// Variables declaration - do not modify
 	private javax.swing.JLabel AvatarImageLabel;

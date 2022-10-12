@@ -1,16 +1,25 @@
 package controller;
 
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.io.IOException;
 import java.util.Observer;
+
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 import model.LoginModel;
 import model.User;
 import view.GameStage;
 import view.LoginMenuView;
+import view.SignUpFormView;
 import view.UserHomeView;
 
 public class LoginMenuController 
 {
-	User user;
 	LoginMenuView view;
 	LoginModel model;
 
@@ -23,21 +32,91 @@ public class LoginMenuController
 		//if(model.getNickName().equals(view.getTxtUser()))
 	}
 	
-	public void setUser(User user)
+	public void loginMenuListeners(LoginMenuView view) 
 	{
-		this.user = user;
-		model.setUser(user);
+		view.addWindowListener(new WindowAdapter()
+		{
+			public void windowOpened(WindowEvent evt)
+			{
+				formWindowOpened(evt);
+			}
+		});
+		view.getLoginButton().addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent evt)
+			{
+				LoginButtonActionPerformed(evt);
+			}
+		});
+		view.getSignUpButton().addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent evt)
+			{
+				try 
+				{
+					SignUpButtonActionPerformed(evt);
+				} 
+				catch (IOException e) 
+				{
+					e.printStackTrace();
+				}
+			}
+		});
 	}
 	
-	public User getUser()
-	{
-		this.user = model.getUser();
-		return user;
-	}
-	
-	public void loginObservation(UserHomeView newView, LoginMenuView oldView)
-	{
-		model.addObserver((Observer)newView);
-		model.deleteObserver(oldView);
-	}
+    private void formWindowOpened(java.awt.event.WindowEvent evt) 
+    {
+    	for (double i = 0.0; i <= 1.0; i+= 0.1) 
+    	{
+    		String val = i + ""; float f =Float.valueOf(val);
+    		view.setOpacity(f); 
+    		try 
+    		{Thread.sleep(50);}
+    		catch(Exception e) 
+    		{e.printStackTrace();} 
+    	}
+    }
+    
+    private void LoginButtonActionPerformed(java.awt.event.ActionEvent evt) 
+    { 
+    	if (view.getTxtUser().isEmpty()) 
+    	{ 
+    		JLabel message = new JLabel("Please enter a name"); 
+    		message.setFont(new Font("Comic Sans MS", Font.BOLD, 48) ); 
+    		JOptionPane.showMessageDialog(null, message);
+    	}
+    	else 
+    	{ 
+    		if (model.getDataBase().getUser(view.getTxtUser())!= null)
+    		{
+    			User user = model.getDataBase().getUser(view.getTxtUser());
+    			model.setUser(user);
+    			model.setPos(model.getDataBase().getPos(user));
+    			view.update(model, user.getNickName());
+    			view.update(model, model.getPos());
+    			UserHomeView newView = new UserHomeView(user, model);
+    			model.observationRoutine(newView, view);
+    			UserHomeController controller = new UserHomeController(model, newView);
+    			controller.userHomeListeners(newView);
+    			newView.setVisible(true);
+    			this.view.dispose();
+    		}
+    		else 
+    		{
+    			JLabel message = new JLabel("User not found, please sign up!");
+    			message.setFont(new Font("Comic Sans MS", Font.BOLD, 48));
+    			JOptionPane.showMessageDialog(null, message); 
+    		}
+    	}
+    }
+    
+    private void SignUpButtonActionPerformed(java.awt.event.ActionEvent evt) throws IOException 
+    {
+    	SignUpFormView newView = new SignUpFormView(model);
+    	model.observationRoutine(newView, view);
+    	SignUpFormController controller = new SignUpFormController(model, newView);
+    	controller.signUpFormListeners(newView);
+    	newView.setVisible(true); 
+    	this.view.dispose(); 
+    }
 }

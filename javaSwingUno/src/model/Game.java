@@ -4,43 +4,69 @@ import java.awt.Color;
 import java.awt.Font;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Observable;
+import java.util.Observer;
+import java.util.Random;
 import java.util.stream.Collectors;
 
 import javax.swing.ImageIcon;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
-public class Game 
+public class Game extends Observable
 {
+	private DataBase dataBase;
+	private String[] nameArray = new String[] {"Carlo", "Gianluca", "Simone", "Giorno", "Marco", "Vista", "Valentina", "Daniela", "Francesca", "Martina", "Elena"};
+	private ArrayList<String> namePool;
 	private int currentPlayer;
-	private Player[] players;
+	private Player[] players = new Player[4];
 	private Deck deck;
-	private ArrayList<ArrayList<Card>> playersHands;
+	private ArrayList<ArrayList<Card>> playersHands = new ArrayList<ArrayList<Card>>();
 	private ArrayList<Card> stockPile;
 	private Card.Color validColor;
 	private Card.Value validValue;
 	boolean gameDirection;
+	private User user;
 	
-	public Game(Player[] players)
+	public Game(User user, DataBase dataBase)
 	{
+		this.dataBase = dataBase;
+		this.user = user;
 		deck = new Deck();
 		deck.reset();
 		deck.shuffle();
 		stockPile = new ArrayList<Card>();
-		
-		this.players = players;
+		namePool = (ArrayList<String>) Arrays.asList(nameArray);
+		playersHands.add(new ArrayList<Card>(Arrays.asList(deck.drawCard(7))));
+		players[0] = new Player(0, user.getNickName(), true, new ArrayList<Card>(Arrays.asList(deck.drawCard(7))));
+		Player[] ias = randomizePlayer();
+		players[1] = ias[0]; players[2] = ias[1]; players[3] = ias[2];
 		currentPlayer = 0;
 		gameDirection = false;
-		
-		playersHands = new ArrayList<ArrayList<Card>>();
-		
-		for (int i = 0; i < players.length; i++)
+	}
+	
+	private Player[] randomizePlayer() 
+	{
+		Random rand = new Random();
+		String ia1 = namePool.get(rand.nextInt(11));
+		String ia2 = namePool.get(rand.nextInt(11)); 
+		String ia3 = namePool.get(rand.nextInt(11));
+		for (int i = 0; i <= 3; i++)
 		{
 			ArrayList<Card> hand = new ArrayList<Card>(Arrays.asList(deck.drawCard(7)));
 			playersHands.add(hand);
 		}
+		Player pia1 = new Player(1, ia1, false, playersHands.get(1));
+		Player pia2 = new Player(2, ia2, false, playersHands.get(2));
+		Player pia3 = new Player(3, ia3, false, playersHands.get(3));
+		Player[] players = new Player[3];
+		players[0] = pia1;
+		players[1] = pia2;
+		players[2] = pia3;
+		return players;
 	}
-	
+
 	public void showInvalidPlayerMoveColorDialog(Card card) throws InvalidColorSubmissionException
 	{
 		JLabel message = new JLabel("Invalid player move, expected color: " + validColor + " but got color " + card.getColor());
@@ -196,6 +222,11 @@ public class Game
 	{
 		int index = Arrays.asList(players).indexOf(player);
 		return playersHands.get(index);
+	}
+	
+	public ArrayList<ArrayList<Card>> getPlayersHands()
+	{
+		return this.playersHands;
 	}
 	
 	public int getPlayerHandSize(Player player)
@@ -389,4 +420,12 @@ public class Game
 			}
 		}
 	}
+	
+	public void observationRoutine(JFrame newView, JFrame oldView)
+	{
+		this.addObserver((Observer)newView);
+		this.deleteObserver((Observer) oldView);
+	}
+	
+	
 }

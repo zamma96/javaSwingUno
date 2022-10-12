@@ -11,8 +11,10 @@ import java.util.Observer;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 import model.LoginModel;
 import model.User;
@@ -37,47 +39,86 @@ public class SignUpFormView extends javax.swing.JFrame implements Observer
 		showImage(pos);
 	}
 
-	// Avatar image setter
-	public void setAvatarImageLabel(Icon icon) 
-	{
-		AvatarImageLabel.setIcon(icon);
-	}
-
-	// pos getter
+	/**
+	 * 
+	 * @return pos field
+	 */
 	public Integer getPos() 
 	{
 		return pos;
 	}
 
-	// pos setter
+	/**
+	 * 
+	 * @param pos
+	 * set this instance's pos to the passed Integer
+	 */
 	public void setPos(Integer pos) 
 	{
 		this.pos = pos;
 	}
 
-	// user input reader
+	/**
+	 * 
+	 * @return user Input on KeyBoard
+	 */
 	public String getTxtUser() 
 	{
 		return txtUser.getText().toString();
 	}
 
-	// user setter
+	/**
+	 * 
+	 * @param user
+	 * set this instance's user to the passed User;
+	 */
 	public void setUser(User user) 
 	{
 		this.user = user;
 	}
 
-	// user getter
+	/**
+	 * 
+	 * @return user field
+	 */
 	public User getUser() 
 	{
 		return user;
 	}
 
-	// loginModel getter
+	/**
+	 * 
+	 * @return loginModel field
+	 */
 	public LoginModel getLoginModel() 
 	{
 		return loginModel;
 	}
+	
+	/**
+	 * 
+	 * @return PreviousButton variable 
+	 */
+	public JButton getPreviousButton() {return PreviousButton;}
+	
+	/**
+	 * 
+	 * @return NextButton variable
+	 */
+	public JButton getNextButton() {return NextButton;}
+
+	/**
+	 * 
+	 * @return txtUser variable
+	 */
+	public JTextField gettxtUser() {return txtUser;}
+	
+	/**
+	 * 
+	 * @return SignUpButton variable
+	 */
+	public JButton getSignUpButton() {return SignUpButton;}
+	
 
 	/**
 	 * 
@@ -135,6 +176,7 @@ public class SignUpFormView extends javax.swing.JFrame implements Observer
 		txtUser.setBorder(null);
 
 		PreviousButton.setText("Previous");
+/*
 		PreviousButton.addActionListener(new ActionListener()
 			{
 				public void actionPerformed(ActionEvent evt)
@@ -142,8 +184,9 @@ public class SignUpFormView extends javax.swing.JFrame implements Observer
 					PreviousButtonActionPerformed(evt);
 				}
 			});
-
+*/
 		NextButton.setText("Next");
+/*
 		NextButton.addActionListener(new ActionListener()
 			{
 				public void actionPerformed(ActionEvent evt)
@@ -151,9 +194,10 @@ public class SignUpFormView extends javax.swing.JFrame implements Observer
 					NextButtonActionPerformed(evt);
 				}
 			});
-
+*/
 		SignUpButton.setText("Sign Up");
 		SignUpButton.setBorder(null);
+/*
 		SignUpButton.addActionListener(new ActionListener()
 			{
 				public void actionPerformed(ActionEvent evt)
@@ -161,7 +205,7 @@ public class SignUpFormView extends javax.swing.JFrame implements Observer
 					SignUpButtonActionPerformed(evt);
 				}
 			});
-
+*/
 		javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
 		jPanel2.setLayout(jPanel2Layout);
 		jPanel2Layout.setHorizontalGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -243,52 +287,7 @@ public class SignUpFormView extends javax.swing.JFrame implements Observer
 								javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)));
 		pack();
 	}
-
 	
-	private void PreviousButtonActionPerformed(java.awt.event.ActionEvent evt)
-	{
-		loginModel.setPos(loginModel.getPos()-1);
-		if(loginModel.getPos() < 0)
-			loginModel.setPos(getImages().length-1);
-		this.update(loginModel, pos);
-		showImage(pos); 
-	}
-	 
-
-	private void NextButtonActionPerformed(java.awt.event.ActionEvent evt) 
-	{
-		loginModel.setPos(loginModel.getPos()+1);
-		if (loginModel.getPos()>= getImages().length)
-			loginModel.setPos(0);
-		this.update(loginModel, pos);
-		showImage(pos);
-	}
-	 
-
-	
-	private void SignUpButtonActionPerformed(java.awt.event.ActionEvent evt) 
-	{
-		String nickName	= txtUser.getText().toString();
-		if (nickName == "")
-			JOptionPane.showMessageDialog(null, "You need a Nickname!"); 
-		else 
-		{
-			user = new User(nickName, pos);
-			JLabel message = new JLabel("Welcome to JUno!");
-			message.setFont(new Font("Comic Sans MS", Font.BOLD, 48));
-			message.setBackground(new Color(53, 101, 77));
-			message.setForeground(new Color(255, 145, 164));
-			JOptionPane.showMessageDialog(null, message); 
-			loginModel.setUser(user);
-			loginModel.setPos(pos);
-			loginModel.saveUserData();
-			this.update(loginModel, user);
-			this.update(loginModel, pos);
-			new	UserHomeView(user).setVisible(true); 
-		}
-	}
-	 
-
 	/*
 	 * public static void main(String args[]) { Create and display the form
 	 * java.awt.EventQueue.invokeLater(new Runnable() { public void run() { try {
@@ -316,5 +315,4 @@ public class SignUpFormView extends javax.swing.JFrame implements Observer
 		if (arg.getClass().getName() == "model.User")
 			this.setUser(((LoginModel)o).getUser());
 	}	
-
 }
