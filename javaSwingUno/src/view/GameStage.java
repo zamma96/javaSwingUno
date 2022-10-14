@@ -53,13 +53,27 @@ public class GameStage extends javax.swing.JFrame {
 		populateArrayList();
 		game.start(game);
 		setPlayerIdName();
-		Icon icon = new ImageIcon(".\\resources\\UnoCards\\CARD_BACK.png");
-		Icon iconS = new ImageIcon(".\\resources\\UnoCards\\" + game.getTopCardImage());
-		StockPileButton.setIcon(iconS);
-		DeckPileButton.setIcon(icon);
 		setButtonIcons();
 	}
 
+	/**
+	 * 
+	 * @return StockPileButton;
+	 */
+	public JButton getStockPileButton()
+	{
+		return StockPileButton;
+	}
+	
+	/**
+	 * 
+	 * @return DeckPileButton;
+	 */
+	public JButton getDeckPileButton()
+	{
+		return DeckPileButton;
+	}
+	
 	public void setButtonIcons() 
 	{
 		/*
@@ -105,15 +119,22 @@ public class GameStage extends javax.swing.JFrame {
 
 	}
 
-	public void setPlayerIdName() {
+	public void setPlayerIdName() 
+	{
 		String currentPlayer = game.getCurrentPlayer().getPlayerNickName();
 		playerIdNameLabel.setForeground(new Color(255, 145, 164));
 		playerIdNameLabel.setText(currentPlayer + "'s cards");
 	}
 
-	public void setPlayerIdName(String currentPlayer) {
+	public void setPlayerIdName(String currentPlayer) 
+	{
 		playerIdNameLabel.setText(currentPlayer + "'s cards");
 		playerIdNameLabel.setForeground(new Color(255, 145, 164));
+	}
+	
+	public JButton getjButton1()
+	{
+		return jButton1;
 	}
 
 	/**

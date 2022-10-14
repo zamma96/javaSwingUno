@@ -1,106 +1,107 @@
 package view;
 
 import model.LoginModel;
-import model.User;
 
-import java.io.File;
 import java.util.Observable;
 import java.util.Observer;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 
 /**
  *
  * @author matte
  */
-public class UserHomeView extends javax.swing.JFrame implements Observer
+public class UserHomeView extends javax.swing.JFrame implements Observer 
 {
 	private LoginModel model;
-	private File userData = new File(".\\resources\\UserData");
-	private User user;
 	private Integer pos;
-	
-	public UserHomeView(User user, LoginModel model)
+
+	public UserHomeView(LoginModel model) 
 	{
 		this.model = model;
-		this.user = model.getUser();
 		this.pos = model.getPos();
 		initComponents();
-		EmptyNickNameLabel.setText(user.getNickName());
-		showImage(pos);
 	}
-	
+
 	/**
 	 * 
 	 * set this instance's pos field to @param pos;
 	 */
-	public void setPos(Integer pos)
+	public void setPos(Integer pos) 
 	{
 		this.pos = pos;
 	}
+
 	/**
 	 * 
 	 * @return NextButton variable
 	 */
-	public JButton getNextButton()
+	public JButton getNextButton() 
 	{
 		return NextButton;
 	}
+
 	/**
 	 * 
 	 * @return PreviousButton variable
 	 */
-	public JButton getPreviousButton()
+	public JButton getPreviousButton() 
 	{
 		return PreviousButton;
 	}
+
 	/**
 	 * 
 	 * @return exitButton variable
 	 */
-	public JButton getExitButton()
+	public JButton getExitButton() 
 	{
 		return exitButton;
 	}
+
 	/**
 	 * 
 	 * @return playButton variable
 	 */
-	public JButton getPlayButton()
+	public JButton getPlayButton() 
 	{
 		return playButton;
 	}
+
 	/**
 	 * 
-	 * @return the stringList of images names.
+	 * @return JLabel1 variable
 	 */
-	public String[] getImages() 
+	public JLabel getjLabel1() 
 	{
-		File file = new File(getClass().getResource(".\\resources\\Avatars").getFile());
-		String[] imageList = file.list();
-		return imageList;
-	}
-	/**
-	 * 
-	 * @param index
-	 * sets the AvatarImageLabel icon
-	 */
-	public void showImage(Integer index) 
-	{
-		String[] imagesList = getImages();
-		String imageName = imagesList[index];
-		Icon icon = new ImageIcon(".\\resources\\Avatar" + imageName);
-		AvatarImageLabel.setIcon(icon);
+		return jLabel1;
 	}
 
+	/**
+	 * 
+	 * @return AvatarImageLabel variable
+	 */
+	public JLabel getAvatarImageLabel() 
+	{
+		return AvatarImageLabel;
+	}
+	
+    /**
+     * 
+     * @return EmptyNickNameLabel variable
+     */
+    public JLabel getEmptyNickNameLabel()
+    {
+    	return EmptyNickNameLabel;
+    }
 
 	/**
 	 * initialize all of this frame's components and their settings.
 	 */
-	private void initComponents() 
-	{
+	private void initComponents() {
 		JPanel1 = new javax.swing.JPanel();
 		jLabel1 = new javax.swing.JLabel();
 		JPanel2 = new javax.swing.JPanel();
@@ -122,7 +123,6 @@ public class UserHomeView extends javax.swing.JFrame implements Observer
 		jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
 		jLabel1.setForeground(new java.awt.Color(255, 255, 255));
 		jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-		jLabel1.setText("'s Home");
 
 		javax.swing.GroupLayout JPanel1Layout = new javax.swing.GroupLayout(JPanel1);
 		JPanel1.setLayout(JPanel1Layout);
@@ -153,33 +153,10 @@ public class UserHomeView extends javax.swing.JFrame implements Observer
 		EmptyNickNameLabel.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
 
 		PreviousButton.setText("Previous");
-/*
-		PreviousButton.addActionListener(new ActionListener() 
-		{
-			public void actionPerformed(ActionEvent evt) {PreviousButtonActionPerformed(evt);}
-		});
-*/
 		NextButton.setText("Next");
-/*
-		NextButton.addActionListener(new ActionListener()
-		{
-			public void actionPerformed(ActionEvent evt) {NextButtonActionPerformed(evt);}
-		});
-*/
 		playButton.setText("PLAY!");
-/*
-		playButton.addActionListener(new ActionListener() 
-		{
-			public void actionPerformed(ActionEvent evt) {playButtonActionPerformed(evt);}
-		});
-*/
 		exitButton.setText("EXIT");
-/*
-		exitButton.addActionListener(new ActionListener() 
-		{
-			public void actionPerformed(ActionEvent evt) {exitButtonActionPerformed(evt);}
-		});
-*/
+
 		javax.swing.GroupLayout JPanel2Layout = new javax.swing.GroupLayout(JPanel2);
 		JPanel2.setLayout(JPanel2Layout);
 		JPanel2Layout.setHorizontalGroup(JPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -251,28 +228,6 @@ public class UserHomeView extends javax.swing.JFrame implements Observer
 		pack();
 	}
 
-	/*
-	 * public static void main(String args[]) { try { for
-	 * (javax.swing.UIManager.LookAndFeelInfo info :
-	 * javax.swing.UIManager.getInstalledLookAndFeels()) { if
-	 * ("Nimbus".equals(info.getName())) {
-	 * javax.swing.UIManager.setLookAndFeel(info.getClassName()); break; } } } catch
-	 * (ClassNotFoundException ex) {
-	 * java.util.logging.Logger.getLogger(UserHomeView.class.getName()).log(java.
-	 * util.logging.Level.SEVERE, null, ex); } catch (InstantiationException ex) {
-	 * java.util.logging.Logger.getLogger(UserHomeView.class.getName()).log(java.
-	 * util.logging.Level.SEVERE, null, ex); } catch (IllegalAccessException ex) {
-	 * java.util.logging.Logger.getLogger(UserHomeView.class.getName()).log(java.
-	 * util.logging.Level.SEVERE, null, ex); } catch
-	 * (javax.swing.UnsupportedLookAndFeelException ex) {
-	 * java.util.logging.Logger.getLogger(UserHomeView.class.getName()).log(java.
-	 * util.logging.Level.SEVERE, null, ex); }
-	 * 
-	 * Create and display the form java.awt.EventQueue.invokeLater(new Runnable() {
-	 * public void run() { new UserHomeView().setVisible(true); } } ); }
-	 */
-	
-
 	// Variables declaration - do not modify
 	private javax.swing.JLabel AvatarImageLabel;
 	private javax.swing.JLabel AvatarLabel;
@@ -289,6 +244,6 @@ public class UserHomeView extends javax.swing.JFrame implements Observer
 	@Override
 	public void update(Observable o, Object arg) 
 	{
-		this.setPos((Integer)arg);
+		this.setPos((Integer) arg);
 	}
 }

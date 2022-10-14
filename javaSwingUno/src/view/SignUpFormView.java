@@ -26,19 +26,23 @@ import model.User;
 public class SignUpFormView extends javax.swing.JFrame implements Observer
 {
 
-	private LoginModel loginModel;
+	private LoginModel model;
 	private Integer pos;
 	private User user;
 
 	public SignUpFormView(LoginModel loginModel) throws IOException 
 	{
 		initComponents();
-		this.loginModel = loginModel;
-		this.pos = loginModel.getPos();
-		this.user = loginModel.getUser();
-		showImage(pos);
+		this.model = loginModel;
+		model.setPos(0);		
+		this.update(model, model.getPos());
 	}
 
+	public JLabel getAvatarImageLabel()
+	{
+		return AvatarImageLabel;
+	}
+	
 	/**
 	 * 
 	 * @return pos field
@@ -92,7 +96,7 @@ public class SignUpFormView extends javax.swing.JFrame implements Observer
 	 */
 	public LoginModel getLoginModel() 
 	{
-		return loginModel;
+		return model;
 	}
 	
 	/**
@@ -124,13 +128,15 @@ public class SignUpFormView extends javax.swing.JFrame implements Observer
 	 * 
 	 * @return A stringList with the names of the avatarImages
 	 */
-	public String[] getImages() {
+	public String[] getImages() 
+	{
 		File file = new File(getClass().getResource(".\\resources\\Avatars").getFile());
 		String[] imageList = file.list();
 		return imageList;
 	}
 
-	public void showImage(Integer index) {
+	public void showImage(Integer index) 
+	{
 		String[] imagesList = getImages();
 		String imageName = imagesList[index];
 		Icon icon = new ImageIcon(".\\resources\\Avatars" + imageName);
@@ -176,36 +182,12 @@ public class SignUpFormView extends javax.swing.JFrame implements Observer
 		txtUser.setBorder(null);
 
 		PreviousButton.setText("Previous");
-/*
-		PreviousButton.addActionListener(new ActionListener()
-			{
-				public void actionPerformed(ActionEvent evt)
-				{
-					PreviousButtonActionPerformed(evt);
-				}
-			});
-*/
+
 		NextButton.setText("Next");
-/*
-		NextButton.addActionListener(new ActionListener()
-			{
-				public void actionPerformed(ActionEvent evt)
-				{
-					NextButtonActionPerformed(evt);
-				}
-			});
-*/
+
 		SignUpButton.setText("Sign Up");
 		SignUpButton.setBorder(null);
-/*
-		SignUpButton.addActionListener(new ActionListener()
-			{
-				public void actionPerformed(ActionEvent evt)
-				{
-					SignUpButtonActionPerformed(evt);
-				}
-			});
-*/
+
 		javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
 		jPanel2.setLayout(jPanel2Layout);
 		jPanel2Layout.setHorizontalGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -288,12 +270,6 @@ public class SignUpFormView extends javax.swing.JFrame implements Observer
 		pack();
 	}
 	
-	/*
-	 * public static void main(String args[]) { Create and display the form
-	 * java.awt.EventQueue.invokeLater(new Runnable() { public void run() { try {
-	 * new SignUpFormView().setVisible(true); } catch (IOException e) {
-	 * e.printStackTrace(); } } }); }
-	 */
 	// Variables declaration - do not modify
 	private javax.swing.JLabel AvatarImageLabel;
 	private javax.swing.JLabel AvatarLabel;

@@ -28,18 +28,38 @@ public class LoginMenuView extends javax.swing.JFrame implements Observer
     {
     	loginModel = model;
     	initComponents();
-    	
     }
     
-    //loginModel getter
+    /**
+     * 
+     * @return the current model instance
+     */
     public LoginModel getLoginModel() {return loginModel;}
                   
-    //nickName getter
+    /**
+     * 
+     * @return user's nickName
+     */
     public String getNickName() {return nickName;}
     
-    //nickName setter
+    /**
+     * 
+     * @param nickName used in update() method to change this instance's nickName.
+     */
     public void setNickName(String nickName) {this.nickName = nickName;}
     
+    /**
+     * 
+     * @return jLabel2 used in controller method to change this label's Icon.
+     */
+    public JLabel getjLabel2()
+    {
+    	return jLabel2;
+    }
+    
+    /**
+     * init of all components of this view.
+     */
     private void initComponents() 
     {
         jPanel1 = new javax.swing.JPanel();
@@ -58,19 +78,10 @@ public class LoginMenuView extends javax.swing.JFrame implements Observer
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(655, 386));
         setResizable(false);
-/*
-        addWindowListener(new WindowAdapter() 
-        {
-        	public void windowOpened(WindowEvent evt) 
-        	{
-        	formWindowOpened(evt);
-        	}
-        }
-        );
-*/        
+     
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource(".\\reources\\LoginImg\\unoLogo.png")));
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource(".\\resources\\LoginImg\\unoLogo.png")));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -119,15 +130,7 @@ public class LoginMenuView extends javax.swing.JFrame implements Observer
         LoginButton.setFont(new java.awt.Font("Segoe UI", 1, 14));
         LoginButton.setForeground(new java.awt.Color(53, 101, 77));
         LoginButton.setText("LOGIN");
-/*
-        LoginButton.addActionListener(new ActionListener()
-        {
-        	public void actionPerformed(ActionEvent evt) 
-        	{
-        		LoginButtonActionPerformed(evt);
-        	}
-        });
-*/
+
         SignUpLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); 
         SignUpLabel.setForeground(new java.awt.Color(255, 255, 255));
         SignUpLabel.setText("Don't have an account?");
@@ -136,18 +139,7 @@ public class LoginMenuView extends javax.swing.JFrame implements Observer
         SignUpButton.setForeground(new java.awt.Color(255, 255, 255));
         SignUpButton.setText("Sign Up");
         SignUpButton.setBorder(null);
-/*
-        SignUpButton.addActionListener(new ActionListener()
-        {
-        	public void actionPerformed(ActionEvent evt)
-        	{
-        		try
-        		{SignUpButtonActionPerformed(evt);}
-        		catch (IOException e)
-        		{e.printStackTrace();}
-        	}
-        });
-*/
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -221,115 +213,22 @@ public class LoginMenuView extends javax.swing.JFrame implements Observer
 
     //END OF INIT
     
-    //inputTextGetter
-    public String getTxtUser()
-    {
-    	return txtUser.getText().toString();
-    }
+    /**
+     * 
+     * @return user input on textField
+     */
+    public String getTxtUser() {return txtUser.getText().toString();}
     
-    //dataBase getter
+    /**
+     * 
+     * @return current database instance
+     */
     public DataBase getDataBase() {return loginModel.getDataBase();}
     
-	/**
-	 * 
-	 * @param evt
-	 * @throws HeadlessException
-	 * 
-	 * receives the event (Login button getting pressed) and checks if the user
-	 * exists in the dataBase, if not, open a message dialog to tell the user 
-	 * to create an account. Else login and open the UserHome
-	 */
-/*
-    private void LoginButtonActionPerformed(java.awt.event.ActionEvent evt) 
-    { 
-    	if (getTxtUser().isEmpty()) 
-    	{ 
-    		JLabel message = new JLabel("Please enter a name"); 
-    		message.setFont(new Font("Comic Sans MS", Font.BOLD, 48) ); 
-    		JOptionPane.showMessageDialog(null, message);
-    	}
-    	else 
-    	{ 
-    		if (loginModel.getDataBase().getUser(getTxtUser())!= null)
-    		{
-    			User user = loginModel.getDataBase().getUser(getTxtUser());
-    			loginModel.setUser(user);
-    			loginModel.setPos(loginModel.getDataBase().getPos(user));
-    			update(loginModel, user.getNickName());
-    			update(loginModel, loginModel.getPos());
-    			UserHomeView view = new UserHomeView(user);
-    			loginModel.observationRoutine(view, this);
-    			view.setVisible(true);
-    			this.dispose();
-    		}
-    		else 
-    		{
-    			JLabel message = new JLabel("User not found, please sign up!");
-    			message.setFont(new Font("Comic Sans MS", Font.BOLD, 48));
-    			JOptionPane.showMessageDialog(null, message); 
-    		}
-    	}
-    }
-	                                                                     
-    private void formWindowOpened(java.awt.event.WindowEvent evt) 
-    {
-    	for (double i = 0.0; i <= 1.0; i+= 0.1) 
-    	{
-    		String val = i + ""; float f =Float.valueOf(val);
-    		this.setOpacity(f); 
-    		try 
-    		{Thread.sleep(50);}
-    		catch(Exception e) 
-    		{e.printStackTrace();} 
-    	}
-    }
-	                                  
-    private void SignUpButtonActionPerformed(java.awt.event.ActionEvent evt) throws IOException 
-    {
-    	SignUpFormView view = new SignUpFormView(loginModel);
-    	view.setVisible(true); 
-    	loginModel.addObserver((Observer)view);
-    	loginModel.deleteObserver(this);
-    	this.dispose(); 
-    }
-*/
+    public JButton getLoginButton(){return LoginButton;}
     
-    public JButton getLoginButton()
-    {
-    	return LoginButton;
-    }
-    
-    public JButton getSignUpButton()
-    {
-    	return SignUpButton;
-    }
+    public JButton getSignUpButton(){return SignUpButton;}
 
-/*
-    public static void main(String args[])
-    {
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(LoginMenuView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(LoginMenuView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(LoginMenuView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(LoginMenuView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-
-        
-	
-	 * java.awt.EventQueue.invokeLater(new Runnable() { public void run() { try {
-	 * new LoginMenuView().setVisible(true); } catch (IOException e) {
-	 * e.printStackTrace(); } } }); }
-*/
                   
     private javax.swing.JButton LoginButton;
     private javax.swing.JLabel LoginLabel;

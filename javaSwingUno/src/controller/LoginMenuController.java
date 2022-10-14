@@ -8,6 +8,7 @@ import java.awt.event.WindowEvent;
 import java.io.IOException;
 import java.util.Observer;
 
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
@@ -27,9 +28,19 @@ public class LoginMenuController
 	{
 		this.view = view;
 		this.model = model;
-		model.setNickname(view.getTxtUser());
 		model.addObserver(view);
-		//if(model.getNickName().equals(view.getTxtUser()))
+		initView();
+	}
+	
+	public void initView()
+	{
+		view.getjLabel2().setIcon(new ImageIcon(getClass().getResource(".\\resources\\LoginImg\\unoLogo.png")));
+		view.setVisible(true);
+	}
+	
+	public void initController()
+	{
+		loginMenuListeners(view);
 	}
 	
 	public void loginMenuListeners(LoginMenuView view) 
@@ -92,13 +103,13 @@ public class LoginMenuController
     			User user = model.getDataBase().getUser(view.getTxtUser());
     			model.setUser(user);
     			model.setPos(model.getDataBase().getPos(user));
-    			view.update(model, user.getNickName());
+    			model.setNickname(user.getNickName());
+    			view.update(model, model.getNickName());
     			view.update(model, model.getPos());
-    			UserHomeView newView = new UserHomeView(user, model);
+    			UserHomeView newView = new UserHomeView(model);
     			model.observationRoutine(newView, view);
     			UserHomeController controller = new UserHomeController(model, newView);
-    			controller.userHomeListeners(newView);
-    			newView.setVisible(true);
+    			controller.initController();
     			this.view.dispose();
     		}
     		else 
@@ -115,8 +126,7 @@ public class LoginMenuController
     	SignUpFormView newView = new SignUpFormView(model);
     	model.observationRoutine(newView, view);
     	SignUpFormController controller = new SignUpFormController(model, newView);
-    	controller.signUpFormListeners(newView);
-    	newView.setVisible(true); 
+    	controller.initController();
     	this.view.dispose(); 
     }
 }

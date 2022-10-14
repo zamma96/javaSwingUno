@@ -28,6 +28,18 @@ public class SignUpFormController
 	{
 		this.model = loginModel;
 		this.view = view;
+		initView();
+	}
+	
+	public void initView()
+	{
+		view.showImage(model.getPos());
+		view.setVisible(true);
+	}
+	
+	public void initController()
+	{
+		signUpFormListeners(view);
 	}
 	
 	public void signUpFormListeners(SignUpFormView view)
@@ -80,22 +92,42 @@ public class SignUpFormController
 			JOptionPane.showMessageDialog(null, "You need a Nickname!"); 
 		else 
 		{
-			model.setUser(new User(nickName, view.getPos()));
-			model.setPos(view.getPos());
+			model.setUser(new User(nickName, model.getPos()));
 			view.update(model, model.getUser());
 			view.update(model, model.getPos());
-			JLabel message = new JLabel("Welcome to JUno!");
-			message.setFont(new Font("Comic Sans MS", Font.BOLD, 48));
-			message.setBackground(new Color(53, 101, 77));
-			message.setForeground(new Color(255, 145, 164));
-			JOptionPane.showMessageDialog(null, message); 
+			welcomeMessage();
 			model.saveUserData();
-			UserHomeView newView = new	UserHomeView(model.getUser(), model);
-			model.deleteObserver(this.view);
+			UserHomeView newView = new	UserHomeView(model);
+			model.observationRoutine(newView, view);
 			UserHomeController controller = new UserHomeController(model, newView);
-			controller.userHomeListeners(newView);
-			newView.setVisible(true);
+			controller.initController();
 			this.view.dispose();
 		}
+		
 	}
+	
+	public void welcomeMessage()
+	{
+		JLabel message = new JLabel("Welcome to JUno!");
+		message.setFont(new Font("Comic Sans MS", Font.BOLD, 48));
+		message.setBackground(new Color(53, 101, 77));
+		message.setForeground(new Color(255, 145, 164));
+		JOptionPane.showMessageDialog(null, message); 
+	}
+	
+	public String[] getImages() 
+	{
+		File file = new File(getClass().getResource(".\\resources\\Avatars").getFile());
+		String[] imageList = file.list();
+		return imageList;
+	}
+	
+	public void showImage(Integer index)
+	{
+		String[] imageList = getImages();
+		String imageName = imageList[model.getPos()];
+		Icon icon = new ImageIcon(".\\resources\\Avatars"+imageName);
+		view.getAvatarImageLabel().setIcon(icon);
+	}
+	
 }

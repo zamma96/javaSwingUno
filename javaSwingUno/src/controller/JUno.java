@@ -12,7 +12,7 @@ public class JUno
 		LoginModel model = new LoginModel();
 		view.LoginMenuView view = new view.LoginMenuView(model);
 		LoginMenuController controller = new LoginMenuController(model, view);
-		controller.loginMenuListeners(view);
-		view.setVisible(true);
+		controller.initController();
+		
 	}
 }
