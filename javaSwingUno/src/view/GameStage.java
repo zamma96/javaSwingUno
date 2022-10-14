@@ -43,13 +43,13 @@ public class GameStage extends javax.swing.JFrame {
 
 	/* Double constructors for both ways of creating a new gameStage */
 
-	public GameStage(User user) {}
+	public GameStage(Game model) {this.game = model;}
 
 	public GameStage(ArrayList<String> playerIds) {
 		initComponents();
 		temp = playerIds;
 		this.playerIds = temp.toArray(new String[temp.size()]);
-		game = new Game(user);
+		game = new Game(user, game.getDataBase());//da rivedere
 		populateArrayList();
 		game.start(game);
 		setPlayerIdName();
@@ -118,6 +118,11 @@ public class GameStage extends javax.swing.JFrame {
 		cardButtons.add(jButton16);
 
 	}
+	
+	public JLabel getPlayerIdName()
+	{
+		return playerIdNameLabel;
+	}
 
 	public void setPlayerIdName() 
 	{
@@ -136,12 +141,84 @@ public class GameStage extends javax.swing.JFrame {
 	{
 		return jButton1;
 	}
+	
+	public JButton getjButton2()
+	{
+		return jButton2;
+	}
+	
+	public JButton getjButton3()
+	{
+		return jButton3;
+	}
 
-	/**
-	 * This method is called from within the constructor to initialize the form.
-	 */
-	@SuppressWarnings("unchecked")
-	private void initComponents() {
+	public JButton getjButton4()
+	{
+		return jButton4;
+	}
+	
+	public JButton getjButton5()
+	{
+		return jButton5;
+	}
+	
+	public JButton getjButton6()
+	{
+		return jButton6;
+	}
+	
+	public JButton getjButton7()
+	{
+		return jButton7;
+	}
+	
+	public JButton getjButton8()
+	{
+		return jButton8;
+	}
+	
+	public JButton getjButton9()
+	{
+		return jButton9;
+	}
+	
+	public JButton getjButton10()
+	{
+		return jButton10;
+	}
+	
+	public JButton getjButton11()
+	{
+		return jButton11;
+	}
+	
+	public JButton getjButton12()
+	{
+		return jButton12;
+	}
+	
+	public JButton getjButton13()
+	{
+		return jButton13;
+	}
+	
+	public JButton getjButton14()
+	{
+		return jButton14;
+	}
+	
+	public JButton getjButton15()
+	{
+		return jButton15;
+	}
+	
+	public JButton getjButton16()
+	{
+		return jButton16;
+	}
+	
+	private void initComponents() 
+	{
 
 		jPanel1 = new javax.swing.JPanel();
 		jButton1 = new javax.swing.JButton();
@@ -172,117 +249,133 @@ public class GameStage extends javax.swing.JFrame {
 		jPanel1.setToolTipText("");
 		jPanel1.setBackground(new Color(53, 101, 77));
 		jPanel1.setPreferredSize(new java.awt.Dimension(1280, 720));
-
+/*
 		jButton1.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				jButton1ActionPerformed(evt);
 			}
 		});
+*/
 		jButton1.setBackground(new Color(53, 101, 77));
-
+/*
 		jButton2.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				jButton2ActionPerformed(evt);
 			}
 		});
+*/
 		jButton2.setBackground(new Color(53, 101, 77));
-
+/*
 		jButton3.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				jButton3ActionPerformed(evt);
 			}
 		});
+*/
 		jButton3.setBackground(new Color(53, 101, 77));
-
+/*
 		jButton4.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				jButton4ActionPerformed(evt);
 			}
 		});
+*/
 		jButton4.setBackground(new Color(53, 101, 77));
-
+/*
 		jButton5.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				jButton5ActionPerformed(evt);
 			}
 		});
+*/	
 		jButton5.setBackground(new Color(53, 101, 77));
-
+/*
 		jButton6.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				jButton6ActionPerformed(evt);
 			}
 		});
+*/	
 		jButton6.setBackground(new Color(53, 101, 77));
-
+/*
 		jButton7.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				jButton7ActionPerformed(evt);
 			}
 		});
+*/
 		jButton7.setBackground(new Color(53, 101, 77));
-
+/*
 		jButton8.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				jButton8ActionPerformed(evt);
 			}
 		});
+*/
 		jButton8.setBackground(new Color(53, 101, 77));
-
+/*
 		jButton9.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				jButton9ActionPerformed(evt);
 			}
 		});
+*/
 		jButton9.setBackground(new Color(53, 101, 77));
-
+/*
 		jButton10.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				jButton10ActionPerformed(evt);
 			}
 		});
+*/
 		jButton10.setBackground(new Color(53, 101, 77));
-
+/*
 		jButton11.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				jButton11ActionPerformed(evt);
 			}
 		});
+*/
 		jButton11.setBackground(new Color(53, 101, 77));
-
+/*
 		jButton12.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				jButton12ActionPerformed(evt);
 			}
 		});
+*/
 		jButton12.setBackground(new Color(53, 101, 77));
-
+/*
 		jButton13.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				jButton13ActionPerformed(evt);
 			}
 		});
+*/
 		jButton13.setBackground(new Color(53, 101, 77));
-
+/*
 		jButton14.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				jButton14ActionPerformed(evt);
 			}
 		});
+*/
 		jButton14.setBackground(new Color(53, 101, 77));
-
+/*
 		jButton15.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				jButton15ActionPerformed(evt);
 			}
 		});
+*/
 		jButton15.setBackground(new Color(53, 101, 77));
-
+/*
 		jButton16.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				jButton16ActionPerformed(evt);
 			}
 		});
+*/
 		jButton16.setBackground(new Color(53, 101, 77));
 
 		playerIdNameLabel.setFont(new java.awt.Font("Comic Sans MS", Font.BOLD, 48));
@@ -291,12 +384,13 @@ public class GameStage extends javax.swing.JFrame {
 		drawCardButton.setForeground(new Color(255, 145, 164));
 		drawCardButton.setBackground(new Color(53, 101, 77));
 		drawCardButton.setText("draw card");
+/*
 		drawCardButton.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				drawCardButtonActionPerformed(evt);
 			}
 		});
-
+*/
 		DeckPileButton.setPreferredSize(new java.awt.Dimension(100, 70));
 
 		StockPileButton.setPreferredSize(new java.awt.Dimension(100, 70));
@@ -451,6 +545,7 @@ public class GameStage extends javax.swing.JFrame {
 	//da implementare classe popup per scelta carta,
 	//attenzione al limite di carte in mano, per questo codice 15, aumentare?
 	
+/*
 	private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
 		if (cardIds.get(0) != null) {
 			int index = 0;
@@ -642,30 +737,8 @@ public class GameStage extends javax.swing.JFrame {
 			window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		}
 	}
+*/
 
-	/**
-	 * @param args the command line arguments
-	 */
-	/*
-	 * public static void main(String args[]) { try { for
-	 * (javax.swing.UIManager.LookAndFeelInfo info :
-	 * javax.swing.UIManager.getInstalledLookAndFeels()) { if
-	 * ("Nimbus".equals(info.getName())) {
-	 * javax.swing.UIManager.setLookAndFeel(info.getClassName()); break; } } } catch
-	 * (ClassNotFoundException ex) {
-	 * java.util.logging.Logger.getLogger(GameStage.class.getName()).log(java.util.
-	 * logging.Level.SEVERE, null, ex); } catch (InstantiationException ex) {
-	 * java.util.logging.Logger.getLogger(GameStage.class.getName()).log(java.util.
-	 * logging.Level.SEVERE, null, ex); } catch (IllegalAccessException ex) {
-	 * java.util.logging.Logger.getLogger(GameStage.class.getName()).log(java.util.
-	 * logging.Level.SEVERE, null, ex); } catch
-	 * (javax.swing.UnsupportedLookAndFeelException ex) {
-	 * java.util.logging.Logger.getLogger(GameStage.class.getName()).log(java.util.
-	 * logging.Level.SEVERE, null, ex); }
-	 * 
-	 * Create and display the form java.awt.EventQueue.invokeLater(new Runnable() {
-	 * public void run() { new GameStage().setVisible(true); } }); }
-	 */
 
 	// Variables declaration - do not modify
 	private javax.swing.JButton DeckPileButton;

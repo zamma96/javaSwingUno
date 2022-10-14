@@ -17,6 +17,7 @@ public class GameController
 	//classe che serve ad amministrare cambiamenti sulla view scatenati dalle interazioni delle IA col model nella partita
 	private Game model;
 	private GameStage view;
+	private PopUp window;
 	
 	public GameController(Game game, GameStage gameStage)
 	{
@@ -48,14 +49,57 @@ public class GameController
 				jButton1ActionPerformed(evt);
 			}
 		});
+		
+		view.getjButton2().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt)
+			{
+				jButton2ActionPerformed(evt);
+			}
+		});
+		
+		view.getjButton3().addActionListener(new ActionListener()
+				{
+			public void actionPerformed(ActionEvent evt)
+			{
+				jButton3ActionPerformed(evt);
+			}
+				});
 	}
 	
+	//da rivedere assolutamente, ho solo tolto i main error
 	private void jButton1ActionPerformed(ActionEvent evt) 
 	{
-		if (cardIds.get(0) != null) {
+		if (model.getCardIds().get(0) != null) {
 			int index = 0;
-			String cardId = cardIds.get(0);
-			window = new PopUp(cardId, game, index, cardButtons, this, DeckPileButton, StockPileButton);
+			String cardId = model.getCardIds().get(0);
+			window = new PopUp(cardId, model, index, model.getcardButtons(), view, view.getDeckPileButton(), view.getStockPileButton());
+			window.setBounds(750, 40, 700, 800);
+			window.setVisible(true);
+			window.setResizable(false);
+			window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		}
+	}
+	
+	private void jButton2ActionPerformed(ActionEvent evt) 
+	{
+		if (model.getCardIds().get(1) != null) {
+			int index = 1;
+			String cardId = model.getCardIds().get(1);
+			window = new PopUp(cardId, model, index, model.getcardButtons(), view, view.getDeckPileButton(), view.getStockPileButton());
+			window.setBounds(750, 40, 700, 800);
+			window.setVisible(true);
+			window.setResizable(false);
+			window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		}
+	}
+	
+	private void jButton3ActionPerformed(ActionEvent evt)
+	{
+		if (model.getCardIds().get(2) != null)
+		{
+			int index = 2;
+			String cardId = model.getCardIds().get(2);
+			window = new PopUp(cardId, model, index, model.getcardButtons(), view, view.getDeckPileButton(), view.getStockPileButton());
 			window.setBounds(750, 40, 700, 800);
 			window.setVisible(true);
 			window.setResizable(false);

@@ -10,15 +10,18 @@ import java.util.Random;
 import java.util.stream.Collectors;
 
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 public class Game extends Observable
 {
+	//qui dataBase serve solo per salvare i risultati delle partite (Games won, Games played, Games loss)
 	private DataBase dataBase;
 	private String[] nameArray = new String[] {"Carlo", "Gianluca", "Simone", "Giorno", "Marco", "Vista", "Valentina", "Daniela", "Francesca", "Martina", "Elena"};
 	private ArrayList<String> namePool;
+	private ArrayList<String> cardIds;
 	private int currentPlayer;
 	private Player[] players = new Player[4];
 	private Deck deck;
@@ -26,6 +29,7 @@ public class Game extends Observable
 	private ArrayList<Card> stockPile;
 	private Card.Color validColor;
 	private Card.Value validValue;
+	private ArrayList<JButton> cardButtons;
 	boolean gameDirection;
 	private User user;
 	
@@ -133,7 +137,7 @@ public class Game extends Observable
 		JOptionPane.showMessageDialog(null, message);
 	}
 	
-	/*
+	/**
 	 * @param player
 	 * gets the mostFrequentColor on any Player's hand, selected by passing the player.
 	 * with stream takes the list of all the player's hand's cards, splits it by underescore
@@ -188,6 +192,21 @@ public class Game extends Observable
 			currentPlayer = players.length-1;
 		}
 		stockPile.add(card);
+	}
+	
+	public ArrayList<String> getCardIds()
+	{
+		return cardIds;
+	}
+	
+	public ArrayList<JButton> getcardButtons()
+	{
+		return cardButtons;
+	}
+	
+	public DataBase getDataBase()
+	{
+		return dataBase;
 	}
 	
 	public Card getTopCard()
