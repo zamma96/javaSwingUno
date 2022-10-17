@@ -8,13 +8,14 @@ import java.util.Observer;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 /**
  *
  * @author matte
  */
-public class UserHomeView extends javax.swing.JFrame implements Observer 
+public class UserHomeView extends JFrame implements Observer 
 {
 	private LoginModel model;
 	private Integer pos;

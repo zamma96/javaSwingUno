@@ -1,30 +1,11 @@
-/*
- * package view;
- * 
- * import java.util.Observable; import java.util.Observer;
- * 
- * import javax.swing.JFrame;
- * 
- * import model.User;
- * 
- * public class GameStage extends JFrame implements Observer { private User
- * user;
- * 
- * public GameStage(User user) { this.user = user; }
- * 
- * @Override public void update(Observable o, Object arg) {
- * 
- * }
- * 
- * }
- */
-
 package view;
 
 import java.awt.Color;
 import java.awt.Font;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Observable;
+import java.util.Observer;
 import java.util.logging.*;
 import java.util.stream.Collectors;
 import javax.swing.*;
@@ -32,7 +13,8 @@ import model.InvalidPlayerTurnException;
 import model.User;
 import model.Game;
 
-public class GameStage extends javax.swing.JFrame {
+public class GameStage extends JFrame implements Observer 
+{
 	private User user;
 	ArrayList<String> temp = new ArrayList<>();
 	String[] playerIds = new String[4];
@@ -217,30 +199,35 @@ public class GameStage extends javax.swing.JFrame {
 		return jButton16;
 	}
 	
+	public JButton getDrawCardButton()
+	{
+		return drawCardButton;
+	}
+	
 	private void initComponents() 
 	{
 
-		jPanel1 = new javax.swing.JPanel();
-		jButton1 = new javax.swing.JButton();
-		jButton2 = new javax.swing.JButton();
-		jButton3 = new javax.swing.JButton();
-		jButton4 = new javax.swing.JButton();
-		jButton5 = new javax.swing.JButton();
-		jButton6 = new javax.swing.JButton();
-		jButton7 = new javax.swing.JButton();
-		jButton8 = new javax.swing.JButton();
-		jButton9 = new javax.swing.JButton();
-		jButton10 = new javax.swing.JButton();
-		jButton11 = new javax.swing.JButton();
-		jButton12 = new javax.swing.JButton();
-		jButton13 = new javax.swing.JButton();
-		jButton14 = new javax.swing.JButton();
-		jButton15 = new javax.swing.JButton();
-		jButton16 = new javax.swing.JButton();
-		playerIdNameLabel = new javax.swing.JLabel();
-		drawCardButton = new javax.swing.JButton();
-		DeckPileButton = new javax.swing.JButton();
-		StockPileButton = new javax.swing.JButton();
+		jPanel1 = new JPanel();
+		jButton1 = new JButton();
+		jButton2 = new JButton();
+		jButton3 = new JButton();
+		jButton4 = new JButton();
+		jButton5 = new JButton();
+		jButton6 = new JButton();
+		jButton7 = new JButton();
+		jButton8 = new JButton();
+		jButton9 = new JButton();
+		jButton10 = new JButton();
+		jButton11 = new JButton();
+		jButton12 = new JButton();
+		jButton13 = new JButton();
+		jButton14 = new JButton();
+		jButton15 = new JButton();
+		jButton16 = new JButton();
+		playerIdNameLabel = new JLabel();
+		drawCardButton = new JButton();
+		DeckPileButton = new JButton();
+		StockPileButton = new JButton();
 
 		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 		setTitle("UNO");
@@ -249,133 +236,37 @@ public class GameStage extends javax.swing.JFrame {
 		jPanel1.setToolTipText("");
 		jPanel1.setBackground(new Color(53, 101, 77));
 		jPanel1.setPreferredSize(new java.awt.Dimension(1280, 720));
-/*
-		jButton1.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				jButton1ActionPerformed(evt);
-			}
-		});
-*/
+		
 		jButton1.setBackground(new Color(53, 101, 77));
-/*
-		jButton2.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				jButton2ActionPerformed(evt);
-			}
-		});
-*/
+
 		jButton2.setBackground(new Color(53, 101, 77));
-/*
-		jButton3.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				jButton3ActionPerformed(evt);
-			}
-		});
-*/
+
 		jButton3.setBackground(new Color(53, 101, 77));
-/*
-		jButton4.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				jButton4ActionPerformed(evt);
-			}
-		});
-*/
+
 		jButton4.setBackground(new Color(53, 101, 77));
-/*
-		jButton5.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				jButton5ActionPerformed(evt);
-			}
-		});
-*/	
+
 		jButton5.setBackground(new Color(53, 101, 77));
-/*
-		jButton6.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				jButton6ActionPerformed(evt);
-			}
-		});
-*/	
+	
 		jButton6.setBackground(new Color(53, 101, 77));
-/*
-		jButton7.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				jButton7ActionPerformed(evt);
-			}
-		});
-*/
+
 		jButton7.setBackground(new Color(53, 101, 77));
-/*
-		jButton8.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				jButton8ActionPerformed(evt);
-			}
-		});
-*/
+
 		jButton8.setBackground(new Color(53, 101, 77));
-/*
-		jButton9.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				jButton9ActionPerformed(evt);
-			}
-		});
-*/
+
 		jButton9.setBackground(new Color(53, 101, 77));
-/*
-		jButton10.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				jButton10ActionPerformed(evt);
-			}
-		});
-*/
+
 		jButton10.setBackground(new Color(53, 101, 77));
-/*
-		jButton11.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				jButton11ActionPerformed(evt);
-			}
-		});
-*/
+
 		jButton11.setBackground(new Color(53, 101, 77));
-/*
-		jButton12.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				jButton12ActionPerformed(evt);
-			}
-		});
-*/
+
 		jButton12.setBackground(new Color(53, 101, 77));
-/*
-		jButton13.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				jButton13ActionPerformed(evt);
-			}
-		});
-*/
+
 		jButton13.setBackground(new Color(53, 101, 77));
-/*
-		jButton14.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				jButton14ActionPerformed(evt);
-			}
-		});
-*/
+
 		jButton14.setBackground(new Color(53, 101, 77));
-/*
-		jButton15.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				jButton15ActionPerformed(evt);
-			}
-		});
-*/
+
 		jButton15.setBackground(new Color(53, 101, 77));
-/*
-		jButton16.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				jButton16ActionPerformed(evt);
-			}
-		});
-*/
+
 		jButton16.setBackground(new Color(53, 101, 77));
 
 		playerIdNameLabel.setFont(new java.awt.Font("Comic Sans MS", Font.BOLD, 48));
@@ -384,13 +275,7 @@ public class GameStage extends javax.swing.JFrame {
 		drawCardButton.setForeground(new Color(255, 145, 164));
 		drawCardButton.setBackground(new Color(53, 101, 77));
 		drawCardButton.setText("draw card");
-/*
-		drawCardButton.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				drawCardButtonActionPerformed(evt);
-			}
-		});
-*/
+
 		DeckPileButton.setPreferredSize(new java.awt.Dimension(100, 70));
 
 		StockPileButton.setPreferredSize(new java.awt.Dimension(100, 70));
@@ -527,240 +412,34 @@ public class GameStage extends javax.swing.JFrame {
 		pack();
 	}
 
-	private void drawCardButtonActionPerformed(java.awt.event.ActionEvent evt) {
-		JLabel message = new JLabel(game.getCurrentPlayer() + " drew a card");
-		message.setFont(new Font("Comic Sans MS", Font.BOLD, 48));
-		message.setBackground(new Color(53, 101, 77));
-		message.setForeground(new Color(255, 145, 164));
-		JOptionPane.showMessageDialog(null, message);
-		try {
-			game.submitDraw(game.getCurrentPlayer());
-		} catch (InvalidPlayerTurnException ex) {
-			Logger.getLogger(GameStage.class.getName()).log(Level.SEVERE, null, ex);
-		}
-		this.setPlayerIdName(game.getCurrentPlayer().getPlayerNickName());
-		this.setButtonIcons();
-	}
-
-	//da implementare classe popup per scelta carta,
-	//attenzione al limite di carte in mano, per questo codice 15, aumentare?
-	
-/*
-	private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
-		if (cardIds.get(0) != null) {
-			int index = 0;
-			String cardId = cardIds.get(0);
-			window = new PopUp(cardId, game, index, cardButtons, this, DeckPileButton, StockPileButton);
-			window.setBounds(750, 40, 700, 800);
-			window.setVisible(true);
-			window.setResizable(false);
-			window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		}
-	}
-
-	private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {
-		if (cardIds.get(1) != null) {
-			int index = 1;
-			String cardId = cardIds.get(1);
-			window = new PopUp(cardId, game, index, cardButtons, this, DeckPileButton, StockPileButton);
-			window.setBounds(750, 40, 700, 800);
-			window.setVisible(true);
-			window.setResizable(false);
-			window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		}
-	}
-
-	private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {
-		if (cardIds.get(2) != null) {
-			int index = 2;
-			String cardId = cardIds.get(2);
-			window = new PopUp(cardId, game, index, cardButtons, this, DeckPileButton, StockPileButton);
-			window.setBounds(750, 40, 700, 800);
-			window.setVisible(true);
-			window.setResizable(false);
-			window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		}
-	}
-
-	private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {
-		if (cardIds.get(3) != null) {
-			int index = 3;
-			String cardId = cardIds.get(3);
-			window = new PopUp(cardId, game, index, cardButtons, this, DeckPileButton, StockPileButton);
-			window.setBounds(750, 40, 700, 800);
-			window.setVisible(true);
-			window.setResizable(false);
-			window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		}
-	}
-
-	private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {
-		if (cardIds.get(4) != null) {
-			int index = 4;
-			String cardId = cardIds.get(4);
-			window = new PopUp(cardId, game, index, cardButtons, this, DeckPileButton, StockPileButton);
-			window.setBounds(750, 40, 700, 800);
-			window.setVisible(true);
-			window.setResizable(false);
-			window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		}
-	}
-
-	private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {
-		if (cardIds.get(5) != null) {
-			int index = 5;
-			String cardId = cardIds.get(5);
-			window = new PopUp(cardId, game, index, cardButtons, this, DeckPileButton, StockPileButton);
-			window.setBounds(750, 40, 700, 800);
-			window.setVisible(true);
-			window.setResizable(false);
-			window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		}
-	}
-
-	private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {
-		if (cardIds.get(6) != null) {
-			int index = 6;
-			String cardId = cardIds.get(6);
-			window = new PopUp(cardId, game, index, cardButtons, this, DeckPileButton, StockPileButton);
-			window.setBounds(750, 40, 700, 800);
-			window.setVisible(true);
-			window.setResizable(false);
-			window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		}
-	}
-
-	private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {
-		if (cardIds.get(7) != null) {
-			int index = 7;
-			String cardId = cardIds.get(7);
-			window = new PopUp(cardId, game, index, cardButtons, this, DeckPileButton, StockPileButton);
-			window.setBounds(750, 40, 700, 800);
-			window.setVisible(true);
-			window.setResizable(false);
-			window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		}
-	}
-
-	private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {
-		if (cardIds.get(8) != null) {
-			int index = 8;
-			String cardId = cardIds.get(8);
-			window = new PopUp(cardId, game, index, cardButtons, this, DeckPileButton, StockPileButton);
-			window.setBounds(750, 40, 700, 800);
-			window.setVisible(true);
-			window.setResizable(false);
-			window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		}
-	}
-
-	private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {
-		if (cardIds.get(9) != null) {
-			int index = 9;
-			String cardId = cardIds.get(9);
-			window = new PopUp(cardId, game, index, cardButtons, this, DeckPileButton, StockPileButton);
-			window.setBounds(750, 40, 700, 800);
-			window.setVisible(true);
-			window.setResizable(false);
-			window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		}
-	}
-
-	private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {
-		if (cardIds.get(10) != null) {
-			int index = 10;
-			String cardId = cardIds.get(10);
-			window = new PopUp(cardId, game, index, cardButtons, this, DeckPileButton, StockPileButton);
-			window.setBounds(750, 40, 700, 800);
-			window.setVisible(true);
-			window.setResizable(false);
-			window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		}
-	}
-
-	private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {
-		if (cardIds.get(11) != null) {
-			int index = 11;
-			String cardId = cardIds.get(11);
-			window = new PopUp(cardId, game, index, cardButtons, this, DeckPileButton, StockPileButton);
-			window.setBounds(750, 40, 700, 800);
-			window.setVisible(true);
-			window.setResizable(false);
-			window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		}
-	}
-
-	private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {
-		if (cardIds.get(12) != null) {
-			int index = 12;
-			String cardId = cardIds.get(12);
-			window = new PopUp(cardId, game, index, cardButtons, this, DeckPileButton, StockPileButton);
-			window.setBounds(750, 40, 700, 800);
-			window.setVisible(true);
-			window.setResizable(false);
-			window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		}
-	}
-
-	private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {
-		if (cardIds.get(13) != null) {
-			int index = 13;
-			String cardId = cardIds.get(13);
-			window = new PopUp(cardId, game, index, cardButtons, this, DeckPileButton, StockPileButton);
-			window.setBounds(750, 40, 700, 800);
-			window.setVisible(true);
-			window.setResizable(false);
-			window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		}
-	}
-
-	private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {
-		if (cardIds.get(14) != null) {
-			int index = 14;
-			String cardId = cardIds.get(14);
-			window = new PopUp(cardId, game, index, cardButtons, this, DeckPileButton, StockPileButton);
-			window.setBounds(750, 40, 700, 800);
-			window.setVisible(true);
-			window.setResizable(false);
-			window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		}
-	}
-
-	private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {
-		if (cardIds.get(15) != null) {
-			int index = 15;
-			String cardId = cardIds.get(15);
-			window = new PopUp(cardId, game, index, cardButtons, this, DeckPileButton, StockPileButton);
-			window.setBounds(750, 40, 700, 800);
-			window.setVisible(true);
-			window.setResizable(false);
-			window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		}
-	}
-*/
-
-
-	// Variables declaration - do not modify
-	private javax.swing.JButton DeckPileButton;
-	private javax.swing.JButton StockPileButton;
-	private javax.swing.JButton drawCardButton;
-	private javax.swing.JButton jButton1;
-	private javax.swing.JButton jButton10;
-	private javax.swing.JButton jButton11;
-	private javax.swing.JButton jButton12;
-	private javax.swing.JButton jButton13;
-	private javax.swing.JButton jButton14;
-	private javax.swing.JButton jButton15;
-	private javax.swing.JButton jButton16;
-	private javax.swing.JButton jButton2;
-	private javax.swing.JButton jButton3;
-	private javax.swing.JButton jButton4;
-	private javax.swing.JButton jButton5;
-	private javax.swing.JButton jButton6;
-	private javax.swing.JButton jButton7;
-	private javax.swing.JButton jButton8;
-	private javax.swing.JButton jButton9;
+	private JButton DeckPileButton;
+	private JButton StockPileButton;
+	private JButton drawCardButton;
+	private JButton jButton1;
+	private JButton jButton10;
+	private JButton jButton11;
+	private JButton jButton12;
+	private JButton jButton13;
+	private JButton jButton14;
+	private JButton jButton15;
+	private JButton jButton16;
+	private JButton jButton2;
+	private JButton jButton3;
+	private JButton jButton4;
+	private JButton jButton5;
+	private JButton jButton6;
+	private JButton jButton7;
+	private JButton jButton8;
+	private JButton jButton9;
 	private javax.swing.JPanel jPanel1;
-	private javax.swing.JLabel playerIdNameLabel;
-	// End of variables declaration
+	private JLabel playerIdNameLabel;
+
+
+	@Override
+	public void update(Observable o, Object arg) 
+	{
+		if (arg.getClass().getName() == "java.lang.String")
+			setPlayerIdName((String)arg);
+		
+	}
 }

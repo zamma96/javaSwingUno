@@ -30,8 +30,11 @@ public class Game extends Observable
 	private Card.Color validColor;
 	private Card.Value validValue;
 	private ArrayList<JButton> cardButtons;
-	boolean gameDirection;
+	public boolean gameDirection;
 	private User user;
+	private Card.Color wildColor;
+	private Card.Color declaredColor;
+	private String playerIdName;
 	
 	public Game(User user, DataBase dataBase)
 	{
@@ -194,6 +197,26 @@ public class Game extends Observable
 		stockPile.add(card);
 	}
 	
+	public Card.Color getWildColor()
+	{
+		return wildColor;
+	}
+	
+	public void setWildColor(Card.Color c)
+	{
+		wildColor = c;
+	}
+	
+	public void setDeclaredColor(Card.Color c)
+	{
+		declaredColor = c;
+	}
+	
+	public Card.Color getDeclaredColor()
+	{
+		return declaredColor;
+	}
+	
 	public ArrayList<String> getCardIds()
 	{
 		return cardIds;
@@ -264,6 +287,16 @@ public class Game extends Observable
 		return this.deck;
 	}
 	
+	public void setPlayerIdName(String s)
+	{
+		this.playerIdName = s;
+	}
+	
+	public String getPlayerIdName() 
+	{
+		return playerIdName;
+	}
+	
 	public boolean hasEmptyHand(Player player)
 	{
 		return getPlayerHand(player).isEmpty();
@@ -272,11 +305,11 @@ public class Game extends Observable
 	public boolean hasDrawTwo()
 	{
 		for(int i = 0; i < getPlayerHandSize(players[currentPlayer]); i++)
-			 	if (getPlayerHand(players[currentPlayer]).get(i).toString() == "RED_DRAW_TWO" || getPlayerHand(players[currentPlayer]).get(i).toString() == "BLUE_DRAW_TWO" || getPlayerHand(players[currentPlayer]).get(i).toString() == "YELLOW_DRAW_TWO" || getPlayerHand(players[currentPlayer]).get(i).toString() == "GREEN_DRAW_TWO") 
-			 		return true;
+			 if (getPlayerHand(players[currentPlayer]).get(i).toString() == "RED_DRAW_TWO" || getPlayerHand(players[currentPlayer]).get(i).toString() == "BLUE_DRAW_TWO" || getPlayerHand(players[currentPlayer]).get(i).toString() == "YELLOW_DRAW_TWO" || getPlayerHand(players[currentPlayer]).get(i).toString() == "GREEN_DRAW_TWO") 
+			 	return true;
 		return false;
 	}
-	
+/*
 	public boolean isDrawTwo()
 	{
 		for(int i = 0; i < getPlayerHandSize(players[currentPlayer]); i++)
@@ -284,7 +317,7 @@ public class Game extends Observable
 				return true;
 		return false;
 	}
-	
+*/
 	public boolean hasDrawFour()
 	{
 		for (int i = 0; i < getPlayerHandSize(players[currentPlayer]); i++)
@@ -336,7 +369,7 @@ public class Game extends Observable
 		checkGameDirection(players);
 	}
 	
-	public void setCardColor(Card.Color color)
+	public void setValidColor(Card.Color color)
 	{
 		validColor = color;
 	}
