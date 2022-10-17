@@ -179,9 +179,12 @@ public class GameController
 			String cardId = model.getCardIds().get(0);
 			window = new PopUp(cardId, model, index, model.getcardButtons(), view, view.getDeckPileButton(), view.getStockPileButton());
 			window.setBounds(750, 40, 700, 800);
-			window.setVisible(true);
 			window.setResizable(false);
 			window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+			PopUpController controller = new PopUpController(model, view, window);
+			controller.initController(window);
+			model.addObserver(window);
+			window.setVisible(true);
 		}
 	}
 	

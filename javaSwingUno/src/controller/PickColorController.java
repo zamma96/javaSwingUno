@@ -23,7 +23,6 @@ public class PickColorController
 	private PopUp popUp;
 	private PickColorFrame view;
 	public boolean allow = false;
-	private Card.Color wildColor;
 	
 	public PickColorController(Game game, PickColorFrame view)
 	{
@@ -50,12 +49,12 @@ public class PickColorController
 		view.setVisible(true);
 	}
 	
-	public void initController()
+	public void initController(PickColorFrame view)
 	{
-		PickColorListeners();
+		PickColorListeners(view);
 	}
 	
-	public void PickColorListeners()
+	public void PickColorListeners(PickColorFrame view)
 	{
 		view.getRedButton().addActionListener(new ActionListener() 
 		{
@@ -102,8 +101,10 @@ public class PickColorController
 		game.setPlayerIdName(game.getCurrentPlayer().getPlayerNickName());
 		gameView.setButtonIcons();
 		Icon icon = new ImageIcon(".\\resources\\UnoCards\\" + game.getTopCardImage());
+		//gameView.update(game, icon);
 		gameView.getStockPileButton().setIcon(icon);
 		game.setValidColor(Card.Color.RED);
+		//gameView.update(game, game.getValidColor());
 		popUp.dispose();
 	}
 	
@@ -117,8 +118,10 @@ public class PickColorController
 		game.setPlayerIdName(game.getCurrentPlayer().getPlayerNickName());
 		gameView.setButtonIcons();
 		Icon icon = new ImageIcon(".\\resources\\UnoCards\\" + game.getTopCardImage());
+		//gameView.update(game, icon);
 		gameView.getStockPileButton().setIcon(icon);
 		game.setValidColor(Card.Color.GREEN);
+		//gameView.update(game, game.getValidColor());
 		popUp.dispose();
 	}
 	
@@ -132,8 +135,10 @@ public class PickColorController
 		game.setPlayerIdName(game.getCurrentPlayer().getPlayerNickName());
 		gameView.setButtonIcons();
 		Icon icon = new ImageIcon(".\\resources\\UnoCards\\" + game.getTopCardImage());
+		//gameView.update(game, icon);
 		gameView.getStockPileButton().setIcon(icon);
 		game.setValidColor(Card.Color.BLUE);
+		//gameView.update(game, game.getValidColor());
 		popUp.dispose();
 	}
 	
@@ -147,8 +152,10 @@ public class PickColorController
 		game.setPlayerIdName(game.getCurrentPlayer().getPlayerNickName());;
 		gameView.setButtonIcons();
 		Icon icon = new ImageIcon(".\\resources\\UnoCards\\"+ game.getTopCardImage());
+		//gameView.update(game, icon);
 		gameView.getStockPileButton().setIcon(icon);
 		game.setValidColor(Card.Color.YELLOW);
+		//gameView.update(game, game.getValidColor());
 		popUp.dispose();
 	}
 	

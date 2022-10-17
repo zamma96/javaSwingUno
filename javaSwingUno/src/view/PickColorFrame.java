@@ -91,42 +91,46 @@ public class PickColorFrame extends JFrame implements Observer
         redButton.setText("RED");
         redButton.setBackground(new Color(53,101,77));
 		redButton.setForeground(new Color(255, 145, 164));
+/*
         redButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 redButtonActionPerformed(evt);
             }
         });
-
+*/
         greenButton.setFont(new java.awt.Font("Comic Sans MS", Font.BOLD, 18)); // NOI18N
         greenButton.setText("GREEN");
         greenButton.setBackground(new Color(53,101,77));
 		greenButton.setForeground(new Color(255, 145, 164));
+/*
         greenButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 greenButtonActionPerformed(evt);
             }
         });
-
+*/
         blueButton.setFont(new java.awt.Font("Comic Sans MS", Font.BOLD, 18)); // NOI18N
         blueButton.setText("BLUE");
         blueButton.setBackground(new Color(53,101,77));
 		blueButton.setForeground(new Color(255, 145, 164));
+/*
         blueButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 blueButtonActionPerformed(evt);
             }
         });
-
+*/
         yellowButton.setFont(new java.awt.Font("Comic Sans MS", Font.BOLD, 18)); // NOI18N
         yellowButton.setText("YELLOW");
         yellowButton.setBackground(new Color(53,101,77));
 		yellowButton.setForeground(new Color(255, 145, 164));
+/*
         yellowButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 yellowButtonActionPerformed(evt);
             }
         });
-
+*/
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -175,7 +179,7 @@ public class PickColorFrame extends JFrame implements Observer
 
         pack();
     }                       
-
+/*
     private void yellowButtonActionPerformed(java.awt.event.ActionEvent evt) {                                             
         wildColor = Card.Color.YELLOW;
         JLabel message = new JLabel("The color changed into yellow!");
@@ -249,7 +253,7 @@ public class PickColorFrame extends JFrame implements Observer
         popUp.game.setCardColor(Card.Color.BLUE);
         popUp.dispose();
     }                                          
-
+*/
 
 
     // Variables declaration - do not modify                     
