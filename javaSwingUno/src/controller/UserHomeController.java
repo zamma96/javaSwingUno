@@ -97,7 +97,7 @@ public class UserHomeController
 		model.setPos(model.getPos());
 		model.saveUserData();
 		Game gameModel = new Game(model.getUser(), model.getDataBase());
-		GameStage gameView = new GameStage(gameModel);//da rivedere
+		GameStage gameView = new GameStage(gameModel);
 		model.observationRoutine(gameView, this.view);
 		GameController controller = new GameController(gameModel, gameView);
 		controller.initController();

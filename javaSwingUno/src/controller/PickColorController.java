@@ -93,7 +93,7 @@ public class PickColorController
 	
 	public void redButtonActionPerformed(ActionEvent evt)
 	{
-		game.setWildColor(Card.Color.RED);
+		//game.setWildColor(Card.Color.RED);
 		showMessage("red!");
 		allow = true;
 		view.dispose();
@@ -101,16 +101,15 @@ public class PickColorController
 		game.setPlayerIdName(game.getCurrentPlayer().getPlayerNickName());
 		gameView.setButtonIcons();
 		Icon icon = new ImageIcon(".\\resources\\UnoCards\\" + game.getTopCardImage());
-		//gameView.update(game, icon);
+		gameView.update(game, icon);
 		gameView.getStockPileButton().setIcon(icon);
 		game.setValidColor(Card.Color.RED);
-		//gameView.update(game, game.getValidColor());
 		popUp.dispose();
 	}
 	
 	public void greenButtonActionPerformed(ActionEvent evt)
 	{
-		game.setWildColor(Card.Color.GREEN);
+		//game.setWildColor(Card.Color.GREEN);
 		showMessage("green!");
 		allow = true;
 		view.dispose();
@@ -118,16 +117,15 @@ public class PickColorController
 		game.setPlayerIdName(game.getCurrentPlayer().getPlayerNickName());
 		gameView.setButtonIcons();
 		Icon icon = new ImageIcon(".\\resources\\UnoCards\\" + game.getTopCardImage());
-		//gameView.update(game, icon);
+		gameView.update(game, icon);
 		gameView.getStockPileButton().setIcon(icon);
 		game.setValidColor(Card.Color.GREEN);
-		//gameView.update(game, game.getValidColor());
 		popUp.dispose();
 	}
 	
 	public void blueButtonActionPerformed(ActionEvent evt)
 	{
-		game.setWildColor(Card.Color.BLUE);
+		//game.setWildColor(Card.Color.BLUE);
 		showMessage("blue!");
 		allow = true;
 		view.dispose();
@@ -135,16 +133,15 @@ public class PickColorController
 		game.setPlayerIdName(game.getCurrentPlayer().getPlayerNickName());
 		gameView.setButtonIcons();
 		Icon icon = new ImageIcon(".\\resources\\UnoCards\\" + game.getTopCardImage());
-		//gameView.update(game, icon);
+		gameView.update(game, icon);
 		gameView.getStockPileButton().setIcon(icon);
 		game.setValidColor(Card.Color.BLUE);
-		//gameView.update(game, game.getValidColor());
 		popUp.dispose();
 	}
 	
 	public void yellowButtonActionPerformed(ActionEvent evt)
 	{
-		game.setWildColor(Card.Color.YELLOW);
+		//game.setWildColor(Card.Color.YELLOW);
 		showMessage("yellow!");
 		allow = true;
 		view.dispose();
@@ -152,10 +149,9 @@ public class PickColorController
 		game.setPlayerIdName(game.getCurrentPlayer().getPlayerNickName());;
 		gameView.setButtonIcons();
 		Icon icon = new ImageIcon(".\\resources\\UnoCards\\"+ game.getTopCardImage());
-		//gameView.update(game, icon);
+		gameView.update(game, icon);
 		gameView.getStockPileButton().setIcon(icon);
 		game.setValidColor(Card.Color.YELLOW);
-		//gameView.update(game, game.getValidColor());
 		popUp.dispose();
 	}
 	

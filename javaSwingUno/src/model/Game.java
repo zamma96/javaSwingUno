@@ -35,18 +35,22 @@ public class Game extends Observable
 	private Card.Color wildColor;
 	private Card.Color declaredColor;
 	private String playerIdName;
+	private int drawTwoCount = 0;
+	private int drawFourCount = 0;
 	
 	public Game(User user, DataBase dataBase)
 	{
 		this.dataBase = dataBase;
 		this.user = user;
+		hasChanged();
+		notifyObservers(user);
 		deck = new Deck();
 		deck.reset();
 		deck.shuffle();
 		stockPile = new ArrayList<Card>();
 		namePool = (ArrayList<String>) Arrays.asList(nameArray);
-		playersHands.add(new ArrayList<Card>(Arrays.asList(deck.drawCard(7))));
 		players[0] = new Player(0, user.getNickName(), true, new ArrayList<Card>(Arrays.asList(deck.drawCard(7))));
+		playersHands.add(getPlayerHand(players[0]));
 		Player[] ias = randomizePlayer();
 		players[1] = ias[0]; players[2] = ias[1]; players[3] = ias[2];
 		currentPlayer = 0;
@@ -115,7 +119,16 @@ public class Game extends Observable
 	
 	public void showDrawTwoDialog()
 	{
-		JLabel message = new JLabel(this.players[currentPlayer].toString() + " drew two cards!");
+		JLabel message = new JLabel(this.players[currentPlayer].toString() + " drew 2 cards!");
+		message.setBackground(new Color(53,101,77));
+		message.setForeground(new Color(255, 145, 164));
+		message.setFont(new Font("Comic Sans MS", Font.BOLD, 48));
+		JOptionPane.showMessageDialog(null, message);
+	}
+	
+	public void showAnsweredDrawTwoDialog(int i)
+	{
+		JLabel message = new JLabel(this.players[currentPlayer].toString() + " drew" + i*2 + " cards!");
 		message.setBackground(new Color(53,101,77));
 		message.setForeground(new Color(255, 145, 164));
 		message.setFont(new Font("Comic Sans MS", Font.BOLD, 48));
@@ -124,7 +137,16 @@ public class Game extends Observable
 	
 	public void showDrawFourDialog()
 	{
-		JLabel message = new JLabel(this.players[currentPlayer].toString() + " drew four cards!");			
+		JLabel message = new JLabel(this.players[currentPlayer].toString() + " drew 4 cards!");			
+		message.setBackground(new Color(53,101,77));
+		message.setForeground(new Color(255, 145, 164));
+		message.setFont(new Font("Comic Sans MS", Font.BOLD, 48));
+		JOptionPane.showMessageDialog(null, message);
+	}
+	
+	public void showAnsweredDrawFourDialog(int i)
+	{
+		JLabel message = new JLabel(this.players[currentPlayer].toString() + " drew" + i*4 + " cards!");			
 		message.setBackground(new Color(53,101,77));
 		message.setForeground(new Color(255, 145, 164));
 		message.setFont(new Font("Comic Sans MS", Font.BOLD, 48));
@@ -186,7 +208,7 @@ public class Game extends Observable
 		if (card.getValue() == Card.Value.SKIP)
 		{
 			showSkipDialog();
-			checkGameDirection(this.players);
+			checkGameDirection();
 		}
 		if (card.getValue() == Card.Value.REVERSE)
 		{
@@ -202,14 +224,11 @@ public class Game extends Observable
 		return wildColor;
 	}
 	
-	public void setWildColor(Card.Color c)
-	{
-		wildColor = c;
-	}
-	
 	public void setDeclaredColor(Card.Color c)
 	{
 		declaredColor = c;
+		setChanged();
+		notifyObservers((Card.Color)c );
 	}
 	
 	public Card.Color getDeclaredColor()
@@ -260,6 +279,17 @@ public class Game extends Observable
 		return players;
 	}
 	
+	public String[] getPlayersNames()
+	{
+		ArrayList<String> playerNamesL = new ArrayList<String>();
+		String[] playerNames = new String[4];
+		for (Player p : players)
+			playerNamesL.add(p.getPlayerNickName());
+		String playerList = playerNamesL.stream().collect(Collectors.joining(","));
+		playerNames = playerList.split(",");
+		return playerNames;
+	}
+	
 	public ArrayList<Card> getPlayerHand(Player player)
 	{
 		int index = Arrays.asList(players).indexOf(player);
@@ -290,6 +320,8 @@ public class Game extends Observable
 	public void setPlayerIdName(String s)
 	{
 		this.playerIdName = s;
+		setChanged();
+		notifyObservers(s);
 	}
 	
 	public String getPlayerIdName() 
@@ -309,15 +341,14 @@ public class Game extends Observable
 			 	return true;
 		return false;
 	}
-/*
-	public boolean isDrawTwo()
+
+	public boolean isDrawTwo(int i)
 	{
-		for(int i = 0; i < getPlayerHandSize(players[currentPlayer]); i++)
-			if (getPlayerHand(players[currentPlayer]).get(i).toString() == "RED_DRAW_TWO" || getPlayerHand(players[currentPlayer]).get(i).toString() == "BLUE_DRAW_TWO" || getPlayerHand(players[currentPlayer]).get(i).toString() == "YELLOW_DRAW_TWO" || getPlayerHand(players[currentPlayer]).get(i).toString() == "GREEN_DRAW_TWO")
-				return true;
+		if (getPlayerHand(players[currentPlayer]).get(i).toString() == "RED_DRAW_TWO" || getPlayerHand(players[currentPlayer]).get(i).toString() == "BLUE_DRAW_TWO" || getPlayerHand(players[currentPlayer]).get(i).toString() == "YELLOW_DRAW_TWO" || getPlayerHand(players[currentPlayer]).get(i).toString() == "GREEN_DRAW_TWO")
+			return true;
 		return false;
 	}
-*/
+
 	public boolean hasDrawFour()
 	{
 		for (int i = 0; i < getPlayerHandSize(players[currentPlayer]); i++)
@@ -345,13 +376,17 @@ public class Game extends Observable
 			throw new InvalidPlayerTurnException("it is not " + player.toString() + "'s turn", player.toString());
 	}
 	
-	public void checkGameDirection(Player[] players)
+	/**
+	 * 
+	 * @param players 
+	 */
+	public void checkGameDirection()
 	{
 		if (gameDirection == false)
-			currentPlayer = (currentPlayer + 1)% players.length;
+			currentPlayer++;
 		else if(gameDirection == true) 
 		{
-			currentPlayer = (currentPlayer - 1)% players.length;
+			currentPlayer--;
 			if (currentPlayer == -1)
 				currentPlayer = players.length -1;		
 		}
@@ -366,7 +401,7 @@ public class Game extends Observable
 			deck.shuffle();
 		}
 		getPlayerHand(player).add(deck.drawCard());
-		checkGameDirection(players);
+		checkGameDirection();
 	}
 	
 	public void setValidColor(Card.Color color)
@@ -402,56 +437,94 @@ public class Game extends Observable
 		if (isGameOver())
 		{
 			showGameWonDialog();
+			//forse qua riaprire UserHome, aggiornata con contatori partite
 			System.exit(0);
 		}
 		validColor = card.getColor();
 		validValue = card.getValue();
 		stockPile.add(card);
-		checkGameDirection(players);
+		checkGameDirection();
 		
 		if (card.getColor() == Card.Color.WILD)
 			validColor = declaredColor;
 		if (card.getValue() == Card.Value.DRAW_TWO)
 		{
-			//have to implement: allow the next player to answer a +2 ////NB\\\\ non so se va bene col new Card...
-			/* checkGameDirection(players);
-			 * if (hasDrawTwo())
-			 * for(int i = 0; i < getPlayerHandSize(players[currentPlayer]); i++)
-			 * {
-			 * 		if (isDrawTwo())
-			 * 			submitPlayerCard(players[currentPlayer], getPlayerHand(players[currentPlayer]).get(i), declaredColor); 
-			 * }
-			 * else{aggiorna il giocatore, pesca carte, mostra popup}
-			 */
+			drawTwoCount++;
+			//checkGameDirection(players); forse questo comando fa saltare un turno
+			if (hasDrawTwo())
+				for(int i = 0; i < getPlayerHandSize(players[currentPlayer]); i++)
+				{
+					if(isDrawTwo(i));
+					//forse dialogo per scelta utente se rispondere al +2 o meno
+			 		submitPlayerCard(players[currentPlayer], getPlayerHand(players[currentPlayer]).get(i), declaredColor);
+			 		drawTwoCount++;
+				}
+			if (!hasDrawTwo())
+			{
+				player = players[currentPlayer];
+				for (int i = 0; i <= drawTwoCount; i++)
+				{
+					getPlayerHand(player).add(deck.drawCard());
+					getPlayerHand(player).add(deck.drawCard());
+				}
+				showAnsweredDrawTwoDialog(drawTwoCount);
+			}	
+/*
+			else
+			{
+				player = players[currentPlayer];
+				getPlayerHand(player).add(deck.drawCard());
+				getPlayerHand(player).add(deck.drawCard());
+				showDrawTwoDialog();
+			}
+*/
+/*
 			player = players[currentPlayer];
 			getPlayerHand(player).add(deck.drawCard());
 			getPlayerHand(player).add(deck.drawCard());
 			showDrawTwoDialog();
+*/
 		}
 		if (card.getValue() == Card.Value.DRAW_FOUR)
 		{
-			//have to implement: allow the next player to answer a +4 ////NB\\\\ non so se va bene col new Card...
-			/*
-			 * checkGameDirection(players);
-			 * if (hasDrawFour());
-			 * 		for(int i = 0; i < getPlayerHandSize(players[currentPlayer]), i++)
-			 * 		{
-			 * 			if (getPlayerHand(players[currentPlayer]).get(i).toString() == "WILD_DRAW_FOUR")
-			 * 				submitPlayerCard(players[currentPlayer], getPlayerHand(players[currentPlayer]).get(i), declaredColor); 
-			 * 		}
-			 * 	else{aggiorna il giocatore, pesca carte, mostra popup}
-			 */
+			drawFourCount++;
+			//checkGameDirection(players); forse questo salta un giocatore
+			if (hasDrawFour());
+			{
+				for(int i = 0; i < getPlayerHandSize(players[currentPlayer]); i++)
+			 	{
+			 		if (getPlayerHand(players[currentPlayer]).get(i).toString() == "WILD_DRAW_FOUR")
+			 		{
+			 			submitPlayerCard(players[currentPlayer], getPlayerHand(players[currentPlayer]).get(i), declaredColor);
+			 			drawFourCount++;
+			 		}
+			 	}
+			}
+			if (!hasDrawFour())
+			{
+				player = players[currentPlayer];
+				for (int i = 0; i <= drawFourCount; i++)
+				{
+					getPlayerHand(player).add(deck.drawCard());
+					getPlayerHand(player).add(deck.drawCard());
+					getPlayerHand(player).add(deck.drawCard());
+					getPlayerHand(player).add(deck.drawCard());
+				}
+				showAnsweredDrawFourDialog(drawFourCount);
+			}
+/* 
 			player = players[currentPlayer];
 			getPlayerHand(player).add(deck.drawCard());
 			getPlayerHand(player).add(deck.drawCard());
 			getPlayerHand(player).add(deck.drawCard());
 			getPlayerHand(player).add(deck.drawCard());
 			showDrawFourDialog();
+*/
 		}
 		if (card.getValue() == Card.Value.SKIP)
 		{
 			showSkipDialog();
-			checkGameDirection(players);
+			checkGameDirection();
 		}
 		if (card.getValue() == Card.Value.REVERSE)
 		{
@@ -460,7 +533,7 @@ public class Game extends Observable
 			gameDirection ^= true;
 			if (gameDirection == true)
 			{
-				currentPlayer = (currentPlayer - 2)% players.length;
+				currentPlayer = (currentPlayer - 2);
 				if (currentPlayer == -1)
 					currentPlayer = players.length - 1;
 				if (currentPlayer == -2)
@@ -468,7 +541,7 @@ public class Game extends Observable
 			}
 			else if(gameDirection == false)
 			{
-				currentPlayer = (currentPlayer + 2)%players.length;
+				currentPlayer = (currentPlayer + 2);
 			}
 		}
 	}

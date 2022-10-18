@@ -16,28 +16,38 @@ import model.Game;
 public class GameStage extends JFrame implements Observer 
 {
 	private User user;
-	ArrayList<String> temp = new ArrayList<>();
-	String[] playerIds = new String[4];
-	Game game;
-	ArrayList<JButton> cardButtons = new ArrayList<JButton>();
-	ArrayList<String> cardIds;
-	// PopUp window;
+	private ArrayList<String> temp = new ArrayList<>();
+	private String[] playerIds = new String[4];
+	private Game game;
+	private ArrayList<JButton> cardButtons = new ArrayList<JButton>();
+	private ArrayList<String> cardIds;
 
 	/* Double constructors for both ways of creating a new gameStage */
 
-	public GameStage(Game model) {this.game = model;}
-
-	public GameStage(ArrayList<String> playerIds) {
+	public GameStage(Game model) 
+	{
 		initComponents();
-		temp = playerIds;
-		this.playerIds = temp.toArray(new String[temp.size()]);
-		game = new Game(user, game.getDataBase());//da rivedere
+		this.game = model;
+		this.playerIds = model.getPlayersNames();
 		populateArrayList();
 		game.start(game);
 		setPlayerIdName();
 		setButtonIcons();
 	}
-
+	
+/*
+	public GameStage(ArrayList<String> playerIds) 
+	{
+		initComponents();
+		temp = playerIds;
+		this.playerIds = temp.toArray(new String[temp.size()]);
+		populateArrayList();
+		game.start(game);
+		setPlayerIdName();
+		setButtonIcons();
+	}
+*/
+	
 	/**
 	 * 
 	 * @return StockPileButton;
@@ -76,9 +86,13 @@ public class GameStage extends JFrame implements Observer
 		/*
 		 * setting all the card Icons to null if they are not in the player's hand.
 		 */
-		for (int i = cardIds.size(); i < cardButtons.size(); i++) {
+		for (int i = cardIds.size(); i < cardButtons.size(); i++) 
+		{	
 			cardButtons.get(i).setIcon(null);
-		}
+			cardButtons.get(i).setBackground(new Color(53, 101, 77));
+		}	
+		
+		
 	}
 
 	public void populateArrayList() {
@@ -117,6 +131,11 @@ public class GameStage extends JFrame implements Observer
 	{
 		playerIdNameLabel.setText(currentPlayer + "'s cards");
 		playerIdNameLabel.setForeground(new Color(255, 145, 164));
+	}
+
+	public void setUser(User user)
+	{
+		this.user = user;
 	}
 	
 	public JButton getjButton1()
@@ -236,7 +255,7 @@ public class GameStage extends JFrame implements Observer
 		jPanel1.setToolTipText("");
 		jPanel1.setBackground(new Color(53, 101, 77));
 		jPanel1.setPreferredSize(new java.awt.Dimension(1280, 720));
-		
+/*
 		jButton1.setBackground(new Color(53, 101, 77));
 
 		jButton2.setBackground(new Color(53, 101, 77));
@@ -268,7 +287,7 @@ public class GameStage extends JFrame implements Observer
 		jButton15.setBackground(new Color(53, 101, 77));
 
 		jButton16.setBackground(new Color(53, 101, 77));
-
+*/
 		playerIdNameLabel.setFont(new java.awt.Font("Comic Sans MS", Font.BOLD, 48));
 
 		drawCardButton.setFont(new java.awt.Font("Comic Sans MS", Font.BOLD, 36));
@@ -431,7 +450,7 @@ public class GameStage extends JFrame implements Observer
 	private JButton jButton7;
 	private JButton jButton8;
 	private JButton jButton9;
-	private javax.swing.JPanel jPanel1;
+	private JPanel jPanel1;
 	private JLabel playerIdNameLabel;
 
 
@@ -440,6 +459,10 @@ public class GameStage extends JFrame implements Observer
 	{
 		if (arg.getClass().getName() == "java.lang.String")
 			setPlayerIdName((String)arg);
+		if (arg.getClass().getName() == "model.User")
+			setUser((User)arg);
+		if(arg.getClass().getName() == "javax.swing.ImageIcon")
+			StockPileButton.setIcon((Icon)arg);
 		
 	}
 }
