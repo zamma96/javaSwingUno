@@ -213,6 +213,7 @@ public class PopUp extends JFrame implements Observer
 	public void update(Observable o, Object arg) {
 		if (arg.getClass().getName() == "Card.Color")
 			this.declaredColor = (Card.Color)arg;
+
 		
 	}
 }

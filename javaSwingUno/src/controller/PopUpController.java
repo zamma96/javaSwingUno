@@ -88,7 +88,7 @@ public class PopUpController
 			popUpView.revalidate();
 			if (model.getDeclaredColor() != Card.Color.WILD)
 				{
-					//view.update(model, getCurrentPlayerNickName());
+					view.update(model, model.getCurrentPlayer().getPlayerNickName());
 					//al posto della riga qua sotto
 					view.setPlayerIdName(model.getCurrentPlayer().getPlayerNickName());
 					view.setButtonIcons();

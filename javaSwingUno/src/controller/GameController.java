@@ -21,7 +21,9 @@ import view.PopUp;
 public class GameController 
 {
 	
-	//classe che serve ad amministrare cambiamenti sulla view scatenati dalle interazioni delle IA col model nella partita
+	//classe che serve ad amministrare cambiamenti
+	//sulla view scatenati dalle interazioni delle IA
+	//col model nella partita
 	private Game model;
 	private GameStage view;
 	private PopUp window;
@@ -174,7 +176,8 @@ public class GameController
 	//da rivedere assolutamente, ho solo tolto i main error
 	private void jButton1ActionPerformed(ActionEvent evt) 
 	{
-		if (model.getCardIds().get(0) != null) {
+		if (model.getCardIds().get(0) != null) 
+		{
 			int index = 0;
 			String cardId = model.getCardIds().get(0);
 			window = new PopUp(cardId, model, index, model.getcardButtons(), view, view.getDeckPileButton(), view.getStockPileButton());
@@ -190,7 +193,8 @@ public class GameController
 	
 	private void jButton2ActionPerformed(ActionEvent evt) 
 	{
-		if (model.getCardIds().get(1) != null) {
+		if (model.getCardIds().get(1) != null) 
+		{
 			int index = 1;
 			String cardId = model.getCardIds().get(1);
 			window = new PopUp(cardId, model, index, model.getcardButtons(), view, view.getDeckPileButton(), view.getStockPileButton());
@@ -399,7 +403,6 @@ public class GameController
 	
 	private void drawCardButtonActionPerformed(ActionEvent evt)
 	{
-		drawCardMessage();
 		try
 		{
 			model.submitDraw(model.getCurrentPlayer());
@@ -408,6 +411,7 @@ public class GameController
 		{
 			Logger.getLogger(GameStage.class.getName()).log(Level.SEVERE, null, ex);
 		}
+		drawCardMessage();
 		model.setPlayerIdName(model.getCurrentPlayer().getPlayerNickName());
 		view.update(model, (String) model.getPlayerIdName());
 		view.setButtonIcons();
