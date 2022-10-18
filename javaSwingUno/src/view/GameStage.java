@@ -16,7 +16,6 @@ import model.Game;
 public class GameStage extends JFrame implements Observer 
 {
 	private User user;
-	private ArrayList<String> temp = new ArrayList<>();
 	private String[] playerIds = new String[4];
 	private Game game;
 	private ArrayList<JButton> cardButtons = new ArrayList<JButton>();
@@ -31,22 +30,9 @@ public class GameStage extends JFrame implements Observer
 		this.playerIds = model.getPlayersNames();
 		populateArrayList();
 		game.start(game);
-		setPlayerIdName();
+		setPlayerIdName(model.getCurrentPlayer().getPlayerNickName());
 		setButtonIcons();
 	}
-	
-/*
-	public GameStage(ArrayList<String> playerIds) 
-	{
-		initComponents();
-		temp = playerIds;
-		this.playerIds = temp.toArray(new String[temp.size()]);
-		populateArrayList();
-		game.start(game);
-		setPlayerIdName();
-		setButtonIcons();
-	}
-*/
 	
 	/**
 	 * 
@@ -72,10 +58,13 @@ public class GameStage extends JFrame implements Observer
 		 * Using stream to transform an ArrayList<Card> into a String list
 		 */
 
-		String listString = (game.getPlayerHand(game.getCurrentPlayer())).stream().map(Object::toString)
+		String listString = (game.getPlayerHand(game.getCurrentPlayer()))
+				.stream().map(Object::toString)
 				.collect(Collectors.joining(","));
 		String[] cardNames = listString.split(",");
-		cardIds = new ArrayList<>(Arrays.asList(cardNames));
+		game.setCardIds(new ArrayList<>(Arrays.asList(cardNames)));
+		update(game, game.getCardIds());
+		
 		/*
 		 * Setting all card icons in that particular player's hand when is it's turn
 		 */
@@ -91,10 +80,13 @@ public class GameStage extends JFrame implements Observer
 			cardButtons.get(i).setIcon(null);
 			cardButtons.get(i).setBackground(new Color(53, 101, 77));
 		}	
-		
-		
 	}
 
+	public void setCardIds(ArrayList<String> cardIds)
+	{
+		this.cardIds = cardIds;
+	}
+	
 	public void populateArrayList() {
 		cardButtons.add(jButton1);
 		cardButtons.add(jButton2);
@@ -118,13 +110,6 @@ public class GameStage extends JFrame implements Observer
 	public JLabel getPlayerIdName()
 	{
 		return playerIdNameLabel;
-	}
-
-	public void setPlayerIdName() 
-	{
-		String currentPlayer = game.getCurrentPlayer().getPlayerNickName();
-		playerIdNameLabel.setForeground(new Color(255, 145, 164));
-		playerIdNameLabel.setText(currentPlayer + "'s cards");
 	}
 
 	public void setPlayerIdName(String currentPlayer) 
@@ -463,6 +448,8 @@ public class GameStage extends JFrame implements Observer
 			setUser((User)arg);
 		if(arg.getClass().getName() == "javax.swing.ImageIcon")
 			StockPileButton.setIcon((Icon)arg);
+		if(arg.getClass().getName() == "java.util.ArrayList")
+			setCardIds((ArrayList<String>)arg);
 		
 	}
 }

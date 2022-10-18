@@ -236,6 +236,13 @@ public class Game extends Observable
 		return declaredColor;
 	}
 	
+	public void setCardIds(ArrayList<String> cardNames)
+	{
+		this.cardIds = cardNames;
+		setChanged();
+		notifyObservers(cardIds);
+	}
+	
 	public ArrayList<String> getCardIds()
 	{
 		return cardIds;
@@ -377,8 +384,7 @@ public class Game extends Observable
 	}
 	
 	/**
-	 * 
-	 * @param players 
+	 * method to check gameDirection and go to next player
 	 */
 	public void checkGameDirection()
 	{
@@ -450,7 +456,7 @@ public class Game extends Observable
 		if (card.getValue() == Card.Value.DRAW_TWO)
 		{
 			drawTwoCount++;
-			//checkGameDirection(players); forse questo comando fa saltare un turno
+			//checkGameDirection(); forse questo comando fa saltare un turno
 			if (hasDrawTwo())
 				for(int i = 0; i < getPlayerHandSize(players[currentPlayer]); i++)
 				{
@@ -468,6 +474,7 @@ public class Game extends Observable
 					getPlayerHand(player).add(deck.drawCard());
 				}
 				showAnsweredDrawTwoDialog(drawTwoCount);
+				drawTwoCount = 0;
 			}	
 /*
 			else
@@ -511,6 +518,7 @@ public class Game extends Observable
 					getPlayerHand(player).add(deck.drawCard());
 				}
 				showAnsweredDrawFourDialog(drawFourCount);
+				drawFourCount = 0;
 			}
 /* 
 			player = players[currentPlayer];

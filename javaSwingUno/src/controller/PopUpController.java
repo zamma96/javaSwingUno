@@ -62,6 +62,10 @@ public class PopUpController
 	
 	public void useCardButtonActionPerformed(ActionEvent evt)
 	{
+		if(model.getPlayerHand(model.getCurrentPlayer()).get(popUpView.getChoice()).toString() == "WILD_DRAW_FOUR" || model.getPlayerHand(model.getCurrentPlayer()).get(popUpView.getChoice()).toString() == "WILD_CHANGE_COLOR") 
+		{
+			
+		}
 		PickColorFrame pickColorView = new PickColorFrame(popUpView);
 		PickColorController controller = new PickColorController(model, pickColorView);
 		controller.initController(pickColorView);

@@ -42,6 +42,7 @@ public class PopUp extends JFrame implements Observer
     public PopUp(String cardName, Game game, int index, ArrayList<JButton> cardButtons, GameStage gameStage, JButton DeckPileButton, JButton StockPileButton) 
     {
         initComponents();
+        declaredColor = game.getTopCard().getColor();
         this.cardImage = cardName;
         this.game = game;
         this.playerHand = game.getPlayerHand(game.getCurrentPlayer());
@@ -210,7 +211,8 @@ public class PopUp extends JFrame implements Observer
 
 
 	@Override
-	public void update(Observable o, Object arg) {
+	public void update(Observable o, Object arg) 
+	{
 		if (arg.getClass().getName() == "Card.Color")
 			this.declaredColor = (Card.Color)arg;
 

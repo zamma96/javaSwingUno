@@ -1,5 +1,7 @@
 package javaSwingUno;
 
+import java.util.ArrayList;
+
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 
@@ -10,7 +12,7 @@ public class Test
 
 	public static void main(String[] args) 
 	{
-		String[] s = new String[4];
-		System.out.println(s.length);
+		ArrayList<String> s = new ArrayList<String>();
+		System.out.println(s.getClass().getName());
 	}
 }

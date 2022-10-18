@@ -17,8 +17,8 @@ public class PickColorFrame extends JFrame implements Observer
 {
 
     private Card.Color wildColor = null;
-    boolean allow = false;
-    PopUp popUp;
+    private boolean allow = false;
+    private PopUp popUp;
     
     
     public PickColorFrame() 
@@ -29,7 +29,12 @@ public class PickColorFrame extends JFrame implements Observer
     public PickColorFrame(PopUp pop)
     {
         initComponents();
-        popUp = pop;
+        this.popUp = pop;
+    }
+    
+    public void setWildColor(Card.Color c)
+    {
+    	this.wildColor = c;
     }
     
     public Card.Color choseColor(Card card)
@@ -269,6 +274,7 @@ public class PickColorFrame extends JFrame implements Observer
 	@Override
 	public void update(Observable o, Object arg) 
 	{
-		
+		if(arg.getClass().getName() == "model.Card$Color")
+			setWildColor((Card.Color)arg);
 	}
 }
