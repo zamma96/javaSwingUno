@@ -20,8 +20,8 @@ import view.PopUp;
 public class PopUpController 
 {
 	private Game model;
-	private GameStage view;
 	private PopUp popUpView;
+	private GameStage view;
 	
 	public PopUpController(Game game, GameStage gameStage, PopUp popUpView)
 	{
@@ -35,7 +35,7 @@ public class PopUpController
 	{
 		Icon icon = new ImageIcon(".\\resources\\Images\\" + popUpView.getCardImage() + ".png");
         popUpView.getCardLabel().setIcon(icon);
-        view.setVisible(true);
+        popUpView.setVisible(true);
 	}
 	
 	public void initController(PopUp view)
@@ -62,14 +62,12 @@ public class PopUpController
 	
 	public void useCardButtonActionPerformed(ActionEvent evt)
 	{
-		if(model.getPlayerHand(model.getCurrentPlayer()).get(popUpView.getChoice()).toString() == "WILD_DRAW_FOUR" || model.getPlayerHand(model.getCurrentPlayer()).get(popUpView.getChoice()).toString() == "WILD_CHANGE_COLOR") 
-		{
-			
-		}
 		PickColorFrame pickColorView = new PickColorFrame(popUpView);
-		PickColorController controller = new PickColorController(model, pickColorView);
+		PickColorController controller = new PickColorController(model, popUpView, pickColorView);
 		controller.initController(pickColorView);
 		model.addObserver(pickColorView);
+		//riga sotto può essere sostituita(?) in
+		//model.setDeclaredColor(pickColorView.choseColor(model.getLastStockPileCard()));
 		model.setDeclaredColor(pickColorView.choseColor(model.getPlayerHand(model.getCurrentPlayer()).get(popUpView.getChoice())));
 		if (model.getDeclaredColor() != null)
 		{
@@ -92,13 +90,11 @@ public class PopUpController
 			popUpView.revalidate();
 			if (model.getDeclaredColor() != Card.Color.WILD)
 				{
-					view.update(model, model.getCurrentPlayer().getPlayerNickName());
-					//al posto della riga qua sotto
-					view.setPlayerIdName(model.getCurrentPlayer().getPlayerNickName());
 					view.setButtonIcons();
 					Icon iconS = new ImageIcon(".\\resources\\UnoCards\\" + model.getTopCardImage());
 					popUpView.getStockPileButton().setIcon(iconS);
 					model.deleteObserver(pickColorView);
+					model.deleteObserver(popUpView);
 					popUpView.dispose();
 				}
 		}

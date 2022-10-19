@@ -9,6 +9,7 @@ import java.util.Observer;
 import java.util.Random;
 import java.util.stream.Collectors;
 
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -32,11 +33,11 @@ public class Game extends Observable
 	private ArrayList<JButton> cardButtons;
 	public boolean gameDirection;
 	private User user;
-	private Card.Color wildColor;
 	private Card.Color declaredColor;
 	private String playerIdName;
 	private int drawTwoCount = 0;
 	private int drawFourCount = 0;
+	private Icon stockPileIcon = new ImageIcon();
 	
 	public Game(User user, DataBase dataBase)
 	{
@@ -78,6 +79,13 @@ public class Game extends Observable
 		return players;
 	}
 
+	public void setStockPileButton(Icon icon)
+	{
+		this.stockPileIcon = icon;
+		setChanged();
+		notifyObservers(stockPileIcon);
+	}
+	
 	public void showInvalidPlayerMoveColorDialog(Card card) throws InvalidColorSubmissionException
 	{
 		JLabel message = new JLabel("Invalid player move, expected color: " + validColor + " but got color " + card.getColor());
@@ -217,23 +225,26 @@ public class Game extends Observable
 			currentPlayer = players.length-1;
 		}
 		stockPile.add(card);
+		setChanged();
+		notifyObservers(card);
 	}
 	
-	public Card.Color getWildColor()
-	{
-		return wildColor;
-	}
 	
 	public void setDeclaredColor(Card.Color c)
 	{
 		declaredColor = c;
 		setChanged();
-		notifyObservers((Card.Color)c );
+		notifyObservers((Card.Color) c);
 	}
 	
 	public Card.Color getDeclaredColor()
 	{
 		return declaredColor;
+	}
+	
+	public Card getLastStockPileCard()
+	{
+		return stockPile.get(stockPile.size());
 	}
 	
 	public void setCardIds(ArrayList<String> cardNames)
@@ -260,7 +271,8 @@ public class Game extends Observable
 	
 	public Card getTopCard()
 	{
-		return new Card(validColor, validValue);
+		return stockPile.get(stockPile.size());
+		//return new Card(validColor, validValue);
 	}
 	
 	public ImageIcon getTopCardImage()
@@ -323,14 +335,14 @@ public class Game extends Observable
 	{
 		return this.deck;
 	}
-	
+/*	Useless
 	public void setPlayerIdName(String s)
 	{
 		this.playerIdName = s;
 		setChanged();
 		notifyObservers(s);
 	}
-	
+*/
 	public String getPlayerIdName() 
 	{
 		return playerIdName;
@@ -449,6 +461,8 @@ public class Game extends Observable
 		validColor = card.getColor();
 		validValue = card.getValue();
 		stockPile.add(card);
+		setChanged();
+		notifyObservers(card);
 		checkGameDirection();
 		
 		if (card.getColor() == Card.Color.WILD)

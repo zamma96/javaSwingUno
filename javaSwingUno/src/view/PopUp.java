@@ -33,15 +33,15 @@ public class PopUp extends JFrame implements Observer
     private int choice;
     private ArrayList<JButton> cardButtons;
     private GameStage gameStage;
-    private JButton DeckPileButton;
     private JButton StockPileButton;
     private Card.Color declaredColor;
     
     
     public PopUp(){}
-    public PopUp(String cardName, Game game, int index, ArrayList<JButton> cardButtons, GameStage gameStage, JButton DeckPileButton, JButton StockPileButton) 
+    public PopUp(String cardName, Game game, int index, ArrayList<JButton> cardButtons, GameStage gameStage, JButton StockPileButton) 
     {
         initComponents();
+        //in teoria declaredColor viene aggiornato subito dopo che viene settato il declaredColor nel model
         declaredColor = game.getTopCard().getColor();
         this.cardImage = cardName;
         this.game = game;
@@ -51,7 +51,6 @@ public class PopUp extends JFrame implements Observer
         Icon icon = new ImageIcon(".\\resources\\Images\\" + cardImage + ".png");
         CardLabel.setIcon(icon);
         this.gameStage = gameStage;
-        this.DeckPileButton = DeckPileButton;
         this.StockPileButton = StockPileButton;
     }
      
@@ -104,24 +103,12 @@ public class PopUp extends JFrame implements Observer
         CancelButton.setText("Cancel");
 		CancelButton.setBackground(new Color(53,101,77));
 		CancelButton.setForeground(new Color(255, 145, 164));
-/*
-        CancelButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CancelButtonActionPerformed(evt);
-            }
-        });
-*/
+
         UseCardButton.setFont(new java.awt.Font("Comic Sans MS", Font.BOLD, 18));
         UseCardButton.setText("Use card");
 		UseCardButton.setBackground(new Color(53,101,77));
 		UseCardButton.setForeground(new Color(255, 145, 164));
-/*
-        UseCardButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                UseCardButtonActionPerformed(evt);
-            }
-        });
-*/
+
         CardLabel.setPreferredSize(new java.awt.Dimension(190, 300));
         
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -164,45 +151,7 @@ public class PopUp extends JFrame implements Observer
 
         pack();
     }               
-/*
-    private void UseCardButtonActionPerformed(java.awt.event.ActionEvent evt) {                                              
-        PickColorFrame pickColor = new PickColorFrame(this);
-        declaredColor = pickColor.choseColor(playerHand.get(getChoice()));
-        if (declaredColor != null)
-        {
-            try
-            {
-                game.submitPlayerCard(game.getCurrentPlayer(), playerHand.get(getChoice()), declaredColor);
-            }
-            catch (InvalidColorSubmissionException ex) 
-            { 
-                Logger.getLogger(PopUp.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            catch (InvalidValueSubmissionException ex)
-            {
-                Logger.getLogger(PopUp.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            catch (InvalidPlayerTurnException ex)
-            {
-                Logger.getLogger(PopUp.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            this.revalidate();
-            if(declaredColor != Card.Color.WILD)
-            {
-                gameStage.setPlayerIdName(game.getCurrentPlayer().getPlayerNickName());
-                gameStage.setButtonIcons();
-                Icon iconS = new ImageIcon(".\\resources\\UnoCards\\" + game.getTopCardImage());
-                StockPileButton.setIcon(iconS);
-                this.dispose();
-            }
-        }
-    }                                             
 
-    private void CancelButtonActionPerformed(ActionEvent evt) 
-    {                                             
-        this.dispose();
-    }                                            
-*/
                  
     private JButton CancelButton;
     private JLabel CardLabel;

@@ -19,18 +19,15 @@ import view.PopUp;
 public class PickColorController 
 {
 	private Game game;
-	private GameStage gameView;
 	private PopUp popUp;
 	private PickColorFrame view;
-	public boolean allow = false;
 	
-	public PickColorController(Game game, PickColorFrame view)
+	public PickColorController(Game game, PopUp popUpView, PickColorFrame view)
 	{
 		this.game = game;
+		this.popUp = popUpView;
 		this.view = view;
-		//Quando si crea una istanza di questa classe bisogna anche 
-		//aggiungere agli observer del model la view.
-		//initView();
+		initView();
 	}
 	
 	public Game getGame()
@@ -61,8 +58,6 @@ public class PickColorController
 			public void actionPerformed(ActionEvent evt)
 			{
 				redButtonActionPerformed(evt); 
-				//sta nella classe PickColorFrame per ora
-				//da spostare non appena modificato model e view.
 			}
 		});
 		
@@ -93,64 +88,66 @@ public class PickColorController
 	
 	public void redButtonActionPerformed(ActionEvent evt)
 	{
-		//game.setWildColor(Card.Color.RED);
 		showMessage("red!");
-		allow = true;
+		game.deleteObserver(view);
 		view.dispose();
 		game.setDeclaredColor(Card.Color.RED);
-		game.setPlayerIdName(game.getCurrentPlayer().getPlayerNickName());
-		gameView.setButtonIcons();
+		//forse riga sotto è ridondante, intanto tolgo, poi provo ed effettuo considerazioni
+		//gameView.setButtonIcons();
 		Icon icon = new ImageIcon(".\\resources\\UnoCards\\" + game.getTopCardImage());
-		gameView.update(game, icon);
-		gameView.getStockPileButton().setIcon(icon);
+		game.setStockPileButton(icon);
+		//questo sotto in teoria è automatizzato da ObserverObservable
+		//col game.setStockPileButton chiamo notifyObservers(icon) che aggiorna la view;
+		//gameView.getStockPileButton().setIcon(icon);
 		game.setValidColor(Card.Color.RED);
 		popUp.dispose();
 	}
 	
 	public void greenButtonActionPerformed(ActionEvent evt)
 	{
-		//game.setWildColor(Card.Color.GREEN);
 		showMessage("green!");
-		allow = true;
+		game.deleteObserver(view);
 		view.dispose();
 		game.setDeclaredColor(Card.Color.GREEN);
-		game.setPlayerIdName(game.getCurrentPlayer().getPlayerNickName());
-		gameView.setButtonIcons();
+		//forse riga sotto è ridondante
+		//perché il setButtonIcons è chiamato dopo ogni carta giocata dalla classe PopUpController
+		//gameView.setButtonIcons();
 		Icon icon = new ImageIcon(".\\resources\\UnoCards\\" + game.getTopCardImage());
-		gameView.update(game, icon);
-		gameView.getStockPileButton().setIcon(icon);
+		game.setStockPileButton(icon);
+		//riga sotto da togliere 
+		//gameView.getStockPileButton().setIcon(icon);
 		game.setValidColor(Card.Color.GREEN);
 		popUp.dispose();
 	}
 	
 	public void blueButtonActionPerformed(ActionEvent evt)
 	{
-		//game.setWildColor(Card.Color.BLUE);
 		showMessage("blue!");
-		allow = true;
+		game.deleteObserver(view);
 		view.dispose();
 		game.setDeclaredColor(Card.Color.BLUE);
-		game.setPlayerIdName(game.getCurrentPlayer().getPlayerNickName());
-		gameView.setButtonIcons();
+		//forse riga sotto è ridondante
+		//gameView.setButtonIcons();
 		Icon icon = new ImageIcon(".\\resources\\UnoCards\\" + game.getTopCardImage());
-		gameView.update(game, icon);
-		gameView.getStockPileButton().setIcon(icon);
+		game.setStockPileButton(icon);
+		//riga sotto da togliere
+		//gameView.getStockPileButton().setIcon(icon);
 		game.setValidColor(Card.Color.BLUE);
 		popUp.dispose();
 	}
 	
 	public void yellowButtonActionPerformed(ActionEvent evt)
 	{
-		//game.setWildColor(Card.Color.YELLOW);
 		showMessage("yellow!");
-		allow = true;
+		game.deleteObserver(view);
 		view.dispose();
 		game.setDeclaredColor(Card.Color.YELLOW);
-		game.setPlayerIdName(game.getCurrentPlayer().getPlayerNickName());;
-		gameView.setButtonIcons();
+		//forse riga sotto è ridondante
+		//gameView.setButtonIcons();
 		Icon icon = new ImageIcon(".\\resources\\UnoCards\\"+ game.getTopCardImage());
-		gameView.update(game, icon);
-		gameView.getStockPileButton().setIcon(icon);
+		game.setStockPileButton(icon);
+		//riga sotto da togliere.
+		//gameView.getStockPileButton().setIcon(icon);
 		game.setValidColor(Card.Color.YELLOW);
 		popUp.dispose();
 	}

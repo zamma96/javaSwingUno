@@ -11,6 +11,7 @@ import java.util.stream.Collectors;
 import javax.swing.*;
 import model.InvalidPlayerTurnException;
 import model.User;
+import model.Card;
 import model.Game;
 
 public class GameStage extends JFrame implements Observer 
@@ -20,17 +21,18 @@ public class GameStage extends JFrame implements Observer
 	private Game game;
 	private ArrayList<JButton> cardButtons = new ArrayList<JButton>();
 	private ArrayList<String> cardIds;
+	private Card lastCard;
 
 	/* Double constructors for both ways of creating a new gameStage */
 
 	public GameStage(Game model) 
 	{
 		initComponents();
+		this.lastCard = model.getLastStockPileCard();
 		this.game = model;
 		this.playerIds = model.getPlayersNames();
 		populateArrayList();
 		game.start(game);
-		setPlayerIdName(model.getCurrentPlayer().getPlayerNickName());
 		setButtonIcons();
 	}
 	
@@ -52,29 +54,28 @@ public class GameStage extends JFrame implements Observer
 		return DeckPileButton;
 	}
 	
+	public void setLastCard(Card card)
+	{
+		this.lastCard = card;
+	}
+	
+	/**
+	 * use of stream to trasform an ArrayList<Card> into a String list;
+	 * this method sets all user's button icons to show the proper card
+	 * and the other buttons are set to null
+	 */
 	public void setButtonIcons() 
 	{
-		/*
-		 * Using stream to transform an ArrayList<Card> into a String list
-		 */
-
-		String listString = (game.getPlayerHand(game.getCurrentPlayer()))
+		String listString = (game.getPlayerHand(game.getPlayers()[0])
 				.stream().map(Object::toString)
-				.collect(Collectors.joining(","));
+				.collect(Collectors.joining(",")));
 		String[] cardNames = listString.split(",");
 		game.setCardIds(new ArrayList<>(Arrays.asList(cardNames)));
-		update(game, game.getCardIds());
-		
-		/*
-		 * Setting all card icons in that particular player's hand when is it's turn
-		 */
-		for (int i = 0; i < cardIds.size(); i++) {
+		for (int i = 0; i < cardIds.size(); i++) 
+		{
 			Icon iconH = new ImageIcon(".\\resources\\UnoCards\\" + cardIds.get(i) + ".png");
 			cardButtons.get(i).setIcon(iconH);
 		}
-		/*
-		 * setting all the card Icons to null if they are not in the player's hand.
-		 */
 		for (int i = cardIds.size(); i < cardButtons.size(); i++) 
 		{	
 			cardButtons.get(i).setIcon(null);
@@ -112,10 +113,19 @@ public class GameStage extends JFrame implements Observer
 		return playerIdNameLabel;
 	}
 
-	public void setPlayerIdName(String currentPlayer) 
+	public JLabel getIaNameLabel1()
 	{
-		playerIdNameLabel.setText(currentPlayer + "'s cards");
-		playerIdNameLabel.setForeground(new Color(255, 145, 164));
+		return iaNameLabel1;
+	}
+	
+	public JLabel getIaNameLabel2()
+	{
+		return iaNameLabel2;
+	}
+	
+	public JLabel getIaNameLabel3()
+	{
+		return iaNameLabel3;
 	}
 
 	public void setUser(User user)
@@ -273,7 +283,10 @@ public class GameStage extends JFrame implements Observer
 
 		jButton16.setBackground(new Color(53, 101, 77));
 */
-		playerIdNameLabel.setFont(new java.awt.Font("Comic Sans MS", Font.BOLD, 48));
+		playerIdNameLabel.setFont(new Font("Comic Sans MS", Font.BOLD, 48));
+		iaNameLabel1.setFont(new Font("Comic Sans MS", Font.BOLD, 48));
+		iaNameLabel2.setFont(new Font("Comic Sans MS", Font.BOLD, 48));
+		iaNameLabel3.setFont(new Font("Comic Sans MS", Font.BOLD, 48));
 
 		drawCardButton.setFont(new java.awt.Font("Comic Sans MS", Font.BOLD, 36));
 		drawCardButton.setForeground(new Color(255, 145, 164));
@@ -353,7 +366,18 @@ public class GameStage extends JFrame implements Observer
 								.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
 								.addComponent(StockPileButton, javax.swing.GroupLayout.PREFERRED_SIZE, 70,
 										javax.swing.GroupLayout.PREFERRED_SIZE)))
-						.addContainerGap(33, Short.MAX_VALUE)));
+						.addGroup(jPanel1Layout.createSequentialGroup()
+								.addGap(67, 67, 67)
+								.addComponent(iaNameLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+								.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+								.addComponent(iaNameLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+								.addGap(34, 34, 34))
+						.addContainerGap(33, Short.MAX_VALUE))
+				 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+			                .addGroup(jPanel1Layout.createSequentialGroup()
+			                    .addGap(488, 488, 488)
+			                    .addComponent(iaNameLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+			                    .addContainerGap(492, Short.MAX_VALUE))));
 		jPanel1Layout.setVerticalGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 				.addGroup(jPanel1Layout.createSequentialGroup().addContainerGap()
 						.addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -416,17 +440,11 @@ public class GameStage extends JFrame implements Observer
 		pack();
 	}
 
+	private JPanel jPanel1;
 	private JButton DeckPileButton;
 	private JButton StockPileButton;
 	private JButton drawCardButton;
 	private JButton jButton1;
-	private JButton jButton10;
-	private JButton jButton11;
-	private JButton jButton12;
-	private JButton jButton13;
-	private JButton jButton14;
-	private JButton jButton15;
-	private JButton jButton16;
 	private JButton jButton2;
 	private JButton jButton3;
 	private JButton jButton4;
@@ -435,21 +453,30 @@ public class GameStage extends JFrame implements Observer
 	private JButton jButton7;
 	private JButton jButton8;
 	private JButton jButton9;
-	private JPanel jPanel1;
+	private JButton jButton10;
+	private JButton jButton11;
+	private JButton jButton12;
+	private JButton jButton13;
+	private JButton jButton14;
+	private JButton jButton15;
+	private JButton jButton16;
 	private JLabel playerIdNameLabel;
-
+    private JLabel iaNameLabel1;
+    private JLabel iaNameLabel2;
+    private JLabel iaNameLabel3;
+	
 
 	@Override
 	public void update(Observable o, Object arg) 
 	{
-		if (arg.getClass().getName() == "java.lang.String")
-			setPlayerIdName((String)arg);
 		if (arg.getClass().getName() == "model.User")
 			setUser((User)arg);
 		if(arg.getClass().getName() == "javax.swing.ImageIcon")
 			StockPileButton.setIcon((Icon)arg);
 		if(arg.getClass().getName() == "java.util.ArrayList")
 			setCardIds((ArrayList<String>)arg);
+		if(arg.getClass().getName() == "model.Card")
+			setLastCard((Card) arg);
 		
 	}
 }

@@ -16,25 +16,24 @@ import model.Card;
 public class PickColorFrame extends JFrame implements Observer
 {
 
-    private Card.Color wildColor = null;
-    private boolean allow = false;
+    private Card.Color declaredColor = null;
     private PopUp popUp;
     
-    
+/*
     public PickColorFrame() 
     {
         initComponents();
     }
-
+*/
     public PickColorFrame(PopUp pop)
     {
         initComponents();
         this.popUp = pop;
     }
     
-    public void setWildColor(Card.Color c)
+    public void setDeclaredColor(Card.Color c)
     {
-    	this.wildColor = c;
+    	this.declaredColor = c;
     }
     
     public Card.Color choseColor(Card card)
@@ -96,46 +95,22 @@ public class PickColorFrame extends JFrame implements Observer
         redButton.setText("RED");
         redButton.setBackground(new Color(53,101,77));
 		redButton.setForeground(new Color(255, 145, 164));
-/*
-        redButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                redButtonActionPerformed(evt);
-            }
-        });
-*/
+
         greenButton.setFont(new java.awt.Font("Comic Sans MS", Font.BOLD, 18)); // NOI18N
         greenButton.setText("GREEN");
         greenButton.setBackground(new Color(53,101,77));
 		greenButton.setForeground(new Color(255, 145, 164));
-/*
-        greenButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                greenButtonActionPerformed(evt);
-            }
-        });
-*/
+
         blueButton.setFont(new java.awt.Font("Comic Sans MS", Font.BOLD, 18)); // NOI18N
         blueButton.setText("BLUE");
         blueButton.setBackground(new Color(53,101,77));
 		blueButton.setForeground(new Color(255, 145, 164));
-/*
-        blueButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                blueButtonActionPerformed(evt);
-            }
-        });
-*/
+
         yellowButton.setFont(new java.awt.Font("Comic Sans MS", Font.BOLD, 18)); // NOI18N
         yellowButton.setText("YELLOW");
         yellowButton.setBackground(new Color(53,101,77));
 		yellowButton.setForeground(new Color(255, 145, 164));
-/*
-        yellowButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                yellowButtonActionPerformed(evt);
-            }
-        });
-*/
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -184,82 +159,6 @@ public class PickColorFrame extends JFrame implements Observer
 
         pack();
     }                       
-/*
-    private void yellowButtonActionPerformed(java.awt.event.ActionEvent evt) {                                             
-        wildColor = Card.Color.YELLOW;
-        JLabel message = new JLabel("The color changed into yellow!");
-		message.setBackground(new Color(53,101,77));
-		message.setForeground(new Color(255, 145, 164));
-        message.setFont(new Font("Comic Sans MS", Font.BOLD, 48));
-        JOptionPane.showMessageDialog(null, message);
-        allow = true;
-        this.dispose();
-        popUp.declaredColor = Card.Color.YELLOW;
-        popUp.gameStage.setPlayerIdName(popUp.game.getCurrentPlayer());
-        popUp.gameStage.setButtonIcons();
-        Icon icon = new ImageIcon(".\\resources\\UnoCards\\" + popUp.game.getTopCardImage());
-        popUp.StockPileButton.setIcon(icon);
-        popUp.game.setCardColor(Card.Color.YELLOW);
-        popUp.dispose();
-    }                                            
-
-    private void greenButtonActionPerformed(java.awt.event.ActionEvent evt) {                                            
-        wildColor = Card.Color.GREEN;
-        JLabel message = new JLabel("The color changed into green!");
-        message.setFont(new Font("Comic Sans MS", Font.BOLD, 48));
-		message.setBackground(new Color(53,101,77));
-		message.setForeground(new Color(255, 145, 164));
-        JOptionPane.showMessageDialog(null, message);
-        allow = true;
-        this.dispose();
-        popUp.declaredColor = Card.Color.GREEN;
-        popUp.gameStage.setPlayerIdName(popUp.game.getCurrentPlayer());
-        popUp.gameStage.setButtonIcons();
-        Icon icon = new ImageIcon(".\\resources\\UnoCards\\" + popUp.game.getTopCardImage());
-        popUp.StockPileButton.setIcon(icon);
-        popUp.game.setCardColor(Card.Color.GREEN);
-        popUp.dispose();
-    }                                           
-
-    private void redButtonActionPerformed(java.awt.event.ActionEvent evt) {                                          
-        wildColor = Card.Color.RED;
-        JLabel message = new JLabel("The color changed into red!");
-        message.setFont(new Font("Comic Sans MS", Font.BOLD, 48));
-		message.setBackground(new Color(53,101,77));
-		message.setForeground(new Color(255, 145, 164));
-        JOptionPane.showMessageDialog(null, message);
-        allow = true;
-        this.dispose();
-        popUp.declaredColor = Card.Color.RED;
-        popUp.gameStage.setPlayerIdName(popUp.game.getCurrentPlayer());
-        popUp.gameStage.setButtonIcons();
-        Icon icon = new ImageIcon(".\\resources\\UnoCards\\" + popUp.game.getTopCardImage());
-        popUp.StockPileButton.setIcon(icon);
-        popUp.game.setCardColor(Card.Color.RED);
-        popUp.dispose();
-        
-    }                                         
-
-    private void blueButtonActionPerformed(java.awt.event.ActionEvent evt) {                                           
-        wildColor = Card.Color.BLUE;
-        JLabel message = new JLabel("The color changed into blue!");
-        message.setFont(new Font("Comic Sans MS", Font.BOLD, 48));
-		message.setBackground(new Color(53,101,77));
-		message.setForeground(new Color(255, 145, 164));
-        JOptionPane.showMessageDialog(null, message);
-        allow = true;
-        this.dispose();
-        popUp.declaredColor = Card.Color.BLUE;
-        //need to reorganize mvc on this view too
-        popUp.gameStage.setPlayerIdName(popUp.game.getCurrentPlayer());
-        popUp.gameStage.setButtonIcons();
-        Icon icon = new ImageIcon(".\\resources\\UnoCards\\" + popUp.game.getTopCardImage());
-        popUp.StockPileButton.setIcon(icon);
-        popUp.game.setCardColor(Card.Color.BLUE);
-        popUp.dispose();
-    }                                          
-*/
-
 
     // Variables declaration - do not modify                     
     private javax.swing.JButton blueButton;
@@ -270,11 +169,10 @@ public class PickColorFrame extends JFrame implements Observer
     private javax.swing.JButton yellowButton;
     // End of variables declaration                   
 
-
 	@Override
 	public void update(Observable o, Object arg) 
 	{
 		if(arg.getClass().getName() == "model.Card$Color")
-			setWildColor((Card.Color)arg);
+			setDeclaredColor((Card.Color)arg);
 	}
 }
