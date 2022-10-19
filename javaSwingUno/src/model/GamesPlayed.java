@@ -1,5 +1,7 @@
 package model;
 
+import java.util.ArrayList;
+
 public class GamesPlayed 
 {
 	private User user;
@@ -7,7 +9,7 @@ public class GamesPlayed
 	
 	public GamesPlayed(User user)
 	{
-		this.user = user; 
+		this.user = user;
 		this.games_w_l_played  = new Integer[] {0,0,0}; 
 	}
 	

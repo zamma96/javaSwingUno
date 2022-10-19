@@ -16,10 +16,14 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
+import controller.UserHomeController;
+import view.UserHomeView;
+
 public class Game extends Observable
 {
 	//qui dataBase serve solo per salvare i risultati delle partite (Games won, Games played, Games loss)
 	private DataBase dataBase;
+	private LoginModel loginModel;
 	private String[] nameArray = new String[] {"Carlo", "Gianluca", "Simone", "Giorno", "Marco", "Vista", "Valentina", "Daniela", "Francesca", "Martina", "Elena"};
 	private ArrayList<String> namePool;
 	private ArrayList<String> cardIds;
@@ -39,8 +43,9 @@ public class Game extends Observable
 	private int drawFourCount = 0;
 	private Icon stockPileIcon = new ImageIcon();
 	
-	public Game(User user, DataBase dataBase)
+	public Game(User user, DataBase dataBase, LoginModel loginModel)
 	{
+		this.loginModel = loginModel;
 		this.dataBase = dataBase;
 		this.user = user;
 		hasChanged();
@@ -455,6 +460,12 @@ public class Game extends Observable
 		if (isGameOver())
 		{
 			showGameWonDialog();
+			if (this.players[0] == players[currentPlayer])
+				loginModel.setGamesInfo();
+			//comandi qua sopra inutili, da rivedere classe GamesPlayed e vedere se esiste una soluzione migliore per salvare i risultati della partita.
+			UserHomeView newView = new UserHomeView(loginModel);
+			UserHomeController newController = new UserHomeController(loginModel, newView);
+			newController.initController();
 			//forse qua riaprire UserHome, aggiornata con contatori partite
 			System.exit(0);
 		}

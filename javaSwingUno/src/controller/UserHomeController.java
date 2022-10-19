@@ -96,7 +96,7 @@ public class UserHomeController
 	{
 		model.setPos(model.getPos());
 		model.saveUserData();
-		Game gameModel = new Game(model.getUser(), model.getDataBase());
+		Game gameModel = new Game(model.getUser(), model.getDataBase(), model);
 		GameStage gameView = new GameStage(gameModel);
 		model.observationRoutine(gameView, this.view);
 		GameController controller = new GameController(gameModel, gameView);

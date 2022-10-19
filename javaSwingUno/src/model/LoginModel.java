@@ -18,11 +18,15 @@ public class LoginModel extends Observable
 	private User user;
 	private DataBase dataBase;
 	private File userDataFile = new File(".\\resources\\UserData");
-	private File posDataFile = new File(".resources\\PosData");
+	private File posDataFile = new File(".\\resources\\PosData");
+	private File gamesWonDataFile = new File(".\\resources\\GamesWonData");
+	private File gamesLossDataFile = new File(".\\resources\\GamesLossData");
+	private File gamesPlayedDataFile = new File(".\\resources\\GamesPlayedData");
+	private GamesPlayed games;
 	
 	public LoginModel()	throws IOException
 	{
-		this.dataBase = new DataBase(userDataFile, posDataFile);
+		this.dataBase = new DataBase(userDataFile, posDataFile, gamesWonDataFile, gamesLossDataFile, gamesPlayedDataFile);
 	}
 	
 	/**
@@ -85,6 +89,13 @@ public class LoginModel extends Observable
 		notifyObservers(nickName);
 	}
 	
+	public void setGamesInfo()
+	{
+		games.addGameWin(user);
+		games.addGamePlayed(user);
+	}
+	
+	
 	/**
 	 * method that saves user info (User user, Integer pos) on file
 	 */
@@ -95,7 +106,7 @@ public class LoginModel extends Observable
 		dataBase.addPos(user, pos);
 		try 
 		{
-			dataBase.saveOnFile(userDataFile, posDataFile);
+			dataBase.saveOnFile(userDataFile, posDataFile, gamesWonDataFile, gamesLossDataFile, gamesPlayedDataFile);
 		} 
 		catch (IOException e) 
 		{

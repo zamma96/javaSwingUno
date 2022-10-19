@@ -12,7 +12,6 @@ import javax.swing.JOptionPane;
 
 import model.Card;
 import model.Game;
-import view.GameStage;
 import view.PickColorFrame;
 import view.PopUp;
 
