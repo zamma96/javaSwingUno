@@ -194,13 +194,9 @@ public class GameController
 			int index = 0;
 			String cardId = model.getCardIds().get(0);
 			window = new PopUp(cardId, model, index, model.getcardButtons(), view, view.getStockPileButton());
-			window.setBounds(750, 40, 700, 800);
-			window.setResizable(false);
-			window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 			PopUpController controller = new PopUpController(model, view, window);
 			controller.initController(window);
 			model.addObserver(window);
-			window.setVisible(true);
 		}
 	}
 	
@@ -211,10 +207,9 @@ public class GameController
 			int index = 1;
 			String cardId = model.getCardIds().get(1);
 			window = new PopUp(cardId, model, index, model.getcardButtons(), view, view.getStockPileButton());
-			window.setBounds(750, 40, 700, 800);
-			window.setVisible(true);
-			window.setResizable(false);
-			window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+			PopUpController controller = new PopUpController(model, view, window);
+			controller.initController(window);
+			model.addObserver(window);
 		}
 	}
 	
@@ -225,10 +220,9 @@ public class GameController
 			int index = 2;
 			String cardId = model.getCardIds().get(2);
 			window = new PopUp(cardId, model, index, model.getcardButtons(), view, view.getStockPileButton());
-			window.setBounds(750, 40, 700, 800);
-			window.setVisible(true);
-			window.setResizable(false);
-			window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+			PopUpController controller = new PopUpController(model, view, window);
+			controller.initController(window);
+			model.addObserver(window);
 		}
 	}
 	
@@ -239,10 +233,9 @@ public class GameController
 			int index = 3;
 			String cardId = model.getCardIds().get(3);
 			window = new PopUp(cardId, model, index, model.getcardButtons(), view, view.getStockPileButton());
-			window.setBounds(750, 40, 700, 800);
-			window.setVisible(true);
-			window.setResizable(false);
-			window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+			PopUpController controller = new PopUpController(model, view, window);
+			controller.initController(window);
+			model.addObserver(window);
 		}
 	}
 	
@@ -253,10 +246,9 @@ public class GameController
 			int index = 4;
 			String cardId = model.getCardIds().get(4);
 			window = new PopUp(cardId, model, index, model.getcardButtons(), view, view.getStockPileButton());
-			window.setBounds(750, 40, 700, 800);
-			window.setVisible(true);
-			window.setResizable(false);
-			window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+			PopUpController controller = new PopUpController(model, view, window);
+			controller.initController(window);
+			model.addObserver(window);
 		}
 	}
 	
@@ -267,10 +259,9 @@ public class GameController
 			int index = 5;
 			String cardId = model.getCardIds().get(5);
 			window = new PopUp(cardId, model, index, model.getcardButtons(), view, view.getStockPileButton());
-			window.setBounds(750, 40, 700, 800);
-			window.setVisible(true);
-			window.setResizable(false);
-			window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+			PopUpController controller = new PopUpController(model, view, window);
+			controller.initController(window);
+			model.addObserver(window);
 		}
 	}
 	
@@ -281,10 +272,9 @@ public class GameController
 			int index = 6;
 			String cardId = model.getCardIds().get(6);
 			window = new PopUp(cardId, model, index, model.getcardButtons(), view, view.getStockPileButton());
-			window.setBounds(750, 40, 700, 800);
-			window.setVisible(true);
-			window.setResizable(false);
-			window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+			PopUpController controller = new PopUpController(model, view, window);
+			controller.initController(window);
+			model.addObserver(window);
 		}
 	}
 	
@@ -295,10 +285,9 @@ public class GameController
 			int index = 7;
 			String cardId = model.getCardIds().get(7);
 			window = new PopUp(cardId, model, index, model.getcardButtons(), view, view.getStockPileButton());
-			window.setBounds(750, 40, 700, 800);
-			window.setVisible(true);
-			window.setResizable(false);
-			window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+			PopUpController controller = new PopUpController(model, view, window);
+			controller.initController(window);
+			model.addObserver(window);
 		}
 	}
 	
@@ -309,10 +298,9 @@ public class GameController
 			int index = 8;
 			String cardId = model.getCardIds().get(8);
 			window = new PopUp(cardId, model, index, model.getcardButtons(), view, view.getStockPileButton());
-			window.setBounds(750, 40, 700, 800);
-			window.setVisible(true);
-			window.setResizable(false);
-			window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+			PopUpController controller = new PopUpController(model, view, window);
+			controller.initController(window);
+			model.addObserver(window);
 		}
 	}
 	
@@ -323,10 +311,9 @@ public class GameController
 			int index = 9;
 			String cardId = model.getCardIds().get(9);
 			window = new PopUp(cardId, model, index, model.getcardButtons(), view, view.getStockPileButton());
-			window.setBounds(750, 40, 700, 800);
-			window.setVisible(true);
-			window.setResizable(false);
-			window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+			PopUpController controller = new PopUpController(model, view, window);
+			controller.initController(window);
+			model.addObserver(window);
 		}
 	}
 	
@@ -337,10 +324,9 @@ public class GameController
 			int index = 10;
 			String cardId = model.getCardIds().get(10);
 			window = new PopUp(cardId, model, index, model.getcardButtons(), view, view.getStockPileButton());
-			window.setBounds(750, 40, 700, 800);
-			window.setVisible(true);
-			window.setResizable(false);
-			window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+			PopUpController controller = new PopUpController(model, view, window);
+			controller.initController(window);
+			model.addObserver(window);
 		}
 	}
 	
@@ -351,10 +337,9 @@ public class GameController
 			int index = 11;
 			String cardId = model.getCardIds().get(11);
 			window = new PopUp(cardId, model, index, model.getcardButtons(), view, view.getStockPileButton());
-			window.setBounds(750, 40, 700, 800);
-			window.setVisible(true);
-			window.setResizable(false);
-			window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+			PopUpController controller = new PopUpController(model, view, window);
+			controller.initController(window);
+			model.addObserver(window);
 		}
 	}
 	
@@ -365,10 +350,9 @@ public class GameController
 			int index = 12;
 			String cardId = model.getCardIds().get(12);
 			window = new PopUp(cardId, model, index, model.getcardButtons(), view, view.getStockPileButton());
-			window.setBounds(750, 40, 700, 800);
-			window.setVisible(true);
-			window.setResizable(false);
-			window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+			PopUpController controller = new PopUpController(model, view, window);
+			controller.initController(window);
+			model.addObserver(window);
 		}
 	}
 	
@@ -379,10 +363,9 @@ public class GameController
 			int index = 13;
 			String cardId = model.getCardIds().get(13);
 			window = new PopUp(cardId, model, index, model.getcardButtons(), view, view.getStockPileButton());
-			window.setBounds(750, 40, 700, 800);
-			window.setVisible(true);
-			window.setResizable(false);
-			window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+			PopUpController controller = new PopUpController(model, view, window);
+			controller.initController(window);
+			model.addObserver(window);
 		}
 	}
 	
@@ -393,10 +376,9 @@ public class GameController
 			int index = 14;
 			String cardId = model.getCardIds().get(14);
 			window = new PopUp(cardId, model, index, model.getcardButtons(), view, view.getStockPileButton());
-			window.setBounds(750, 40, 700, 800);
-			window.setVisible(true);
-			window.setResizable(false);
-			window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+			PopUpController controller = new PopUpController(model, view, window);
+			controller.initController(window);
+			model.addObserver(window);
 		}
 	}
 	
@@ -407,10 +389,9 @@ public class GameController
 			int index = 15;
 			String cardId = model.getCardIds().get(15);
 			window = new PopUp(cardId, model, index, model.getcardButtons(), view, view.getStockPileButton());
-			window.setBounds(750, 40, 700, 800);
-			window.setVisible(true);
-			window.setResizable(false);
-			window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+			PopUpController controller = new PopUpController(model, view, window);
+			controller.initController(window);
+			model.addObserver(window);
 		}
 	}
 	

@@ -7,6 +7,7 @@ import java.util.logging.Logger;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JFrame;
 
 import model.Card;
 import model.Game;
@@ -33,6 +34,9 @@ public class PopUpController
 	
 	public void initView()
 	{
+		popUpView.setBounds(750, 40, 700, 800);
+		popUpView.setResizable(false);
+		popUpView.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		Icon icon = new ImageIcon(".\\resources\\Images\\" + popUpView.getCardImage() + ".png");
         popUpView.getCardLabel().setIcon(icon);
         popUpView.setVisible(true);

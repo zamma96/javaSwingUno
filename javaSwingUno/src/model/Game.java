@@ -303,6 +303,14 @@ public class Game extends Observable
 		return players;
 	}
 	
+	public Player getHumanPlayer()
+	{
+		for (Player p : players)
+			if (p.getPlayerNickName() == user.getNickName())
+				return p;
+		return null;
+	}
+	
 	public String[] getPlayersNames()
 	{
 		ArrayList<String> playerNamesL = new ArrayList<String>();

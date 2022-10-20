@@ -66,7 +66,7 @@ public class GameStage extends JFrame implements Observer
 	 */
 	public void setButtonIcons() 
 	{
-		String listString = (game.getPlayerHand(game.getPlayers()[0])
+		String listString = (game.getPlayerHand(game.getHumanPlayer())
 				.stream().map(Object::toString)
 				.collect(Collectors.joining(",")));
 		String[] cardNames = listString.split(",");
