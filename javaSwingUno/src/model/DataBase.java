@@ -21,24 +21,20 @@ public class DataBase
 	public DataBase(File userData, File posData, File gamesWonData, File gamesLossData, File gamesPlayedData) throws IOException
 	{
 		loadByFile(userData, posData, gamesWonData, gamesLossData, gamesPlayedData);
+			
 	}
 	
 	public void addGameWon(User user)
 	{
 		int index = users.indexOf(user);
 		gamesWon.add(index, gamesWon.get(index)+1);
+		gamesPlayed.add(index, gamesPlayed.get(index)+1);
 	}
 	
 	public Integer getGamesWon(User user)
 	{
 		int index = users.indexOf(user);
 		return gamesWon.get(index);
-	}
-
-	public void addGamePlayed(User user)
-	{
-		int index = users.indexOf(user);
-		gamesPlayed.add(index, gamesPlayed.get(index)+1);
 	}
 	
 	public Integer getGamesPlayed(User user)
@@ -51,6 +47,7 @@ public class DataBase
 	{
 		int index = users.indexOf(user);
 		gamesLoss.add(index, gamesLoss.get(index)+1);
+		gamesPlayed.add(index, gamesPlayed.get(index)+1);
 	}
 	
 	public Integer getGamesLoss(User user)
@@ -74,6 +71,10 @@ public class DataBase
 	public void addUser(User user)
 	{
 		users.add(user);
+		positions.add(users.indexOf(user), 0);
+		gamesWon.add(users.indexOf(user), 0);
+		gamesLoss.add(users.indexOf(user), 0);
+		gamesPlayed.add(users.indexOf(user), 0);
 	}
 	
 	public List<User> getUsers()

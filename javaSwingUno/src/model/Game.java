@@ -43,11 +43,11 @@ public class Game extends Observable
 	private int drawFourCount = 0;
 	private Icon stockPileIcon = new ImageIcon();
 	
-	public Game(User user, DataBase dataBase, LoginModel loginModel)
+	public Game(LoginModel loginModel)
 	{
 		this.loginModel = loginModel;
-		this.dataBase = dataBase;
-		this.user = user;
+		this.dataBase = loginModel.getDataBase();
+		this.user = loginModel.getUser();
 		hasChanged();
 		notifyObservers(user);
 		deck = new Deck();
@@ -468,9 +468,12 @@ public class Game extends Observable
 		if (isGameOver())
 		{
 			showGameWonDialog();
-			if (this.players[0] == players[currentPlayer])
-				loginModel.setGamesInfo();
-			//comandi qua sopra inutili, da rivedere classe GamesPlayed e vedere se esiste una soluzione migliore per salvare i risultati della partita.
+			if (getHumanPlayer() == players[currentPlayer])
+			
+				loginModel.getDataBase().addGameWon(user);
+			else
+				loginModel.getDataBase().addGameLoss(user);
+				//comandi qua sopra inutili, da rivedere classe GamesPlayed e vedere se esiste una soluzione migliore per salvare i risultati della partita.
 			UserHomeView newView = new UserHomeView(loginModel);
 			UserHomeController newController = new UserHomeController(loginModel, newView);
 			newController.initController();

@@ -10,6 +10,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 /**
  *
@@ -98,22 +99,50 @@ public class UserHomeView extends JFrame implements Observer
     {
     	return EmptyNickNameLabel;
     }
+    
+    public JLabel getGamesWonLabel()
+    {
+    	return GamesWonLabel;
+    }
+    
+    public JLabel getGamesLossLabel()
+    {
+    	return GamesLossLabel;
+    }
+    
+    public JLabel getGamesPlayedLabel()
+    {
+    	return GamesPlayedLabel;
+    }
 
+    public JLabel getNickNameLabel()
+    {
+    	return NickNameLabel; 
+    }
+    
+    public JLabel getAvatarLabel()
+    {
+    	return AvatarLabel;
+    }
+    
 	/**
 	 * initialize all of this frame's components and their settings.
 	 */
 	private void initComponents() {
-		JPanel1 = new javax.swing.JPanel();
-		jLabel1 = new javax.swing.JLabel();
-		JPanel2 = new javax.swing.JPanel();
-		NickNameLabel = new javax.swing.JLabel();
-		AvatarLabel = new javax.swing.JLabel();
-		AvatarImageLabel = new javax.swing.JLabel();
-		EmptyNickNameLabel = new javax.swing.JLabel();
-		PreviousButton = new javax.swing.JButton();
-		NextButton = new javax.swing.JButton();
-		playButton = new javax.swing.JButton();
-		exitButton = new javax.swing.JButton();
+		JPanel1 = new JPanel();
+		jLabel1 = new JLabel();
+		JPanel2 = new JPanel();
+		NickNameLabel = new JLabel();
+		AvatarLabel = new JLabel();
+		AvatarImageLabel = new JLabel();
+		EmptyNickNameLabel = new JLabel();
+		PreviousButton = new JButton();
+		NextButton = new JButton();
+		playButton = new JButton();
+		exitButton = new JButton();
+        GamesWonLabel = new JLabel();
+        GamesLossLabel = new JLabel();
+        GamesPlayedLabel = new JLabel();
 
 		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 		setBackground(new java.awt.Color(255, 255, 255));
@@ -141,106 +170,109 @@ public class UserHomeView extends JFrame implements Observer
 		JPanel2.setBackground(new java.awt.Color(255, 255, 255));
 		JPanel2.setPreferredSize(new java.awt.Dimension(400, 299));
 
-		NickNameLabel.setFont(new java.awt.Font("Segoe UI", 0, 18));
-		NickNameLabel.setText("NickName:");
-
-		AvatarLabel.setFont(new java.awt.Font("Segoe UI", 0, 18));
-		AvatarLabel.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-		AvatarLabel.setText("Avatar:");
-
-		AvatarImageLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Avatar/default.png")));
-
-		EmptyNickNameLabel.setFont(new java.awt.Font("Segoe UI", 0, 18));
-		EmptyNickNameLabel.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-
-		PreviousButton.setText("Previous");
-		NextButton.setText("Next");
-		playButton.setText("PLAY!");
-		exitButton.setText("EXIT");
-
 		javax.swing.GroupLayout JPanel2Layout = new javax.swing.GroupLayout(JPanel2);
-		JPanel2.setLayout(JPanel2Layout);
-		JPanel2Layout.setHorizontalGroup(JPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGroup(javax.swing.GroupLayout.Alignment.TRAILING, JPanel2Layout.createSequentialGroup()
-						.addGroup(JPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-								.addGroup(JPanel2Layout.createSequentialGroup().addGap(27, 27, 27)
-										.addGroup(JPanel2Layout
-												.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-												.addComponent(AvatarLabel, javax.swing.GroupLayout.DEFAULT_SIZE,
-														javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-												.addComponent(NickNameLabel, javax.swing.GroupLayout.DEFAULT_SIZE,
-														javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-										.addGap(18, 18, 18)
-										.addGroup(JPanel2Layout
-												.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-												.addGroup(JPanel2Layout.createSequentialGroup()
-														.addComponent(AvatarImageLabel).addGap(44, 44, 44)
-														.addGroup(JPanel2Layout
-																.createParallelGroup(
-																		javax.swing.GroupLayout.Alignment.LEADING)
-																.addComponent(PreviousButton).addComponent(NextButton)))
-												.addComponent(EmptyNickNameLabel,
-														javax.swing.GroupLayout.PREFERRED_SIZE, 250,
-														javax.swing.GroupLayout.PREFERRED_SIZE)))
-								.addGroup(JPanel2Layout.createSequentialGroup().addGap(114, 114, 114)
-										.addComponent(exitButton).addGap(18, 18, 18).addComponent(playButton)
-										.addGap(0, 0, Short.MAX_VALUE)))
-						.addGap(14, 14, 14)));
-		JPanel2Layout.setVerticalGroup(JPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGroup(JPanel2Layout.createSequentialGroup().addGap(38, 38, 38)
-						.addGroup(JPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-								.addComponent(NickNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 22,
-										javax.swing.GroupLayout.PREFERRED_SIZE)
-								.addComponent(EmptyNickNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 22,
-										javax.swing.GroupLayout.PREFERRED_SIZE))
-						.addGroup(JPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-								.addGroup(JPanel2Layout.createSequentialGroup()
-										.addGroup(JPanel2Layout
-												.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-												.addGroup(JPanel2Layout.createSequentialGroup().addGap(79, 79, 79)
-														.addComponent(AvatarLabel))
-												.addGroup(JPanel2Layout.createSequentialGroup().addGap(55, 55, 55)
-														.addComponent(PreviousButton)))
-										.addGap(2, 2, 2).addComponent(NextButton))
-								.addGroup(JPanel2Layout.createSequentialGroup().addGap(28, 28, 28)
-										.addComponent(AvatarImageLabel)))
-						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
-						.addGroup(JPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-								.addComponent(playButton).addComponent(exitButton))
-						.addGap(27, 27, 27)));
+        JPanel2.setLayout(JPanel2Layout);
+        JPanel2Layout.setHorizontalGroup(
+            JPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, JPanel2Layout.createSequentialGroup()
+                .addGroup(JPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(JPanel2Layout.createSequentialGroup()
+                        .addGap(114, 114, 114)
+                        .addComponent(exitButton)
+                        .addGap(18, 18, 18)
+                        .addComponent(playButton)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, JPanel2Layout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addGroup(JPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(JPanel2Layout.createSequentialGroup()
+                                .addGroup(JPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(AvatarLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(NickNameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 97, Short.MAX_VALUE))
+                                .addGap(18, 18, 18)
+                                .addGroup(JPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(JPanel2Layout.createSequentialGroup()
+                                        .addComponent(AvatarImageLabel)
+                                        .addGap(44, 44, 44)
+                                        .addGroup(JPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(PreviousButton)
+                                            .addComponent(NextButton)))
+                                    .addComponent(EmptyNickNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(JPanel2Layout.createSequentialGroup()
+                                .addComponent(GamesWonLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(110, 110, 110)
+                                .addComponent(GamesLossLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(GamesPlayedLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap())
+        );
+        JPanel2Layout.setVerticalGroup(
+            JPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(JPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(JPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(GamesWonLabel)
+                    .addComponent(GamesLossLabel)
+                    .addComponent(GamesPlayedLabel))
+                .addGap(16, 16, 16)
+                .addGroup(JPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(JPanel2Layout.createSequentialGroup()
+                        .addGap(50, 50, 50)
+                        .addComponent(AvatarImageLabel))
+                    .addGroup(JPanel2Layout.createSequentialGroup()
+                        .addGroup(JPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(JPanel2Layout.createSequentialGroup()
+                                .addComponent(EmptyNickNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(33, 33, 33)
+                                .addComponent(PreviousButton))
+                            .addGroup(JPanel2Layout.createSequentialGroup()
+                                .addComponent(NickNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(77, 77, 77)
+                                .addComponent(AvatarLabel)))
+                        .addGap(2, 2, 2)
+                        .addComponent(NextButton)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                .addGroup(JPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(playButton)
+                    .addComponent(exitButton))
+                .addGap(27, 27, 27))
+        );
 
-		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-		getContentPane().setLayout(layout);
-		layout.setHorizontalGroup(
-				layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-						.addComponent(JPanel1, javax.swing.GroupLayout.DEFAULT_SIZE,
-								javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-						.addGroup(layout.createSequentialGroup().addComponent(JPanel2,
-								javax.swing.GroupLayout.PREFERRED_SIZE, 398, javax.swing.GroupLayout.PREFERRED_SIZE)
-								.addGap(0, 0, Short.MAX_VALUE)));
-		layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGroup(layout.createSequentialGroup()
-						.addComponent(JPanel1, javax.swing.GroupLayout.PREFERRED_SIZE,
-								javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(JPanel2,
-								javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
-								Short.MAX_VALUE)));
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(JPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(JPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 398, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(JPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(JPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
-		pack();
+        pack();
 	}
 
 	// Variables declaration - do not modify
-	private javax.swing.JLabel AvatarImageLabel;
-	private javax.swing.JLabel AvatarLabel;
-	private javax.swing.JLabel EmptyNickNameLabel;
-	private javax.swing.JPanel JPanel1;
-	private javax.swing.JPanel JPanel2;
-	private javax.swing.JButton NextButton;
-	private javax.swing.JLabel NickNameLabel;
-	private javax.swing.JButton PreviousButton;
-	private javax.swing.JButton exitButton;
-	private javax.swing.JLabel jLabel1;
-	private javax.swing.JButton playButton;
+	private JLabel AvatarImageLabel;
+	private JLabel AvatarLabel;
+	private JLabel EmptyNickNameLabel;
+	private JPanel JPanel1;
+	private JPanel JPanel2;
+	private JButton NextButton;
+	private JLabel NickNameLabel;
+	private JButton PreviousButton;
+	private JButton exitButton;
+	private JLabel jLabel1;
+	private JButton playButton;
+    private JLabel GamesLossLabel;
+    private JLabel GamesPlayedLabel;
+    private JLabel GamesWonLabel; 
 
 	@Override
 	public void update(Observable o, Object arg) 
