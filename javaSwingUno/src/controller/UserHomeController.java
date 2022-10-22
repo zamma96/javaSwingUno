@@ -32,6 +32,8 @@ public class UserHomeController
 	
 	public void initView()
 	{
+		setHistory();
+		
 		view.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 		view.setBackground(WHITE);
 		
@@ -63,13 +65,10 @@ public class UserHomeController
 		view.getEmptyNickNameLabel().setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
 		
 		view.getGamesWonLabel().setFont(UiFont);
-		view.getGamesWonLabel().setText("");
 		
 		view.getGamesLossLabel().setFont(UiFont);
-		view.getGamesLossLabel().setText("");
 		
 		view.getGamesPlayedLabel().setFont(UiFont);
-		view.getGamesPlayedLabel().setText("");
 		
 		view.getPreviousButton().setText("Previous");
 		
