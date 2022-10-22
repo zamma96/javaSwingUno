@@ -1,5 +1,7 @@
 package controller;
 
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -17,6 +19,9 @@ public class UserHomeController
 {
 	private UserHomeView view;
 	private LoginModel model;
+	static private Color WHITE = new Color(255,255,255);
+	static private Color TABLE_GREEN = new Color(53, 101, 77);
+	static private Font UiFont = new Font("Segoe UI", 0, 32);
 
 	public UserHomeController(LoginModel loginModel, UserHomeView userHomeView)
 	{
@@ -27,29 +32,53 @@ public class UserHomeController
 	
 	public void initView()
 	{
+		view.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+		view.setBackground(WHITE);
+		
+		view.getjPanel1().setBackground(TABLE_GREEN);
+		
+		view.getjPanel2().setBackground(WHITE);
+		view.getjPanel2().setPreferredSize(new Dimension(400, 299));
+		
 		view.getjLabel1().setText(model.getNickName() + "'s Home");
+		view.getjLabel1().setBackground(TABLE_GREEN);
+		view.getjLabel1().setFont(UiFont);
+		view.getjLabel1().setForeground(WHITE);
+		view.getjLabel1().setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+		
 		String[] imageList = getImages();
 		String imageName = imageList[model.getPos()];
-		view.getNickNameLabel().setFont(new java.awt.Font("Segoe UI", 0, 18));
+		
+		view.getNickNameLabel().setFont(UiFont);
 		view.getNickNameLabel().setText("NickName:");
-		view.getAvatarLabel().setFont(new java.awt.Font("Segoe UI", 0, 18));
+		
+		view.getAvatarLabel().setFont(UiFont);
 		view.getAvatarLabel().setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
 		view.getAvatarLabel().setText("Avatar:");
+		
 		Icon icon = new ImageIcon(".\\resources\\Avatars"+imageName);
 		view.getAvatarImageLabel().setIcon(icon);
-		view.getEmptyNickNameLabel().setFont(new Font("Segoe UI", 0, 18));
+		view.getEmptyNickNameLabel().setFont(UiFont);
 		view.getEmptyNickNameLabel().setText(model.getNickName());
 		view.getEmptyNickNameLabel().setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-		view.getGamesWonLabel().setFont(new java.awt.Font("Segoe UI", 0, 18));
+		
+		view.getGamesWonLabel().setFont(UiFont);
 		view.getGamesWonLabel().setText("");
-		view.getGamesLossLabel().setFont(new java.awt.Font("Segoe UI", 0, 18));
+		
+		view.getGamesLossLabel().setFont(UiFont);
 		view.getGamesLossLabel().setText("");
-		view.getGamesPlayedLabel().setFont(new java.awt.Font("Segoe UI", 0, 18));
+		
+		view.getGamesPlayedLabel().setFont(UiFont);
 		view.getGamesPlayedLabel().setText("");
+		
 		view.getPreviousButton().setText("Previous");
+		
 		view.getNextButton().setText("Next");
+		
 		view.getPlayButton().setText("PLAY!");
+		
 		view.getExitButton().setText("EXIT");
+		
 		view.setVisible(true);
 	}
 	

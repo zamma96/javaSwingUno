@@ -2,6 +2,8 @@ package view;
 
 import model.LoginModel;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -100,29 +102,63 @@ public class UserHomeView extends JFrame implements Observer
     	return EmptyNickNameLabel;
     }
     
+    /**
+     * 
+     * @return GamesWonLabel variable;
+     */
     public JLabel getGamesWonLabel()
     {
     	return GamesWonLabel;
     }
     
+    /**
+     * 
+     * @return GamesLossLabel variable;
+     */
     public JLabel getGamesLossLabel()
     {
     	return GamesLossLabel;
     }
     
+    /**
+     * 
+     * @return GamesPlayedLabel variable;
+     */
     public JLabel getGamesPlayedLabel()
     {
     	return GamesPlayedLabel;
     }
 
+    /**
+     * 
+     * @return NickNameLabel variable;
+     */
     public JLabel getNickNameLabel()
     {
     	return NickNameLabel; 
     }
     
+    /**
+     * 
+     * @return AvatarLabel variable;
+     */
     public JLabel getAvatarLabel()
     {
     	return AvatarLabel;
+    }
+    
+    /**
+     * 
+     * @return jPanel1
+     */
+    public JPanel getjPanel1()
+    {
+    	return JPanel1;
+    }
+    
+    public JPanel getjPanel2()
+    {
+    	return JPanel2;
     }
     
 	/**
@@ -144,16 +180,6 @@ public class UserHomeView extends JFrame implements Observer
         GamesLossLabel = new JLabel();
         GamesPlayedLabel = new JLabel();
 
-		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-		setBackground(new java.awt.Color(255, 255, 255));
-
-		JPanel1.setBackground(new java.awt.Color(53, 101, 77));
-
-		jLabel1.setBackground(new java.awt.Color(53, 101, 77));
-		jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
-		jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-		jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-
 		javax.swing.GroupLayout JPanel1Layout = new javax.swing.GroupLayout(JPanel1);
 		JPanel1.setLayout(JPanel1Layout);
 		JPanel1Layout.setHorizontalGroup(JPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -166,9 +192,6 @@ public class UserHomeView extends JFrame implements Observer
 				.addGroup(JPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 						.addGroup(JPanel1Layout.createSequentialGroup().addGap(0, 0, Short.MAX_VALUE)
 								.addComponent(jLabel1).addGap(0, 0, Short.MAX_VALUE))));
-
-		JPanel2.setBackground(new java.awt.Color(255, 255, 255));
-		JPanel2.setPreferredSize(new java.awt.Dimension(400, 299));
 
 		javax.swing.GroupLayout JPanel2Layout = new javax.swing.GroupLayout(JPanel2);
         JPanel2.setLayout(JPanel2Layout);
@@ -258,7 +281,6 @@ public class UserHomeView extends JFrame implements Observer
         pack();
 	}
 
-	// Variables declaration - do not modify
 	private JLabel AvatarImageLabel;
 	private JLabel AvatarLabel;
 	private JLabel EmptyNickNameLabel;

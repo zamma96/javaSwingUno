@@ -13,6 +13,8 @@ import java.util.Observer;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 import model.DataBase;
 import model.LoginModel;
@@ -32,21 +34,71 @@ public class LoginMenuView extends javax.swing.JFrame implements Observer
     
     /**
      * 
+     * @return user input on textField
+     */
+    public String getTxtUser() 
+    {
+    	return txtUser.getText().toString();
+    }
+    
+    /**
+     * 
+     * @return current database instance
+     */
+    public DataBase getDataBase() 
+    {
+    	return loginModel.getDataBase();
+    }
+    
+    /**
+     * 
+     * @return LoginButton variable
+     */
+    public JButton getLoginButton()
+    {
+    	return LoginButton;
+    }
+   
+    /**
+     * 
+     * @return SignUpButton variable
+     */
+    public JButton getSignUpButton()
+    {
+    	return SignUpButton;
+    }
+    
+    public JLabel getSignUpLabel()
+    {
+    	return SignUpLabel;
+    }
+    
+    /**
+     * 
      * @return the current model instance
      */
-    public LoginModel getLoginModel() {return loginModel;}
+    public LoginModel getLoginModel() 
+    {
+    	return loginModel;
+    }
                   
     /**
      * 
      * @return user's nickName
      */
-    public String getNickName() {return nickName;}
+    public String getNickName() 
+    {
+    	return nickName;
+    }
     
     /**
      * 
      * @param nickName used in update() method to change this instance's nickName.
      */
-    public void setNickName(String nickName) {this.nickName = nickName;}
+    public void setNickName(String nickName) 
+    {
+    	this.nickName = nickName;
+    }
     
     /**
      * 
@@ -58,31 +110,95 @@ public class LoginMenuView extends javax.swing.JFrame implements Observer
     }
     
     /**
+     * 
+     * @return LoginLabel variable
+     */
+    public JLabel getLoginLabel()
+    {
+    	return LoginLabel;
+    }
+    
+    /**
+     * 
+     * @return WelcomeLabel variable
+     */
+    public JLabel getWelcomeLabel()
+    {
+    	return WelcomeLabel;
+    }
+    
+    /**
+     * 
+     * @return Usernameabel variable
+     */
+    public JLabel getUsernameLabel()
+    {
+    	return UsernameLabel;
+    }
+    
+    /**
+     * 
+     * @return txtUser variable
+     */
+    public JTextField gettxtUser()
+    {
+    	return txtUser;
+    }
+    
+    /**
+     * 
+     * @return UsernameFieldLabel variable
+     */
+    public JLabel getUsernameFieldLabel()
+    {
+    	return UsernameFieldLabel;
+    }
+    
+    /**
+     * 
+     * @return UserNameIconLabel variable
+     */
+    public JLabel getUserNameIconLabel()
+    {
+    	return UsernameIconLabel;
+    }
+    
+    /**
+     * 
+     * @return jPanel1 variable
+     */
+    public JPanel getjPanel1()
+    {
+    	return jPanel1;
+    }
+    
+    /**
+     * 
+     * @return jPanel2 variable
+     */
+    public JPanel getjPanel2()
+    {
+    	return jPanel2;
+    }
+    
+    /**
      * init of all components of this view.
      */
     private void initComponents() 
     {
-        jPanel1 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
-        LoginLabel = new javax.swing.JLabel();
-        WelcomeLabel = new javax.swing.JLabel();
-        UsernameLabel = new javax.swing.JLabel();
-        txtUser = new javax.swing.JTextField();
-        UsernameFieldLabel = new javax.swing.JLabel();
-        UsernameIconLabel = new javax.swing.JLabel();
-        LoginButton = new javax.swing.JButton();
-        SignUpLabel = new javax.swing.JLabel();
-        SignUpButton = new javax.swing.JButton();
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMinimumSize(new java.awt.Dimension(655, 386));
-        setResizable(false);
+        jPanel1 = new JPanel();
+        jLabel2 = new JLabel();
+        jPanel2 = new JPanel();
+        LoginLabel = new JLabel();
+        WelcomeLabel = new JLabel();
+        UsernameLabel = new JLabel();
+        txtUser = new JTextField();
+        UsernameFieldLabel = new JLabel();
+        UsernameIconLabel = new JLabel();
+        LoginButton = new JButton();
+        SignUpLabel = new JLabel();
+        SignUpButton = new JButton();
      
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource(".\\resources\\LoginImg\\unoLogo.png")));
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -99,46 +215,6 @@ public class LoginMenuView extends javax.swing.JFrame implements Observer
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(83, 83, 83))
         );
-
-        jPanel2.setBackground(new java.awt.Color(53, 101, 77));
-
-        LoginLabel.setFont(new java.awt.Font("Segoe UI", 0, 32));
-        LoginLabel.setForeground(new java.awt.Color(255, 255, 255));
-        LoginLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        LoginLabel.setText("Login");
-
-        WelcomeLabel.setFont(new java.awt.Font("Segoe UI", 0, 14));
-        WelcomeLabel.setForeground(new java.awt.Color(255, 255, 255));
-        WelcomeLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        WelcomeLabel.setText("Hello! Let's play!");
-
-        UsernameLabel.setFont(new java.awt.Font("Segoe UI", 0, 14));
-        UsernameLabel.setForeground(new java.awt.Color(255, 255, 255));
-        UsernameLabel.setText("Username:");
-
-        txtUser.setBackground(new java.awt.Color(53, 101, 77));
-        txtUser.setFont(txtUser.getFont().deriveFont(txtUser.getFont().getSize()+2f));
-        txtUser.setForeground(new java.awt.Color(255, 255, 255));
-        txtUser.setBorder(null);
-
-        UsernameFieldLabel.setForeground(new java.awt.Color(255, 255, 255));
-        UsernameFieldLabel.setText("________________________________________________________");
-
-        UsernameIconLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        UsernameIconLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource(".\\resources\\LoginImg\\icons8_customer_20px_2.png")));
-
-        LoginButton.setFont(new java.awt.Font("Segoe UI", 1, 14));
-        LoginButton.setForeground(new java.awt.Color(53, 101, 77));
-        LoginButton.setText("LOGIN");
-
-        SignUpLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); 
-        SignUpLabel.setForeground(new java.awt.Color(255, 255, 255));
-        SignUpLabel.setText("Don't have an account?");
-
-        SignUpButton.setBackground(new java.awt.Color(53, 101, 77));
-        SignUpButton.setForeground(new java.awt.Color(255, 255, 255));
-        SignUpButton.setText("Sign Up");
-        SignUpButton.setBorder(null);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -209,39 +285,20 @@ public class LoginMenuView extends javax.swing.JFrame implements Observer
 
         pack();
         setLocationRelativeTo(null);
-    }                      
-
-    //END OF INIT
-    
-    /**
-     * 
-     * @return user input on textField
-     */
-    public String getTxtUser() {return txtUser.getText().toString();}
-    
-    /**
-     * 
-     * @return current database instance
-     */
-    public DataBase getDataBase() {return loginModel.getDataBase();}
-    
-    public JButton getLoginButton(){return LoginButton;}
-    
-    public JButton getSignUpButton(){return SignUpButton;}
-
+    }                     
                   
-    private javax.swing.JButton LoginButton;
-    private javax.swing.JLabel LoginLabel;
-    private javax.swing.JButton SignUpButton;
-    private javax.swing.JLabel SignUpLabel;
-    private javax.swing.JLabel UsernameFieldLabel;
-    private javax.swing.JLabel UsernameIconLabel;
-    private javax.swing.JLabel UsernameLabel;
-    private javax.swing.JLabel WelcomeLabel;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JTextField txtUser;
+    private JButton LoginButton;
+    private JLabel LoginLabel;
+    private JButton SignUpButton;
+    private JLabel SignUpLabel;
+    private JLabel UsernameFieldLabel;
+    private JLabel UsernameIconLabel;
+    private JLabel UsernameLabel;
+    private JLabel WelcomeLabel;
+    private JLabel jLabel2;
+    private JPanel jPanel1;
+    private JPanel jPanel2;
+    private JTextField txtUser;
 
 	@Override
 	public void update(Observable o, Object arg) 

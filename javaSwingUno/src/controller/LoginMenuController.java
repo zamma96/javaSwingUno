@@ -1,5 +1,7 @@
 package controller;
 
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -8,6 +10,7 @@ import java.awt.event.WindowEvent;
 import java.io.IOException;
 import java.util.Observer;
 
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -21,8 +24,13 @@ import view.UserHomeView;
 
 public class LoginMenuController 
 {
-	LoginMenuView view;
-	LoginModel model;
+	private LoginMenuView view;
+	private LoginModel model;
+	static private Color WHITE = new Color(255,255,255);
+	static private Color TABLE_GREEN = new Color(53, 101, 77);
+	static private Color SALMON_PINK = new Color(255, 145, 164);
+	static private Font UiFont = new Font("Segoe UI", 0, 32);
+	
 
 	public LoginMenuController(LoginModel model, LoginMenuView view)
 	{
@@ -34,7 +42,54 @@ public class LoginMenuController
 	
 	public void initView()
 	{
-		view.getjLabel2().setIcon(new ImageIcon(getClass().getResource(".\\resources\\LoginImg\\unoLogo.png")));
+		view.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+		view.setMinimumSize(new Dimension(655, 386));
+		view.setResizable(false);
+		
+		view.getjPanel1().setBackground(WHITE);
+		view.getjPanel2().setBackground(TABLE_GREEN);
+		
+		view.getjLabel2().setIcon(new ImageIcon(".\\resources\\LoginImg\\unoLogo.png"));
+		
+		view.getLoginLabel().setFont(UiFont);
+		view.getLoginLabel().setForeground(WHITE);
+		view.getLoginLabel().setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+		view.getLoginLabel().setText("Login");        
+        
+		view.getWelcomeLabel().setFont(UiFont);
+		view.getWelcomeLabel().setForeground(WHITE);
+		view.getWelcomeLabel().setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+		view.getWelcomeLabel().setText("Welcome! Let's Play!");
+		
+		view.getUsernameLabel().setFont(UiFont);
+		view.getUsernameLabel().setForeground(WHITE);
+		view.getUsernameLabel().setText("Username: ");
+		
+		view.gettxtUser().setBackground(new Color(53,101, 77));
+		view.gettxtUser().setFont((view.gettxtUser().getFont().deriveFont(view.gettxtUser().getFont().getSize()+2f)));
+		view.gettxtUser().setForeground(WHITE);
+		view.gettxtUser().setBorder(null);
+		
+		view.getUsernameFieldLabel().setForeground(WHITE);
+		view.getUsernameFieldLabel().setText("________________________________________________________");
+		
+		view.getUserNameIconLabel().setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+		view.getUserNameIconLabel().setIcon(new ImageIcon(".\\resources\\LoginImg\\icons8_customer_20px_2.png"));
+		
+		view.getLoginButton().setFont(UiFont);
+		view.getLoginButton().setForeground(TABLE_GREEN);
+		view.getLoginButton().setText("LOGIN");
+		
+		view.getSignUpLabel().setFont(UiFont);
+		view.getSignUpLabel().setForeground(WHITE);
+		view.getSignUpLabel().setText("Don't have an account?");
+		
+		view.getSignUpButton().setBackground(TABLE_GREEN);
+		view.getSignUpButton().setForeground(WHITE);
+		view.getSignUpButton().setText("Sign Up");
+		view.getSignUpButton().setBorder(null);
+		
+		view.getjLabel2().setIcon(new ImageIcon(".\\resources\\LoginImg\\unoLogo.png"));
 		view.setVisible(true);
 	}
 	

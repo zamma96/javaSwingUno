@@ -1,7 +1,9 @@
 package controller;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -15,7 +17,6 @@ import javax.swing.JOptionPane;
 
 import model.LoginModel;
 import model.User;
-import view.LoginMenuView;
 import view.SignUpFormView;
 import view.UserHomeView;
 
@@ -23,6 +24,10 @@ public class SignUpFormController
 {
 	private SignUpFormView view;
 	private LoginModel model;
+	static private Color WHITE = new Color(255,255,255);
+	static private Color TABLE_GREEN = new Color(53, 101, 77);
+	static private Color SALMON_PINK = new Color(255, 145, 164);
+	static private Font UiFont = new Font("Segoe UI", 0, 32);
 	
 	public SignUpFormController(LoginModel loginModel, SignUpFormView view) throws IOException
 	{
@@ -33,7 +38,47 @@ public class SignUpFormController
 	
 	public void initView()
 	{
+		view.getjPanel2().setBackground(WHITE);
+		view.getjPanel2().setPreferredSize(new Dimension(400, 300));
+		
+		view.getjPanel1().setBackground(TABLE_GREEN);
+		view.getjPanel1().setForeground(WHITE);
+		view.getjPanel1().setPreferredSize(new Dimension(400, 100));
+		
+		view.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+		view.setTitle("Registration Form");
+		view.setBackground(WHITE);
+		view.setBounds(new Rectangle(400, 400, 400, 400));
+		view.setMinimumSize(new Dimension(400, 400));
+		view.setResizable(false);
+		
 		view.showImage(model.getPos());
+		
+		view.getNickNameLabel().setFont(UiFont);
+		view.getNickNameLabel().setText("NickName: ");
+		
+		view.getAvatarLabel().setFont(UiFont);
+		view.getAvatarLabel().setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+		view.getAvatarLabel().setText("Avatar: ");
+		
+		view.getUsernameFieldLabel().setBackground(WHITE);
+		view.getUsernameFieldLabel().setText("______________________________________________");
+		view.getUsernameFieldLabel().setRequestFocusEnabled(false);
+		
+		view.gettxtUser().setFont(UiFont);
+		view.gettxtUser().setBorder(null);
+		
+		view.getPreviousButton().setText("Previous");
+		view.getNextButton().setText("Next");
+		view.getSignUpButton().setText("Sign Up");
+		view.getSignUpButton().setBorder(null);
+		
+		view.getjLabel1().setBackground(TABLE_GREEN);
+		view.getjLabel1().setFont(UiFont);
+		view.getjLabel1().setForeground(WHITE);
+		view.getjLabel1().setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+		view.getjLabel1().setText("Registation Form");
+		
 		view.setVisible(true);
 	}
 	
@@ -110,8 +155,8 @@ public class SignUpFormController
 	{
 		JLabel message = new JLabel("Welcome to JUno!");
 		message.setFont(new Font("Comic Sans MS", Font.BOLD, 48));
-		message.setBackground(new Color(53, 101, 77));
-		message.setForeground(new Color(255, 145, 164));
+		message.setBackground(TABLE_GREEN);
+		message.setForeground(SALMON_PINK);
 		JOptionPane.showMessageDialog(null, message); 
 	}
 	

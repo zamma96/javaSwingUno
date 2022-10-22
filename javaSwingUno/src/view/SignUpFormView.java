@@ -1,9 +1,5 @@
 package view;
 
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 import java.util.Observable;
@@ -13,7 +9,7 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import model.LoginModel;
@@ -35,7 +31,6 @@ public class SignUpFormView extends javax.swing.JFrame implements Observer
 		initComponents();
 		this.model = loginModel;
 		model.setPos(0);		
-		this.update(model, model.getPos());
 	}
 
 	public JLabel getAvatarImageLabel()
@@ -103,27 +98,92 @@ public class SignUpFormView extends javax.swing.JFrame implements Observer
 	 * 
 	 * @return PreviousButton variable 
 	 */
-	public JButton getPreviousButton() {return PreviousButton;}
+	public JButton getPreviousButton() 
+	{
+		return PreviousButton;
+	}
 	
 	/**
 	 * 
 	 * @return NextButton variable
 	 */
-	public JButton getNextButton() {return NextButton;}
+	public JButton getNextButton() 
+	{
+		return NextButton;
+	}
 
 	/**
 	 * 
 	 * @return txtUser variable
 	 */
-	public JTextField gettxtUser() {return txtUser;}
+	public JTextField gettxtUser() 
+	{
+		return txtUser;
+	}
 	
 	/**
 	 * 
 	 * @return SignUpButton variable
 	 */
-	public JButton getSignUpButton() {return SignUpButton;}
+	public JButton getSignUpButton() 
+	{
+		return SignUpButton;
+	}
 	
+	/**
+	 * 
+	 * @return NickNameLabel variable
+	 */
+	public JLabel getNickNameLabel()
+	{
+		return NickNameLabel;
+	}
+	
+	/**
+	 * 
+	 * @return AvatarLabel variable
+	 */
+	public JLabel getAvatarLabel()
+	{
+		return AvatarLabel;
+	}
 
+	/**
+	 * 
+	 * @return UsernameFieldLabel variable
+	 */
+	public JLabel getUsernameFieldLabel()
+	{
+		return UsernameFieldLabel;
+	}
+	
+	/**
+	 * 
+	 * @return jLabel1 variable
+	 */
+	public JLabel getjLabel1()
+	{
+		return jLabel1;
+	}
+	
+	/**
+	 * 
+	 * @return jPanel1 variable
+	 */
+	public JPanel getjPanel1()
+	{
+		return jPanel1;
+	}
+	
+	/**
+	 * 
+	 * @return jPanel2 variable
+	 */
+	public JPanel getjPanel2()
+	{
+		return jPanel2;
+	}
+	
 	/**
 	 * 
 	 * @return A stringList with the names of the avatarImages
@@ -144,49 +204,17 @@ public class SignUpFormView extends javax.swing.JFrame implements Observer
 	}
 
 	private void initComponents() {
-		jPanel2 = new javax.swing.JPanel();
-		NickNameLabel = new javax.swing.JLabel();
-		AvatarLabel = new javax.swing.JLabel();
-		AvatarImageLabel = new javax.swing.JLabel();
-		UsernameFieldLabel = new javax.swing.JLabel();
-		txtUser = new javax.swing.JTextField();
-		PreviousButton = new javax.swing.JButton();
-		NextButton = new javax.swing.JButton();
-		SignUpButton = new javax.swing.JButton();
-		jPanel1 = new javax.swing.JPanel();
-		jLabel1 = new javax.swing.JLabel();
-
-		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-		setTitle("Registration Form");
-		setBackground(new java.awt.Color(255, 255, 255));
-		setBounds(new java.awt.Rectangle(400, 400, 400, 400));
-		setMinimumSize(new java.awt.Dimension(400, 400));
-		setResizable(false);
-
-		jPanel2.setBackground(new java.awt.Color(255, 255, 255));
-		jPanel2.setPreferredSize(new java.awt.Dimension(400, 300));
-
-		NickNameLabel.setFont(new java.awt.Font("Segoe UI", 0, 18));
-		NickNameLabel.setText("NickName:");
-
-		AvatarLabel.setFont(new java.awt.Font("Segoe UI", 0, 18));
-		AvatarLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-		AvatarLabel.setText("Avatar:");
-
-		AvatarImageLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource(".\\reources\\Avatars\\default.png")));
-		UsernameFieldLabel.setBackground(new java.awt.Color(255, 255, 255));
-		UsernameFieldLabel.setText("______________________________________________");
-		UsernameFieldLabel.setRequestFocusEnabled(false);
-
-		txtUser.setFont(txtUser.getFont().deriveFont(txtUser.getFont().getSize() + 2f));
-		txtUser.setBorder(null);
-
-		PreviousButton.setText("Previous");
-
-		NextButton.setText("Next");
-
-		SignUpButton.setText("Sign Up");
-		SignUpButton.setBorder(null);
+		jPanel2 = new JPanel();
+		NickNameLabel = new JLabel();
+		AvatarLabel = new JLabel();
+		AvatarImageLabel = new JLabel();
+		UsernameFieldLabel = new JLabel();
+		txtUser = new JTextField();
+		PreviousButton = new JButton();
+		NextButton = new JButton();
+		SignUpButton = new JButton();
+		jPanel1 = new JPanel();
+		jLabel1 = new JLabel();
 
 		javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
 		jPanel2.setLayout(jPanel2Layout);
@@ -233,14 +261,8 @@ public class SignUpFormView extends javax.swing.JFrame implements Observer
 										.addGroup(jPanel2Layout.createSequentialGroup().addGap(70, 70, 70)
 												.addComponent(AvatarLabel)))
 								.addGap(33, 33, 33).addComponent(SignUpButton).addContainerGap(53, Short.MAX_VALUE)));
-		jPanel1.setBackground(new java.awt.Color(53, 101, 77));
-		jPanel1.setForeground(new java.awt.Color(255, 255, 255));
-		jPanel1.setPreferredSize(new java.awt.Dimension(400, 100));
-		jLabel1.setBackground(new java.awt.Color(53, 101, 77));
-		jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-		jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-		jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-		jLabel1.setText("Registration Form");
+
+
 		javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
 		jPanel1.setLayout(jPanel1Layout);
 		jPanel1Layout.setHorizontalGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -270,25 +292,24 @@ public class SignUpFormView extends javax.swing.JFrame implements Observer
 		pack();
 	}
 	
-	// Variables declaration - do not modify
-	private javax.swing.JLabel AvatarImageLabel;
-	private javax.swing.JLabel AvatarLabel;
-	private javax.swing.JButton NextButton;
-	private javax.swing.JLabel NickNameLabel;
-	private javax.swing.JButton PreviousButton;
-	private javax.swing.JButton SignUpButton;
-	private javax.swing.JLabel UsernameFieldLabel;
-	private javax.swing.JLabel jLabel1;
-	private javax.swing.JPanel jPanel1;
-	private javax.swing.JPanel jPanel2;
-	private javax.swing.JTextField txtUser;
+	private JLabel AvatarImageLabel;
+	private JLabel AvatarLabel;
+	private JButton NextButton;
+	private JLabel NickNameLabel;
+	private JButton PreviousButton;
+	private JButton SignUpButton;
+	private JLabel UsernameFieldLabel;
+	private JLabel jLabel1;
+	private JPanel jPanel1;
+	private JPanel jPanel2;
+	private JTextField txtUser;
 
 	@Override
 	public void update(Observable o, Object arg) 
 	{
 		if(arg.getClass().getName() == "java.lang.Integer");
-			this.setPos(((LoginModel) o).getPos());
+			this.setPos((Integer) arg);
 		if (arg.getClass().getName() == "model.User")
-			this.setUser(((LoginModel)o).getUser());
+			this.setUser((User) arg);
 	}	
 }
