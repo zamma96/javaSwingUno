@@ -79,12 +79,12 @@ public class PickColorFrame extends JFrame implements Observer
                               
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        redButton = new javax.swing.JButton();
-        greenButton = new javax.swing.JButton();
-        blueButton = new javax.swing.JButton();
-        yellowButton = new javax.swing.JButton();
+        jPanel1 = new JPanel();
+        jLabel1 = new JLabel();
+        redButton = new JButton();
+        greenButton = new JButton();
+        blueButton = new JButton();
+        yellowButton = new JButton();
         
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
