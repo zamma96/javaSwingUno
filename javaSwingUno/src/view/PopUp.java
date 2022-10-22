@@ -37,7 +37,18 @@ public class PopUp extends JFrame implements Observer
     private Card.Color declaredColor;
     
     
-    public PopUp(){}
+    /**
+     * 
+     * @param cardName
+     * @param game
+     * @param index
+     * @param cardButtons
+     * @param gameStage
+     * @param StockPileButton
+     * 
+     * Constructor, sets class fields to the params specified 
+     * 
+     */
     public PopUp(String cardName, Game game, int index, ArrayList<JButton> cardButtons, GameStage gameStage, JButton StockPileButton) 
     {
         initComponents();
@@ -48,42 +59,78 @@ public class PopUp extends JFrame implements Observer
         this.playerHand = game.getPlayerHand(game.getCurrentPlayer());
         this.choice = index;
         this.cardButtons = cardButtons;
+        //in teoria queste due righe circondate da commenti sono inutili, perché 
         Icon icon = new ImageIcon(".\\resources\\Images\\" + cardImage + ".png");
         CardLabel.setIcon(icon);
+        //CardLabel viene inizializzata da PopUpController.initView()
         this.gameStage = gameStage;
         this.StockPileButton = StockPileButton;
     }
-     
-    //forse tocca fare model anche di popUp
     
+    //forse StockPileButton non serve mantenerlo qua,
+    //bisognerebbe prendere (se serve) la variabile dal model
+    
+    /**
+     * 
+     * @return StockPileButton variable
+     */
     public JButton getStockPileButton()
     {
     	return StockPileButton;
     }
     
+    /**
+     * 
+     * @return UseCardButton variable
+     */
     public JButton getUseCardButton()
     {
     	return UseCardButton;
     }
     
+    /**
+     * 
+     * @return CancelButton variable
+     */
     public JButton getCancelButton()
     {
     	return CancelButton;
     }
     
+    /**
+     * 
+     * @return cardImage variable
+     */
     public String getCardImage() 
     {
     	return cardImage;
     }
     
+    /**
+     * 
+     * @return CardLabel variable
+     */
     public JLabel getCardLabel()
     {
     	return CardLabel;
     }
     
+    /**
+     * 
+     * @return choice variable
+     */
 	public int getChoice() 
 	{
 		return choice;
+	}
+	
+	/**
+	 * 
+	 * @return jPanel1 variable
+	 */
+	public JPanel getjPanel1()
+	{
+		return jPanel1;
 	}
     
     private void initComponents() 
@@ -93,24 +140,6 @@ public class PopUp extends JFrame implements Observer
         UseCardButton = new JButton();
         CardLabel = new JLabel();
 
-        jPanel1.setBackground(new Color(53,101,77));
-        
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setResizable(false);
-        setPreferredSize(new java.awt.Dimension(500, 500));
-
-        CancelButton.setFont(new java.awt.Font("Comic Sans MS", Font.BOLD, 18));
-        CancelButton.setText("Cancel");
-		CancelButton.setBackground(new Color(53,101,77));
-		CancelButton.setForeground(new Color(255, 145, 164));
-
-        UseCardButton.setFont(new java.awt.Font("Comic Sans MS", Font.BOLD, 18));
-        UseCardButton.setText("Use card");
-		UseCardButton.setBackground(new Color(53,101,77));
-		UseCardButton.setForeground(new Color(255, 145, 164));
-
-        CardLabel.setPreferredSize(new java.awt.Dimension(190, 300));
-        
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(

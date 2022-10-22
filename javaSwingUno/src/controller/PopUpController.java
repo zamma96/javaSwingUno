@@ -1,5 +1,8 @@
 package controller;
 
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.logging.Level;
@@ -7,7 +10,6 @@ import java.util.logging.Logger;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
-import javax.swing.JFrame;
 
 import model.Card;
 import model.Game;
@@ -23,6 +25,9 @@ public class PopUpController
 	private Game model;
 	private PopUp popUpView;
 	private GameStage view;
+	private static Font SMALL_GAME_FONT = new Font("Comic Sans MS", Font.BOLD, 18);
+	private static Color TABLE_GREEN = new Color(53, 101, 77);
+	private static Color SALMON_PINK = new Color(255, 145, 164);
 	
 	public PopUpController(Game game, GameStage gameStage, PopUp popUpView)
 	{
@@ -34,9 +39,25 @@ public class PopUpController
 	
 	public void initView()
 	{
+		popUpView.setPreferredSize(new Dimension(500, 500));
 		popUpView.setBounds(750, 40, 700, 800);
 		popUpView.setResizable(false);
-		popUpView.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		popUpView.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+		
+		popUpView.getjPanel1().setBackground(TABLE_GREEN);
+		
+		popUpView.getCancelButton().setFont(SMALL_GAME_FONT);
+		popUpView.getCancelButton().setText("Cancel");
+		popUpView.getCancelButton().setBackground(TABLE_GREEN);
+		popUpView.getCancelButton().setForeground(SALMON_PINK);
+		
+		popUpView.getUseCardButton().setFont(SMALL_GAME_FONT);
+		popUpView.getUseCardButton().setText("Use card");
+		popUpView.getUseCardButton().setBackground(TABLE_GREEN);
+		popUpView.getUseCardButton().setForeground(SALMON_PINK);
+		
+		popUpView.getCardLabel().setPreferredSize(new Dimension(190, 300));
+		
 		Icon icon = new ImageIcon(".\\resources\\Images\\" + popUpView.getCardImage() + ".png");
         popUpView.getCardLabel().setIcon(icon);
         popUpView.setVisible(true);

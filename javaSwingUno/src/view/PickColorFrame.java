@@ -71,6 +71,11 @@ public class PickColorFrame extends JFrame implements Observer
     {
     	return blueButton;
     }
+    
+    public JPanel getjPanel1()
+    {
+    	return jPanel1;
+    }
                               
     private void initComponents() {
 
@@ -80,37 +85,7 @@ public class PickColorFrame extends JFrame implements Observer
         greenButton = new javax.swing.JButton();
         blueButton = new javax.swing.JButton();
         yellowButton = new javax.swing.JButton();
-
-        jPanel1.setBackground(new Color(53,101,77));
         
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setResizable(false);
-
-        jLabel1.setFont(new java.awt.Font("Comic Sans MS", Font.BOLD, 18)); // NOI18N
-        jLabel1.setForeground(new Color(255, 145, 164));
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Change color into:");
-
-        redButton.setFont(new java.awt.Font("Comic Sans MS", Font.BOLD, 18)); // NOI18N
-        redButton.setText("RED");
-        redButton.setBackground(new Color(53,101,77));
-		redButton.setForeground(new Color(255, 145, 164));
-
-        greenButton.setFont(new java.awt.Font("Comic Sans MS", Font.BOLD, 18)); // NOI18N
-        greenButton.setText("GREEN");
-        greenButton.setBackground(new Color(53,101,77));
-		greenButton.setForeground(new Color(255, 145, 164));
-
-        blueButton.setFont(new java.awt.Font("Comic Sans MS", Font.BOLD, 18)); // NOI18N
-        blueButton.setText("BLUE");
-        blueButton.setBackground(new Color(53,101,77));
-		blueButton.setForeground(new Color(255, 145, 164));
-
-        yellowButton.setFont(new java.awt.Font("Comic Sans MS", Font.BOLD, 18)); // NOI18N
-        yellowButton.setText("YELLOW");
-        yellowButton.setBackground(new Color(53,101,77));
-		yellowButton.setForeground(new Color(255, 145, 164));
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -159,15 +134,13 @@ public class PickColorFrame extends JFrame implements Observer
 
         pack();
     }                       
-
-    // Variables declaration - do not modify                     
+                  
     private javax.swing.JButton blueButton;
     private javax.swing.JButton greenButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton redButton;
     private javax.swing.JButton yellowButton;
-    // End of variables declaration                   
 
 	@Override
 	public void update(Observable o, Object arg) 

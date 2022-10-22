@@ -1,6 +1,7 @@
 package controller;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -9,7 +10,6 @@ import java.util.logging.Logger;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
@@ -27,6 +27,10 @@ public class GameController
 	private Game model;
 	private GameStage view;
 	private PopUp window;
+	private static Font BIG_GAME_FONT = new Font("Comic Sans MS", Font.BOLD, 48);
+	private static Font MID_GAME_FONT = new Font("Comic Sans MS", Font.BOLD, 36);
+	private static Color TABLE_GREEN = new Color(53, 101, 77);
+	private static Color SALMON_PINK = new Color(255, 145, 164);
 	
 	public GameController(Game game, GameStage gameStage)
 	{
@@ -38,17 +42,38 @@ public class GameController
 	public void setPlayerNames()
 	{
 		view.getPlayerIdName().setText(model.getPlayers()[0].getPlayerNickName() + "'s cards");
-		view.getPlayerIdName().setForeground(new Color(255, 145, 164));
+		view.getPlayerIdName().setForeground(SALMON_PINK);
 		view.getIaNameLabel1().setText(model.getPlayers()[1].getPlayerNickName());
-		view.getIaNameLabel1().setForeground(new Color(255, 145, 164));
+		view.getIaNameLabel1().setForeground(SALMON_PINK);
 		view.getIaNameLabel2().setText(model.getPlayers()[2].getPlayerNickName());
-		view.getIaNameLabel2().setForeground(new Color(255, 145, 164));
+		view.getIaNameLabel2().setForeground(SALMON_PINK);
 		view.getIaNameLabel3().setText(model.getPlayers()[3].getPlayerNickName());
-		view.getIaNameLabel3().setForeground(new Color(255, 145, 164));
+		view.getIaNameLabel3().setForeground(SALMON_PINK);
 	}
 	
 	public void initView()
 	{
+		view.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+		view.setTitle("UNO");
+		view.setResizable(false);
+		
+		view.getjPanel1().setToolTipText("");
+		view.getjPanel1().setBackground(TABLE_GREEN);
+		view.setPreferredSize(new Dimension(1200, 720));
+		
+		view.getDrawCardButton().setFont(MID_GAME_FONT);
+		view.getDrawCardButton().setForeground(SALMON_PINK);
+		view.getDrawCardButton().setBackground(TABLE_GREEN);
+		view.getDrawCardButton().setText("Draw Card");
+		
+		view.getDeckPileButton().setPreferredSize(new Dimension(100, 70));
+		view.getStockPileButton().setPreferredSize(new Dimension(100, 70));
+		
+		view.getPlayerIdName().setFont(BIG_GAME_FONT);
+		view.getIaNameLabel1().setFont(BIG_GAME_FONT);
+		view.getIaNameLabel2().setFont(BIG_GAME_FONT);
+		view.getIaNameLabel3().setFont(BIG_GAME_FONT);
+		
 		Icon icon = new ImageIcon(".\\resources\\UnoCards\\CARD_BACK.png");
 		Icon iconS = new ImageIcon(".\\resources\\UnoCards\\" + model.getTopCardImage());
 		view.getStockPileButton().setIcon(iconS);
@@ -186,7 +211,10 @@ public class GameController
 		});
 	}
 	
-	//da rivedere assolutamente, ho solo tolto i main error
+	//dovrebbe andare bene, quando si tocca un bottone della carta
+	//si apre il popUp relativo alla carta, che controllerà il tipo di carta
+	//e in caso proporrà un popUp di scelta colore.
+	//il popup verrà chiuso con il click del bottone SubmitCard
 	private void jButton1ActionPerformed(ActionEvent evt) 
 	{
 		if (model.getCardIds().get(0) != null) 
@@ -412,9 +440,9 @@ public class GameController
 	private void drawCardMessage()
 	{
 		JLabel message = new JLabel(model.getCurrentPlayer().getPlayerNickName() + " drew a card" );
-		message.setFont(new Font("Comic Sans MS", Font.BOLD, 48));
-		message.setBackground(new Color(53, 101, 77));
-		message.setForeground(new Color(255, 145, 164));
+		message.setFont(MID_GAME_FONT);
+		message.setBackground(TABLE_GREEN);
+		message.setForeground(SALMON_PINK);
 		JOptionPane.showMessageDialog(null, message);
 	}
 }

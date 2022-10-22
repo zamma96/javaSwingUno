@@ -20,6 +20,10 @@ public class PickColorController
 	private Game game;
 	private PopUp popUp;
 	private PickColorFrame view;
+	private static Font BIG_GAME_FONT = new Font("Comic Sans MS", Font.BOLD, 48);
+	private static Font SMALL_GAME_FONT = new Font("Comic Sans MS", Font.BOLD, 18);
+	private static Color TABLE_GREEN = new Color(53, 101, 77);
+	private static Color SALMON_PINK = new Color(255, 145, 164);
 	
 	public PickColorController(Game game, PopUp popUpView, PickColorFrame view)
 	{
@@ -37,11 +41,36 @@ public class PickColorController
 	
 	public void initView()
 	{
+		view.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+		view.setResizable(false);
+		
 		view.getjLabel1().setText("Change color into:");
+		view.getjLabel1().setFont(SMALL_GAME_FONT);
+		view.getjLabel1().setForeground(SALMON_PINK);
+		view.getjLabel1().setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+		
+		view.getjPanel1().setBackground(TABLE_GREEN);
+		
 		view.getRedButton().setText("RED");
+		view.getRedButton().setFont(SMALL_GAME_FONT);
+		view.getRedButton().setBackground(TABLE_GREEN);
+		view.getRedButton().setForeground(SALMON_PINK);
+		
 		view.getGreenButton().setText("GREEN");
+		view.getGreenButton().setFont(SMALL_GAME_FONT);
+		view.getGreenButton().setBackground(TABLE_GREEN);
+		view.getGreenButton().setForeground(SALMON_PINK);
+		
 		view.getBlueButton().setText("BLUE");
+		view.getBlueButton().setFont(SMALL_GAME_FONT);
+		view.getBlueButton().setBackground(TABLE_GREEN);
+		view.getBlueButton().setForeground(SALMON_PINK);
+		
 		view.getYellowButton().setText("YELLOW");
+		view.getYellowButton().setFont(SMALL_GAME_FONT);
+		view.getYellowButton().setBackground(TABLE_GREEN);
+		view.getYellowButton().setForeground(SALMON_PINK);
+		
 		view.setVisible(true);
 	}
 	
@@ -154,9 +183,9 @@ public class PickColorController
 	public void showMessage(String s)
 	{
 		JLabel message = new JLabel("The color changed into " + s);
-		message.setFont(new Font("Comic Sans MS", Font.BOLD, 48));
-		message.setBackground(new Color(53, 101, 77));
-		message.setForeground(new Color(255, 145, 164));
+		message.setFont(BIG_GAME_FONT);
+		message.setBackground(TABLE_GREEN);
+		message.setForeground(SALMON_PINK);
 		JOptionPane.showMessageDialog(null, message);
 	}
 }

@@ -43,6 +43,10 @@ public class Game extends Observable
 	private int drawFourCount = 0;
 	private Icon stockPileIcon = new ImageIcon();
 	
+	private static Font BIG_GAME_FONT = new Font("Comic Sans MS", Font.BOLD, 48);
+	private static Color TABLE_GREEN = new Color(53, 101, 77);
+	private static Color SALMON_PINK = new Color(255, 145, 164);
+	
 	public Game(LoginModel loginModel)
 	{
 		this.loginModel = loginModel;
@@ -94,9 +98,9 @@ public class Game extends Observable
 	public void showInvalidPlayerMoveColorDialog(Card card) throws InvalidColorSubmissionException
 	{
 		JLabel message = new JLabel("Invalid player move, expected color: " + validColor + " but got color " + card.getColor());
-		message.setFont(new Font("Comic Sans MS", Font.BOLD, 48));
-		message.setBackground(new Color(53,101,77));
-		message.setForeground(new Color(255, 145, 164));
+		message.setFont(BIG_GAME_FONT);
+		message.setBackground(TABLE_GREEN);
+		message.setForeground(SALMON_PINK);
 		JOptionPane.showMessageDialog(null, message);
 		throw new InvalidColorSubmissionException(message, card.getColor(), validColor);
 	}
@@ -104,9 +108,9 @@ public class Game extends Observable
 	public void showInvalidPlayerMoveValueDialog(Card card) throws InvalidValueSubmissionException
 	{
 		JLabel message = new JLabel("Invalid player move, expected value: " + validValue +" but got value " + card.getValue());
-		message.setFont(new Font("Comic Sans MS", Font.BOLD, 48));
-		message.setBackground(new Color(53,101,77));
-		message.setForeground(new Color(255, 145, 164));
+		message.setFont(BIG_GAME_FONT);
+		message.setBackground(TABLE_GREEN);
+		message.setForeground(SALMON_PINK);
 		JOptionPane.showMessageDialog(null, message);
 		throw new InvalidValueSubmissionException(message, card.getValue() , validValue);	
 	}
@@ -114,9 +118,9 @@ public class Game extends Observable
 	public void showSkipDialog()
 	{
 		JLabel message = new JLabel(this.players[currentPlayer] + " was skipped!");
-		message.setFont(new Font("Comic Sans MS", Font.BOLD, 48));
-		message.setBackground(new Color(53,101,77));
-		message.setForeground(new Color(255, 145, 164));
+		message.setFont(BIG_GAME_FONT);
+		message.setBackground(TABLE_GREEN);
+		message.setForeground(SALMON_PINK);
 		JOptionPane.showMessageDialog(null, message);
 	}
 	
@@ -124,54 +128,54 @@ public class Game extends Observable
 	{
 
 		JLabel message = new JLabel(this.players[currentPlayer].toString() + " has changed the game direction!");
-		message.setFont(new Font("Comic Sans MS", Font.BOLD, 48));
-		message.setBackground(new Color(53,101,77));
-		message.setForeground(new Color(255, 145, 164));
+		message.setFont(BIG_GAME_FONT);
+		message.setBackground(TABLE_GREEN);
+		message.setForeground(SALMON_PINK);
 		JOptionPane.showMessageDialog(null, message);
 	}
 	
 	public void showDrawTwoDialog()
 	{
 		JLabel message = new JLabel(this.players[currentPlayer].toString() + " drew 2 cards!");
-		message.setBackground(new Color(53,101,77));
-		message.setForeground(new Color(255, 145, 164));
-		message.setFont(new Font("Comic Sans MS", Font.BOLD, 48));
+		message.setBackground(TABLE_GREEN);
+		message.setForeground(SALMON_PINK);
+		message.setFont(BIG_GAME_FONT);
 		JOptionPane.showMessageDialog(null, message);
 	}
 	
 	public void showAnsweredDrawTwoDialog(int i)
 	{
 		JLabel message = new JLabel(this.players[currentPlayer].toString() + " drew" + i*2 + " cards!");
-		message.setBackground(new Color(53,101,77));
-		message.setForeground(new Color(255, 145, 164));
-		message.setFont(new Font("Comic Sans MS", Font.BOLD, 48));
+		message.setBackground(TABLE_GREEN);
+		message.setForeground(SALMON_PINK);
+		message.setFont(BIG_GAME_FONT);
 		JOptionPane.showMessageDialog(null, message);
 	}
 	
 	public void showDrawFourDialog()
 	{
 		JLabel message = new JLabel(this.players[currentPlayer].toString() + " drew 4 cards!");			
-		message.setBackground(new Color(53,101,77));
-		message.setForeground(new Color(255, 145, 164));
-		message.setFont(new Font("Comic Sans MS", Font.BOLD, 48));
+		message.setBackground(TABLE_GREEN);
+		message.setForeground(SALMON_PINK);
+		message.setFont(BIG_GAME_FONT);
 		JOptionPane.showMessageDialog(null, message);
 	}
 	
 	public void showAnsweredDrawFourDialog(int i)
 	{
 		JLabel message = new JLabel(this.players[currentPlayer].toString() + " drew" + i*4 + " cards!");			
-		message.setBackground(new Color(53,101,77));
-		message.setForeground(new Color(255, 145, 164));
-		message.setFont(new Font("Comic Sans MS", Font.BOLD, 48));
+		message.setBackground(TABLE_GREEN);
+		message.setForeground(SALMON_PINK);
+		message.setFont(BIG_GAME_FONT);
 		JOptionPane.showMessageDialog(null, message);
 	}
 	
 	public void showGameWonDialog()
 	{
 		JLabel message = new JLabel(this.players[currentPlayer] + " won the game!");
-		message.setFont(new Font("Comic Sans MS", Font.BOLD, 48));
-		message.setBackground(new Color(53,101,77));
-		message.setForeground(new Color(255, 145, 164));
+		message.setFont(BIG_GAME_FONT);
+		message.setBackground(TABLE_GREEN);
+		message.setForeground(SALMON_PINK);
 		JOptionPane.showMessageDialog(null, message);
 	}
 	

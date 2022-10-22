@@ -213,6 +213,11 @@ public class GameStage extends JFrame implements Observer
 		return jButton16;
 	}
 	
+	public JPanel getjPanel1()
+	{
+		return jPanel1;
+	}
+	
 	public JButton getDrawCardButton()
 	{
 		return drawCardButton;
@@ -242,60 +247,6 @@ public class GameStage extends JFrame implements Observer
 		drawCardButton = new JButton();
 		DeckPileButton = new JButton();
 		StockPileButton = new JButton();
-
-		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-		setTitle("UNO");
-		setResizable(false);
-
-		jPanel1.setToolTipText("");
-		jPanel1.setBackground(new Color(53, 101, 77));
-		jPanel1.setPreferredSize(new java.awt.Dimension(1280, 720));
-/*
-		jButton1.setBackground(new Color(53, 101, 77));
-
-		jButton2.setBackground(new Color(53, 101, 77));
-
-		jButton3.setBackground(new Color(53, 101, 77));
-
-		jButton4.setBackground(new Color(53, 101, 77));
-
-		jButton5.setBackground(new Color(53, 101, 77));
-	
-		jButton6.setBackground(new Color(53, 101, 77));
-
-		jButton7.setBackground(new Color(53, 101, 77));
-
-		jButton8.setBackground(new Color(53, 101, 77));
-
-		jButton9.setBackground(new Color(53, 101, 77));
-
-		jButton10.setBackground(new Color(53, 101, 77));
-
-		jButton11.setBackground(new Color(53, 101, 77));
-
-		jButton12.setBackground(new Color(53, 101, 77));
-
-		jButton13.setBackground(new Color(53, 101, 77));
-
-		jButton14.setBackground(new Color(53, 101, 77));
-
-		jButton15.setBackground(new Color(53, 101, 77));
-
-		jButton16.setBackground(new Color(53, 101, 77));
-*/
-		playerIdNameLabel.setFont(new Font("Comic Sans MS", Font.BOLD, 48));
-		iaNameLabel1.setFont(new Font("Comic Sans MS", Font.BOLD, 48));
-		iaNameLabel2.setFont(new Font("Comic Sans MS", Font.BOLD, 48));
-		iaNameLabel3.setFont(new Font("Comic Sans MS", Font.BOLD, 48));
-
-		drawCardButton.setFont(new java.awt.Font("Comic Sans MS", Font.BOLD, 36));
-		drawCardButton.setForeground(new Color(255, 145, 164));
-		drawCardButton.setBackground(new Color(53, 101, 77));
-		drawCardButton.setText("draw card");
-
-		DeckPileButton.setPreferredSize(new java.awt.Dimension(100, 70));
-
-		StockPileButton.setPreferredSize(new java.awt.Dimension(100, 70));
 
 		javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
 		jPanel1.setLayout(jPanel1Layout);
