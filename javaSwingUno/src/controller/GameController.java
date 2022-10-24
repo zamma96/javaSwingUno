@@ -445,4 +445,14 @@ public class GameController
 		message.setForeground(SALMON_PINK);
 		JOptionPane.showMessageDialog(null, message);
 	}
+
+	private void saveOnFile(java.io.File file) throws java.io.IOException
+	{
+		model.getDataBase().saveOnFile(file);
+	}
+	
+	private void loadByFile(java.io.File file) throws java.io.IOException 
+	{
+		model.getDataBase().loadByFile(file);
+	}
 }

@@ -17,6 +17,7 @@ import javax.swing.JOptionPane;
 
 import model.LoginModel;
 import model.User;
+import model.UserData;
 import view.SignUpFormView;
 import view.UserHomeView;
 
@@ -137,11 +138,13 @@ public class SignUpFormController
 			JOptionPane.showMessageDialog(null, "You need a Nickname!"); 
 		else 
 		{
-			model.setUser(new User(nickName, model.getPos()));
-			view.update(model, model.getUser());
-			view.update(model, model.getPos());
+			model.setUser(new User(nickName));
+			model.setPos(0);
+			model.getDataBase().addUserData(new UserData(model.getUser(), model.getPos(), 0, 0, 0));
 			welcomeMessage();
+			//riga sotto da spostare a inizio partita
 			model.saveUserData();
+			//riga sopra da spostare a inizio partita
 			UserHomeView newView = new	UserHomeView(model);
 			model.observationRoutine(newView, view);
 			UserHomeController controller = new UserHomeController(model, newView);

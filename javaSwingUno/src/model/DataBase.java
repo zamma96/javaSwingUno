@@ -12,12 +12,103 @@ import java.util.List;
 
 public class DataBase 
 {
-	private ArrayList<User> users;
-	private ArrayList<Integer> positions;
-	private ArrayList<Integer> gamesWon;
-	private ArrayList<Integer> gamesLoss;
-	private ArrayList<Integer> gamesPlayed;
+	private ArrayList<UserData> userData;
+
+	public DataBase()
+	{
+		userData = new ArrayList<UserData>();
+	}
+	 
+	public void addUserData(UserData ud)
+	{
+		userData.add(ud);
+	}
 	
+	public ArrayList<UserData> getUserData()
+	{
+		return userData;
+	}
+	
+	public UserData getSpecUserData(User user)
+	{
+		for (UserData userD : this.userData)
+			if (userD.getUser().equals(user))
+				return userD;
+		return null;
+	}
+	
+	public User getUser(User user) 
+	{
+		for (UserData u : userData)
+		{
+			if(u.getUser() == user)
+				return user;
+		}
+		return null;
+	}
+	
+	public void setUserData(UserData ud)
+	{
+		Integer temp = userData.indexOf(ud);
+		for (UserData userD : this.userData)
+		{
+			if (userD.getUser().equals(ud.getUser()))
+			{
+				userData.remove(temp);
+				userData.add(temp, ud);
+			}
+			else
+				userData.add(ud);
+				
+		}
+				
+	}
+	
+	public Integer getPos(User user)
+	{
+		for (UserData u : userData)
+		{
+			if (u.getUser() == user)
+			{
+				return u.getPosition();
+			}
+		}
+		return -1;
+	}
+	
+	public void saveOnFile(File file) throws IOException
+	{
+		FileOutputStream fos = new FileOutputStream(file);
+		ObjectOutputStream oos = new ObjectOutputStream(fos);
+		
+		UserData[] userDataArray = userData.toArray(new UserData[userData.size()]);
+		
+		oos.writeObject(userDataArray);
+		
+		oos.close();
+		fos.close();
+	}
+	
+	public void loadByFile(File file) throws IOException
+	{
+		FileInputStream fis = new FileInputStream(file);
+		ObjectInputStream ois = new ObjectInputStream(fis);
+		
+		try
+		{
+			UserData[] loadedUserData = (UserData[]) ois.readObject();
+			userData.clear();
+			userData.addAll(Arrays.asList(loadedUserData));
+		}
+		catch (ClassNotFoundException e)
+		{
+			e.printStackTrace();
+		}
+		
+		ois.close();
+		fis.close();
+	}
+/*
 	public DataBase(File userData, File posData, File gamesWonData, File gamesLossData, File gamesPlayedData) throws IOException
 	{
 		loadByFile(userData, posData, gamesWonData, gamesLossData, gamesPlayedData);
@@ -173,4 +264,5 @@ public class DataBase
 		fis1.close();
 		fis2.close();
 	}
+*/
 }

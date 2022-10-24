@@ -17,16 +17,16 @@ public class LoginModel extends Observable
 	private String nickName;
 	private User user;
 	private DataBase dataBase;
-	private File userDataFile = new File(".\\resources\\UserData");
-	private File posDataFile = new File(".\\resources\\PosData");
-	private File gamesWonDataFile = new File(".\\resources\\GamesWonData");
-	private File gamesLossDataFile = new File(".\\resources\\GamesLossData");
-	private File gamesPlayedDataFile = new File(".\\resources\\GamesPlayedData");
-	private GamesPlayed games;
+	private File userDataFile = new File("C:\\Users\\matte\\git\\javaSwingUno\\javaSwingUno\\resources\\UserData\\");
+	private File posDataFile = new File("C:\\Users\\matte\\git\\javaSwingUno\\javaSwingUno\\resources\\PosData\\");
+	private File gamesWonDataFile = new File("C:\\Users\\matte\\git\\javaSwingUno\\javaSwingUno\\resources\\GamesWonData\\");
+	private File gamesLossDataFile = new File("C:\\Users\\matte\\git\\javaSwingUno\\javaSwingUno\\resources\\GamesLossData\\");
+	private File gamesPlayedDataFile = new File("C:\\Users\\matte\\git\\javaSwingUno\\javaSwingUno\\resources\\GamesPlayedData\\");
 	
 	public LoginModel()	throws IOException
 	{
-		this.dataBase = new DataBase(userDataFile, posDataFile, gamesWonDataFile, gamesLossDataFile, gamesPlayedDataFile);
+		this.dataBase = new DataBase();
+		//this.dataBase = new DataBase(userDataFile, posDataFile, gamesWonDataFile, gamesLossDataFile, gamesPlayedDataFile);
 	}
 	
 	/**
@@ -89,24 +89,18 @@ public class LoginModel extends Observable
 		notifyObservers(nickName);
 	}
 	
-	public void setGamesInfo()
-	{
-		games.addGameWin(user);
-		games.addGamePlayed(user);
-	}
-	
 	
 	/**
-	 * method that saves user info (User user, Integer pos) on file
+	 * method that saves user info (User user, Integer pos, Integer gamesWon, Integer gamesLoss, Integer gamesPlayed) on file
 	 */
 	public void saveUserData()
 	{
-				
-		dataBase.addUser(user);
-		dataBase.addPos(user, pos);
+		UserData ud = new UserData(user, pos, user.getGamesWon(), user.getGamesLoss(), user.getGamesPlayed());
+		for (UserData userData : dataBase.getUserData())
+			dataBase.setUserData(ud);
 		try 
 		{
-			dataBase.saveOnFile(userDataFile, posDataFile, gamesWonDataFile, gamesLossDataFile, gamesPlayedDataFile);
+			dataBase.saveOnFile(userDataFile);
 		} 
 		catch (IOException e) 
 		{

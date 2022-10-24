@@ -8,17 +8,28 @@ public class User
 {
 
 	private String nickName;
-	private Avatar avatar;
-	private GamesPlayed gamesPlayed;
-	private int level;
-	
-	//when building the user, the first int index has to be selected from 1 to 9 to select an avatar
-	public User(String nickName, int index)
+	private Integer level;
+	private Integer gamesWon;
+	private Integer gamesLoss;
+	private Integer gamesPlayed;
+	private boolean maxLevel;
+
+	public User(String nickName, Integer gamesWon, Integer gamesLoss, Integer gamesPlayed)
 	{
 		this.setNickName(nickName);
-		this.avatar = new Avatar(index);
-		this.gamesPlayed = new GamesPlayed(this);
 		this.setLevel(1);
+		this.gamesWon = gamesWon;
+		this.gamesLoss = gamesLoss;
+		this.gamesPlayed = gamesPlayed;
+	}
+	
+	public User(String nickName)
+	{
+		this.setNickName(nickName);
+		this.setLevel(1);
+		this.gamesWon = 0;
+		this.gamesLoss = 0;
+		this.gamesPlayed = 0;
 	}
 
 	public String getNickName() 
@@ -31,34 +42,19 @@ public class User
 		this.nickName = nickName;
 	}
 
-	public Avatar getAvatar() 
-	{
-		return this.avatar;
-	}
-	
-	public String getAvatarInfo()
-	{
-		return this.avatar.toString();
-	}
-
-	public void setAvatar(int index) 
-	{
-		this.avatar = new Avatar(index);
-	}
-
 	public int getGamesPlayed() 
 	{
-		return gamesPlayed.getGamesPlayed(this);
+		return gamesPlayed;
 	}
 	
 	public int getGamesWon()
 	{
-		return gamesPlayed.getGamesWon(this);
+		return gamesWon;
 	}
 	
 	public int getGamesLoss()
 	{
-		return gamesPlayed.getGamesLoss(this);
+		return gamesLoss;
 	}
 
 	public int getLevel() 
@@ -74,29 +70,29 @@ public class User
 	public void maxLevelReward()
 	{
 		if (this.level == 10);
-			this.avatar = avatar.getMaxLevelAvatar();
+			this.maxLevel = true;
 	}
 	
 	public void levelUp()
 	{
 		switch(level) {
-		case 1: if(gamesPlayed.getGamesPlayed(this) == 2)
+		case 1: if(gamesPlayed == 2)
 			level++;
-		case 2: if(gamesPlayed.getGamesPlayed(this) == 4)
+		case 2: if(gamesPlayed == 4)
 			level++;
-		case 3: if(gamesPlayed.getGamesPlayed(this) == 6)
+		case 3: if(gamesPlayed == 6)
 			level++;
-		case 4: if(gamesPlayed.getGamesPlayed(this) == 9)
+		case 4: if(gamesPlayed == 9)
 			level++;
-		case 5: if(gamesPlayed.getGamesPlayed(this) == 12)
+		case 5: if(gamesPlayed == 12)
 			level++;
-		case 6: if(gamesPlayed.getGamesPlayed(this) == 15)
+		case 6: if(gamesPlayed == 15)
 			level++;
-		case 7: if(gamesPlayed.getGamesPlayed(this) == 20)
+		case 7: if(gamesPlayed == 20)
 			level++;
-		case 8: if(gamesPlayed.getGamesPlayed(this) == 25)
+		case 8: if(gamesPlayed == 25)
 			level++;
-		case 9: if(gamesPlayed.getGamesPlayed(this) == 30)
+		case 9: if(gamesPlayed == 30)
 			level++;
 		
 		}

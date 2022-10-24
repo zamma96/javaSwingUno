@@ -153,9 +153,9 @@ public class LoginMenuController
     	}
     	else 
     	{ 
-    		if (model.getDataBase().getUser(view.getTxtUser())!= null)
+    		if (model.getDataBase().getUser(model.getUser())!= null)
     		{
-    			User user = model.getDataBase().getUser(view.getTxtUser());
+    			User user = model.getDataBase().getUser(model.getUser());
     			model.setUser(user);
     			model.setPos(model.getDataBase().getPos(user));
     			model.setNickname(user.getNickName());

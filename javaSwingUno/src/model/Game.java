@@ -474,10 +474,10 @@ public class Game extends Observable
 			showGameWonDialog();
 			if (getHumanPlayer() == players[currentPlayer])
 			
-				loginModel.getDataBase().addGameWon(user);
+				loginModel.getDataBase().setUserData(new UserData(user, loginModel.getPos(), user.getGamesWon()+1, user.getGamesLoss(), user.getGamesPlayed()+1));
 			else
-				loginModel.getDataBase().addGameLoss(user);
-				//comandi qua sopra inutili, da rivedere classe GamesPlayed e vedere se esiste una soluzione migliore per salvare i risultati della partita.
+				loginModel.getDataBase().setUserData(new UserData(user, loginModel.getPos(), user.getGamesWon(), user.getGamesLoss()+1, user.getGamesPlayed()+1));
+				//da rivedere se questi comandi portano a quello che voglio io.
 			UserHomeView newView = new UserHomeView(loginModel);
 			UserHomeController newController = new UserHomeController(loginModel, newView);
 			newController.initController();

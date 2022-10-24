@@ -168,9 +168,9 @@ public class UserHomeController
 	
 	public void setHistory()
 	{
-		view.getGamesPlayedLabel().setText("W: " + model.getDataBase().getGamesPlayed(model.getUser()));
-		view.getGamesLossLabel().setText("W: " + model.getDataBase().getGamesLoss(model.getUser()));
-		view.getGamesWonLabel().setText("W: " + model.getDataBase().getGamesWon(model.getUser()));
+		view.getGamesPlayedLabel().setText("W: " + model.getDataBase().getSpecUserData(model.getUser()).getGamesPlayed());
+		view.getGamesLossLabel().setText("L: " + model.getDataBase().getSpecUserData(model.getUser()).getGamesLoss());
+		view.getGamesWonLabel().setText("P: " + model.getDataBase().getSpecUserData(model.getUser()).getGamesWon());
 	}
 
 }

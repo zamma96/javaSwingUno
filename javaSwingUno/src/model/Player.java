@@ -32,10 +32,6 @@ public class Player
 		return this.nickName;
 	}
 	
-	//bisogna rivedere nel Game il metodo che mostra le carte al giocatore, se è umano le mostra altrimenti
-	//mostra il retro delle carte mentre si applica un leggero delay per simulare la scelta della carta;
-	//
-	
 	public String getPlayerNickName()
 	{
 		return this.nickName;
