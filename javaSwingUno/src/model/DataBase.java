@@ -32,7 +32,7 @@ public class DataBase
 	public UserData getSpecUserData(User user)
 	{
 		for (UserData userD : this.userData)
-			if (userD.getUser().equals(user))
+			if (userD.getUser().getNickName().equals(user.getNickName()))
 				return userD;
 		return null;
 	}
@@ -52,7 +52,7 @@ public class DataBase
 		Integer temp = userData.indexOf(ud);
 		for (UserData userD : this.userData)
 		{
-			if (userD.getUser().equals(ud.getUser()))
+			if (userD.getUser().getNickName().equals(ud.getUser().getNickName()))
 			{
 				userData.remove(temp);
 				userData.add(temp, ud);
