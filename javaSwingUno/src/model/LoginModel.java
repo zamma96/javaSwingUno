@@ -66,6 +66,8 @@ public class LoginModel extends Observable
 	 */
 	public void setPos(Integer pos) 
 	{
+		if (pos == -1)
+			pos = 0;
 		this.pos =(Integer) pos;
 		setChanged();
 		notifyObservers(pos);

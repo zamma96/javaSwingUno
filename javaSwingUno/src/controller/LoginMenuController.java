@@ -8,16 +8,13 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
-import java.util.Observer;
 
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import model.LoginModel;
 import model.User;
-import view.GameStage;
 import view.LoginMenuView;
 import view.SignUpFormView;
 import view.UserHomeView;
@@ -28,7 +25,6 @@ public class LoginMenuController
 	private LoginModel model;
 	static private Color WHITE = new Color(255,255,255);
 	static private Color TABLE_GREEN = new Color(53, 101, 77);
-	static private Color SALMON_PINK = new Color(255, 145, 164);
 	static private Font UiFont = new Font("Segoe UI", 0, 32);
 	
 
@@ -36,7 +32,6 @@ public class LoginMenuController
 	{
 		this.view = view;
 		this.model = model;
-		model.addObserver(view);
 		initView();
 	}
 	
@@ -44,7 +39,7 @@ public class LoginMenuController
 	{
 		view.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 		view.setMinimumSize(new Dimension(655, 386));
-		view.setResizable(false);
+		//view.setResizable(false);
 		
 		view.getjPanel1().setBackground(WHITE);
 		view.getjPanel2().setBackground(TABLE_GREEN);
@@ -134,12 +129,17 @@ public class LoginMenuController
     {
     	for (double i = 0.0; i <= 1.0; i+= 0.1) 
     	{
-    		String val = i + ""; float f =Float.valueOf(val);
+    		String val = i + "";
+    		float f = Float.valueOf(val);
     		view.setOpacity(f); 
     		try 
-    		{Thread.sleep(50);}
+    		{
+    			Thread.sleep(50);
+    		}
     		catch(Exception e) 
-    		{e.printStackTrace();} 
+    		{
+    			e.printStackTrace();
+    		} 
     	}
     }
     
@@ -153,14 +153,12 @@ public class LoginMenuController
     	}
     	else 
     	{ 
-    		if (model.getDataBase().getUser(model.getUser())!= null)
+    		if (model.getDataBase().getMatch(view.getTxtUser())) 
     		{
-    			User user = model.getDataBase().getUser(model.getUser());
+    			User user = model.getDataBase().getUserFromNickName(view.getTxtUser());
     			model.setUser(user);
     			model.setPos(model.getDataBase().getPos(user));
     			model.setNickname(user.getNickName());
-    			view.update(model, model.getNickName());
-    			view.update(model, model.getPos());
     			UserHomeView newView = new UserHomeView(model);
     			model.observationRoutine(newView, view);
     			UserHomeController controller = new UserHomeController(model, newView);

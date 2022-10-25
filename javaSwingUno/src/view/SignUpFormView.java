@@ -195,6 +195,11 @@ public class SignUpFormView extends javax.swing.JFrame implements Observer
 		return imageList;
 	}
 
+	/**
+	 * 
+	 * @param index to set the AvatarImageLabel to the right Icon
+	 * got by index.
+	 */
 	public void showImage(Integer index) 
 	{
 		String[] imagesList = getImages();

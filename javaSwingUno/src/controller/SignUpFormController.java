@@ -118,7 +118,6 @@ public class SignUpFormController
 		model.setPos(model.getPos()-1);
 		if(model.getPos() < 0)
 			model.setPos(view.getImages().length-1);
-		view.update(model, model.getPos());
 		view.showImage(model.getPos()); 
 	}
 
@@ -127,29 +126,30 @@ public class SignUpFormController
 		model.setPos(model.getPos()+1);
 		if (model.getPos()>= view.getImages().length)
 			model.setPos(0);
-		view.update(model, model.getPos());
 		view.showImage(model.getPos());
 	}
 
 	private void SignUpButtonActionPerformed(java.awt.event.ActionEvent evt) 
 	{
-		String nickName	= view.gettxtUser().getText().toString();
+		String nickName	= view.getTxtUser();
 		if (nickName == "")
 			JOptionPane.showMessageDialog(null, "You need a Nickname!"); 
 		else 
 		{
-			model.setUser(new User(nickName));
-			model.setPos(0);
-			model.getDataBase().addUserData(new UserData(model.getUser(), model.getPos(), 0, 0, 0));
-			welcomeMessage();
-			//riga sotto da spostare a inizio partita
-			model.saveUserData();
-			//riga sopra da spostare a inizio partita
-			UserHomeView newView = new	UserHomeView(model);
-			model.observationRoutine(newView, view);
-			UserHomeController controller = new UserHomeController(model, newView);
-			controller.initController();
-			this.view.dispose();
+			if (model.getDataBase().getMatch(nickName))
+				errorMessage();
+			else
+			{
+				model.setUser(new User(nickName));
+				model.setPos(0);
+				model.getDataBase().addUserData(new UserData(model.getUser(), model.getPos(), 0, 0, 0));
+				welcomeMessage();
+				UserHomeView newView = new	UserHomeView(model);
+				model.observationRoutine(newView, view);
+				UserHomeController controller = new UserHomeController(model, newView);
+				controller.initController();
+				this.view.dispose();
+			}
 		}
 		
 	}
@@ -176,6 +176,15 @@ public class SignUpFormController
 		String imageName = imageList[model.getPos()];
 		Icon icon = new ImageIcon(".\\resources\\Avatars"+imageName);
 		view.getAvatarImageLabel().setIcon(icon);
+	}
+	
+	public void errorMessage()
+	{
+		JLabel message = new JLabel("This user already exixts, please try another nickName");
+		message.setFont(new Font("Comic Sans MS", Font.BOLD, 48));
+		message.setBackground(TABLE_GREEN);
+		message.setForeground(SALMON_PINK);
+		JOptionPane.showMessageDialog(null, message);
 	}
 	
 }

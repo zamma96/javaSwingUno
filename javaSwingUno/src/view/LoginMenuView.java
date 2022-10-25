@@ -303,6 +303,7 @@ public class LoginMenuView extends javax.swing.JFrame implements Observer
 	@Override
 	public void update(Observable o, Object arg) 
 	{
-		this.setNickName((String) arg);
+		if (arg.getClass().getName().equals("java.lang.Integer"))
+			this.setNickName((String) arg);
 	}                
 }
