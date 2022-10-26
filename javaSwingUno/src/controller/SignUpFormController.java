@@ -28,7 +28,9 @@ public class SignUpFormController
 	static private Color WHITE = new Color(255,255,255);
 	static private Color TABLE_GREEN = new Color(53, 101, 77);
 	static private Color SALMON_PINK = new Color(255, 145, 164);
-	static private Font UiFont = new Font("Segoe UI", 0, 32);
+	static private Font BIG_UI_FONT = new Font("Segoe UI", 0, 24);
+	static private Font MID_UI_FONT = new Font("Segoe UI", 0, 18);
+	static private Font SMALL_UI_FONT = new Font("Segoe UI", 0, 12);
 	
 	public SignUpFormController(LoginModel loginModel, SignUpFormView view) throws IOException
 	{
@@ -53,12 +55,12 @@ public class SignUpFormController
 		view.setMinimumSize(new Dimension(400, 400));
 		view.setResizable(false);
 		
-		view.showImage(model.getPos());
+		showImage(model.getPos());
 		
-		view.getNickNameLabel().setFont(UiFont);
+		view.getNickNameLabel().setFont(MID_UI_FONT);
 		view.getNickNameLabel().setText("NickName: ");
 		
-		view.getAvatarLabel().setFont(UiFont);
+		view.getAvatarLabel().setFont(MID_UI_FONT);
 		view.getAvatarLabel().setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 		view.getAvatarLabel().setText("Avatar: ");
 		
@@ -66,16 +68,19 @@ public class SignUpFormController
 		view.getUsernameFieldLabel().setText("______________________________________________");
 		view.getUsernameFieldLabel().setRequestFocusEnabled(false);
 		
-		view.gettxtUser().setFont(UiFont);
+		view.gettxtUser().setFont(MID_UI_FONT);
 		view.gettxtUser().setBorder(null);
 		
 		view.getPreviousButton().setText("Previous");
+		view.getPreviousButton().setFont(SMALL_UI_FONT);
 		view.getNextButton().setText("Next");
+		view.getNextButton().setFont(SMALL_UI_FONT);
 		view.getSignUpButton().setText("Sign Up");
+		view.getSignUpButton().setFont(SMALL_UI_FONT);
 		view.getSignUpButton().setBorder(null);
 		
 		view.getjLabel1().setBackground(TABLE_GREEN);
-		view.getjLabel1().setFont(UiFont);
+		view.getjLabel1().setFont(BIG_UI_FONT);
 		view.getjLabel1().setForeground(WHITE);
 		view.getjLabel1().setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 		view.getjLabel1().setText("Registation Form");
@@ -118,7 +123,7 @@ public class SignUpFormController
 		model.setPos(model.getPos()-1);
 		if(model.getPos() < 0)
 			model.setPos(view.getImages().length-1);
-		view.showImage(model.getPos()); 
+		showImage(model.getPos()); 
 	}
 
 	private void NextButtonActionPerformed(java.awt.event.ActionEvent evt) 
@@ -126,13 +131,13 @@ public class SignUpFormController
 		model.setPos(model.getPos()+1);
 		if (model.getPos()>= view.getImages().length)
 			model.setPos(0);
-		view.showImage(model.getPos());
+		showImage(model.getPos());
 	}
 
 	private void SignUpButtonActionPerformed(java.awt.event.ActionEvent evt) 
 	{
 		String nickName	= view.getTxtUser();
-		if (nickName == "")
+		if (nickName.isEmpty())
 			JOptionPane.showMessageDialog(null, "You need a Nickname!"); 
 		else 
 		{
@@ -165,7 +170,7 @@ public class SignUpFormController
 	
 	public String[] getImages() 
 	{
-		File file = new File(getClass().getResource(".\\resources\\Avatars").getFile());
+		File file = new File((".\\resources\\Avatars"));
 		String[] imageList = file.list();
 		return imageList;
 	}
@@ -173,7 +178,7 @@ public class SignUpFormController
 	public void showImage(Integer index)
 	{
 		String[] imageList = getImages();
-		String imageName = imageList[model.getPos()];
+		String imageName = imageList[index];
 		Icon icon = new ImageIcon(".\\resources\\Avatars"+imageName);
 		view.getAvatarImageLabel().setIcon(icon);
 	}

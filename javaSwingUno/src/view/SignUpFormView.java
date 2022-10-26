@@ -23,6 +23,7 @@ public class SignUpFormView extends javax.swing.JFrame implements Observer
 {
 
 	private LoginModel model;
+	private String nickName;
 	private Integer pos;
 	private User user;
 
@@ -30,7 +31,7 @@ public class SignUpFormView extends javax.swing.JFrame implements Observer
 	{
 		initComponents();
 		this.model = loginModel;
-		model.setPos(0);		
+		//model.setPos(0);		
 	}
 
 	public JLabel getAvatarImageLabel()
@@ -190,7 +191,7 @@ public class SignUpFormView extends javax.swing.JFrame implements Observer
 	 */
 	public String[] getImages() 
 	{
-		File file = new File(getClass().getResource(".\\resources\\Avatars").getFile());
+		File file = new File(".\\resources\\Avatars");
 		String[] imageList = file.list();
 		return imageList;
 	}
@@ -295,6 +296,7 @@ public class SignUpFormView extends javax.swing.JFrame implements Observer
 						.addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE,
 								javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)));
 		pack();
+		setLocationRelativeTo(null);
 	}
 	
 	private JLabel AvatarImageLabel;
@@ -312,9 +314,11 @@ public class SignUpFormView extends javax.swing.JFrame implements Observer
 	@Override
 	public void update(Observable o, Object arg) 
 	{
-		if(arg.getClass().getName() == "java.lang.Integer");
+		if(arg.getClass().getName() == "java.lang.Integer")
 			this.setPos((Integer) arg);
 		if (arg.getClass().getName() == "model.User")
 			this.setUser((User) arg);
+		if(arg.getClass().getName() == "java.lang.String")
+			this.setName((String) arg);
 	}	
 }

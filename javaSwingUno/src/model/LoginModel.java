@@ -57,7 +57,12 @@ public class LoginModel extends Observable
 	 * return this instance's pos;
 	 * @return
 	 */
-	public Integer getPos()	{return pos;}
+	public Integer getPos()	
+	{
+		if (pos == null)
+			pos = 0;
+		return pos;
+	}
 	
 	/**
 	 * 

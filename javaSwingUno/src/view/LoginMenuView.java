@@ -24,6 +24,7 @@ public class LoginMenuView extends javax.swing.JFrame implements Observer
 {
 	private LoginModel loginModel;
 	private String nickName;
+	private Integer pos;
 
 	//constructor
     public LoginMenuView(LoginModel model) throws IOException 
@@ -98,6 +99,11 @@ public class LoginMenuView extends javax.swing.JFrame implements Observer
     public void setNickName(String nickName) 
     {
     	this.nickName = nickName;
+    }
+    
+    public void setPos(Integer pos)
+    {
+    	this.pos = pos;
     }
     
     /**
@@ -215,7 +221,6 @@ public class LoginMenuView extends javax.swing.JFrame implements Observer
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(83, 83, 83))
         );
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -275,7 +280,7 @@ public class LoginMenuView extends javax.swing.JFrame implements Observer
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -305,5 +310,8 @@ public class LoginMenuView extends javax.swing.JFrame implements Observer
 	{
 		if (arg.getClass().getName().equals("java.lang.Integer"))
 			this.setNickName((String) arg);
+		if (arg.getClass().getName().equals("java.lang.Integer"))
+			this.setPos((Integer)arg);
+			
 	}                
 }

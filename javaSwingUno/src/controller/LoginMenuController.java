@@ -25,7 +25,8 @@ public class LoginMenuController
 	private LoginModel model;
 	static private Color WHITE = new Color(255,255,255);
 	static private Color TABLE_GREEN = new Color(53, 101, 77);
-	static private Font UiFont = new Font("Segoe UI", 0, 32);
+	static private Font MID_UI_FONT = new Font("Segoe UI", 0, 32);
+	static private Font SMALL_UI_FONT = new Font("Segoe UI", 0, 14);
 	
 
 	public LoginMenuController(LoginModel model, LoginMenuView view)
@@ -38,29 +39,31 @@ public class LoginMenuController
 	public void initView()
 	{
 		view.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-		view.setMinimumSize(new Dimension(655, 386));
-		//view.setResizable(false);
+		view.setMinimumSize(new Dimension(660, 420));
+		view.setResizable(false);
 		
 		view.getjPanel1().setBackground(WHITE);
+		view.getjPanel1().setPreferredSize(new Dimension(310, 383));
 		view.getjPanel2().setBackground(TABLE_GREEN);
+		view.getjPanel2().setPreferredSize(new Dimension(350, 383));
 		
 		view.getjLabel2().setIcon(new ImageIcon(".\\resources\\LoginImg\\unoLogo.png"));
 		
-		view.getLoginLabel().setFont(UiFont);
+		view.getLoginLabel().setFont(MID_UI_FONT);
 		view.getLoginLabel().setForeground(WHITE);
 		view.getLoginLabel().setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 		view.getLoginLabel().setText("Login");        
         
-		view.getWelcomeLabel().setFont(UiFont);
+		view.getWelcomeLabel().setFont(SMALL_UI_FONT);
 		view.getWelcomeLabel().setForeground(WHITE);
 		view.getWelcomeLabel().setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 		view.getWelcomeLabel().setText("Welcome! Let's Play!");
 		
-		view.getUsernameLabel().setFont(UiFont);
+		view.getUsernameLabel().setFont(SMALL_UI_FONT);
 		view.getUsernameLabel().setForeground(WHITE);
 		view.getUsernameLabel().setText("Username: ");
 		
-		view.gettxtUser().setBackground(new Color(53,101, 77));
+		view.gettxtUser().setBackground(TABLE_GREEN);
 		view.gettxtUser().setFont((view.gettxtUser().getFont().deriveFont(view.gettxtUser().getFont().getSize()+2f)));
 		view.gettxtUser().setForeground(WHITE);
 		view.gettxtUser().setBorder(null);
@@ -71,11 +74,11 @@ public class LoginMenuController
 		view.getUserNameIconLabel().setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 		view.getUserNameIconLabel().setIcon(new ImageIcon(".\\resources\\LoginImg\\icons8_customer_20px_2.png"));
 		
-		view.getLoginButton().setFont(UiFont);
+		view.getLoginButton().setFont(SMALL_UI_FONT);
 		view.getLoginButton().setForeground(TABLE_GREEN);
 		view.getLoginButton().setText("LOGIN");
 		
-		view.getSignUpLabel().setFont(UiFont);
+		view.getSignUpLabel().setFont(SMALL_UI_FONT);
 		view.getSignUpLabel().setForeground(WHITE);
 		view.getSignUpLabel().setText("Don't have an account?");
 		
@@ -95,13 +98,6 @@ public class LoginMenuController
 	
 	public void loginMenuListeners(LoginMenuView view) 
 	{
-		view.addWindowListener(new WindowAdapter()
-		{
-			public void windowOpened(WindowEvent evt)
-			{
-				formWindowOpened(evt);
-			}
-		});
 		view.getLoginButton().addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent evt)
@@ -125,24 +121,6 @@ public class LoginMenuController
 		});
 	}
 	
-    private void formWindowOpened(java.awt.event.WindowEvent evt) 
-    {
-    	for (double i = 0.0; i <= 1.0; i+= 0.1) 
-    	{
-    		String val = i + "";
-    		float f = Float.valueOf(val);
-    		view.setOpacity(f); 
-    		try 
-    		{
-    			Thread.sleep(50);
-    		}
-    		catch(Exception e) 
-    		{
-    			e.printStackTrace();
-    		} 
-    	}
-    }
-    
     private void LoginButtonActionPerformed(java.awt.event.ActionEvent evt) 
     { 
     	if (view.getTxtUser().isEmpty()) 

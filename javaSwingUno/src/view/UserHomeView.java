@@ -279,6 +279,7 @@ public class UserHomeView extends JFrame implements Observer
         );
 
         pack();
+        setLocationRelativeTo(null);
 	}
 
 	private JLabel AvatarImageLabel;
