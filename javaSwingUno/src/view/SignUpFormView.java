@@ -21,17 +21,23 @@ import model.User;
  */
 public class SignUpFormView extends javax.swing.JFrame implements Observer
 {
-
+	
 	private LoginModel model;
 	private String nickName;
 	private Integer pos;
 	private User user;
+	private String[] imagesList = new String[] {"default.png", "Avatar_1.png", "Avatar_2.png", "Avatar_3.png", "Avatar_4.png", "Avatar_5.png", "Avatar_6.png", "Avatar_7.png", "Avatar_8.png", "Avatar_9.png"};
 
 	public SignUpFormView(LoginModel loginModel) throws IOException 
 	{
 		initComponents();
 		this.model = loginModel;
 		//model.setPos(0);		
+	}
+	
+	public String[] getImagesList()
+	{
+		return this.imagesList;
 	}
 
 	public JLabel getAvatarImageLabel()
@@ -185,16 +191,6 @@ public class SignUpFormView extends javax.swing.JFrame implements Observer
 		return jPanel2;
 	}
 	
-	/**
-	 * 
-	 * @return A stringList with the names of the avatarImages
-	 */
-	public String[] getImages() 
-	{
-		File file = new File(".\\resources\\Avatars");
-		String[] imageList = file.list();
-		return imageList;
-	}
 
 	/**
 	 * 
@@ -203,7 +199,6 @@ public class SignUpFormView extends javax.swing.JFrame implements Observer
 	 */
 	public void showImage(Integer index) 
 	{
-		String[] imagesList = getImages();
 		String imageName = imagesList[index];
 		Icon icon = new ImageIcon(".\\resources\\Avatars" + imageName);
 		AvatarImageLabel.setIcon(icon);
@@ -232,12 +227,16 @@ public class SignUpFormView extends javax.swing.JFrame implements Observer
 								.addComponent(AvatarLabel, javax.swing.GroupLayout.DEFAULT_SIZE,
 										javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 						.addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-								.addGroup(jPanel2Layout.createSequentialGroup().addGap(26, 26, 26)
-										.addComponent(AvatarImageLabel).addGap(37, 37, 37)
+								.addGroup(jPanel2Layout.createSequentialGroup()
+										.addGap(26, 26, 26)
+										.addComponent(AvatarImageLabel)
+										.addGap(37, 37, 37)
+										.addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+												.addComponent(PreviousButton)
+												.addComponent(NextButton)))
+								.addGroup(jPanel2Layout.createSequentialGroup()
+										.addGap(6, 6, 6)
 										.addGroup(jPanel2Layout
-												.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-												.addComponent(PreviousButton).addComponent(NextButton)))
-								.addGroup(jPanel2Layout.createSequentialGroup().addGap(6, 6, 6).addGroup(jPanel2Layout
 										.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 										.addComponent(txtUser, javax.swing.GroupLayout.PREFERRED_SIZE, 256,
 												javax.swing.GroupLayout.PREFERRED_SIZE)

@@ -122,14 +122,14 @@ public class SignUpFormController
 	{
 		model.setPos(model.getPos()-1);
 		if(model.getPos() < 0)
-			model.setPos(view.getImages().length-1);
+			model.setPos(view.getImagesList().length-1);
 		showImage(model.getPos()); 
 	}
 
 	private void NextButtonActionPerformed(java.awt.event.ActionEvent evt) 
 	{
 		model.setPos(model.getPos()+1);
-		if (model.getPos()>= view.getImages().length)
+		if (model.getPos()>= view.getImagesList().length)
 			model.setPos(0);
 		showImage(model.getPos());
 	}

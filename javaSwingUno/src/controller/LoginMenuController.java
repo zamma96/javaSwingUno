@@ -40,12 +40,13 @@ public class LoginMenuController
 	{
 		view.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 		view.setMinimumSize(new Dimension(660, 420));
+		view.setSize(new Dimension(640,420));
 		view.setResizable(false);
 		
 		view.getjPanel1().setBackground(WHITE);
-		view.getjPanel1().setPreferredSize(new Dimension(310, 383));
+		view.getjPanel1().setPreferredSize(new Dimension(305, 383));
 		view.getjPanel2().setBackground(TABLE_GREEN);
-		view.getjPanel2().setPreferredSize(new Dimension(350, 383));
+		view.getjPanel2().setPreferredSize(new Dimension(360, 383));
 		
 		view.getjLabel2().setIcon(new ImageIcon(".\\resources\\LoginImg\\unoLogo.png"));
 		
@@ -69,10 +70,7 @@ public class LoginMenuController
 		view.gettxtUser().setBorder(null);
 		
 		view.getUsernameFieldLabel().setForeground(WHITE);
-		view.getUsernameFieldLabel().setText("________________________________________________________");
-		
-		view.getUserNameIconLabel().setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-		view.getUserNameIconLabel().setIcon(new ImageIcon(".\\resources\\LoginImg\\icons8_customer_20px_2.png"));
+		view.getUsernameFieldLabel().setText("__________________________________________");
 		
 		view.getLoginButton().setFont(SMALL_UI_FONT);
 		view.getLoginButton().setForeground(TABLE_GREEN);
@@ -81,6 +79,7 @@ public class LoginMenuController
 		view.getSignUpLabel().setFont(SMALL_UI_FONT);
 		view.getSignUpLabel().setForeground(WHITE);
 		view.getSignUpLabel().setText("Don't have an account?");
+	
 		
 		view.getSignUpButton().setBackground(TABLE_GREEN);
 		view.getSignUpButton().setForeground(WHITE);
@@ -89,6 +88,7 @@ public class LoginMenuController
 		
 		view.getjLabel2().setIcon(new ImageIcon(".\\resources\\LoginImg\\unoLogo.png"));
 		view.setVisible(true);
+		
 	}
 	
 	public void initController()

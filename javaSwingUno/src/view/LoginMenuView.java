@@ -162,15 +162,6 @@ public class LoginMenuView extends javax.swing.JFrame implements Observer
     
     /**
      * 
-     * @return UserNameIconLabel variable
-     */
-    public JLabel getUserNameIconLabel()
-    {
-    	return UsernameIconLabel;
-    }
-    
-    /**
-     * 
      * @return jPanel1 variable
      */
     public JPanel getjPanel1()
@@ -200,7 +191,6 @@ public class LoginMenuView extends javax.swing.JFrame implements Observer
         UsernameLabel = new JLabel();
         txtUser = new JTextField();
         UsernameFieldLabel = new JLabel();
-        UsernameIconLabel = new JLabel();
         LoginButton = new JButton();
         SignUpLabel = new JLabel();
         SignUpButton = new JButton();
@@ -221,6 +211,9 @@ public class LoginMenuView extends javax.swing.JFrame implements Observer
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(83, 83, 83))
         );
+        
+        
+        
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -237,13 +230,11 @@ public class LoginMenuView extends javax.swing.JFrame implements Observer
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(UsernameFieldLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtUser, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(LoginButton, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(1, 1, 1)
-                        .addComponent(UsernameIconLabel))
+                            .addComponent(LoginButton, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(41, 41, 41)
                         .addComponent(SignUpLabel)
-                        .addGap(38, 38, 38)
+                        .addGap(50, 50, 50)
                         .addComponent(SignUpButton)))
                 .addGap(41, 41, 41))
         );
@@ -262,8 +253,7 @@ public class LoginMenuView extends javax.swing.JFrame implements Observer
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(10, 10, 10)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(UsernameFieldLabel)
-                            .addComponent(UsernameIconLabel))))
+                            .addComponent(UsernameFieldLabel))))
                 .addGap(28, 28, 28)
                 .addComponent(LoginButton, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(43, 43, 43)
@@ -297,7 +287,6 @@ public class LoginMenuView extends javax.swing.JFrame implements Observer
     private JButton SignUpButton;
     private JLabel SignUpLabel;
     private JLabel UsernameFieldLabel;
-    private JLabel UsernameIconLabel;
     private JLabel UsernameLabel;
     private JLabel WelcomeLabel;
     private JLabel jLabel2;
@@ -312,6 +301,5 @@ public class LoginMenuView extends javax.swing.JFrame implements Observer
 			this.setNickName((String) arg);
 		if (arg.getClass().getName().equals("java.lang.Integer"))
 			this.setPos((Integer)arg);
-			
 	}                
 }

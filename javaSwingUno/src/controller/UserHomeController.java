@@ -22,12 +22,18 @@ public class UserHomeController
 	static private Color WHITE = new Color(255,255,255);
 	static private Color TABLE_GREEN = new Color(53, 101, 77);
 	static private Font UiFont = new Font("Segoe UI", 0, 32);
+	private String[] imagesList = new String[] {"default.png", "Avatar_1.png", "Avatar_2.png", "Avatar_3.png", "Avatar_4.png", "Avatar_5.png", "Avatar_6.png", "Avatar_7.png", "Avatar_8.png", "Avatar_9.png"};
 
 	public UserHomeController(LoginModel loginModel, UserHomeView userHomeView)
 	{
 		this.view = userHomeView;
 		this.model = loginModel;
 		initView();
+	}
+	
+	public String[] getImagesList()
+	{
+		return this.imagesList;
 	}
 	
 	public void initView()
@@ -48,8 +54,7 @@ public class UserHomeController
 		view.getjLabel1().setForeground(WHITE);
 		view.getjLabel1().setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 		
-		String[] imageList = getImages();
-		String imageName = imageList[model.getPos()];
+		String imageName = imagesList[model.getPos()];
 		
 		view.getNickNameLabel().setFont(UiFont);
 		view.getNickNameLabel().setText("NickName:");
@@ -118,7 +123,7 @@ public class UserHomeController
 	private void NextButtonActionPerformed(java.awt.event.ActionEvent evt) 
 	{
 		model.setPos(model.getPos()+1);
-		if (model.getPos() >= getImages().length)
+		if (model.getPos() >= getImagesList().length)
 			model.setPos(0);
 		view.update(model, model.getPos());
 		showImage(model.getPos());
@@ -128,7 +133,7 @@ public class UserHomeController
 	{
 		model.setPos(model.getPos()-1);
 		if (model.getPos() < 0)
-			model.setPos(getImages().length-1);
+			model.setPos(getImagesList().length-1);
 		//riga sotto credo sia inutile l'update dovrebbe essere chiamato dal notifyObservers() del metodo setPos();
 		view.update(model, model.getPos());
 		showImage(model.getPos());  
@@ -151,17 +156,10 @@ public class UserHomeController
 		view.dispose();
 	}
 	
-	public String[] getImages() 
-	{
-		File file = new File(getClass().getResource(".\\resources\\Avatars").getFile());
-		String[] imageList = file.list();
-		return imageList;
-	}
 	
 	public void showImage(Integer index)
 	{
-		String[] imageList = getImages();
-		String imageName = imageList[model.getPos()];
+		String imageName = imagesList[model.getPos()];
 		Icon icon = new ImageIcon(".\\resources\\Avatars"+imageName);
 		view.getAvatarImageLabel().setIcon(icon);
 	}
