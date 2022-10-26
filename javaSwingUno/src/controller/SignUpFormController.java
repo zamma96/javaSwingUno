@@ -54,8 +54,7 @@ public class SignUpFormController
 		view.setBounds(new Rectangle(400, 400, 400, 400));
 		view.setMinimumSize(new Dimension(400, 400));
 		view.setResizable(false);
-		
-		showImage(model.getPos());
+		view.setLocationRelativeTo(null);
 		
 		view.getNickNameLabel().setFont(MID_UI_FONT);
 		view.getNickNameLabel().setText("NickName: ");
@@ -63,6 +62,8 @@ public class SignUpFormController
 		view.getAvatarLabel().setFont(MID_UI_FONT);
 		view.getAvatarLabel().setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 		view.getAvatarLabel().setText("Avatar: ");
+		
+		showImage(model.getPos());
 		
 		view.getUsernameFieldLabel().setBackground(WHITE);
 		view.getUsernameFieldLabel().setText("______________________________________________");
@@ -77,6 +78,7 @@ public class SignUpFormController
 		view.getNextButton().setFont(SMALL_UI_FONT);
 		view.getSignUpButton().setText("Sign Up");
 		view.getSignUpButton().setFont(SMALL_UI_FONT);
+		view.getSignUpButton().setBackground(WHITE);
 		view.getSignUpButton().setBorder(null);
 		
 		view.getjLabel1().setBackground(TABLE_GREEN);

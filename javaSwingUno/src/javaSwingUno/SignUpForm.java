@@ -14,27 +14,29 @@ import javax.swing.JOptionPane;
  *
  * @author matte
  */
-public class SignUpForm extends javax.swing.JFrame 
-{
+public class SignUpForm extends javax.swing.JFrame {
+
 	private int pos = 0;
-	private String[] imagesList = new String[] {"default.png", "Avatar_1.png", "Avatar_2.png", "Avatar_3.png", "Avatar_4.png", "Avatar_5.png", "Avatar_6.png", "Avatar_7.png", "Avatar_8.png", "Avatar_9.png"}; 
-	 
+	private String[] imagesList = new String[] {"default.png", "Avatar_1.png", "Avatar_2.png", "Avatar_3.png", "Avatar_4.png", "Avatar_5.png", "Avatar_6.png", "Avatar_7.png", "Avatar_8.png", "Avatar_9.png"};
+	
     public SignUpForm() 
     {
         initComponents();
-        AvatarImageLabel.setIcon(new ImageIcon(".\\resources\\Avatar" + imagesList[pos]));
         showImage(pos);
     }
-
         
        public void showImage(int index)
        {
            String imageName = imagesList[index];
-           Icon icon = new ImageIcon(".\\resources\\Avatar" + imageName);
+           Icon icon = new ImageIcon(".\\resources\\Avatars\\" + imageName);
            AvatarImageLabel.setIcon(icon);
             
        }
-    
+
+       public String[] getImagesList()
+       {
+    	   return imagesList;
+       }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
@@ -44,11 +46,11 @@ public class SignUpForm extends javax.swing.JFrame
         NickNameLabel = new javax.swing.JLabel();
         AvatarLabel = new javax.swing.JLabel();
         AvatarImageLabel = new javax.swing.JLabel();
-        UsernameFieldLabel = new javax.swing.JLabel();
-        txtUser = new javax.swing.JTextField();
         PreviousButton = new javax.swing.JButton();
         NextButton = new javax.swing.JButton();
         SignUpButton = new javax.swing.JButton();
+        txtUser = new javax.swing.JTextField();
+        UsernameFieldLabel = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
 
@@ -56,7 +58,9 @@ public class SignUpForm extends javax.swing.JFrame
         setTitle("Registration Form");
         setBackground(new java.awt.Color(255, 255, 255));
         setBounds(new java.awt.Rectangle(400, 400, 400, 400));
+        setLocation(new java.awt.Point(0, 0));
         setMinimumSize(new java.awt.Dimension(400, 400));
+        setLocationRelativeTo(null);
         setResizable(false);
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
@@ -69,19 +73,7 @@ public class SignUpForm extends javax.swing.JFrame
         AvatarLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         AvatarLabel.setText("Avatar:");
 
-        AvatarImageLabel.setIcon(new javax.swing.ImageIcon(".\\resources\\Avatar\\default.png"));
-
-        UsernameFieldLabel.setBackground(new java.awt.Color(255, 255, 255));
-        UsernameFieldLabel.setText("______________________________________________");
-        UsernameFieldLabel.setRequestFocusEnabled(false);
-
-        txtUser.setFont(txtUser.getFont().deriveFont(txtUser.getFont().getSize()+2f));
-        txtUser.setBorder(null);
-        txtUser.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtUserActionPerformed(evt);
-            }
-        });
+        AvatarImageLabel.setIcon(new ImageIcon(".\\resources\\Avatars\\default.png"));
 
         PreviousButton.setText("Previous");
         PreviousButton.addActionListener(new java.awt.event.ActionListener() {
@@ -105,57 +97,72 @@ public class SignUpForm extends javax.swing.JFrame
             }
         });
 
+        txtUser.setFont(txtUser.getFont().deriveFont(txtUser.getFont().getSize()+2f));
+        txtUser.setBorder(null);
+        txtUser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtUserActionPerformed(evt);
+            }
+        });
+
+        UsernameFieldLabel.setBackground(new java.awt.Color(255, 255, 255));
+        UsernameFieldLabel.setText("_________________________________________");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(NickNameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(AvatarLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(26, 26, 26)
-                        .addComponent(AvatarImageLabel)
-                        .addGap(37, 37, 37)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(PreviousButton)
-                            .addComponent(NextButton)))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtUser, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(UsernameFieldLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(18, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(SignUpButton)
-                .addGap(173, 173, 173))
+                .addComponent(AvatarLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(153, 153, 153))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(41, 41, 41)
+                        .addComponent(PreviousButton)
+                        .addGap(18, 18, 18)
+                        .addComponent(AvatarImageLabel)
+                        .addGap(18, 18, 18)
+                        .addComponent(NextButton))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(148, 148, 148)
+                        .addComponent(NickNameLabel))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(66, 66, 66)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtUser, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(UsernameFieldLabel)))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(177, 177, 177)
+                        .addComponent(SignUpButton)))
+                .addContainerGap(47, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(UsernameFieldLabel)
-                    .addComponent(NickNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtUser, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap()
+                .addComponent(NickNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(UsernameFieldLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(AvatarLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(53, 53, 53)
-                        .addComponent(PreviousButton)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(AvatarImageLabel)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(50, 50, 50)
+                                .addComponent(NextButton)))
                         .addGap(18, 18, 18)
-                        .addComponent(NextButton))
+                        .addComponent(SignUpButton))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(AvatarImageLabel))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(70, 70, 70)
-                        .addComponent(AvatarLabel)))
-                .addGap(33, 33, 33)
-                .addComponent(SignUpButton)
-                .addContainerGap(53, Short.MAX_VALUE))
+                        .addGap(49, 49, 49)
+                        .addComponent(PreviousButton)))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         jPanel1.setBackground(new java.awt.Color(53, 101, 77));
@@ -198,24 +205,20 @@ public class SignUpForm extends javax.swing.JFrame
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
-        setLocationRelativeTo(null);
+
         pack();
     }// </editor-fold>                        
-
-    private void txtUserActionPerformed(java.awt.event.ActionEvent evt) {                                        
-        // TODO add your handling code here:
-    }                                       
 
     private void PreviousButtonActionPerformed(java.awt.event.ActionEvent evt) {                                               
         pos = pos -1;
         if (pos < 0)
-            pos = imagesList.length -1;
+            pos = getImagesList().length -1;
         showImage(pos);
     }                                              
 
     private void NextButtonActionPerformed(java.awt.event.ActionEvent evt) {                                           
         pos = pos +1;
-        if (pos >= imagesList.length)
+        if (pos >= getImagesList().length)
             pos = 0;
         showImage(pos);
     }                                          
@@ -228,6 +231,10 @@ public class SignUpForm extends javax.swing.JFrame
             JOptionPane.showMessageDialog(null, "Welcome to JUno!");
         //da aggiungere il salvataggio dell'utente nel database
     }                                            
+
+    private void txtUserActionPerformed(java.awt.event.ActionEvent evt) {                                        
+        // TODO add your handling code here:
+    }                                       
 
     public static void main(String args[]) {
 

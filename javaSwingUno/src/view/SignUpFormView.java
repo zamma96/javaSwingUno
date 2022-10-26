@@ -219,61 +219,65 @@ public class SignUpFormView extends javax.swing.JFrame implements Observer
 
 		javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
 		jPanel2.setLayout(jPanel2Layout);
-		jPanel2Layout.setHorizontalGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+		jPanel2Layout.setHorizontalGroup(
+				jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 				.addGroup(jPanel2Layout.createSequentialGroup().addGap(26, 26, 26)
 						.addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-								.addComponent(NickNameLabel, javax.swing.GroupLayout.DEFAULT_SIZE,
-										javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-								.addComponent(AvatarLabel, javax.swing.GroupLayout.DEFAULT_SIZE,
-										javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+								.addComponent(NickNameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+								.addComponent(AvatarLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 						.addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 								.addGroup(jPanel2Layout.createSequentialGroup()
 										.addGap(26, 26, 26)
 										.addComponent(AvatarImageLabel)
 										.addGap(37, 37, 37)
 										.addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-												.addComponent(PreviousButton)
+												.addComponent(PreviousButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE)
 												.addComponent(NextButton)))
 								.addGroup(jPanel2Layout.createSequentialGroup()
 										.addGap(6, 6, 6)
-										.addGroup(jPanel2Layout
-										.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-										.addComponent(txtUser, javax.swing.GroupLayout.PREFERRED_SIZE, 256,
-												javax.swing.GroupLayout.PREFERRED_SIZE)
-										.addComponent(UsernameFieldLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 233,
-												javax.swing.GroupLayout.PREFERRED_SIZE))))
+										.addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+												.addComponent(UsernameFieldLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
+												.addComponent(txtUser, javax.swing.GroupLayout.PREFERRED_SIZE, 270,	javax.swing.GroupLayout.PREFERRED_SIZE))))
 						.addContainerGap(18, Short.MAX_VALUE))
 				.addGroup(javax.swing.GroupLayout.Alignment.TRAILING,
 						jPanel2Layout.createSequentialGroup()
 								.addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-								.addComponent(SignUpButton).addGap(173, 173, 173)));
-		jPanel2Layout.setVerticalGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+								.addComponent(SignUpButton).addGap(173, 173, 173))
+		);
+		jPanel2Layout.setVerticalGroup(
+				jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 				.addGroup(javax.swing.GroupLayout.Alignment.TRAILING,
-						jPanel2Layout.createSequentialGroup().addGap(28, 28, 28)
-								.addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+						jPanel2Layout.createSequentialGroup()
+						.addGap(28, 28, 28)
+						.addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
 										.addComponent(UsernameFieldLabel)
-										.addComponent(NickNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 22,
-												javax.swing.GroupLayout.PREFERRED_SIZE)
-										.addComponent(
-												txtUser, javax.swing.GroupLayout.PREFERRED_SIZE, 12,
-												javax.swing.GroupLayout.PREFERRED_SIZE))
+										.addComponent(NickNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+										.addComponent(txtUser, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE))
 								.addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-										.addGroup(jPanel2Layout.createSequentialGroup().addGap(53, 53, 53)
-												.addComponent(PreviousButton).addGap(18, 18, 18)
+										.addGroup(jPanel2Layout.createSequentialGroup()
+												.addGap(53, 53, 53)
+												.addComponent(PreviousButton)
+												.addGap(18, 18, 18)
 												.addComponent(NextButton))
-										.addGroup(jPanel2Layout.createSequentialGroup().addGap(18, 18, 18)
+										.addGroup(jPanel2Layout.createSequentialGroup()
+												.addGap(18, 18, 18)
 												.addComponent(AvatarImageLabel))
-										.addGroup(jPanel2Layout.createSequentialGroup().addGap(70, 70, 70)
+										.addGroup(jPanel2Layout.createSequentialGroup()
+												.addGap(70, 70, 70)
 												.addComponent(AvatarLabel)))
-								.addGap(33, 33, 33).addComponent(SignUpButton).addContainerGap(53, Short.MAX_VALUE)));
+								.addGap(33, 33, 33)
+								.addComponent(SignUpButton)
+								.addContainerGap(53, Short.MAX_VALUE))
+		);
 
 
 		javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
 		jPanel1.setLayout(jPanel1Layout);
-		jPanel1Layout.setHorizontalGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGroup(jPanel1Layout.createSequentialGroup().addComponent(jLabel1,
-						javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
-						.addGap(0, 0, Short.MAX_VALUE)));
+		jPanel1Layout.setHorizontalGroup(jPanel1Layout.
+				createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.addGroup(jPanel1Layout.createSequentialGroup().addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
+						.addGap(0, 0, Short.MAX_VALUE))
+				);
 		jPanel1Layout.setVerticalGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 				.addGroup(jPanel1Layout.createSequentialGroup().addGap(32, 32, 32).addComponent(jLabel1)
 						.addContainerGap(36, Short.MAX_VALUE)));
@@ -285,7 +289,8 @@ public class SignUpFormView extends javax.swing.JFrame implements Observer
 								javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
 						.addGap(0, 0, Short.MAX_VALUE))
 				.addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
-						Short.MAX_VALUE));
+						Short.MAX_VALUE)
+				);
 		layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 				.addGroup(layout.createSequentialGroup()
 						.addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE,
