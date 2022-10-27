@@ -27,13 +27,13 @@ public class GameStage extends JFrame implements Observer
 
 	public GameStage(Game model) 
 	{
-		initComponents();
-		this.lastCard = model.getLastStockPileCard();
 		this.game = model;
-		this.playerIds = model.getPlayersNames();
+		initComponents();
 		populateArrayList();
 		game.start(game);
 		setButtonIcons();
+		this.lastCard = model.getLastStockPileCard();
+		this.playerIds = model.getPlayersNames();
 	}
 	
 	/**
@@ -223,173 +223,314 @@ public class GameStage extends JFrame implements Observer
 		return drawCardButton;
 	}
 	
-	private void initComponents() 
-	{
+	private void initComponents() {
 
-		jPanel1 = new JPanel();
-		jButton1 = new JButton();
-		jButton2 = new JButton();
-		jButton3 = new JButton();
-		jButton4 = new JButton();
-		jButton5 = new JButton();
-		jButton6 = new JButton();
-		jButton7 = new JButton();
-		jButton8 = new JButton();
-		jButton9 = new JButton();
-		jButton10 = new JButton();
-		jButton11 = new JButton();
-		jButton12 = new JButton();
-		jButton13 = new JButton();
-		jButton14 = new JButton();
-		jButton15 = new JButton();
-		jButton16 = new JButton();
-		playerIdNameLabel = new JLabel();
-		drawCardButton = new JButton();
-		DeckPileButton = new JButton();
-		StockPileButton = new JButton();
+        jPanel1 = new JPanel();
+        jButton1 = new JButton();
+        jButton2 = new JButton();
+        jButton3 = new JButton();
+        jButton4 = new JButton();
+        jButton5 = new JButton();
+        jButton6 = new JButton();
+        jButton7 = new JButton();
+        jButton8 = new JButton();
+        jButton9 = new JButton();
+        jButton10 = new JButton();
+        jButton11 = new JButton();
+        jButton12 = new JButton();
+        jButton13 = new JButton();
+        jButton14 = new JButton();
+        jButton15 = new JButton();
+        jButton16 = new JButton();
+        playerIdNameLabel = new JLabel();
+        drawCardButton = new JButton();
+        DeckPileButton = new JButton();
+        StockPileButton = new JButton();
+        iaNameLabel1 = new JLabel();
+        iaNameLabel3 = new JLabel();
+        iaNameLabel2 = new JLabel();
 
-		javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-		jPanel1.setLayout(jPanel1Layout);
-		jPanel1Layout.setHorizontalGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGroup(jPanel1Layout.createSequentialGroup().addGroup(jPanel1Layout
-						.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-						.addGroup(jPanel1Layout.createSequentialGroup().addGap(35, 35, 35)
-								.addGroup(jPanel1Layout
-										.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-										.addGroup(jPanel1Layout.createSequentialGroup()
-												.addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 70,
-														javax.swing.GroupLayout.PREFERRED_SIZE)
-												.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-												.addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 70,
-														javax.swing.GroupLayout.PREFERRED_SIZE)
-												.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-												.addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 70,
-														javax.swing.GroupLayout.PREFERRED_SIZE)
-												.addGap(8, 8, 8)
-												.addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 70,
-														javax.swing.GroupLayout.PREFERRED_SIZE)
-												.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-												.addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 70,
-														javax.swing.GroupLayout.PREFERRED_SIZE)
-												.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-												.addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 70,
-														javax.swing.GroupLayout.PREFERRED_SIZE)
-												.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-												.addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 70,
-														javax.swing.GroupLayout.PREFERRED_SIZE)
-												.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-												.addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 70,
-														javax.swing.GroupLayout.PREFERRED_SIZE))
-										.addComponent(playerIdNameLabel, javax.swing.GroupLayout.DEFAULT_SIZE,
-												javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-								.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-								.addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 70,
-										javax.swing.GroupLayout.PREFERRED_SIZE)
-								.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-								.addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 70,
-										javax.swing.GroupLayout.PREFERRED_SIZE)
-								.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-								.addComponent(jButton11, javax.swing.GroupLayout.PREFERRED_SIZE, 70,
-										javax.swing.GroupLayout.PREFERRED_SIZE)
-								.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-								.addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 70,
-										javax.swing.GroupLayout.PREFERRED_SIZE)
-								.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-								.addComponent(jButton13, javax.swing.GroupLayout.PREFERRED_SIZE, 70,
-										javax.swing.GroupLayout.PREFERRED_SIZE)
-								.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-								.addGroup(jPanel1Layout
-										.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-										.addGroup(jPanel1Layout.createSequentialGroup()
-												.addComponent(jButton14, javax.swing.GroupLayout.PREFERRED_SIZE, 70,
-														javax.swing.GroupLayout.PREFERRED_SIZE)
-												.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-												.addComponent(jButton15, javax.swing.GroupLayout.PREFERRED_SIZE, 70,
-														javax.swing.GroupLayout.PREFERRED_SIZE)
-												.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-												.addComponent(jButton16, javax.swing.GroupLayout.PREFERRED_SIZE, 70,
-														javax.swing.GroupLayout.PREFERRED_SIZE))
-										.addComponent(drawCardButton, javax.swing.GroupLayout.DEFAULT_SIZE,
-												javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-						.addGroup(jPanel1Layout.createSequentialGroup().addContainerGap()
-								.addComponent(DeckPileButton, javax.swing.GroupLayout.PREFERRED_SIZE, 70,
-										javax.swing.GroupLayout.PREFERRED_SIZE)
-								.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-								.addComponent(StockPileButton, javax.swing.GroupLayout.PREFERRED_SIZE, 70,
-										javax.swing.GroupLayout.PREFERRED_SIZE)))
-						.addGroup(jPanel1Layout.createSequentialGroup()
-								.addGap(67, 67, 67)
-								.addComponent(iaNameLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-								.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-								.addComponent(iaNameLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-								.addGap(34, 34, 34))
-						.addContainerGap(33, Short.MAX_VALUE))
-				 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-			                .addGroup(jPanel1Layout.createSequentialGroup()
-			                    .addGap(488, 488, 488)
-			                    .addComponent(iaNameLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-			                    .addContainerGap(492, Short.MAX_VALUE))));
-		jPanel1Layout.setVerticalGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGroup(jPanel1Layout.createSequentialGroup().addContainerGap()
-						.addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-								.addComponent(DeckPileButton, javax.swing.GroupLayout.PREFERRED_SIZE, 100,
-										javax.swing.GroupLayout.PREFERRED_SIZE)
-								.addComponent(StockPileButton, javax.swing.GroupLayout.PREFERRED_SIZE, 100,
-										javax.swing.GroupLayout.PREFERRED_SIZE))
-						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 433, Short.MAX_VALUE)
-						.addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-								.addComponent(playerIdNameLabel, javax.swing.GroupLayout.DEFAULT_SIZE,
-										javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-								.addComponent(drawCardButton, javax.swing.GroupLayout.DEFAULT_SIZE,
-										javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-						.addGap(18, 18, 18)
-						.addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-								.addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING,
-										javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
-										Short.MAX_VALUE)
-								.addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE,
-										javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-								.addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE,
-										javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-								.addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE,
-										javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-								.addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE,
-										javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-								.addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE,
-										javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-								.addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE,
-										javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-								.addComponent(jButton8, javax.swing.GroupLayout.DEFAULT_SIZE,
-										javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-								.addComponent(jButton9, javax.swing.GroupLayout.DEFAULT_SIZE,
-										javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-								.addComponent(jButton10, javax.swing.GroupLayout.DEFAULT_SIZE,
-										javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-								.addComponent(jButton11, javax.swing.GroupLayout.DEFAULT_SIZE,
-										javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-								.addComponent(jButton12, javax.swing.GroupLayout.DEFAULT_SIZE,
-										javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-								.addComponent(jButton13, javax.swing.GroupLayout.DEFAULT_SIZE,
-										javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-								.addComponent(jButton14, javax.swing.GroupLayout.DEFAULT_SIZE,
-										javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-								.addComponent(jButton15, javax.swing.GroupLayout.DEFAULT_SIZE,
-										javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-								.addComponent(jButton16, javax.swing.GroupLayout.Alignment.TRAILING,
-										javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
-										Short.MAX_VALUE))
-						.addContainerGap()));
 
-		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-		getContentPane().setLayout(layout);
-		layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(
-				jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE,
-				javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE));
-		layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(
-				jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE));
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGap(35, 35, 35)
+                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(8, 8, 8)
+                            .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jButton11, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jButton13, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(playerIdNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 604, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addComponent(jButton14, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jButton15, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jButton16, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(drawCardButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addContainerGap()
+                            .addComponent(DeckPileButton, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(StockPileButton, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(328, 328, 328)
+                            .addComponent(iaNameLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(67, 67, 67)
+                        .addComponent(iaNameLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(iaNameLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(33, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(DeckPileButton, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(StockPileButton, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(101, 101, 101)
+                        .addComponent(iaNameLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 193, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(iaNameLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(iaNameLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(131, 131, 131)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(playerIdNameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(drawCardButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jButton14, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                        .addComponent(jButton15, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                        .addComponent(jButton13, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE))
+                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton16, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
 
-		pack();
-	}
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        pack();
+    }
+	
+	/*
+	 * private void initComponents() {
+	 * 
+	 * jPanel1 = new JPanel(); jButton1 = new JButton(); jButton2 = new JButton();
+	 * jButton3 = new JButton(); jButton4 = new JButton(); jButton5 = new JButton();
+	 * jButton6 = new JButton(); jButton7 = new JButton(); jButton8 = new JButton();
+	 * jButton9 = new JButton(); jButton10 = new JButton(); jButton11 = new
+	 * JButton(); jButton12 = new JButton(); jButton13 = new JButton(); jButton14 =
+	 * new JButton(); jButton15 = new JButton(); jButton16 = new JButton();
+	 * playerIdNameLabel = new JLabel(); drawCardButton = new JButton();
+	 * DeckPileButton = new JButton(); StockPileButton = new JButton(); iaNameLabel1
+	 * = new JLabel(); iaNameLabel2 = new JLabel(); iaNameLabel3 = new JLabel();
+	 * 
+	 * javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+	 * jPanel1.setLayout(jPanel1Layout);
+	 * jPanel1Layout.setHorizontalGroup(jPanel1Layout.createParallelGroup(javax.
+	 * swing.GroupLayout.Alignment.LEADING)
+	 * .addGroup(jPanel1Layout.createSequentialGroup().addGroup(jPanel1Layout
+	 * .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+	 * .addGroup(jPanel1Layout.createSequentialGroup().addGap(35, 35, 35)
+	 * .addGroup(jPanel1Layout
+	 * .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+	 * .addGroup(jPanel1Layout.createSequentialGroup() .addComponent(jButton1,
+	 * javax.swing.GroupLayout.PREFERRED_SIZE, 70,
+	 * javax.swing.GroupLayout.PREFERRED_SIZE)
+	 * .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+	 * .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 70,
+	 * javax.swing.GroupLayout.PREFERRED_SIZE)
+	 * .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+	 * .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 70,
+	 * javax.swing.GroupLayout.PREFERRED_SIZE) .addGap(8, 8, 8)
+	 * .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 70,
+	 * javax.swing.GroupLayout.PREFERRED_SIZE)
+	 * .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+	 * .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 70,
+	 * javax.swing.GroupLayout.PREFERRED_SIZE)
+	 * .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+	 * .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 70,
+	 * javax.swing.GroupLayout.PREFERRED_SIZE)
+	 * .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+	 * .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 70,
+	 * javax.swing.GroupLayout.PREFERRED_SIZE)
+	 * .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+	 * .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 70,
+	 * javax.swing.GroupLayout.PREFERRED_SIZE)) .addComponent(playerIdNameLabel,
+	 * javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
+	 * Short.MAX_VALUE))
+	 * .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+	 * .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 70,
+	 * javax.swing.GroupLayout.PREFERRED_SIZE)
+	 * .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+	 * .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 70,
+	 * javax.swing.GroupLayout.PREFERRED_SIZE)
+	 * .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+	 * .addComponent(jButton11, javax.swing.GroupLayout.PREFERRED_SIZE, 70,
+	 * javax.swing.GroupLayout.PREFERRED_SIZE)
+	 * .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+	 * .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 70,
+	 * javax.swing.GroupLayout.PREFERRED_SIZE)
+	 * .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+	 * .addComponent(jButton13, javax.swing.GroupLayout.PREFERRED_SIZE, 70,
+	 * javax.swing.GroupLayout.PREFERRED_SIZE)
+	 * .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+	 * .addGroup(jPanel1Layout
+	 * .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+	 * .addGroup(jPanel1Layout.createSequentialGroup() .addComponent(jButton14,
+	 * javax.swing.GroupLayout.PREFERRED_SIZE, 70,
+	 * javax.swing.GroupLayout.PREFERRED_SIZE)
+	 * .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+	 * .addComponent(jButton15, javax.swing.GroupLayout.PREFERRED_SIZE, 70,
+	 * javax.swing.GroupLayout.PREFERRED_SIZE)
+	 * .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+	 * .addComponent(jButton16, javax.swing.GroupLayout.PREFERRED_SIZE, 70,
+	 * javax.swing.GroupLayout.PREFERRED_SIZE)) .addComponent(drawCardButton,
+	 * javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
+	 * Short.MAX_VALUE)))
+	 * .addGroup(jPanel1Layout.createSequentialGroup().addContainerGap()
+	 * .addComponent(DeckPileButton, javax.swing.GroupLayout.PREFERRED_SIZE, 70,
+	 * javax.swing.GroupLayout.PREFERRED_SIZE)
+	 * .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+	 * .addComponent(StockPileButton, javax.swing.GroupLayout.PREFERRED_SIZE, 70,
+	 * javax.swing.GroupLayout.PREFERRED_SIZE)))
+	 * .addGroup(jPanel1Layout.createSequentialGroup() .addGap(67, 67, 67)
+	 * .addComponent(iaNameLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 300,
+	 * javax.swing.GroupLayout.PREFERRED_SIZE)
+	 * .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED,
+	 * javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+	 * .addComponent(iaNameLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 300,
+	 * javax.swing.GroupLayout.PREFERRED_SIZE) .addGap(34, 34, 34))
+	 * .addContainerGap(33, Short.MAX_VALUE))
+	 * .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment
+	 * .LEADING) .addGroup(jPanel1Layout.createSequentialGroup() .addGap(488, 488,
+	 * 488) .addComponent(iaNameLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 300,
+	 * javax.swing.GroupLayout.PREFERRED_SIZE) .addContainerGap(492,
+	 * Short.MAX_VALUE))));
+	 * jPanel1Layout.setVerticalGroup(jPanel1Layout.createParallelGroup(javax.swing.
+	 * GroupLayout.Alignment.LEADING)
+	 * .addGroup(jPanel1Layout.createSequentialGroup().addContainerGap()
+	 * .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment
+	 * .LEADING, false) .addComponent(DeckPileButton,
+	 * javax.swing.GroupLayout.PREFERRED_SIZE, 100,
+	 * javax.swing.GroupLayout.PREFERRED_SIZE) .addComponent(StockPileButton,
+	 * javax.swing.GroupLayout.PREFERRED_SIZE, 100,
+	 * javax.swing.GroupLayout.PREFERRED_SIZE))
+	 * .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 433,
+	 * Short.MAX_VALUE)
+	 * .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment
+	 * .LEADING, false) .addComponent(playerIdNameLabel,
+	 * javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
+	 * Short.MAX_VALUE) .addComponent(drawCardButton,
+	 * javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
+	 * Short.MAX_VALUE)) .addGap(18, 18, 18)
+	 * .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment
+	 * .LEADING, false) .addComponent(jButton1,
+	 * javax.swing.GroupLayout.Alignment.TRAILING,
+	 * javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
+	 * Short.MAX_VALUE) .addComponent(jButton2,
+	 * javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
+	 * Short.MAX_VALUE) .addComponent(jButton3,
+	 * javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
+	 * Short.MAX_VALUE) .addComponent(jButton4,
+	 * javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
+	 * Short.MAX_VALUE) .addComponent(jButton5,
+	 * javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
+	 * Short.MAX_VALUE) .addComponent(jButton6,
+	 * javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
+	 * Short.MAX_VALUE) .addComponent(jButton7,
+	 * javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
+	 * Short.MAX_VALUE) .addComponent(jButton8,
+	 * javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
+	 * Short.MAX_VALUE) .addComponent(jButton9,
+	 * javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
+	 * Short.MAX_VALUE) .addComponent(jButton10,
+	 * javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
+	 * Short.MAX_VALUE) .addComponent(jButton11,
+	 * javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
+	 * Short.MAX_VALUE) .addComponent(jButton12,
+	 * javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
+	 * Short.MAX_VALUE) .addComponent(jButton13,
+	 * javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
+	 * Short.MAX_VALUE) .addComponent(jButton14,
+	 * javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
+	 * Short.MAX_VALUE) .addComponent(jButton15,
+	 * javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
+	 * Short.MAX_VALUE) .addComponent(jButton16,
+	 * javax.swing.GroupLayout.Alignment.TRAILING,
+	 * javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
+	 * Short.MAX_VALUE)) .addContainerGap()));
+	 * 
+	 * javax.swing.GroupLayout layout = new
+	 * javax.swing.GroupLayout(getContentPane());
+	 * getContentPane().setLayout(layout);
+	 * layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.
+	 * Alignment.LEADING).addComponent( jPanel1,
+	 * javax.swing.GroupLayout.Alignment.TRAILING,
+	 * javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
+	 * Short.MAX_VALUE));
+	 * layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.
+	 * Alignment.LEADING).addComponent( jPanel1,
+	 * javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
+	 * Short.MAX_VALUE));
+	 * 
+	 * pack(); }
+	 */
 
 	private JPanel jPanel1;
 	private JButton DeckPileButton;

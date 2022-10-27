@@ -1,12 +1,13 @@
 package model;
 
-import java.util.Map;
+import java.io.Serializable;
 
-import javax.swing.ImageIcon;
-
-public class User 
+public class User implements Serializable
 {
-
+	/**
+	 * 
+	 */
+	private static long counter = 1L;
 	private String nickName;
 	private Integer level;
 	private Integer gamesWon;
@@ -21,6 +22,7 @@ public class User
 		this.gamesWon = gamesWon;
 		this.gamesLoss = gamesLoss;
 		this.gamesPlayed = gamesPlayed;
+		counter++;
 	}
 	
 	public User(String nickName)
@@ -30,6 +32,7 @@ public class User
 		this.gamesWon = 0;
 		this.gamesLoss = 0;
 		this.gamesPlayed = 0;
+		counter++;
 	}
 
 	public String getNickName() 

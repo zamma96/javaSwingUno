@@ -43,12 +43,16 @@ public class GameController
 	{
 		view.getPlayerIdName().setText(model.getPlayers()[0].getPlayerNickName() + "'s cards");
 		view.getPlayerIdName().setForeground(SALMON_PINK);
+		view.getPlayerIdName().setBackground(TABLE_GREEN);
 		view.getIaNameLabel1().setText(model.getPlayers()[1].getPlayerNickName());
 		view.getIaNameLabel1().setForeground(SALMON_PINK);
+		view.getIaNameLabel1().setBackground(TABLE_GREEN);
 		view.getIaNameLabel2().setText(model.getPlayers()[2].getPlayerNickName());
 		view.getIaNameLabel2().setForeground(SALMON_PINK);
+		view.getIaNameLabel2().setBackground(TABLE_GREEN);
 		view.getIaNameLabel3().setText(model.getPlayers()[3].getPlayerNickName());
 		view.getIaNameLabel3().setForeground(SALMON_PINK);
+		view.getIaNameLabel3().setBackground(TABLE_GREEN);
 	}
 	
 	public void initView()
@@ -56,6 +60,7 @@ public class GameController
 		view.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 		view.setTitle("UNO");
 		view.setResizable(false);
+		view.setLocationRelativeTo(null);
 		
 		view.getjPanel1().setToolTipText("");
 		view.getjPanel1().setBackground(TABLE_GREEN);
@@ -64,15 +69,20 @@ public class GameController
 		view.getDrawCardButton().setFont(MID_GAME_FONT);
 		view.getDrawCardButton().setForeground(SALMON_PINK);
 		view.getDrawCardButton().setBackground(TABLE_GREEN);
+		view.getDrawCardButton().setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 		view.getDrawCardButton().setText("Draw Card");
 		
 		view.getDeckPileButton().setPreferredSize(new Dimension(100, 70));
 		view.getStockPileButton().setPreferredSize(new Dimension(100, 70));
 		
-		view.getPlayerIdName().setFont(BIG_GAME_FONT);
-		view.getIaNameLabel1().setFont(BIG_GAME_FONT);
-		view.getIaNameLabel2().setFont(BIG_GAME_FONT);
-		view.getIaNameLabel3().setFont(BIG_GAME_FONT);
+		view.getPlayerIdName().setFont(MID_GAME_FONT);
+		view.getPlayerIdName().setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+		view.getIaNameLabel1().setFont(MID_GAME_FONT);
+		view.getIaNameLabel1().setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+		view.getIaNameLabel2().setFont(MID_GAME_FONT);
+		view.getIaNameLabel2().setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+		view.getIaNameLabel3().setFont(MID_GAME_FONT);
+		view.getIaNameLabel3().setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 		
 		Icon icon = new ImageIcon(".\\resources\\UnoCards\\CARD_BACK.png");
 		Icon iconS = new ImageIcon(".\\resources\\UnoCards\\" + model.getTopCardImage());

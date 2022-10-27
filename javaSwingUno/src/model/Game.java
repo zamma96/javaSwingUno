@@ -24,8 +24,8 @@ public class Game extends Observable
 	//qui dataBase serve solo per salvare i risultati delle partite (Games won, Games played, Games loss)
 	private DataBase dataBase;
 	private LoginModel loginModel;
-	private String[] nameArray = new String[] {"Carlo", "Gianluca", "Simone", "Giorno", "Marco", "Vista", "Valentina", "Daniela", "Francesca", "Martina", "Elena"};
-	private ArrayList<String> namePool;
+	private String[] nameArray = new String[] {"Carlo", "Gianluca", "Simone", "Giorno", "Marco", "Vista", "Karl", "Valentina", "Daniela", "Francesca", "Martina", "Elena"};
+	private ArrayList<String> namePool = new ArrayList<String>();
 	private ArrayList<String> cardIds;
 	private int currentPlayer;
 	private Player[] players = new Player[4];
@@ -58,10 +58,14 @@ public class Game extends Observable
 		deck.reset();
 		deck.shuffle();
 		stockPile = new ArrayList<Card>();
-		namePool = (ArrayList<String>) Arrays.asList(nameArray);
+		for (int i = 0; i < nameArray.length; i++)
+			namePool.add(nameArray[i]);
 		players[0] = new Player(0, user.getNickName(), true, new ArrayList<Card>(Arrays.asList(deck.drawCard(7))));
-		playersHands.add(getPlayerHand(players[0]));
+		//playersHands.add(getPlayerHand(players[0]));
 		Player[] ias = randomizePlayer();
+		playersHands.add(getPlayerHand(players[1]));
+		playersHands.add(getPlayerHand(players[2]));
+		playersHands.add(getPlayerHand(players[3]));
 		players[1] = ias[0]; players[2] = ias[1]; players[3] = ias[2];
 		currentPlayer = 0;
 		gameDirection = false;
