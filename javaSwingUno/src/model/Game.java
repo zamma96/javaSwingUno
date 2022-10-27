@@ -257,7 +257,7 @@ public class Game extends Observable
 	
 	public Card getLastStockPileCard()
 	{
-		return stockPile.get(stockPile.size());
+		return stockPile.get(stockPile.size()-1);
 	}
 	
 	public void setCardIds(ArrayList<String> cardNames)
