@@ -31,6 +31,7 @@ public class SignUpFormController
 	static private Font BIG_UI_FONT = new Font("Segoe UI", 0, 24);
 	static private Font MID_UI_FONT = new Font("Segoe UI", 0, 18);
 	static private Font SMALL_UI_FONT = new Font("Segoe UI", 0, 12);
+	private String[] imagesList = new String[] {"default_avatar.png", "Avatar_1.png", "Avatar_2.png", "Avatar_3.png", "Avatar_4.png", "Avatar_5.png", "Avatar_6.png", "Avatar_7.png", "Avatar_8.png", "Avatar_9.png"};
 	
 	public SignUpFormController(LoginModel loginModel, SignUpFormView view) throws IOException
 	{
@@ -42,11 +43,11 @@ public class SignUpFormController
 	public void initView()
 	{
 		view.getjPanel2().setBackground(WHITE);
-		view.getjPanel2().setPreferredSize(new Dimension(400, 300));
+		view.getjPanel2().setPreferredSize(new Dimension(400, 320));
 		
 		view.getjPanel1().setBackground(TABLE_GREEN);
 		view.getjPanel1().setForeground(WHITE);
-		view.getjPanel1().setPreferredSize(new Dimension(400, 100));
+		view.getjPanel1().setPreferredSize(new Dimension(400, 80));
 		
 		view.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 		view.setTitle("Registration Form");
@@ -63,19 +64,23 @@ public class SignUpFormController
 		view.getAvatarLabel().setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 		view.getAvatarLabel().setText("Avatar: ");
 		
-		showImage(model.getPos());
+		view.showImage(model.getPos());
 		
 		view.getUsernameFieldLabel().setBackground(WHITE);
-		view.getUsernameFieldLabel().setText("______________________________________________");
+		view.getUsernameFieldLabel().setText("________________________________________");
 		view.getUsernameFieldLabel().setRequestFocusEnabled(false);
 		
-		view.gettxtUser().setFont(MID_UI_FONT);
+		view.gettxtUser().setFont(SMALL_UI_FONT);
 		view.gettxtUser().setBorder(null);
 		
 		view.getPreviousButton().setText("Previous");
 		view.getPreviousButton().setFont(SMALL_UI_FONT);
+		view.getPreviousButton().setPreferredSize(new Dimension(74,22));
+		
 		view.getNextButton().setText("Next");
 		view.getNextButton().setFont(SMALL_UI_FONT);
+		view.getNextButton().setPreferredSize(new Dimension(74,22));
+		
 		view.getSignUpButton().setText("Sign Up");
 		view.getSignUpButton().setFont(SMALL_UI_FONT);
 		view.getSignUpButton().setBackground(WHITE);
@@ -125,7 +130,7 @@ public class SignUpFormController
 		model.setPos(model.getPos()-1);
 		if(model.getPos() < 0)
 			model.setPos(view.getImagesList().length-1);
-		showImage(model.getPos()); 
+		view.showImage(model.getPos()); 
 	}
 
 	private void NextButtonActionPerformed(java.awt.event.ActionEvent evt) 
@@ -133,7 +138,7 @@ public class SignUpFormController
 		model.setPos(model.getPos()+1);
 		if (model.getPos()>= view.getImagesList().length)
 			model.setPos(0);
-		showImage(model.getPos());
+		view.showImage(model.getPos());
 	}
 
 	private void SignUpButtonActionPerformed(java.awt.event.ActionEvent evt) 
@@ -170,20 +175,6 @@ public class SignUpFormController
 		JOptionPane.showMessageDialog(null, message); 
 	}
 	
-	public String[] getImages() 
-	{
-		File file = new File((".\\resources\\Avatars"));
-		String[] imageList = file.list();
-		return imageList;
-	}
-	
-	public void showImage(Integer index)
-	{
-		String[] imageList = getImages();
-		String imageName = imageList[index];
-		Icon icon = new ImageIcon(".\\resources\\Avatars"+imageName);
-		view.getAvatarImageLabel().setIcon(icon);
-	}
 	
 	public void errorMessage()
 	{

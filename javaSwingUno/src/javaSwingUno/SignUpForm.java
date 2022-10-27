@@ -17,7 +17,7 @@ import javax.swing.JOptionPane;
 public class SignUpForm extends javax.swing.JFrame {
 
 	private int pos = 0;
-	private String[] imagesList = new String[] {"default.png", "Avatar_1.png", "Avatar_2.png", "Avatar_3.png", "Avatar_4.png", "Avatar_5.png", "Avatar_6.png", "Avatar_7.png", "Avatar_8.png", "Avatar_9.png"};
+	private String[] imagesList = new String[] {"default_avatar.png", "Avatar_1.png", "Avatar_2.png", "Avatar_3.png", "Avatar_4.png", "Avatar_5.png", "Avatar_6.png", "Avatar_7.png", "Avatar_8.png", "Avatar_9.png"};
 	
     public SignUpForm() 
     {
