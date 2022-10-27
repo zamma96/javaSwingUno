@@ -21,13 +21,16 @@ public class UserHomeController
 	private LoginModel model;
 	static private Color WHITE = new Color(255,255,255);
 	static private Color TABLE_GREEN = new Color(53, 101, 77);
-	static private Font UiFont = new Font("Segoe UI", 0, 32);
+	static private Font MID_UI_FONT = new Font("Segoe UI", 0, 36);
+	static private Font SMALL_UI_FONT = new Font("Segoe UI", 0, 18);
 	private String[] imagesList = new String[] {"default.png", "Avatar_1.png", "Avatar_2.png", "Avatar_3.png", "Avatar_4.png", "Avatar_5.png", "Avatar_6.png", "Avatar_7.png", "Avatar_8.png", "Avatar_9.png"};
+	private Integer pos;
 
 	public UserHomeController(LoginModel loginModel, UserHomeView userHomeView)
 	{
 		this.view = userHomeView;
 		this.model = loginModel;
+		pos = model.getPos();
 		initView();
 	}
 	
@@ -42,38 +45,30 @@ public class UserHomeController
 		
 		view.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 		view.setBackground(WHITE);
+		view.setLocationRelativeTo(null);
 		
 		view.getjPanel1().setBackground(TABLE_GREEN);
 		
 		view.getjPanel2().setBackground(WHITE);
 		view.getjPanel2().setPreferredSize(new Dimension(400, 299));
 		
-		view.getjLabel1().setText(model.getNickName() + "'s Home");
+		view.getjLabel1().setText(model.getUser().getNickName() + "'s Home");
 		view.getjLabel1().setBackground(TABLE_GREEN);
-		view.getjLabel1().setFont(UiFont);
+		view.getjLabel1().setFont(MID_UI_FONT);
 		view.getjLabel1().setForeground(WHITE);
 		view.getjLabel1().setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 		
-		String imageName = imagesList[model.getPos()];
-		
-		view.getNickNameLabel().setFont(UiFont);
-		view.getNickNameLabel().setText("NickName:");
-		
-		view.getAvatarLabel().setFont(UiFont);
+		view.getAvatarLabel().setFont(SMALL_UI_FONT);
 		view.getAvatarLabel().setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
 		view.getAvatarLabel().setText("Avatar:");
 		
-		Icon icon = new ImageIcon(".\\resources\\Avatars"+imageName);
-		view.getAvatarImageLabel().setIcon(icon);
-		view.getEmptyNickNameLabel().setFont(UiFont);
-		view.getEmptyNickNameLabel().setText(model.getNickName());
-		view.getEmptyNickNameLabel().setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+		view.showImage();
+
+		view.getGamesWonLabel().setFont(SMALL_UI_FONT);
 		
-		view.getGamesWonLabel().setFont(UiFont);
+		view.getGamesLossLabel().setFont(SMALL_UI_FONT);
 		
-		view.getGamesLossLabel().setFont(UiFont);
-		
-		view.getGamesPlayedLabel().setFont(UiFont);
+		view.getGamesPlayedLabel().setFont(SMALL_UI_FONT);
 		
 		view.getPreviousButton().setText("Previous");
 		
@@ -125,8 +120,7 @@ public class UserHomeController
 		model.setPos(model.getPos()+1);
 		if (model.getPos() >= getImagesList().length)
 			model.setPos(0);
-		view.update(model, model.getPos());
-		showImage(model.getPos());
+		view.showImage();
 	}
 	
 	private void PreviousButtonActionPerformed(java.awt.event.ActionEvent evt) 
@@ -134,9 +128,7 @@ public class UserHomeController
 		model.setPos(model.getPos()-1);
 		if (model.getPos() < 0)
 			model.setPos(getImagesList().length-1);
-		//riga sotto credo sia inutile l'update dovrebbe essere chiamato dal notifyObservers() del metodo setPos();
-		view.update(model, model.getPos());
-		showImage(model.getPos());  
+		view.showImage();  
 	}
 	
 	private void ExitButtonActionPerformed(java.awt.event.ActionEvent evt) 
@@ -156,13 +148,6 @@ public class UserHomeController
 		view.dispose();
 	}
 	
-	
-	public void showImage(Integer index)
-	{
-		String imageName = imagesList[model.getPos()];
-		Icon icon = new ImageIcon(".\\resources\\Avatars"+imageName);
-		view.getAvatarImageLabel().setIcon(icon);
-	}
 	
 	public void setHistory()
 	{
