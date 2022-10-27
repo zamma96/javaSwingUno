@@ -12,6 +12,7 @@ import java.util.List;
 
 public class DataBase 
 {
+	private File userDataFile = new File("C:\\Users\\matte\\git\\javaSwingUno\\javaSwingUno\\resources\\UserData\\");
 	private ArrayList<UserData> userData;
 
 	public DataBase()
@@ -77,19 +78,27 @@ public class DataBase
 	
 	public void setUserData(UserData ud)
 	{
-		Integer temp = userData.indexOf(ud);
-		for (UserData userD : this.userData)
+		userData.add(ud);
+		try 
 		{
-			if (userD.getUser().getNickName().equals(ud.getUser().getNickName()))
-			{
-				userData.remove(temp);
-				userData.add(temp, ud);
-			}
-			else
-				userData.add(ud);
-				
+			saveOnFile(userDataFile);
+		} catch (IOException e) 
+		{
+			e.printStackTrace();
 		}
-				
+	}
+	
+	public void setUserData(UserData ud, int pos)
+	{
+		userData.remove(pos);
+		userData.add(pos, ud);
+		try 
+		{
+			saveOnFile(userDataFile);
+		} catch (IOException e) 
+		{
+			e.printStackTrace();
+		}
 	}
 	
 	public Integer getPos(User user)

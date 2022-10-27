@@ -154,7 +154,7 @@ public class SignUpFormController
 			else
 			{
 				model.setUser(new User(nickName));
-				model.setPos(0);
+				model.setPos(model.getPos());
 				model.getDataBase().addUserData(new UserData(model.getUser(), model.getPos(), 0, 0, 0));
 				welcomeMessage();
 				UserHomeView newView = new	UserHomeView(model);

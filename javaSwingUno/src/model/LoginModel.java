@@ -94,21 +94,18 @@ public class LoginModel extends Observable
 	
 	
 	/**
-	 * method that saves user info (User user, Integer pos, Integer gamesWon, Integer gamesLoss, Integer gamesPlayed) on file
+	 * method that checks if userInfos are already saved on File
+	 * if yes, it's going to swap userDatas updating the ArrayList with new UserDatas
+	 * if no, it's going to save new UserData in the ArrayList
 	 */
 	public void saveUserData()
 	{
 		UserData ud = new UserData(user, pos, user.getGamesWon(), user.getGamesLoss(), user.getGamesPlayed());
 		for (UserData userData : dataBase.getUserData())
-			dataBase.setUserData(ud);
-		try 
-		{
-			dataBase.saveOnFile(userDataFile);
-		} 
-		catch (IOException e) 
-		{
-			e.printStackTrace();
-		}
+			if (userData.getUser().getNickName().equals(ud.getUser().getNickName()))
+				dataBase.setUserData(ud, dataBase.getUserData().indexOf(userData));
+			else
+				dataBase.setUserData(ud);		
 	}
 
 	/**
