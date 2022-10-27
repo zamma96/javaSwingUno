@@ -37,6 +37,7 @@ public class SignUpFormController
 	{
 		this.model = loginModel;
 		this.view = view;
+		model.setPos(0);
 		initView();
 	}
 	
@@ -64,7 +65,7 @@ public class SignUpFormController
 		view.getAvatarLabel().setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 		view.getAvatarLabel().setText("Avatar: ");
 		
-		view.showImage(model.getPos());
+		showImage();
 		
 		view.getUsernameFieldLabel().setBackground(WHITE);
 		view.getUsernameFieldLabel().setText("________________________________________");
@@ -130,7 +131,7 @@ public class SignUpFormController
 		model.setPos(model.getPos()-1);
 		if(model.getPos() < 0)
 			model.setPos(view.getImagesList().length-1);
-		view.showImage(model.getPos()); 
+		showImage(); 
 	}
 
 	private void NextButtonActionPerformed(java.awt.event.ActionEvent evt) 
@@ -138,7 +139,7 @@ public class SignUpFormController
 		model.setPos(model.getPos()+1);
 		if (model.getPos()>= view.getImagesList().length)
 			model.setPos(0);
-		view.showImage(model.getPos());
+		showImage();
 	}
 
 	private void SignUpButtonActionPerformed(java.awt.event.ActionEvent evt) 
@@ -175,6 +176,17 @@ public class SignUpFormController
 		JOptionPane.showMessageDialog(null, message); 
 	}
 	
+	/**
+	 * 
+	 * @param index to set the AvatarImageLabel to the right Icon
+	 * got by index.
+	 */
+	public void showImage()
+	{
+		String imageName = imagesList[model.getPos()];
+		String imagePath = ".\\resources\\Avatars\\"+imageName;
+		view.getAvatarImageLabel().setIcon(new ImageIcon(imagePath));
+	}
 	
 	public void errorMessage()
 	{
@@ -184,5 +196,4 @@ public class SignUpFormController
 		message.setForeground(SALMON_PINK);
 		JOptionPane.showMessageDialog(null, message);
 	}
-	
 }

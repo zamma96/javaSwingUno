@@ -35,17 +35,6 @@ public class SignUpFormView extends javax.swing.JFrame implements Observer
 		//model.setPos(0);		
 	}
 	
-	/**
-	 * 
-	 * @param index to set the AvatarImageLabel to the right Icon
-	 * got by index.
-	 */
-	public void showImage(Integer index)
-	{
-		String imageName = imagesList[index];
-		Icon icon = new ImageIcon(".\\resources\\Avatars"+imageName);
-		this.AvatarImageLabel.setIcon(icon);
-	}
 	
 	public String[] getImagesList()
 	{
@@ -265,7 +254,7 @@ public class SignUpFormView extends javax.swing.JFrame implements Observer
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGap(50, 50, 50)
                                 .addComponent(NextButton)))
-                        .addGap(18, 18, 18)
+                        .addGap(5, 5, 5)
                         .addComponent(SignUpButton))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(49, 49, 49)

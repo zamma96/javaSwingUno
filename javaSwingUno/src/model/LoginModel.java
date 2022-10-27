@@ -59,8 +59,6 @@ public class LoginModel extends Observable
 	 */
 	public Integer getPos()	
 	{
-		if (pos == null)
-			pos = 0;
 		return pos;
 	}
 	
