@@ -43,6 +43,7 @@ public class Card
 		return this.value;
 	}
 	
+	@Override
 	public String toString()
 	{
 		return color + "_" + value;

@@ -2,7 +2,7 @@ package model;
 
 import java.io.Serializable;
 
-public class User implements Serializable
+public class User implements Serializable 
 {
 	/**
 	 * 
@@ -13,7 +13,6 @@ public class User implements Serializable
 	private Integer gamesWon;
 	private Integer gamesLoss;
 	private Integer gamesPlayed;
-	private boolean maxLevel;
 
 	public User(String nickName, Integer gamesWon, Integer gamesLoss, Integer gamesPlayed)
 	{
@@ -70,11 +69,6 @@ public class User implements Serializable
 		this.level = level;
 	}
 	
-	public void maxLevelReward()
-	{
-		if (this.level == 10);
-			this.maxLevel = true;
-	}
 	
 	public void levelUp()
 	{

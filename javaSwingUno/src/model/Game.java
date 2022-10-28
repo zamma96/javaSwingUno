@@ -63,10 +63,10 @@ public class Game extends Observable
 		players[0] = new Player(0, user.getNickName(), true, new ArrayList<Card>(Arrays.asList(deck.drawCard(7))));
 		//playersHands.add(getPlayerHand(players[0]));
 		Player[] ias = randomizePlayer();
+		players[1] = ias[0]; players[2] = ias[1]; players[3] = ias[2];
 		playersHands.add(getPlayerHand(players[1]));
 		playersHands.add(getPlayerHand(players[2]));
 		playersHands.add(getPlayerHand(players[3]));
-		players[1] = ias[0]; players[2] = ias[1]; players[3] = ias[2];
 		currentPlayer = 0;
 		gameDirection = false;
 	}
@@ -429,6 +429,10 @@ public class Game extends Observable
 			if (currentPlayer == -1)
 				currentPlayer = players.length -1;		
 		}
+		if (players[currentPlayer].isHuman() == false)
+		{
+			
+		}
 	}
 	
 	public void submitDraw(Player player) throws InvalidPlayerTurnException
@@ -452,35 +456,35 @@ public class Game extends Observable
 	{
 		checkPlayerTurn(player);
 		
-		ArrayList<Card> playerHand = getPlayerHand(player);
+		ArrayList<Card> currentPlayerHand = getPlayerHand(player);
 		
 		if(!validCardPlay(card))
 		{
 			if (card.getColor() == Card.Color.WILD)
 			{
-				playerHand.remove(card);
+				currentPlayerHand.remove(card);
 				validColor = card.getColor();
 				validValue = card.getValue();
 			}
 			if (card.getColor() != validColor)
 			{
 				if (card.getValue() == validValue)
-					playerHand.remove(card);
+					currentPlayerHand.remove(card);
 				showInvalidPlayerMoveColorDialog(card);
 			}
 			else if (card.getValue() != validValue)
 				showInvalidPlayerMoveValueDialog(card);
 		}
-		playerHand.remove(card);
+		currentPlayerHand.remove(card);
 		
 		if (isGameOver())
 		{
 			showGameWonDialog();
 			if (getHumanPlayer() == players[currentPlayer])
 			
-				loginModel.getDataBase().setUserData(new UserData(user, loginModel.getPos(), user.getGamesWon()+1, user.getGamesLoss(), user.getGamesPlayed()+1));
+				loginModel.getDataBase().setUserData(new UserData(user, loginModel.getPos(), user.getGamesWon()+1, user.getGamesLoss(), user.getGamesPlayed()+1), loginModel.getDataBase().getUserData().indexOf(loginModel.getDataBase().getSpecUserData(user)));
 			else
-				loginModel.getDataBase().setUserData(new UserData(user, loginModel.getPos(), user.getGamesWon(), user.getGamesLoss()+1, user.getGamesPlayed()+1));
+				loginModel.getDataBase().setUserData(new UserData(user, loginModel.getPos(), user.getGamesWon(), user.getGamesLoss()+1, user.getGamesPlayed()+1), loginModel.getDataBase().getUserData().indexOf(loginModel.getDataBase().getSpecUserData(user)));
 				//da rivedere se questi comandi portano a quello che voglio io.
 			UserHomeView newView = new UserHomeView(loginModel);
 			UserHomeController newController = new UserHomeController(loginModel, newView);
@@ -500,7 +504,7 @@ public class Game extends Observable
 		if (card.getValue() == Card.Value.DRAW_TWO)
 		{
 			drawTwoCount++;
-			//checkGameDirection(); forse questo comando fa saltare un turno
+			checkGameDirection(); 
 			if (hasDrawTwo())
 				for(int i = 0; i < getPlayerHandSize(players[currentPlayer]); i++)
 				{
@@ -511,35 +515,19 @@ public class Game extends Observable
 				}
 			if (!hasDrawTwo())
 			{
-				player = players[currentPlayer];
 				for (int i = 0; i <= drawTwoCount; i++)
 				{
-					getPlayerHand(player).add(deck.drawCard());
-					getPlayerHand(player).add(deck.drawCard());
+					submitDraw(player);
+					submitDraw(player);
 				}
 				showAnsweredDrawTwoDialog(drawTwoCount);
 				drawTwoCount = 0;
 			}	
-/*
-			else
-			{
-				player = players[currentPlayer];
-				getPlayerHand(player).add(deck.drawCard());
-				getPlayerHand(player).add(deck.drawCard());
-				showDrawTwoDialog();
-			}
-*/
-/*
-			player = players[currentPlayer];
-			getPlayerHand(player).add(deck.drawCard());
-			getPlayerHand(player).add(deck.drawCard());
-			showDrawTwoDialog();
-*/
 		}
 		if (card.getValue() == Card.Value.DRAW_FOUR)
 		{
 			drawFourCount++;
-			//checkGameDirection(players); forse questo salta un giocatore
+			checkGameDirection(); 
 			if (hasDrawFour());
 			{
 				for(int i = 0; i < getPlayerHandSize(players[currentPlayer]); i++)
@@ -553,25 +541,16 @@ public class Game extends Observable
 			}
 			if (!hasDrawFour())
 			{
-				player = players[currentPlayer];
 				for (int i = 0; i <= drawFourCount; i++)
 				{
-					getPlayerHand(player).add(deck.drawCard());
-					getPlayerHand(player).add(deck.drawCard());
-					getPlayerHand(player).add(deck.drawCard());
-					getPlayerHand(player).add(deck.drawCard());
+					submitDraw(player);
+					submitDraw(player);
+					submitDraw(player);
+					submitDraw(player);
 				}
 				showAnsweredDrawFourDialog(drawFourCount);
 				drawFourCount = 0;
 			}
-/* 
-			player = players[currentPlayer];
-			getPlayerHand(player).add(deck.drawCard());
-			getPlayerHand(player).add(deck.drawCard());
-			getPlayerHand(player).add(deck.drawCard());
-			getPlayerHand(player).add(deck.drawCard());
-			showDrawFourDialog();
-*/
 		}
 		if (card.getValue() == Card.Value.SKIP)
 		{
@@ -596,6 +575,217 @@ public class Game extends Observable
 				currentPlayer = (currentPlayer + 2);
 			}
 		}
+	}
+	
+	public String[] handToString(Player player)
+	{
+		String[] cards = new String[getPlayerHand(player).size()];
+		int index = 0;
+		for (Card c : getPlayerHand(player))
+		{
+			cards[index] = c.toString();
+			index++;
+		}
+		return cards;
+	}
+	
+	// probabile macello, forse conviene fare un submitPlayerCardGenerale che inizialmente fa il check sul giocatore Umano o meno e poi si comporta di conseguenza
+	// questa implementazione è corretta e serve a far tirare la carta alla IA e aggiungerla alla stockPile, però se devo far rispondere alle IA ai +2 e ai +4
+	// credo debba fare come credo... altrimenti devo implementare due diverse routine per la risposta ai +2/+4 per IA e per User
+	public void submitIaCard(Player player) throws InvalidPlayerTurnException, InvalidColorSubmissionException, InvalidValueSubmissionException
+	{
+		checkPlayerTurn(player);
+		ArrayList<Card> currentPlayerHand = getPlayerHand(player);
+		
+		String[] cards = handToString(player);
+		
+		for (Card c : currentPlayerHand)
+		{
+			for (String s : cards)
+				if (c.toString().equals(s))
+				{
+					if (s.equals("WILD_DRAW_FOUR") || s.equals("WILD_COLOR_CHANGE"))
+					{
+						currentPlayerHand.remove(c);
+						validColor = getMostFrequentColor(player);
+						validValue = c.getValue();
+						stockPile.add(c);
+						checkGameDirection();
+						
+						if (players[currentPlayer].isHuman())
+						{
+							if (hasDrawFour());
+							{
+								for(int i = 0; i < getPlayerHandSize(players[currentPlayer]); i++)
+								{
+									if (getPlayerHand(players[currentPlayer]).get(i).toString() == "WILD_DRAW_FOUR")
+									{
+										submitPlayerCard(players[currentPlayer], getPlayerHand(players[currentPlayer]).get(i), declaredColor);
+										drawFourCount++;
+										//non so se comando sotto è di troppo o è giusto per passare turno
+										checkGameDirection();
+									}
+								}
+							}
+							if (!hasDrawFour())
+							{
+								for (int i = 0; i <= drawFourCount; i++)
+								{
+									submitDraw(players[currentPlayer]);
+									submitDraw(players[currentPlayer]);
+									submitDraw(players[currentPlayer]);
+									submitDraw(players[currentPlayer]);
+								}
+								showAnsweredDrawFourDialog(drawFourCount);
+								drawFourCount = 0;
+								checkGameDirection();
+							}
+						}
+						else
+						{
+							currentPlayerHand.remove(c);
+							validColor = getMostFrequentColor(player);
+							validValue = c.getValue();
+							stockPile.add(c);
+							checkGameDirection();
+							if (hasDrawFour())
+							{
+								for (int i = 0; i < getPlayerHandSize(players[currentPlayer]); i++)
+								{
+									if (getPlayerHand(players[currentPlayer]).get(i).toString().equals("WILD_DRAW_FOUR"))
+									{
+										submitIaCard(players[currentPlayer]);
+										drawFourCount++;
+										//non so se comando sotto è di troppo o è gisuto per il cambio turno
+										checkGameDirection();
+									}
+								}
+							}
+							if (!hasDrawFour())
+							{
+								for (int i = 0; i <= drawFourCount; i++)
+								{
+									submitDraw(players[currentPlayer]);
+									submitDraw(players[currentPlayer]);
+									submitDraw(players[currentPlayer]);
+									submitDraw(players[currentPlayer]);
+								}
+								showAnsweredDrawFourDialog(drawFourCount);
+								drawFourCount = 0;
+								checkGameDirection();
+							}
+						}
+						
+						
+					}
+					if ((s.equals("RED_DRAW_TWO") && validCardPlay(c)) || s.equals("BLUE_DRAW_TWO") && validCardPlay(c) || s.equals("GREEN_DRAW_TWO") && validCardPlay(c) || s.equals("YELLOW_DRAW_TWO") && validCardPlay(c))
+					{
+						
+						currentPlayerHand.remove(c);
+						validColor = c.getColor();
+						validValue = c.getValue();
+						stockPile.add(c);
+						checkGameDirection();
+						
+						if (players[currentPlayer].isHuman())
+						{
+							drawTwoCount++;
+							if (hasDrawTwo())
+								for(int i = 0; i < getPlayerHandSize(players[currentPlayer]); i++)
+								{
+									if(isDrawTwo(i));
+							 		submitPlayerCard(players[currentPlayer], getPlayerHand(players[currentPlayer]).get(i), declaredColor);
+							 		drawTwoCount++;
+								}
+							if (!hasDrawTwo())
+							{
+								for (int i = 0; i <= drawTwoCount; i++)
+								{
+									submitDraw(players[currentPlayer]);
+									submitDraw(players[currentPlayer]);
+								}
+								showAnsweredDrawTwoDialog(drawTwoCount);
+								drawTwoCount = 0;
+							}
+						}
+						else
+						{
+							drawTwoCount++;
+							if (hasDrawTwo())
+								for(int i = 0; i < getPlayerHandSize(players[currentPlayer]); i++)
+								{
+									if(isDrawTwo(i));
+									//forse dialogo per scelta utente se rispondere al +2 o meno
+							 		submitIaCard(players[currentPlayer]);
+							 		drawTwoCount++;
+								}
+							if (!hasDrawTwo())
+							{
+								for (int i = 0; i <= drawTwoCount; i++)
+								{
+									submitDraw(players[currentPlayer]);
+									submitDraw(players[currentPlayer]);
+								}
+								showAnsweredDrawTwoDialog(drawTwoCount);
+								drawTwoCount = 0;
+							}
+						}
+						
+					}
+					if (s.equals("RED_SKIP") && validCardPlay(c) || s.equals("BLUE_SKIP") && validCardPlay(c) || s.equals("GREEN_SKIP") && validCardPlay(c) || s.equals("YELLOW_SKIP") && validCardPlay(c))
+					{
+						currentPlayerHand.remove(c);
+						showSkipDialog();
+						checkGameDirection();
+						validColor = c.getColor();
+						validValue = c.getValue();
+						stockPile.add(c);
+						checkGameDirection();
+					}
+					if (s.equals("RED_REVERSE") && validCardPlay(c) || s.equals("BLUE_REVERSE") && validCardPlay(c) || s.equals("GREEN_REVERSE") && validCardPlay(c) || s.equals("YELLOW_REVERSE") && validCardPlay(c))
+					{
+						currentPlayerHand.remove(c);
+						showReverseDialog();
+						
+						gameDirection ^= true;
+						if (gameDirection == true)
+						{
+							currentPlayer = (currentPlayer - 2);
+							if (currentPlayer == -1)
+								currentPlayer = players.length - 1;
+							if (currentPlayer == -2)
+								currentPlayer = players.length - 2;
+						}
+						else if(gameDirection == false)
+						{
+							currentPlayer = (currentPlayer + 2);
+						}
+						validColor = c.getColor();
+						validValue = c.getValue();
+						stockPile.add(c);
+						checkGameDirection();
+					}
+					else 
+					{
+						if (validCardPlay(c))
+						{
+							currentPlayerHand.remove(c);
+							validColor = c.getColor();
+							validValue = c.getValue();
+							stockPile.add(c);
+							checkGameDirection();
+						}
+					}
+				}
+		}
+	}
+	
+	public void submitCard(Player player, Card card, Card.Color declaredColor) throws InvalidColorSubmissionException, InvalidValueSubmissionException, InvalidPlayerTurnException
+	{
+		if (player.isHuman())
+			submitPlayerCard(player, card, declaredColor);
+		else
+			submitIaCard(player);
 	}
 	
 	public void observationRoutine(JFrame newView, JFrame oldView)

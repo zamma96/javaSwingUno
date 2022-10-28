@@ -153,9 +153,10 @@ public class SignUpFormController
 				errorMessage();
 			else
 			{
-				model.setUser(new User(nickName));
+				User u = new User(nickName);
+				model.setUser(u);
 				model.setPos(model.getPos());
-				model.getDataBase().addUserData(new UserData(model.getUser(), model.getPos(), 0, 0, 0));
+				model.getDataBase().addUserData(new UserData(model.getUser(), model.getPos(), model.getUser().getGamesWon(), model.getUser().getGamesLoss(), model.getUser().getGamesPlayed()));
 				welcomeMessage();
 				UserHomeView newView = new	UserHomeView(model);
 				model.observationRoutine(newView, view);

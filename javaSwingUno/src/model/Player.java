@@ -26,12 +26,6 @@ public class Player
 		return this.playerHand;
 	}
 	
-	@Override
-	public String toString()
-	{
-		return this.nickName;
-	}
-	
 	public String getPlayerNickName()
 	{
 		return this.nickName;
