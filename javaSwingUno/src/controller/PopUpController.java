@@ -39,7 +39,7 @@ public class PopUpController
 	
 	public void initView()
 	{
-		popUpView.setPreferredSize(new Dimension(500, 500));
+		popUpView.setPreferredSize(new Dimension(500, 600));
 		popUpView.setBounds(750, 40, 700, 800);
 		popUpView.setResizable(false);
 		popUpView.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);

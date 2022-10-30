@@ -309,11 +309,11 @@ javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
 	@Override
 	public void update(Observable o, Object arg) 
 	{
-		if(arg.getClass().getName() == "java.lang.Integer")
+		if(arg.getClass().getName().equals("java.lang.Integer"))
 			this.setPos((Integer) arg);
-		if (arg.getClass().getName() == "model.User")
+		else if (arg.getClass().getName().equals("model.User"))
 			this.setUser((User) arg);
-		if(arg.getClass().getName() == "java.lang.String")
+		else if(arg.getClass().getName().equals("java.lang.String"))
 			this.setName((String) arg);
 	}	
 }

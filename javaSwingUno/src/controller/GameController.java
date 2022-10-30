@@ -36,6 +36,7 @@ public class GameController
 	{
 		this.model = game;
 		this.view = gameStage;
+		gameStage.setButtonIcons();
 		initView();
 	}
 	

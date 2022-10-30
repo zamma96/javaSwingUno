@@ -115,8 +115,8 @@ public class LoginModel extends Observable
 	 */
 	public void observationRoutine(JFrame newView, JFrame oldView)
 	{
-		this.addObserver((Observer)newView);
 		this.deleteObserver((Observer) oldView);
+		this.addObserver((Observer)newView);
 	}
 	
 }

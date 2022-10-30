@@ -31,7 +31,7 @@ public class GameStage extends JFrame implements Observer
 		initComponents();
 		populateArrayList();
 		game.start(game);
-		setButtonIcons();
+		//setButtonIcons();
 		this.lastCard = model.getLastStockPileCard();
 		this.playerIds = model.getPlayersNames();
 	}
@@ -561,13 +561,13 @@ public class GameStage extends JFrame implements Observer
 	@Override
 	public void update(Observable o, Object arg) 
 	{
-		if (arg.getClass().getName() == "model.User")
+		if (arg.getClass().getName().equals("model.User"))
 			setUser((User)arg);
-		if(arg.getClass().getName() == "javax.swing.ImageIcon")
+		else if(arg.getClass().getName().equals("javax.swing.ImageIcon"))
 			StockPileButton.setIcon((Icon)arg);
-		if(arg.getClass().getName() == "java.util.ArrayList")
+		else if(arg.getClass().getName().equals("java.util.ArrayList"))
 			setCardIds((ArrayList<String>)arg);
-		if(arg.getClass().getName() == "model.Card")
+		else if(arg.getClass().getName().equals("model.Card"))
 			setLastCard((Card) arg);
 		
 	}

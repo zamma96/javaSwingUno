@@ -50,6 +50,7 @@ public class Game extends Observable
 	public Game(LoginModel loginModel)
 	{
 		this.loginModel = loginModel;
+		
 		this.dataBase = loginModel.getDataBase();
 		this.user = loginModel.getUser();
 		hasChanged();
@@ -121,7 +122,7 @@ public class Game extends Observable
 	
 	public void showSkipDialog()
 	{
-		JLabel message = new JLabel(this.players[currentPlayer] + " was skipped!");
+		JLabel message = new JLabel(this.players[currentPlayer].getPlayerNickName() + " was skipped!");
 		message.setFont(BIG_GAME_FONT);
 		message.setBackground(TABLE_GREEN);
 		message.setForeground(SALMON_PINK);
@@ -131,7 +132,7 @@ public class Game extends Observable
 	public void showReverseDialog()
 	{
 
-		JLabel message = new JLabel(this.players[currentPlayer].toString() + " has changed the game direction!");
+		JLabel message = new JLabel(this.players[currentPlayer].getPlayerNickName() + " has changed the game direction!");
 		message.setFont(BIG_GAME_FONT);
 		message.setBackground(TABLE_GREEN);
 		message.setForeground(SALMON_PINK);
@@ -140,7 +141,7 @@ public class Game extends Observable
 	
 	public void showDrawTwoDialog()
 	{
-		JLabel message = new JLabel(this.players[currentPlayer].toString() + " drew 2 cards!");
+		JLabel message = new JLabel(this.players[currentPlayer].getPlayerNickName() + " drew 2 cards!");
 		message.setBackground(TABLE_GREEN);
 		message.setForeground(SALMON_PINK);
 		message.setFont(BIG_GAME_FONT);
@@ -149,7 +150,7 @@ public class Game extends Observable
 	
 	public void showAnsweredDrawTwoDialog(int i)
 	{
-		JLabel message = new JLabel(this.players[currentPlayer].toString() + " drew" + i*2 + " cards!");
+		JLabel message = new JLabel(this.players[currentPlayer].getPlayerNickName() + " drew" + i*2 + " cards!");
 		message.setBackground(TABLE_GREEN);
 		message.setForeground(SALMON_PINK);
 		message.setFont(BIG_GAME_FONT);
@@ -158,7 +159,7 @@ public class Game extends Observable
 	
 	public void showDrawFourDialog()
 	{
-		JLabel message = new JLabel(this.players[currentPlayer].toString() + " drew 4 cards!");			
+		JLabel message = new JLabel(this.players[currentPlayer].getPlayerNickName() + " drew 4 cards!");			
 		message.setBackground(TABLE_GREEN);
 		message.setForeground(SALMON_PINK);
 		message.setFont(BIG_GAME_FONT);
@@ -167,7 +168,7 @@ public class Game extends Observable
 	
 	public void showAnsweredDrawFourDialog(int i)
 	{
-		JLabel message = new JLabel(this.players[currentPlayer].toString() + " drew" + i*4 + " cards!");			
+		JLabel message = new JLabel(this.players[currentPlayer].getPlayerNickName() + " drew" + i*4 + " cards!");			
 		message.setBackground(TABLE_GREEN);
 		message.setForeground(SALMON_PINK);
 		message.setFont(BIG_GAME_FONT);
@@ -176,7 +177,7 @@ public class Game extends Observable
 	
 	public void showGameWonDialog()
 	{
-		JLabel message = new JLabel(this.players[currentPlayer] + " won the game!");
+		JLabel message = new JLabel(this.players[currentPlayer].getPlayerNickName() + " won the game!");
 		message.setFont(BIG_GAME_FONT);
 		message.setBackground(TABLE_GREEN);
 		message.setForeground(SALMON_PINK);
@@ -284,7 +285,7 @@ public class Game extends Observable
 	
 	public Card getTopCard()
 	{
-		return stockPile.get(stockPile.size());
+		return stockPile.get(stockPile.size()-1);
 		//return new Card(validColor, validValue);
 	}
 	
@@ -472,8 +473,6 @@ public class Game extends Observable
 					currentPlayerHand.remove(card);
 				showInvalidPlayerMoveColorDialog(card);
 			}
-			else if (card.getValue() != validValue)
-				showInvalidPlayerMoveValueDialog(card);
 		}
 		currentPlayerHand.remove(card);
 		

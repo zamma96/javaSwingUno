@@ -142,7 +142,9 @@ public class UserHomeController
 		model.saveUserData();
 		Game gameModel = new Game(model);
 		GameStage gameView = new GameStage(gameModel);
-		model.observationRoutine(gameView, this.view);
+		model.deleteObserver(this.view);
+		gameModel.addObserver(gameView);
+		//gameModel.observationRoutine(gameView, this.view);
 		GameController controller = new GameController(gameModel, gameView);
 		controller.initController();
 		view.dispose();
