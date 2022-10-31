@@ -157,5 +157,4 @@ public class UserHomeController
 		view.getGamesLossLabel().setText("L: " + model.getDataBase().getSpecUserData(model.getUser()).getGamesLoss());
 		view.getGamesWonLabel().setText("P: " + model.getDataBase().getSpecUserData(model.getUser()).getGamesWon());
 	}
-
 }

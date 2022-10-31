@@ -7,6 +7,7 @@ import java.util.Arrays;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.Random;
+import java.util.Timer;
 import java.util.stream.Collectors;
 
 import javax.swing.Icon;
@@ -93,11 +94,60 @@ public class Game extends Observable
 		return players;
 	}
 
+	public void setStockPile(Card card)
+	{
+		this.stockPile.add(card);
+		validColor = card.getColor();
+		validValue = card.getValue();
+		setChanged();
+		notifyObservers(card);
+	}
+	
 	public void setStockPileButton(Icon icon)
 	{
 		this.stockPileIcon = icon;
 		setChanged();
 		notifyObservers(stockPileIcon);
+	}
+	
+	public int getDrawFourCount()
+	{
+		return drawFourCount;
+	}
+	
+	public int getDrawTwoCount()
+	{
+		return drawTwoCount;
+	}
+	
+	public void setDrawFourCount()
+	{
+		drawFourCount++;
+	}
+	
+	public void setDrawTwoCount()
+	{
+		drawTwoCount++;
+	}
+	
+	public void resetDrawFourCount()
+	{
+		drawFourCount = 0;
+	}
+	
+	public void resetDrawTwoCount()
+	{
+		drawTwoCount = 0;
+	}
+	
+	public int getCurrentPlayerCounter()
+	{
+		return currentPlayer;
+	}
+	
+	public void setCurrentPlayerCounter(int c)
+	{
+		this.currentPlayer = c;
 	}
 	
 	public void showInvalidPlayerMoveColorDialog(Card card) throws InvalidColorSubmissionException
@@ -320,6 +370,17 @@ public class Game extends Observable
 		return null;
 	}
 	
+	public void addGameWon()
+	{
+		loginModel.getDataBase().setUserData(new UserData(user, loginModel.getPos(), user.getGamesWon()+1, user.getGamesLoss(), user.getGamesPlayed()+1), loginModel.getDataBase().getUserData().indexOf(loginModel.getDataBase().getSpecUserData(user)));
+	}
+	
+	public void addGameLoss()
+	{
+		loginModel.getDataBase().setUserData(new UserData(user, loginModel.getPos(), user.getGamesWon(), user.getGamesLoss()+1, user.getGamesPlayed()+1), loginModel.getDataBase().getUserData().indexOf(loginModel.getDataBase().getSpecUserData(user)));
+	}
+	
+	
 	public String[] getPlayersNames()
 	{
 		ArrayList<String> playerNamesL = new ArrayList<String>();
@@ -451,6 +512,11 @@ public class Game extends Observable
 	public void setValidColor(Card.Color color)
 	{
 		validColor = color;
+	}
+	
+	public void setValidValue(Card.Value value)
+	{
+		validValue = value;
 	}
 	
 	public void submitPlayerCard(Player player, Card card, Card.Color declaredColor)throws InvalidColorSubmissionException, InvalidValueSubmissionException, InvalidPlayerTurnException
@@ -785,6 +851,19 @@ public class Game extends Observable
 			submitPlayerCard(player, card, declaredColor);
 		else
 			submitIaCard(player);
+	}
+	
+	public void gameLoop() throws InvalidPlayerTurnException, InvalidColorSubmissionException, InvalidValueSubmissionException
+	{
+		while (players[currentPlayer].isHuman() == false)
+		{
+			//Timer timer = new Timer();
+			
+			submitIaCard(players[currentPlayer]);
+		}
+			
+		
+			
 	}
 	
 	public void observationRoutine(JFrame newView, JFrame oldView)
