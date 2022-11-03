@@ -27,7 +27,6 @@ public class GameController
 	private Game model;
 	private GameStage view;
 	private PopUp window;
-	private static Font BIG_GAME_FONT = new Font("Comic Sans MS", Font.BOLD, 48);
 	private static Font MID_GAME_FONT = new Font("Comic Sans MS", Font.BOLD, 36);
 	private static Color TABLE_GREEN = new Color(53, 101, 77);
 	private static Color SALMON_PINK = new Color(255, 145, 164);
@@ -96,6 +95,8 @@ public class GameController
 	public void initController()
 	{
 		gameViewListener(view);
+		//chiamare qui instanziazione game loop
+		
 	}
 	
 	public void gameViewListener(GameStage gameView)
@@ -466,4 +467,10 @@ public class GameController
 	{
 		model.getDataBase().loadByFile(file);
 	}
+	
+	public static void main(String[] args)
+	{
+		
+	}
+	
 }

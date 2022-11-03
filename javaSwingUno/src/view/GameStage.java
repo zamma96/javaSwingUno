@@ -6,13 +6,16 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.*;
 import java.util.stream.Collectors;
 import javax.swing.*;
 import model.InvalidPlayerTurnException;
+import model.InvalidValueSubmissionException;
 import model.User;
 import model.Card;
 import model.Game;
+import model.InvalidColorSubmissionException;
 
 public class GameStage extends JFrame implements Observer 
 {
@@ -557,7 +560,21 @@ public class GameStage extends JFrame implements Observer
     private JLabel iaNameLabel2;
     private JLabel iaNameLabel3;
 	
-
+    
+    public void run() throws InvalidPlayerTurnException, InvalidColorSubmissionException, InvalidValueSubmissionException, InterruptedException
+    {
+    	while (this != null)
+    	{
+    		int currentPlayer = game.getCurrentPlayerCounter();
+    		//1. update
+    		//2. draw
+    		if (game.getPlayers()[currentPlayer].isHuman() == false)
+    		{
+    			game.submitAICard();
+    		}
+    	}
+    }
+    
 	@Override
 	public void update(Observable o, Object arg) 
 	{

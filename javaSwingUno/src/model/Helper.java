@@ -161,17 +161,7 @@ public class Helper extends TimerTask
 		{
 			game.showReverseDialog();
 			
-			game.gameDirection ^= true;
-			if (game.gameDirection == true)
-			{
-				game.setCurrentPlayerCounter(game.getCurrentPlayerCounter()-2);
-				if (game.getCurrentPlayerCounter() == -1)
-					game.setCurrentPlayerCounter(players.length-1);
-				if (game.getCurrentPlayerCounter() == -2)
-					game.setCurrentPlayerCounter(players.length-2);
-			}
-			else if(game.gameDirection == false)
-				game.setCurrentPlayerCounter(game.getCurrentPlayerCounter()+2);
+			game.reverseRoutine();
 		}
 		else
 		{
@@ -193,6 +183,107 @@ public class Helper extends TimerTask
 					game.setStockPile(c);
 					game.checkGameDirection();
 				}
+			}
+		}
+	}
+	
+	public void submitPlayerCard(Card card) throws InvalidColorSubmissionException, InvalidPlayerTurnException, InvalidValueSubmissionException
+	{
+		ArrayList<Card> currentPlayerHand = game.getPlayerHand(players[game.getCurrentPlayerCounter()]);
+		validColor = game.getLastStockPileCard().getColor();
+		validValue = game.getLastStockPileCard().getValue();
+		
+		if (game.getLastStockPileCard().getColor().equals(Card.Color.WILD))	
+		{
+			if (game.getLastStockPileCard().getValue().equals(Card.Value.DRAW_FOUR))
+			{
+				if (game.hasDrawFour())
+				{
+					for (Card c : currentPlayerHand)
+						if (c.toString().equals("WILD_DRAW_FOUR"))
+							game.answerDrawFourDialog(c);
+				}
+				if (!game.hasDrawFour())
+				{
+					for (int i = 0; i <= game.getDrawFourCount(); i++)
+					{
+						game.submitDraw(players[game.getCurrentPlayerCounter()]);
+						game.submitDraw(players[game.getCurrentPlayerCounter()]);
+						game.submitDraw(players[game.getCurrentPlayerCounter()]);
+						game.submitDraw(players[game.getCurrentPlayerCounter()]);
+					}
+					game.showAnsweredDrawFourDialog(game.getDrawFourCount());
+					game.resetDrawFourCount();
+					game.checkGameDirection();
+				}
+			}
+			if (game.getLastStockPileCard().getValue().equals(Card.Value.COLOR_CHANGE))
+			{
+				if (!game.validCardPlay(card))
+				{
+					if (card.getColor().equals(Card.Color.WILD))
+					{
+						currentPlayerHand.remove(card);
+						validColor = card.getColor();
+						validValue = card.getValue();
+					}
+					if (card.getColor() != validColor)
+					{
+						if (card.getValue().equals(validValue))
+						{
+							currentPlayerHand.remove(card);
+							game.colorChangeDialog();
+						}
+						else
+							game.showInvalidPlayerMoveValueDialog(card);
+					}
+					else
+						game.showInvalidPlayerMoveColorDialog(card);
+				}
+			}
+		}
+		if (game.getLastStockPileCard().getValue().equals(Card.Value.DRAW_TWO))
+		{
+			if (game.hasDrawTwo())
+			{
+				for (Card c : currentPlayerHand)
+					if (c.getValue().toString().equals("DRAW_TWO"))
+						game.answerDrawTwoDialog(c);
+			}
+			if (!game.hasDrawTwo())
+			{
+				for (int i = 0; i<= game.getDrawTwoCount(); i++)
+				{
+					game.submitDraw(players[game.getCurrentPlayerCounter()]);
+					game.submitDraw(players[game.getCurrentPlayerCounter()]);
+				}
+				game.showAnsweredDrawTwoDialog(game.getDrawTwoCount());
+				game.resetDrawTwoCount();
+				game.checkGameDirection();
+			}
+		}
+		if (game.getLastStockPileCard().getValue().equals(Card.Value.SKIP))
+		{
+			game.checkGameDirection();
+			game.showSkipDialog();
+		}
+		if (game.getLastStockPileCard().getValue().equals(Card.Value.REVERSE))
+		{
+			game.showReverseDialog();
+			game.reverseRoutine();
+		}
+		else
+		{
+			if (!game.validCardPlay(card))
+				game.showInvalidPlayerMoveColorDialog(card);
+			else
+			{
+				currentPlayerHand.remove(card);
+				gameOverCheck();
+				game.setValidColor(card.getColor());
+				game.setValidValue(card.getValue());
+				game.setStockPile(card);
+				game.checkGameDirection();
 			}
 		}
 	}
