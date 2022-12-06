@@ -223,6 +223,39 @@ public class GameController
 		});
 	}
 	
+	
+	/**
+	 * 
+	 * @param evt
+	 * 
+	 * Forse per migliorare e facilitarmi il tutto posso semplicemente
+	 * prendere l'indice della carta in mano dalla pressione del bottone
+	 * della carta, e implementare un metodo per aprire la relativa 
+	 * finestra senza ripetere lo stesso codice per 16 volte.
+	 */
+	
+	public void cardActionWithoutPopUp(int i)
+	{
+		String cardId = model.getCardIds().get(i);
+		model.setChoice(i);
+	}
+	
+	public void cardAction(int i)
+	{
+		String cardId = model.getCardIds().get(i);
+		model.setChoice(i);
+		window = new PopUp(cardId, model, model.getcardButtons(), view);
+		model.addObserver(window);
+		PopUpController controller = new PopUpController(model, view, window);
+		controller.initController(window);
+	}
+	
+	/**
+	 * 
+	 * implementare colorChangeDialog in popUpClass
+	 * 
+	 */
+	
 	//dovrebbe andare bene, quando si tocca un bottone della carta
 	//si apre il popUp relativo alla carta, che controllerà il tipo di carta
 	//e in caso proporrà un popUp di scelta colore.
@@ -230,209 +263,97 @@ public class GameController
 	private void jButton1ActionPerformed(ActionEvent evt) 
 	{
 		if (model.getCardIds().get(0) != null) 
-		{
-			int index = 0;
-			String cardId = model.getCardIds().get(0);
-			window = new PopUp(cardId, model, index, model.getcardButtons(), view, view.getStockPileButton());
-			PopUpController controller = new PopUpController(model, view, window);
-			controller.initController(window);
-			model.addObserver(window);
-		}
+			cardAction(0);
 	}
 	
 	private void jButton2ActionPerformed(ActionEvent evt) 
 	{
 		if (model.getCardIds().get(1) != null) 
-		{
-			int index = 1;
-			String cardId = model.getCardIds().get(1);
-			window = new PopUp(cardId, model, index, model.getcardButtons(), view, view.getStockPileButton());
-			PopUpController controller = new PopUpController(model, view, window);
-			controller.initController(window);
-			model.addObserver(window);
-		}
+			cardAction(1);
 	}
 	
 	private void jButton3ActionPerformed(ActionEvent evt)
 	{
 		if (model.getCardIds().get(2) != null)
-		{
-			int index = 2;
-			String cardId = model.getCardIds().get(2);
-			window = new PopUp(cardId, model, index, model.getcardButtons(), view, view.getStockPileButton());
-			PopUpController controller = new PopUpController(model, view, window);
-			controller.initController(window);
-			model.addObserver(window);
-		}
+			cardAction(2);
 	}
 	
 	private void jButton4ActionPerformed(ActionEvent evt)
 	{
 		if (model.getCardIds().get(3) != null)
-		{
-			int index = 3;
-			String cardId = model.getCardIds().get(3);
-			window = new PopUp(cardId, model, index, model.getcardButtons(), view, view.getStockPileButton());
-			PopUpController controller = new PopUpController(model, view, window);
-			controller.initController(window);
-			model.addObserver(window);
-		}
+			cardAction(3);
 	}
 	
 	private void jButton5ActionPerformed(ActionEvent evt)
 	{
 		if (model.getCardIds().get(4) != null)
-		{
-			int index = 4;
-			String cardId = model.getCardIds().get(4);
-			window = new PopUp(cardId, model, index, model.getcardButtons(), view, view.getStockPileButton());
-			PopUpController controller = new PopUpController(model, view, window);
-			controller.initController(window);
-			model.addObserver(window);
-		}
+			cardAction(4);
 	}
 	
 	private void jButton6ActionPerformed(ActionEvent evt)
 	{
 		if (model.getCardIds().get(5) != null)
-		{
-			int index = 5;
-			String cardId = model.getCardIds().get(5);
-			window = new PopUp(cardId, model, index, model.getcardButtons(), view, view.getStockPileButton());
-			PopUpController controller = new PopUpController(model, view, window);
-			controller.initController(window);
-			model.addObserver(window);
-		}
+			cardAction(5);
 	}
 	
 	private void jButton7ActionPerformed(ActionEvent evt)
 	{
 		if (model.getCardIds().get(6) != null)
-		{
-			int index = 6;
-			String cardId = model.getCardIds().get(6);
-			window = new PopUp(cardId, model, index, model.getcardButtons(), view, view.getStockPileButton());
-			PopUpController controller = new PopUpController(model, view, window);
-			controller.initController(window);
-			model.addObserver(window);
-		}
+			cardAction(6);
 	}
 	
 	private void jButton8ActionPerformed(ActionEvent evt)
 	{
 		if (model.getCardIds().get(7) != null)
-		{
-			int index = 7;
-			String cardId = model.getCardIds().get(7);
-			window = new PopUp(cardId, model, index, model.getcardButtons(), view, view.getStockPileButton());
-			PopUpController controller = new PopUpController(model, view, window);
-			controller.initController(window);
-			model.addObserver(window);
-		}
+			cardAction(7);
 	}
 	
 	private void jButton9ActionPerformed(ActionEvent evt)
 	{
 		if(model.getCardIds().get(8) != null)
-		{
-			int index = 8;
-			String cardId = model.getCardIds().get(8);
-			window = new PopUp(cardId, model, index, model.getcardButtons(), view, view.getStockPileButton());
-			PopUpController controller = new PopUpController(model, view, window);
-			controller.initController(window);
-			model.addObserver(window);
-		}
+			cardAction(8);
 	}
 	
 	private void jButton10ActionPerformed(ActionEvent evt)
 	{
 		if(model.getCardIds().get(9) != null)
-		{
-			int index = 9;
-			String cardId = model.getCardIds().get(9);
-			window = new PopUp(cardId, model, index, model.getcardButtons(), view, view.getStockPileButton());
-			PopUpController controller = new PopUpController(model, view, window);
-			controller.initController(window);
-			model.addObserver(window);
-		}
+			cardAction(9);
 	}
 	
 	private void jButton11ActionPerfomed(ActionEvent evt)
 	{
 		if(model.getCardIds().get(10) != null)
-		{
-			int index = 10;
-			String cardId = model.getCardIds().get(10);
-			window = new PopUp(cardId, model, index, model.getcardButtons(), view, view.getStockPileButton());
-			PopUpController controller = new PopUpController(model, view, window);
-			controller.initController(window);
-			model.addObserver(window);
-		}
+			cardAction(10);
 	}
 	
 	private void jButton12ActionPerformed(ActionEvent evt)
 	{
 		if (model.getCardIds().get(11) != null)
-		{
-			int index = 11;
-			String cardId = model.getCardIds().get(11);
-			window = new PopUp(cardId, model, index, model.getcardButtons(), view, view.getStockPileButton());
-			PopUpController controller = new PopUpController(model, view, window);
-			controller.initController(window);
-			model.addObserver(window);
-		}
+			cardAction(11);
 	}
 	
 	private void jButton13ActionPerformed(ActionEvent evt)
 	{
 		if(model.getCardIds().get(12)!= null)
-		{
-			int index = 12;
-			String cardId = model.getCardIds().get(12);
-			window = new PopUp(cardId, model, index, model.getcardButtons(), view, view.getStockPileButton());
-			PopUpController controller = new PopUpController(model, view, window);
-			controller.initController(window);
-			model.addObserver(window);
-		}
+			cardAction(12);
 	}
 	
 	private void jButton14ActionPerformed(ActionEvent evt)
 	{
 		if (model.getCardIds().get(13) != null)
-		{
-			int index = 13;
-			String cardId = model.getCardIds().get(13);
-			window = new PopUp(cardId, model, index, model.getcardButtons(), view, view.getStockPileButton());
-			PopUpController controller = new PopUpController(model, view, window);
-			controller.initController(window);
-			model.addObserver(window);
-		}
+			cardAction(13);
 	}
 	
 	private void jButton15ActionPerformed(ActionEvent evt)
 	{
 		if (model.getCardIds().get(14) != null)
-		{
-			int index = 14;
-			String cardId = model.getCardIds().get(14);
-			window = new PopUp(cardId, model, index, model.getcardButtons(), view, view.getStockPileButton());
-			PopUpController controller = new PopUpController(model, view, window);
-			controller.initController(window);
-			model.addObserver(window);
-		}
+			cardAction(14);
 	}
 	
 	private void jButton16ActionPerformed(ActionEvent evt)
 	{
 		if (model.getCardIds().get(15) != null)
-		{
-			int index = 15;
-			String cardId = model.getCardIds().get(15);
-			window = new PopUp(cardId, model, index, model.getcardButtons(), view, view.getStockPileButton());
-			PopUpController controller = new PopUpController(model, view, window);
-			controller.initController(window);
-			model.addObserver(window);
-		}
+			cardAction(15);
 	}
 	
 	private void drawCardButtonActionPerformed(ActionEvent evt)
@@ -467,10 +388,4 @@ public class GameController
 	{
 		model.getDataBase().loadByFile(file);
 	}
-	
-	public static void main(String[] args)
-	{
-		
-	}
-	
 }

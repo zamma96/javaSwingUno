@@ -33,7 +33,6 @@ public class PopUp extends JFrame implements Observer
     private int choice;
     private ArrayList<JButton> cardButtons;
     private GameStage gameStage;
-    private JButton StockPileButton;
     private Card.Color declaredColor;
     
     
@@ -44,41 +43,21 @@ public class PopUp extends JFrame implements Observer
      * @param index
      * @param cardButtons
      * @param gameStage
-     * @param StockPileButton
      * 
      * Constructor, sets class fields to the params specified 
      * 
      */
-    public PopUp(String cardName, Game game, int index, ArrayList<JButton> cardButtons, GameStage gameStage, JButton StockPileButton) 
+    public PopUp(String cardName, Game game, ArrayList<JButton> cardButtons, GameStage gameStage) 
     {
         initComponents();
-        //in teoria declaredColor viene aggiornato subito dopo che viene settato il declaredColor nel model
-        declaredColor = game.getTopCard().getColor();
+        this.declaredColor = game.getDeclaredColor();
         this.cardImage = cardName;
         this.game = game;
         this.playerHand = game.getPlayerHand(game.getCurrentPlayer());
-        this.choice = index;
         this.cardButtons = cardButtons;
-        //in teoria queste due righe circondate da commenti sono inutili, perché 
-        Icon icon = new ImageIcon(".\\resources\\Images\\" + cardImage + ".png");
-        CardLabel.setIcon(icon);
-        //CardLabel viene inizializzata da PopUpController.initView()
         this.gameStage = gameStage;
-        this.StockPileButton = StockPileButton;
     }
-    
-    //forse StockPileButton non serve mantenerlo qua,
-    //bisognerebbe prendere (se serve) la variabile dal model
-    
-    /**
-     * 
-     * @return StockPileButton variable
-     */
-    public JButton getStockPileButton()
-    {
-    	return StockPileButton;
-    }
-    
+     
     /**
      * 
      * @return UseCardButton variable
@@ -193,7 +172,7 @@ public class PopUp extends JFrame implements Observer
 	{
 		if (arg.getClass().getName().equals("Card.Color"))
 			this.declaredColor = (Card.Color)arg;
-
-		
+		if (arg.getClass().getName().equals("java.lang.Integer"))
+			this.choice = (Integer)arg;
 	}
 }
