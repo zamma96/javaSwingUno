@@ -42,10 +42,14 @@ public class Game extends Observable
 	private User user;
 	private Card.Color declaredColor;
 	private String playerIdName;
-	private int drawTwoCount = 0;
-	private int drawFourCount = 0;
+	private int drawTwoCount = 1;
+	private int drawFourCount = 1;
 	private Icon stockPileIcon = new ImageIcon();
-	private int choice;
+	private Integer choice;
+	//debug
+	private Card card;
+	//
+	
 	
 	private static Font BIG_GAME_FONT = new Font("Comic Sans MS", Font.BOLD, 48);
 	private static Color TABLE_GREEN = new Color(53, 101, 77);
@@ -105,8 +109,6 @@ public class Game extends Observable
 	public void setStockPile(Card card)
 	{
 		this.stockPile.add(card);
-		validColor = card.getColor();
-		validValue = card.getValue();
 		setChanged();
 		notifyObservers(card);
 	}
@@ -118,12 +120,12 @@ public class Game extends Observable
 		notifyObservers(stockPileIcon);
 	}
 	
-	public int getChoice()
+	public Integer getChoice()
 	{
 		return choice;
 	}
 	
-	public void setChoice(int i)
+	public void setChoice(Integer i)
 	{
 		this.choice = i;
 		setChanged();
@@ -152,12 +154,12 @@ public class Game extends Observable
 	
 	public void resetDrawFourCount()
 	{
-		drawFourCount = 0;
+		drawFourCount = 1;
 	}
 	
 	public void resetDrawTwoCount()
 	{
-		drawTwoCount = 0;
+		drawTwoCount = 1;
 	}
 	
 	public int getCurrentPlayerCounter()
@@ -168,6 +170,10 @@ public class Game extends Observable
 	public void setCurrentPlayerCounter(int c)
 	{
 		this.currentPlayer = c;
+		if (currentPlayer == players.length)
+			currentPlayer = 0;
+		else if (currentPlayer == -1)
+			currentPlayer = players.length-1;
 	}
 	
 	public void showInvalidPlayerMoveFinishDialog(Card card) throws InvalidSubmissionFinisherException
@@ -211,7 +217,6 @@ public class Game extends Observable
 	
 	public void showReverseDialog()
 	{
-
 		JLabel message = new JLabel(this.players[currentPlayer].getPlayerNickName() + " has changed the game direction!");
 		message.setFont(BIG_GAME_FONT);
 		message.setBackground(TABLE_GREEN);
@@ -219,36 +224,31 @@ public class Game extends Observable
 		JOptionPane.showMessageDialog(null, message);
 	}
 	
-	public void showDrawTwoDialog()
+	public void firstReverseDialog()
 	{
-		JLabel message = new JLabel(this.players[currentPlayer].getPlayerNickName() + " drew 2 cards!");
+		JLabel message = new JLabel("The game direction has changed!");
+		message.setFont(BIG_GAME_FONT);
 		message.setBackground(TABLE_GREEN);
 		message.setForeground(SALMON_PINK);
-		message.setFont(BIG_GAME_FONT);
 		JOptionPane.showMessageDialog(null, message);
 	}
+	
 	
 	public void showAnsweredDrawTwoDialog(int i)
 	{
-		JLabel message = new JLabel(this.players[currentPlayer].getPlayerNickName() + " drew" + i*2 + " cards!");
+		
+		JLabel message = new JLabel(this.players[currentPlayer].getPlayerNickName() + " drew " + i*2 + " cards!");
 		message.setBackground(TABLE_GREEN);
 		message.setForeground(SALMON_PINK);
 		message.setFont(BIG_GAME_FONT);
 		JOptionPane.showMessageDialog(null, message);
 	}
-	
-	public void showDrawFourDialog()
-	{
-		JLabel message = new JLabel(this.players[currentPlayer].getPlayerNickName() + " drew 4 cards!");			
-		message.setBackground(TABLE_GREEN);
-		message.setForeground(SALMON_PINK);
-		message.setFont(BIG_GAME_FONT);
-		JOptionPane.showMessageDialog(null, message);
-	}
+
 	
 	public void showAnsweredDrawFourDialog(int i)
 	{
-		JLabel message = new JLabel(this.players[currentPlayer].getPlayerNickName() + " drew" + i*4 + " cards!");			
+		
+		JLabel message = new JLabel(this.players[currentPlayer].getPlayerNickName() + " drew " + i*4 + " cards!");			
 		message.setBackground(TABLE_GREEN);
 		message.setForeground(SALMON_PINK);
 		message.setFont(BIG_GAME_FONT);
@@ -302,8 +302,10 @@ public class Game extends Observable
 	public void start(Game game)
 	{
 		Card card = deck.drawCard();
-		validColor = card.getColor();
-		validValue = card.getValue();
+		setValidColor(card.getColor());
+		setValidValue(card.getValue());
+		setDeclaredColor(card.getColor());
+		
 		
 		if (card.getValue() == Card.Value.COLOR_CHANGE|| card.getValue() == Card.Value.DRAW_TWO || card.getValue() == Card.Value.DRAW_FOUR)
 			start(game); //this cards can't start a UNO game
@@ -314,7 +316,7 @@ public class Game extends Observable
 		}
 		if (card.getValue() == Card.Value.REVERSE)
 		{
-			showReverseDialog();
+			firstReverseDialog();
 			gameDirection ^= true;
 			currentPlayer = players.length-1;
 		}
@@ -326,14 +328,14 @@ public class Game extends Observable
 	
 	public void setDeclaredColor(Card.Color c)
 	{
-		declaredColor = c;
+		this.declaredColor = c;
 		setChanged();
 		notifyObservers((Card.Color) c);
 	}
 	
 	public Card.Color getDeclaredColor()
 	{
-		return declaredColor;
+		return this.declaredColor;
 	}
 	
 	public Card getLastStockPileCard()
@@ -448,14 +450,7 @@ public class Game extends Observable
 	{
 		return this.deck;
 	}
-/*	Useless
-	public void setPlayerIdName(String s)
-	{
-		this.playerIdName = s;
-		setChanged();
-		notifyObservers(s);
-	}
-*/
+
 	public String getPlayerIdName() 
 	{
 		return playerIdName;
@@ -499,7 +494,7 @@ public class Game extends Observable
 	
 	public boolean validCardPlay(Card card)
 	{
-		return card.getColor() == validColor || card.getValue() == validValue;
+		return card.getColor().equals(validColor) || card.getValue().equals(validValue);
 	}
 	
 	public void checkPlayerTurn(Player player) throws InvalidPlayerTurnException
@@ -514,16 +509,16 @@ public class Game extends Observable
 	public void checkGameDirection()
 	{
 		if (gameDirection == false)
+		{
 			currentPlayer++;
+			if (currentPlayer == players.length)
+				currentPlayer = 0;
+		}
 		else if(gameDirection == true) 
 		{
 			currentPlayer--;
 			if (currentPlayer == -1)
 				currentPlayer = players.length -1;		
-		}
-		if (players[currentPlayer].isHuman() == false)
-		{
-			
 		}
 	}
 	
@@ -544,9 +539,19 @@ public class Game extends Observable
 		validColor = color;
 	}
 	
+	public Card.Color getValidColor()
+	{
+		return validColor;
+	}
+	
 	public void setValidValue(Card.Value value)
 	{
 		validValue = value;
+	}
+	
+	public Card.Value getValidValue()
+	{
+		return validValue;
 	}
 	
 	public String[] handToString(Player player)
@@ -653,11 +658,11 @@ public class Game extends Observable
 						if (c.toString().equals("WILD_DRAW_FOUR"))
 						{
 							currentPlayerHand.remove(currentPlayerHand.indexOf(c));
-							gameOverCheck();
 							setValidColor(getMostFrequentColor(players[getCurrentPlayerCounter()]));
 							setValidValue(c.getValue());
-							isGameOver();
+							setDeclaredColor(getValidColor());
 							setStockPile(c);
+							setStockPileButton(new ImageIcon(".\\resources\\UnoCards\\" + c.toString() + ".png"));
 							checkGameDirection();
 							setDrawFourCount();
 						}
@@ -686,7 +691,9 @@ public class Game extends Observable
 						gameOverCheck();
 						setValidColor(c.getColor());
 						setValidValue(c.getValue());
+						setDeclaredColor(c.getColor());
 						setStockPile(c);
+						setStockPileButton(new ImageIcon(".\\resources\\UnoCards\\" + c.toString() + ".png"));
 						checkGameDirection();
 					}
 					else if (c.getValue().equals(validValue))
@@ -695,8 +702,21 @@ public class Game extends Observable
 						gameOverCheck();
 						setValidColor(getMostFrequentColor(players[getCurrentPlayerCounter()]));
 						setValidValue(c.getValue());
+						setDeclaredColor(c.getColor());
 						setStockPile(c);
+						setStockPileButton(new ImageIcon(".\\resources\\UnoCards\\" + c.toString() + ".png"));
 						checkGameDirection();
+					}
+					else if (c.getValue().equals(Card.Value.DRAW_FOUR))
+					{
+						currentPlayerHand.remove(currentPlayerHand.indexOf(c));
+						setValidColor(getMostFrequentColor(players[getCurrentPlayerCounter()]));
+						setValidValue(c.getValue());
+						setDeclaredColor(getValidColor());
+						setStockPile(c);
+						setStockPileButton(new ImageIcon(".\\resources\\UnoCards\\" + c.toString() + ".png"));
+						checkGameDirection();
+						setDrawFourCount();
 					}
 					else
 						submitDraw(players[getCurrentPlayerCounter()]);
@@ -715,6 +735,7 @@ public class Game extends Observable
 						setValidColor(c.getColor());
 						setValidValue(c.getValue());
 						setStockPile(c);
+						setStockPileButton(new ImageIcon(".\\resources\\UnoCards\\" + c.toString() + ".png"));
 						checkGameDirection();
 						setDrawTwoCount();
 					}
@@ -752,6 +773,7 @@ public class Game extends Observable
 					gameOverCheck();
 					setValidValue(c.getValue());
 					setStockPile(c);
+					setStockPileButton(new ImageIcon(".\\resources\\UnoCards\\" + c.toString() + ".png"));
 					checkGameDirection();
 				}
 				else if (c.getValue() == validValue)
@@ -760,6 +782,7 @@ public class Game extends Observable
 					gameOverCheck();
 					setValidColor(c.getColor());
 					setStockPile(c);
+					setStockPileButton(new ImageIcon(".\\resources\\UnoCards\\" + c.toString() + ".png"));
 					checkGameDirection();
 				}
 			}
@@ -769,8 +792,9 @@ public class Game extends Observable
 	public void submitPlayerCard(Card card) throws InvalidColorSubmissionException, InvalidPlayerTurnException, InvalidValueSubmissionException, InvalidSubmissionFinisherException
 	{
 		ArrayList<Card> currentPlayerHand = getPlayerHand(players[getCurrentPlayerCounter()]);
-		validColor = getLastStockPileCard().getColor();
-		validValue = getLastStockPileCard().getValue();
+		setValidColor(getLastStockPileCard().getColor());
+		setValidValue(getLastStockPileCard().getValue());
+		setDeclaredColor(getLastStockPileCard().getColor());
 		
 		if ((currentPlayerHand.size() == 1) && (currentPlayerHand.get(0).getValue().equals(Card.Value.COLOR_CHANGE) || currentPlayerHand.get(0).getValue().equals(Card.Value.DRAW_FOUR) && currentPlayerHand.get(0).getValue().equals(Card.Value.DRAW_TWO) && currentPlayerHand.get(0).getValue().equals(Card.Value.SKIP) && currentPlayerHand.get(0).getValue().equals(Card.Value.REVERSE)))
 		{
@@ -811,10 +835,10 @@ public class Game extends Observable
 				if (card.getColor().equals(Card.Color.WILD))
 				{
 					currentPlayerHand.remove(card);
-					validColor = card.getColor();
-					validValue = card.getValue();
+					setValidColor(card.getColor());
+					setValidValue(card.getValue());
 				}
-				if (card.getColor() != validColor)
+				if (!card.getColor().equals(validColor))
 				{
 					if (card.getValue().equals(validValue))
 					{
@@ -824,8 +848,10 @@ public class Game extends Observable
 					else
 						showInvalidPlayerMoveValueDialog(card);
 		    		}
+				
 				else
 					showInvalidPlayerMoveColorDialog(card);
+				
 			}
 		}
 		if (getLastStockPileCard().getValue().equals(Card.Value.DRAW_TWO))
@@ -860,6 +886,10 @@ public class Game extends Observable
 		}
 		else
 		{
+			Card.Color coloreCarta = card.getColor();
+			String valoreCarta = card.getValue().toString();
+			Card.Color validC = getValidColor();
+			String valid = getValidValue().toString();
 			if (!validCardPlay(card))
 			{
 				if (card.getValue().equals(Card.Value.COLOR_CHANGE))
@@ -871,7 +901,18 @@ public class Game extends Observable
 					gameOverCheck();
 					
 				}
-				showInvalidPlayerMoveColorDialog(card);
+				if (card.getValue().toString().equals("DRAW_FOUR"))
+				{
+					if (currentPlayerHand.size() ==1)
+						showInvalidPlayerMoveFinishDialog(card);
+					currentPlayerHand.remove(card);
+					colorChangeDialog();
+					gameOverCheck();
+					stockPile.add(card);
+					drawFourCount++;
+				}
+				else
+					showInvalidPlayerMoveColorDialog(card);
 			}
 			else
 			{

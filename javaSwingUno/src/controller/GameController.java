@@ -95,7 +95,7 @@ public class GameController
 	public void initController()
 	{
 		gameViewListener(view);
-		//chiamare qui instanziazione game loop
+		//model.gameLoop();
 		
 	}
 	
@@ -234,20 +234,16 @@ public class GameController
 	 * finestra senza ripetere lo stesso codice per 16 volte.
 	 */
 	
-	public void cardActionWithoutPopUp(int i)
-	{
-		String cardId = model.getCardIds().get(i);
-		model.setChoice(i);
-	}
 	
 	public void cardAction(int i)
 	{
 		String cardId = model.getCardIds().get(i);
-		model.setChoice(i);
 		window = new PopUp(cardId, model, model.getcardButtons(), view);
 		model.addObserver(window);
+		model.setChoice(i);
 		PopUpController controller = new PopUpController(model, view, window);
 		controller.initController(window);
+		view.setButtonIcons();
 	}
 	
 	/**
