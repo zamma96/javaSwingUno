@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -14,7 +15,10 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import model.Game;
+import model.InvalidColorSubmissionException;
 import model.InvalidPlayerTurnException;
+import model.InvalidSubmissionFinisherException;
+import model.InvalidValueSubmissionException;
 import view.GameStage;
 import view.PopUp;
 
@@ -95,8 +99,7 @@ public class GameController
 	public void initController()
 	{
 		gameViewListener(view);
-		//model.gameLoop();
-		
+		//view.run();
 	}
 	
 	public void gameViewListener(GameStage gameView)
@@ -246,16 +249,23 @@ public class GameController
 		view.setButtonIcons();
 	}
 	
-	/**
-	 * 
-	 * implementare colorChangeDialog in popUpClass
-	 * 
-	 */
+	/*
+	public void gameLoop() throws InvalidPlayerTurnException, InvalidColorSubmissionException, InvalidValueSubmissionException, InterruptedException, InvalidSubmissionFinisherException
+	{
+		while (model.getPlayers()[model.getCurrentPlayerCounter()].isHuman() == false)
+		{
+			model.submitAICard();
+			model.gameOverCheck();
+			TimeUnit.SECONDS.sleep(10L);
+		}	
+		if (model.getPlayers()[model.getCurrentPlayerCounter()].isHuman())
+		{
+			wait();
+		}
+	}
+	*/
 	
-	//dovrebbe andare bene, quando si tocca un bottone della carta
-	//si apre il popUp relativo alla carta, che controllerà il tipo di carta
-	//e in caso proporrà un popUp di scelta colore.
-	//il popup verrà chiuso con il click del bottone SubmitCard
+
 	private void jButton1ActionPerformed(ActionEvent evt) 
 	{
 		if (model.getCardIds().get(0) != null) 
@@ -356,7 +366,8 @@ public class GameController
 	{
 		try
 		{
-			model.submitDraw(model.getCurrentPlayer());
+			if (model.getCurrentPlayer().isHuman())
+				model.submitDraw(model.getCurrentPlayer());
 		}
 		catch (InvalidPlayerTurnException ex)
 		{

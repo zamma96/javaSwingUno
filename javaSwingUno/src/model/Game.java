@@ -40,15 +40,13 @@ public class Game extends Observable
 	private ArrayList<JButton> cardButtons;
 	public boolean gameDirection;
 	private User user;
-	private Card.Color declaredColor;
 	private String playerIdName;
 	private int drawTwoCount = 1;
 	private int drawFourCount = 1;
-	private Icon stockPileIcon = new ImageIcon();
 	private Integer choice;
-	//debug
-	private Card card;
-	//
+	//per aggiornamenti
+	private Icon stockPileIcon = new ImageIcon();
+	private Card lastCard;
 	
 	
 	private static Font BIG_GAME_FONT = new Font("Comic Sans MS", Font.BOLD, 48);
@@ -69,13 +67,15 @@ public class Game extends Observable
 		stockPile = new ArrayList<Card>();
 		for (int i = 0; i < nameArray.length; i++)
 			namePool.add(nameArray[i]);
-		players[0] = new Player(0, user.getNickName(), true, new ArrayList<Card>(Arrays.asList(deck.drawCard(7))));
-		//playersHands.add(getPlayerHand(players[0]));
+		ArrayList<Card> userHand = new ArrayList<Card>(Arrays.asList(deck.drawCard(7)));
+		players[0] = new Player(0, user.getNickName(), true, userHand);
+		//ultimi cambiamenti fatti qua, ho dichiarato userHand per poi metterla in arrayList playersHands
+		playersHands.add(userHand);
 		Player[] ias = randomizePlayer();
 		players[1] = ias[0]; players[2] = ias[1]; players[3] = ias[2];
-		playersHands.add(getPlayerHand(players[1]));
-		playersHands.add(getPlayerHand(players[2]));
-		playersHands.add(getPlayerHand(players[3]));
+		//playersHands.add(getPlayerHand(players[1]));
+		//playersHands.add(getPlayerHand(players[2]));
+		//playersHands.add(getPlayerHand(players[3]));
 		currentPlayer = 0;
 		gameDirection = false;
 	}
@@ -109,6 +109,11 @@ public class Game extends Observable
 	public void setStockPile(Card card)
 	{
 		this.stockPile.add(card);
+	}
+	
+	public void setLastCard(Card card)
+	{
+		this.lastCard = card;
 		setChanged();
 		notifyObservers(card);
 	}
@@ -117,7 +122,7 @@ public class Game extends Observable
 	{
 		this.stockPileIcon = icon;
 		setChanged();
-		notifyObservers(stockPileIcon);
+		notifyObservers(icon);
 	}
 	
 	public Integer getChoice()
@@ -167,6 +172,7 @@ public class Game extends Observable
 		return currentPlayer;
 	}
 	
+	//probabilmente inutile, non trovo dove lo volevo usare.
 	public void setCurrentPlayerCounter(int c)
 	{
 		this.currentPlayer = c;
@@ -279,13 +285,13 @@ public class Game extends Observable
         String[] cardNames = listString.split("_");
         for (int i = 0; i < cardNames.length; i++)
         {
-        	if (cardNames[i] == red)
+        	if (cardNames[i].equals(red))
         		redCounter ++;
-        	else if (cardNames[i] == blue)
+        	else if (cardNames[i].equals(blue))
         		blueCounter++;
-        	else if (cardNames[i] == yellow)
+        	else if (cardNames[i].equals(yellow))
         		yellowCounter++;
-        	else if (cardNames[i] == green)
+        	else if (cardNames[i].equals(green))
         		greenCounter++;
         }
         if (redCounter > blueCounter && redCounter > yellowCounter && redCounter > greenCounter)
@@ -304,38 +310,25 @@ public class Game extends Observable
 		Card card = deck.drawCard();
 		setValidColor(card.getColor());
 		setValidValue(card.getValue());
-		setDeclaredColor(card.getColor());
+		int i = getCurrentPlayerCounter();
+		setLastCard(card);
 		
 		
-		if (card.getValue() == Card.Value.COLOR_CHANGE|| card.getValue() == Card.Value.DRAW_TWO || card.getValue() == Card.Value.DRAW_FOUR)
+		if (card.getValue().equals(Card.Value.COLOR_CHANGE)|| card.getValue().equals(Card.Value.DRAW_TWO) || card.getValue().equals(Card.Value.DRAW_FOUR))
 			start(game); //this cards can't start a UNO game
-		if (card.getValue() == Card.Value.SKIP)
+		if (card.getValue().equals(Card.Value.SKIP))
 		{
 			showSkipDialog();
 			checkGameDirection();
 		}
-		if (card.getValue() == Card.Value.REVERSE)
+		if (card.getValue().equals(Card.Value.REVERSE))
 		{
 			firstReverseDialog();
 			gameDirection ^= true;
 			currentPlayer = players.length-1;
 		}
-		stockPile.add(card);
-		setChanged();
-		notifyObservers(card);
-	}
-	
-	
-	public void setDeclaredColor(Card.Color c)
-	{
-		this.declaredColor = c;
-		setChanged();
-		notifyObservers((Card.Color) c);
-	}
-	
-	public Card.Color getDeclaredColor()
-	{
-		return this.declaredColor;
+		setStockPile(card);
+		setLastCard(card);
 	}
 	
 	public Card getLastStockPileCard()
@@ -365,11 +358,6 @@ public class Game extends Observable
 		return dataBase;
 	}
 	
-	public Card getTopCard()
-	{
-		return stockPile.get(stockPile.size()-1);
-		//return new Card(validColor, validValue);
-	}
 	
 	public ImageIcon getTopCardImage()
 	{
@@ -397,7 +385,7 @@ public class Game extends Observable
 	public Player getHumanPlayer()
 	{
 		for (Player p : players)
-			if (p.getPlayerNickName() == user.getNickName())
+			if (p.getPlayerNickName().equals(user.getNickName()))
 				return p;
 		return null;
 	}
@@ -464,14 +452,14 @@ public class Game extends Observable
 	public boolean hasDrawTwo()
 	{
 		for(int i = 0; i < getPlayerHandSize(players[currentPlayer]); i++)
-			 if (getPlayerHand(players[currentPlayer]).get(i).toString() == "RED_DRAW_TWO" || getPlayerHand(players[currentPlayer]).get(i).toString() == "BLUE_DRAW_TWO" || getPlayerHand(players[currentPlayer]).get(i).toString() == "YELLOW_DRAW_TWO" || getPlayerHand(players[currentPlayer]).get(i).toString() == "GREEN_DRAW_TWO") 
+			 if (getPlayerHand(players[currentPlayer]).get(i).toString().equals("RED_DRAW_TWO") || getPlayerHand(players[currentPlayer]).get(i).toString().equals("BLUE_DRAW_TWO") || getPlayerHand(players[currentPlayer]).get(i).toString().equals("YELLOW_DRAW_TWO") || getPlayerHand(players[currentPlayer]).get(i).toString().equals("GREEN_DRAW_TWO")) 
 			 	return true;
 		return false;
 	}
 
 	public boolean isDrawTwo(int i)
 	{
-		if (getPlayerHand(players[currentPlayer]).get(i).toString() == "RED_DRAW_TWO" || getPlayerHand(players[currentPlayer]).get(i).toString() == "BLUE_DRAW_TWO" || getPlayerHand(players[currentPlayer]).get(i).toString() == "YELLOW_DRAW_TWO" || getPlayerHand(players[currentPlayer]).get(i).toString() == "GREEN_DRAW_TWO")
+		if (getPlayerHand(players[currentPlayer]).get(i).toString().equals("RED_DRAW_TWO") || getPlayerHand(players[currentPlayer]).get(i).toString().equals("BLUE_DRAW_TWO") || getPlayerHand(players[currentPlayer]).get(i).toString().equals("YELLOW_DRAW_TWO") || getPlayerHand(players[currentPlayer]).get(i).toString().equals("GREEN_DRAW_TWO"))
 			return true;
 		return false;
 	}
@@ -479,7 +467,7 @@ public class Game extends Observable
 	public boolean hasDrawFour()
 	{
 		for (int i = 0; i < getPlayerHandSize(players[currentPlayer]); i++)
-			if (getPlayerHand(players[currentPlayer]).get(i).toString() == "WILD_DRAW_FOUR")
+			if (getPlayerHand(players[currentPlayer]).get(i).toString().equals("WILD_DRAW_FOUR"))
 				return true;
 		return false;
 	}
@@ -537,6 +525,8 @@ public class Game extends Observable
 	public void setValidColor(Card.Color color)
 	{
 		validColor = color;
+		setChanged();
+		notifyObservers(color);
 	}
 	
 	public Card.Color getValidColor()
@@ -547,6 +537,8 @@ public class Game extends Observable
 	public void setValidValue(Card.Value value)
 	{
 		validValue = value;
+		setChanged();
+		notifyObservers(value);
 	}
 	
 	public Card.Value getValidValue()
@@ -571,7 +563,7 @@ public class Game extends Observable
 		if (isGameOver())
 		{
 			showGameWonDialog();
-			if (getHumanPlayer() == players[currentPlayer])
+			if (getHumanPlayer().equals(players[currentPlayer]))
 				addGameWon();
 			else
 				addGameLoss();
@@ -581,13 +573,12 @@ public class Game extends Observable
 	
 	public void answerDrawTwoDialog(Card c) throws InvalidPlayerTurnException
 	{
-		ArrayList<Card> currentPlayerHand = getPlayerHand(players[getCurrentPlayerCounter()]);
 		String[] options = {"Yes", "No"};
 		JOptionPane.showConfirmDialog(null, "Do you want to answer \n" + players[currentPlayer-1].getPlayerNickName() + "'s draw two?", "Answer Dialog", JOptionPane.YES_NO_OPTION);
 		int n = JOptionPane.showOptionDialog(null, "Do you want to answer \n" + players[currentPlayer-1].getPlayerNickName() + "'s draw two?", "Answer Dialog", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, null);
 		if (n == JOptionPane.YES_OPTION)
 		{
-			currentPlayerHand.remove(c);
+			getPlayerHand(players[getCurrentPlayerCounter()]).remove(c);
 			gameOverCheck();
 			stockPile.add(c);
 			drawTwoCount++;
@@ -607,16 +598,16 @@ public class Game extends Observable
 	
 	public void answerDrawFourDialog(Card c) throws InvalidPlayerTurnException
 	{
-		ArrayList<Card> currentPlayerHand = getPlayerHand(players[getCurrentPlayerCounter()]);
 		String[] options = {"Yes", "No"};
 		JOptionPane.showConfirmDialog(null, "Do you want to answer \n" + players[currentPlayer-1].getPlayerNickName() + "'s draw four?", "Answer Dialog", JOptionPane.YES_NO_OPTION);
 		int n = JOptionPane.showOptionDialog(null, "Do you want to answer \n" + players[currentPlayer-1].getPlayerNickName() + "'s draw four?", "Answer Dialog", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, null);
 		if (n == JOptionPane.YES_OPTION)
 		{
-			currentPlayerHand.remove(c);
+			getPlayerHand(players[getCurrentPlayerCounter()]).remove(c);
 			colorChangeDialog();
 			gameOverCheck();
 			stockPile.add(c);
+			setStockPileButton(new ImageIcon(".\\resources\\UnoCards\\" + c.toString() + ".png"));
 			drawFourCount++;
 		}
 		else
@@ -637,12 +628,11 @@ public class Game extends Observable
 	public void submitAICard() throws InvalidColorSubmissionException, InvalidValueSubmissionException, InvalidPlayerTurnException
 	{
 		checkPlayerTurn(players[getCurrentPlayerCounter()]);
-		
-		ArrayList<Card> currentPlayerHand = getPlayerHand(players[getCurrentPlayerCounter()]);
+		int x = getCurrentPlayerCounter();
 		setValidColor(getLastStockPileCard().getColor());
 		setValidValue(getLastStockPileCard().getValue());
 		
-		if ((currentPlayerHand.size() == 1) && (currentPlayerHand.get(0).getValue().equals(Card.Value.COLOR_CHANGE) || currentPlayerHand.get(0).getValue().equals(Card.Value.DRAW_FOUR) && currentPlayerHand.get(0).getValue().equals(Card.Value.DRAW_TWO) && currentPlayerHand.get(0).getValue().equals(Card.Value.SKIP) && currentPlayerHand.get(0).getValue().equals(Card.Value.REVERSE)))
+		if ((getPlayerHand(players[getCurrentPlayerCounter()]).size() == 1) && (getPlayerHand(players[getCurrentPlayerCounter()]).get(0).getValue().equals(Card.Value.COLOR_CHANGE) || getPlayerHand(players[getCurrentPlayerCounter()]).get(0).getValue().equals(Card.Value.DRAW_FOUR) && getPlayerHand(players[getCurrentPlayerCounter()]).get(0).getValue().equals(Card.Value.DRAW_TWO) && getPlayerHand(players[getCurrentPlayerCounter()]).get(0).getValue().equals(Card.Value.SKIP) && getPlayerHand(players[getCurrentPlayerCounter()]).get(0).getValue().equals(Card.Value.REVERSE)))
 		{
 			submitDraw(players[getCurrentPlayerCounter()]);
 			checkGameDirection();
@@ -654,15 +644,14 @@ public class Game extends Observable
 			{
 				if (hasDrawFour())
 				{
-					for (Card c : currentPlayerHand)
-						if (c.toString().equals("WILD_DRAW_FOUR"))
+					for (Card c : getPlayerHand(players[getCurrentPlayerCounter()]))
+						if (c.getValue().equals(Card.Value.DRAW_FOUR) && c.getColor().equals(Card.Color.WILD))
 						{
-							currentPlayerHand.remove(currentPlayerHand.indexOf(c));
-							setValidColor(getMostFrequentColor(players[getCurrentPlayerCounter()]));
-							setValidValue(c.getValue());
-							setDeclaredColor(getValidColor());
+							getPlayerHand(players[getCurrentPlayerCounter()]).remove(getPlayerHand(players[getCurrentPlayerCounter()]).indexOf(c));
 							setStockPile(c);
 							setStockPileButton(new ImageIcon(".\\resources\\UnoCards\\" + c.toString() + ".png"));
+							setValidColor(getMostFrequentColor(players[getCurrentPlayerCounter()]));
+							setValidValue(c.getValue());
 							checkGameDirection();
 							setDrawFourCount();
 						}
@@ -681,40 +670,35 @@ public class Game extends Observable
 					checkGameDirection();
 				}	
 			}	
-			if (validValue.toString().equals("COLOR_CHANGE"))
+			if (validValue.equals(Card.Value.COLOR_CHANGE))
 			{
-				for (Card c : currentPlayerHand)
+				for (Card c : getPlayerHand(players[getCurrentPlayerCounter()]))
 				{
 					if (c.getColor().equals(validColor))
 					{
-						currentPlayerHand.remove(currentPlayerHand.indexOf(c));
-						gameOverCheck();
-						setValidColor(c.getColor());
-						setValidValue(c.getValue());
-						setDeclaredColor(c.getColor());
+						getPlayerHand(players[getCurrentPlayerCounter()]).remove(getPlayerHand(players[getCurrentPlayerCounter()]).indexOf(c));
 						setStockPile(c);
 						setStockPileButton(new ImageIcon(".\\resources\\UnoCards\\" + c.toString() + ".png"));
+						setValidColor(getMostFrequentColor(players[getCurrentPlayerCounter()]));
+						setValidValue(c.getValue());
 						checkGameDirection();
 					}
 					else if (c.getValue().equals(validValue))
 					{
-						currentPlayerHand.remove(currentPlayerHand.indexOf(c));
-						gameOverCheck();
-						setValidColor(getMostFrequentColor(players[getCurrentPlayerCounter()]));
-						setValidValue(c.getValue());
-						setDeclaredColor(c.getColor());
+						getPlayerHand(players[getCurrentPlayerCounter()]).remove(getPlayerHand(players[getCurrentPlayerCounter()]).indexOf(c));
 						setStockPile(c);
 						setStockPileButton(new ImageIcon(".\\resources\\UnoCards\\" + c.toString() + ".png"));
+						setValidColor(getMostFrequentColor(players[getCurrentPlayerCounter()]));
+						setValidValue(c.getValue());
 						checkGameDirection();
 					}
 					else if (c.getValue().equals(Card.Value.DRAW_FOUR))
 					{
-						currentPlayerHand.remove(currentPlayerHand.indexOf(c));
-						setValidColor(getMostFrequentColor(players[getCurrentPlayerCounter()]));
-						setValidValue(c.getValue());
-						setDeclaredColor(getValidColor());
+						getPlayerHand(players[getCurrentPlayerCounter()]).remove(getPlayerHand(players[getCurrentPlayerCounter()]).indexOf(c));
 						setStockPile(c);
 						setStockPileButton(new ImageIcon(".\\resources\\UnoCards\\" + c.toString() + ".png"));
+						setValidColor(getMostFrequentColor(players[getCurrentPlayerCounter()]));
+						setValidValue(c.getValue());
 						checkGameDirection();
 						setDrawFourCount();
 					}
@@ -723,19 +707,18 @@ public class Game extends Observable
 				}
 			}
 		}
-		else if (validValue.toString().equals("DRAW_TWO"))
+		else if (validValue.equals(Card.Value.DRAW_TWO))
 		{
 			if(hasDrawTwo())
 			{
-				for (Card c : currentPlayerHand)
-					if (c.getValue().toString().equals("DRAW_TWO"))
+				for (Card c : getPlayerHand(players[getCurrentPlayerCounter()]))
+					if (c.getValue().equals(Card.Value.DRAW_TWO))
 					{
-						currentPlayerHand.remove(currentPlayerHand.indexOf(c));
-						gameOverCheck();
-						setValidColor(c.getColor());
-						setValidValue(c.getValue());
+						getPlayerHand(players[getCurrentPlayerCounter()]).remove(getPlayerHand(players[getCurrentPlayerCounter()]).indexOf(c));
 						setStockPile(c);
 						setStockPileButton(new ImageIcon(".\\resources\\UnoCards\\" + c.toString() + ".png"));
+						setValidColor(c.getColor());
+						setValidValue(c.getValue());
 						checkGameDirection();
 						setDrawTwoCount();
 					}
@@ -752,12 +735,12 @@ public class Game extends Observable
 				checkGameDirection();
 			}
 		}
-		else if(getLastStockPileCard().getValue().toString().equals("SKIP"))
+		else if(getLastStockPileCard().getValue().equals(Card.Value.SKIP))
 		{
 			checkGameDirection();
 			showSkipDialog();
 		}
-		else if(getLastStockPileCard().getValue().toString().equals("REVERSE"))
+		else if(getLastStockPileCard().getValue().equals(Card.Value.REVERSE))
 		{
 			showReverseDialog();
 			
@@ -765,22 +748,24 @@ public class Game extends Observable
 		}
 		else
 		{
-			for (Card c : currentPlayerHand)
+			for (Card c : getPlayerHand(players[getCurrentPlayerCounter()]))
 			{
-				if (c.getColor() == validColor)
+				if (c.getColor().equals(validColor))
 				{
-					currentPlayerHand.remove(currentPlayerHand.indexOf(c));
+					getPlayerHand(players[getCurrentPlayerCounter()]).remove(getPlayerHand(players[getCurrentPlayerCounter()]).indexOf(c));
 					gameOverCheck();
-					setValidValue(c.getValue());
 					setStockPile(c);
 					setStockPileButton(new ImageIcon(".\\resources\\UnoCards\\" + c.toString() + ".png"));
+					setValidValue(c.getValue());
+					setValidColor(c.getColor());
 					checkGameDirection();
 				}
-				else if (c.getValue() == validValue)
+				else if (c.getValue().equals(validValue))
 				{
-					currentPlayerHand.remove(currentPlayerHand.indexOf(c));
+					getPlayerHand(players[getCurrentPlayerCounter()]).remove(getPlayerHand(players[getCurrentPlayerCounter()]).indexOf(c));
 					gameOverCheck();
 					setValidColor(c.getColor());
+					setValidValue(c.getValue());
 					setStockPile(c);
 					setStockPileButton(new ImageIcon(".\\resources\\UnoCards\\" + c.toString() + ".png"));
 					checkGameDirection();
@@ -791,12 +776,10 @@ public class Game extends Observable
 	
 	public void submitPlayerCard(Card card) throws InvalidColorSubmissionException, InvalidPlayerTurnException, InvalidValueSubmissionException, InvalidSubmissionFinisherException
 	{
-		ArrayList<Card> currentPlayerHand = getPlayerHand(players[getCurrentPlayerCounter()]);
 		setValidColor(getLastStockPileCard().getColor());
 		setValidValue(getLastStockPileCard().getValue());
-		setDeclaredColor(getLastStockPileCard().getColor());
 		
-		if ((currentPlayerHand.size() == 1) && (currentPlayerHand.get(0).getValue().equals(Card.Value.COLOR_CHANGE) || currentPlayerHand.get(0).getValue().equals(Card.Value.DRAW_FOUR) && currentPlayerHand.get(0).getValue().equals(Card.Value.DRAW_TWO) && currentPlayerHand.get(0).getValue().equals(Card.Value.SKIP) && currentPlayerHand.get(0).getValue().equals(Card.Value.REVERSE)))
+		if ((getPlayerHand(players[getCurrentPlayerCounter()]).size() == 1) && (getPlayerHand(players[getCurrentPlayerCounter()]).get(0).getValue().equals(Card.Value.COLOR_CHANGE) || getPlayerHand(players[getCurrentPlayerCounter()]).get(0).getValue().equals(Card.Value.DRAW_FOUR) && getPlayerHand(players[getCurrentPlayerCounter()]).get(0).getValue().equals(Card.Value.DRAW_TWO) && getPlayerHand(players[getCurrentPlayerCounter()]).get(0).getValue().equals(Card.Value.SKIP) && getPlayerHand(players[getCurrentPlayerCounter()]).get(0).getValue().equals(Card.Value.REVERSE)))
 		{
 			JLabel message = new JLabel ("You should draw a card, can't win a UNO game with a non-basic Card");
 			message.setFont(BIG_GAME_FONT);
@@ -810,7 +793,7 @@ public class Game extends Observable
 		{
 			if (hasDrawFour())
 			{
-				for (Card c : currentPlayerHand)
+				for (Card c : getPlayerHand(players[getCurrentPlayerCounter()]))
 					if (c.toString().equals("WILD_DRAW_FOUR"))
 						answerDrawFourDialog(c);
 			}
@@ -834,21 +817,22 @@ public class Game extends Observable
 			{
 				if (card.getColor().equals(Card.Color.WILD))
 				{
-					currentPlayerHand.remove(card);
-					setValidColor(card.getColor());
+					getPlayerHand(players[getCurrentPlayerCounter()]).remove(card);
+					setStockPile(card);
+					setStockPileButton(new ImageIcon(".\\resources\\UnoCards\\" + card.toString() + ".png"));
+					colorChangeDialog();
 					setValidValue(card.getValue());
+					
 				}
 				if (!card.getColor().equals(validColor))
-				{
 					if (card.getValue().equals(validValue))
 					{
-						currentPlayerHand.remove(card);
+						getPlayerHand(players[getCurrentPlayerCounter()]).remove(card);
+						setStockPile(card);
+						setStockPileButton(new ImageIcon(".\\resources\\UnoCards\\" + card.toString() + ".png"));
 						colorChangeDialog();
-					}
-					else
-						showInvalidPlayerMoveValueDialog(card);
-		    		}
-				
+						setValidValue(card.getValue());
+					}				
 				else
 					showInvalidPlayerMoveColorDialog(card);
 				
@@ -858,7 +842,7 @@ public class Game extends Observable
 		{
 			if (hasDrawTwo())
 			{
-				for (Card c : currentPlayerHand)
+				for (Card c : getPlayerHand(players[getCurrentPlayerCounter()]))
 					if (c.getValue().toString().equals("DRAW_TWO"))
 						answerDrawTwoDialog(c);
 			}
@@ -886,29 +870,32 @@ public class Game extends Observable
 		}
 		else
 		{
-			Card.Color coloreCarta = card.getColor();
+			String coloreCarta = card.getColor().toString();
 			String valoreCarta = card.getValue().toString();
-			Card.Color validC = getValidColor();
+			String validC = getValidColor().toString();
 			String valid = getValidValue().toString();
 			if (!validCardPlay(card))
 			{
 				if (card.getValue().equals(Card.Value.COLOR_CHANGE))
 				{
-					if(currentPlayerHand.size()==1)
+					if(getPlayerHand(players[getCurrentPlayerCounter()]).size()==1)
 						showInvalidPlayerMoveFinishDialog(card);
 					colorChangeDialog();
-					currentPlayerHand.remove(card);
+					getPlayerHand(players[getCurrentPlayerCounter()]).remove(card);
+					setStockPile(card);
+					setStockPileButton(new ImageIcon(".\\resources\\UnoCards\\" + card.toString() + ".png"));
 					gameOverCheck();
 					
 				}
-				if (card.getValue().toString().equals("DRAW_FOUR"))
+				if (card.getValue().equals(Card.Value.DRAW_FOUR))
 				{
-					if (currentPlayerHand.size() ==1)
+					if (getPlayerHand(players[getCurrentPlayerCounter()]).size() ==1)
 						showInvalidPlayerMoveFinishDialog(card);
-					currentPlayerHand.remove(card);
+					getPlayerHand(players[getCurrentPlayerCounter()]).remove(card);
 					colorChangeDialog();
 					gameOverCheck();
-					stockPile.add(card);
+					setStockPile(card);
+					setStockPileButton(new ImageIcon(".\\resources\\UnoCards\\" + card.toString() + ".png"));
 					drawFourCount++;
 				}
 				else
@@ -916,35 +903,37 @@ public class Game extends Observable
 			}
 			else
 			{
-				if(currentPlayerHand.size()==1)
+				if(getPlayerHand(players[getCurrentPlayerCounter()]).size()==1)
 					if ((card.getValue().equals(Card.Value.REVERSE)) || (card.getValue().equals(Card.Value.SKIP)) || (card.getValue().equals(Card.Value.COLOR_CHANGE)) || (card.getValue().equals(Card.Value.DRAW_FOUR)) || (card.getValue().equals(Card.Value.DRAW_TWO)))
 							showInvalidPlayerMoveFinishDialog(card);
-				currentPlayerHand.remove(card);
+				getPlayerHand(players[getCurrentPlayerCounter()]).remove(card);
 				gameOverCheck();
 				setValidColor(card.getColor());
 				setValidValue(card.getValue());
 				setStockPile(card);
+				setStockPileButton(new ImageIcon(".\\resources\\UnoCards\\" + card.toString() + ".png"));
 				checkGameDirection();
 			}
 		}
 	}
 
 	
-	//va in GameControllerClass
+	/*
 	public void gameLoop() throws InvalidPlayerTurnException, InvalidColorSubmissionException, InvalidValueSubmissionException, InterruptedException, InvalidSubmissionFinisherException
 	{
 		while (players[currentPlayer].isHuman() == false)
 		{
 			submitAICard();
 			gameOverCheck();
-			TimeUnit.SECONDS.sleep(5L);
+			TimeUnit.SECONDS.sleep(10L);
 		}	
 		if (players[currentPlayer].isHuman())
 		{
-			submitPlayerCard(getPlayerHand(players[currentPlayer]).get(choice));
+			//submitPlayerCard(getPlayerHand(players[currentPlayer]).get(choice));
 			gameOverCheck();
 		}
 	}
+	*/
 	
 	public void observationRoutine(JFrame newView, JFrame oldView)
 	{
@@ -957,7 +946,7 @@ public class Game extends Observable
 		Object[] possibilities = {"RED", "GREEN", "BLUE", "YELLOW"};
 		String s = (String)JOptionPane.showInputDialog(null, "Change color into: ", "Change Color Frame", JOptionPane.PLAIN_MESSAGE, null, possibilities, "RED");
 		if ((s!= null) && s.length() > 0)
-			validColor = toColor(s);
+			setValidColor(toColor(s));
 	}
 	
 	public Card.Color toColor(String s)
@@ -995,6 +984,12 @@ public class Game extends Observable
 				currentPlayer = players.length-2;
 		}
 		else if(gameDirection == false)
+		{
 			currentPlayer += 2;
+			if (currentPlayer == players.length)
+				currentPlayer = 0;
+			if (currentPlayer == players.length+1)
+				currentPlayer = 1;
+		}
 	}
 }

@@ -33,14 +33,52 @@ public class Card
 		this.value = value;
 	}
 	
-	public Color getColor()
+	public Card.Color getColor()
 	{
-		return this.color;
+		if (this.color.equals(Card.Color.RED))
+			return Card.Color.RED;
+		else if (this.color.equals(Card.Color.BLUE))
+			return Card.Color.BLUE;
+		else if (this.color.equals(Card.Color.GREEN))
+			return Card.Color.GREEN;
+		else if (this.color.equals(Card.Color.YELLOW))
+			return Card.Color.YELLOW;
+		else
+			return Card.Color.WILD;
 	}
 	
-	public Value getValue()
+	public Card.Value getValue()
 	{
-		return this.value;
+		if (this.value.equals(Card.Value.ZERO))
+			return Card.Value.ZERO;
+		else if (this.value.equals(Card.Value.ONE))
+			return Card.Value.ONE;
+		else if (this.value.equals(Card.Value.TWO))
+			return Card.Value.TWO;
+		else if (this.value.equals(Card.Value.THREE))
+			return Card.Value.THREE;
+		else if (this.value.equals(Card.Value.FOUR))
+			return Card.Value.FOUR;
+		else if (this.value.equals(Card.Value.FIVE))
+			return Card.Value.FIVE;
+		else if (this.value.equals(Card.Value.SIX))
+			return Card.Value.SIX;
+		else if (this.value.equals(Card.Value.SEVEN))
+			return Card.Value.SEVEN;
+		else if (this.value.equals(Card.Value.EIGHT))
+			return Card.Value.EIGHT;
+		else if (this.value.equals(Card.Value.NINE))
+			return Card.Value.NINE;
+		else if (this.value.equals(Card.Value.DRAW_TWO))
+			return Card.Value.DRAW_TWO;
+		else if (this.value.equals(Card.Value.SKIP))
+			return Card.Value.SKIP;
+		else if (this.value.equals(Card.Value.REVERSE))
+			return Card.Value.REVERSE;
+		else if (this.value.equals(Card.Value.DRAW_FOUR))
+			return Card.Value.DRAW_FOUR;
+		else
+			return Card.Value.COLOR_CHANGE;
 	}
 	
 	@Override
@@ -49,20 +87,4 @@ public class Card
 		return color + "_" + value;
 	}
 	
-    /**
-     * Gets the score based on the faceValue of the card.
-     * Numbered cards are their face value, wild and +4 are worth 50,
-     * and others are worth 20.
-     *
-     * @return The calculated score for this card.
-     */
-    public int getScoreValue() 
-    {
-        if(this.value == Card.Value.ONE || (this.value == Card.Value.TWO) || (this.value == Card.Value.THREE) ||
-        		(this.value == Card.Value.FOUR) || (this.value == Card.Value.FIVE) || (this.value == Card.Value.SIX) ||
-        		(this.value == Card.Value.SEVEN) || (this.value == Card.Value.EIGHT) || (this.value == Card.Value.NINE))
-        	return 10;
-        else if(this.getValue() == Card.Value.DRAW_FOUR || this.getValue() == Card.Value.COLOR_CHANGE) return 50;
-        else return 20;
-    }
 }

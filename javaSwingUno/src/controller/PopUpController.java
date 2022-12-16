@@ -18,7 +18,6 @@ import model.InvalidPlayerTurnException;
 import model.InvalidSubmissionFinisherException;
 import model.InvalidValueSubmissionException;
 import view.GameStage;
-import view.PickColorFrame;
 import view.PopUp;
 
 public class PopUpController 
@@ -97,11 +96,11 @@ public class PopUpController
 	
 	public void useCardButtonActionPerformed(ActionEvent evt) throws InvalidSubmissionFinisherException
 	{
-		if (model.getDeclaredColor() != null)
+		if (model.getValidColor() != null)
 		{
 			try
 			{
-				model.submitPlayerCard(model.getPlayerHand(model.getCurrentPlayer()).get(popUpView.getChoice()));
+				model.submitPlayerCard(model.getPlayerHand(model.getCurrentPlayer()).get(model.getChoice()));
 			}
 			catch (InvalidColorSubmissionException ex) 
             { 

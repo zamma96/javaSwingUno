@@ -33,7 +33,7 @@ public class PopUp extends JFrame implements Observer
     private int choice;
     private ArrayList<JButton> cardButtons;
     private GameStage gameStage;
-    private Card.Color declaredColor;
+    private Card.Color validColor;
     
     
     /**
@@ -50,7 +50,7 @@ public class PopUp extends JFrame implements Observer
     public PopUp(String cardName, Game game, ArrayList<JButton> cardButtons, GameStage gameStage) 
     {
         initComponents();
-        this.declaredColor = game.getDeclaredColor();
+        this.validColor = game.getValidColor();
         this.cardImage = cardName;
         this.game = game;
         this.playerHand = game.getPlayerHand(game.getCurrentPlayer());
@@ -171,7 +171,7 @@ public class PopUp extends JFrame implements Observer
 	public void update(Observable o, Object arg) 
 	{
 		if (arg.getClass().getName().equals("Card.Color"))
-			this.declaredColor = (Card.Color)arg;
+			this.validColor = (Card.Color)arg;
 		if (arg.getClass().getName().equals("java.lang.Integer"))
 			this.choice = (Integer)arg;
 	}
