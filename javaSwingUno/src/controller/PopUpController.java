@@ -100,6 +100,9 @@ public class PopUpController
 		{
 			try
 			{
+				Card c = popUpView.getChoosenCard();
+				String nome = c.toString();
+				Card.Color colore = c.getColor();
 				model.submitPlayerCard(model.getPlayerHand(model.getCurrentPlayer()).get(model.getChoice()));
 			}
 			catch (InvalidColorSubmissionException ex) 

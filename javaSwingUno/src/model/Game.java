@@ -46,7 +46,11 @@ public class Game extends Observable
 	private Integer choice;
 	//per aggiornamenti
 	private Icon stockPileIcon = new ImageIcon();
+	private Card choosenCard;
+	//da togliere
 	private Card lastCard;
+	//da implementare private Card choosenCard; con setChoosenCard che fa l'update notificando gli observers,
+	//il getter è direttamente nella classe PopUpController
 	
 	
 	private static Font BIG_GAME_FONT = new Font("Comic Sans MS", Font.BOLD, 48);
@@ -109,6 +113,13 @@ public class Game extends Observable
 	public void setStockPile(Card card)
 	{
 		this.stockPile.add(card);
+	}
+	
+	public void setChoosenCard(Card card)
+	{
+		this.choosenCard = card;
+		setChanged();
+		notifyObservers(choosenCard);
 	}
 	
 	public void setLastCard(Card card)
@@ -310,9 +321,6 @@ public class Game extends Observable
 		Card card = deck.drawCard();
 		setValidColor(card.getColor());
 		setValidValue(card.getValue());
-		int i = getCurrentPlayerCounter();
-		setLastCard(card);
-		
 		
 		if (card.getValue().equals(Card.Value.COLOR_CHANGE)|| card.getValue().equals(Card.Value.DRAW_TWO) || card.getValue().equals(Card.Value.DRAW_FOUR))
 			start(game); //this cards can't start a UNO game
@@ -328,6 +336,7 @@ public class Game extends Observable
 			currentPlayer = players.length-1;
 		}
 		setStockPile(card);
+		//da togliere.. si può ricavare con stockPile.get(stockPile.size-1);
 		setLastCard(card);
 	}
 	
@@ -366,7 +375,7 @@ public class Game extends Observable
 	
 	public Player getCurrentPlayer()
 	{
-		return this.players[currentPlayer];
+		return players[currentPlayer];
 	}
 	
 	public Player getPreviousPlayer(int i)

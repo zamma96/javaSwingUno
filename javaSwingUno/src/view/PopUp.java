@@ -34,6 +34,7 @@ public class PopUp extends JFrame implements Observer
     private ArrayList<JButton> cardButtons;
     private GameStage gameStage;
     private Card.Color validColor;
+    private Card choosenCard;
     
     
     /**
@@ -101,6 +102,11 @@ public class PopUp extends JFrame implements Observer
 	public int getChoice() 
 	{
 		return choice;
+	}
+	
+	public Card getChoosenCard()
+	{
+		return choosenCard;
 	}
 	
 	/**
@@ -174,5 +180,7 @@ public class PopUp extends JFrame implements Observer
 			this.validColor = (Card.Color)arg;
 		if (arg.getClass().getName().equals("java.lang.Integer"))
 			this.choice = (Integer)arg;
+		if (arg.getClass().getName().equals("model.Card"))
+				this.choosenCard = (Card)arg;
 	}
 }

@@ -244,6 +244,7 @@ public class GameController
 		window = new PopUp(cardId, model, model.getcardButtons(), view);
 		model.addObserver(window);
 		model.setChoice(i);
+		model.setChoosenCard(model.getCurrentPlayer().getHand().get(model.getChoice()));
 		PopUpController controller = new PopUpController(model, view, window);
 		controller.initController(window);
 		view.setButtonIcons();
