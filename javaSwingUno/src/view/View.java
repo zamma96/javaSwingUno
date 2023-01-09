@@ -1,41 +1,77 @@
 package view;
 
 import java.awt.Color;
-import java.awt.Font;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Observable;
 import java.util.Observer;
-import java.util.concurrent.TimeUnit;
-import java.util.logging.*;
 import java.util.stream.Collectors;
 import javax.swing.*;
-import model.InvalidPlayerTurnException;
-import model.InvalidValueSubmissionException;
+import model.Model;
 import model.User;
 import model.Card;
-import model.Game;
-import model.InvalidColorSubmissionException;
 
-public class GameStage extends JFrame implements Observer, Runnable
+public class View extends JFrame implements Observer, Runnable
 {
 	private User user;
-	private String[] playerIds = new String[4];
-	private Game game;
-	private ArrayList<JButton> cardButtons = new ArrayList<JButton>();
-	private ArrayList<String> cardIds;
-	private Card lastStockPileCard;
+	private Card.Value validValue;
 	private Card.Color validColor;
+	private Integer choice;
+	private ArrayList<String> cardIds;
+	private Card downCard;
+	private String[] playerIds = new String[4];
+	private Model model;
+	private ArrayList<JButton> cardButtons = new ArrayList<JButton>();
 	
-	/* Double constructors for both ways of creating a new gameStage */
 
-	public GameStage(Game model) 
+	public View(Model model) 
 	{
-		this.game = model;
+		this.model = model;
 		initComponents();
 		populateArrayList();
-		game.start(game);
+		model.start(model);
 		this.playerIds = model.getPlayersNames();
+	}
+	
+	public void setValidColor(Card.Color c)
+	{
+		this.validColor = c;
+	}
+	
+	public Card.Color getValidColor()
+	{
+		return validColor;
+	}
+	
+	public Card.Value getValidValue()
+	{
+		return validValue;
+	}
+	
+	public void setValidValue(Card.Value v)
+	{
+		this.validValue = v;
+	}
+	
+	public Integer getChoice()
+	{
+		return choice;
+	}
+	
+	public void setChoice(Integer i)
+	{
+		this.choice = i;
+	}
+	
+	public Card getDownCard()
+	{
+		return model.getStockPile().get(model.getStockPile().size()-1);
+	}
+	
+	public void setDownCard(Card c)
+	{
+		this.downCard = c;
 	}
 	
 	/**
@@ -56,11 +92,6 @@ public class GameStage extends JFrame implements Observer, Runnable
 		return DeckPileButton;
 	}
 	
-	public void setLastStockPileCard(Card card)
-	{
-		this.lastStockPileCard = card;
-	}
-	
 	/**
 	 * use of stream to trasform an ArrayList<Card> into a String list;
 	 * this method sets all user's button icons to show the proper card
@@ -68,11 +99,11 @@ public class GameStage extends JFrame implements Observer, Runnable
 	 */
 	public void setButtonIcons() 
 	{
-		String listString = (game.getPlayerHand(game.getHumanPlayer())
+		String listString = (model.getPlayerHand(model.getHumanPlayer())
 				.stream().map(Object::toString)
 				.collect(Collectors.joining(",")));
 		String[] cardNames = listString.split(",");
-		game.setCardIds(new ArrayList<>(Arrays.asList(cardNames)));
+		model.setCardIds(new ArrayList<>(Arrays.asList(cardNames)));
 		for (int i = 0; i < cardIds.size(); i++) 
 		{
 			Icon iconH = new ImageIcon(".\\resources\\UnoCards\\" + cardIds.get(i) + ".png");
@@ -401,38 +432,47 @@ public class GameStage extends JFrame implements Observer, Runnable
 		{
 			if (arg.getClass().getName().equals("model.User"))
 				setUser((User)arg);
-			else if(arg.getClass().getName().equals("javax.swing.Icon"))
-				StockPileButton.setIcon((Icon)arg);
+			else if(arg.getClass().getName().equals("javax.swing.ImageIcon"))
+				StockPileButton.setIcon((ImageIcon)arg);
 			else if(arg.getClass().getName().equals("java.util.ArrayList"))
 				setCardIds((ArrayList<String>)arg);
-			else if(arg.getClass().getName().equals("model.Card"))
-				setLastStockPileCard((Card) arg);
+			else if (arg.getClass().getName().equals("Card.Value"))
+				this.validValue = (Card.Value)arg;
 			else if (arg.getClass().getName().equals("Card.Color"))
 				this.validColor = (Card.Color)arg;
 		}
+		else 
+			setChoice((Integer) arg);
 	}
 
 	@Override
 	public void run() 
 	{
-		this.setVisible(true);
-		while(!game.isGameOver())
+		while (!model.isGameOver());
 		{
-			if(!game.getPlayers()[game.getCurrentPlayerCounter()].isHuman())
+			if (model.getHumanPlayer().isHuman() == false)
 			{
-				try 
+				Timer timer = new Timer(5000, (ActionListener) this);
+				timer.setRepeats(false);
+				timer.start();
+				model.submitAiCard();
+			} 
+			else
+			{
+				if(model.cardCheck())
 				{
-					game.submitAICard();
-					Thread.sleep(20);
-				} 
-				catch (InterruptedException | InvalidColorSubmissionException | InvalidValueSubmissionException
-						| InvalidPlayerTurnException e) 
-				{
-					e.printStackTrace();
-				} 
+					try 
+					{
+						//dare tempo all'utente di effettuare la propria giocata
+						wait(10000);
+					} 
+					catch (InterruptedException e) 
+					{
+						e.printStackTrace();
+					}
+				}
 			}
 		}
-		System.exit(0);
 	}
 
 }

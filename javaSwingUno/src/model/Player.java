@@ -8,12 +8,23 @@ public class Player
 	private String nickName;
 	private boolean human;
 	private ArrayList<Card> playerHand;
+	private boolean played = false;
 	
 	
 	public Player(int playerId, String nickName, boolean human, ArrayList<Card> playerHand) 
 	{
 		this.playerId = playerId; this.nickName = nickName;
 		this.human = human; this.playerHand = playerHand;
+	}
+	
+	public void setPlayed(boolean b)
+	{
+		this.played = b;
+	}
+	
+	public boolean hasPlayed()
+	{
+		return this.played;
 	}
 	
 	public int getPlayerId()

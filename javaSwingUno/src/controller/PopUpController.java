@@ -17,19 +17,21 @@ import model.InvalidColorSubmissionException;
 import model.InvalidPlayerTurnException;
 import model.InvalidSubmissionFinisherException;
 import model.InvalidValueSubmissionException;
+import model.Model;
 import view.GameStage;
 import view.PopUp;
+import view.View;
 
 public class PopUpController 
 {
-	private Game model;
+	private Model model;
 	private PopUp popUpView;
-	private GameStage view;
+	private View view;
 	private static Font SMALL_GAME_FONT = new Font("Comic Sans MS", Font.BOLD, 18);
 	private static Color TABLE_GREEN = new Color(53, 101, 77);
 	private static Color SALMON_PINK = new Color(255, 145, 164);
 	
-	public PopUpController(Game game, GameStage gameStage, PopUp popUpView)
+	public PopUpController(Model game, View gameStage, PopUp popUpView)
 	{
 		this.model = game;
 		this.view = gameStage;
@@ -100,10 +102,8 @@ public class PopUpController
 		{
 			try
 			{
-				Card c = popUpView.getChoosenCard();
-				String nome = c.toString();
-				Card.Color colore = c.getColor();
-				model.submitPlayerCard(model.getPlayerHand(model.getCurrentPlayer()).get(model.getChoice()));
+				Card c = model.getHumanPlayer().getHand().get(model.getChoice());
+				model.submitPlayerCard(c);
 			}
 			catch (InvalidColorSubmissionException ex) 
             { 

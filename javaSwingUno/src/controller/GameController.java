@@ -241,30 +241,14 @@ public class GameController
 	public void cardAction(int i)
 	{
 		String cardId = model.getCardIds().get(i);
+		String stockCard = model.getLastStockPileCard().toString();
 		window = new PopUp(cardId, model, model.getcardButtons(), view);
 		model.addObserver(window);
 		model.setChoice(i);
-		model.setChoosenCard(model.getCurrentPlayer().getHand().get(model.getChoice()));
 		PopUpController controller = new PopUpController(model, view, window);
 		controller.initController(window);
 		view.setButtonIcons();
 	}
-	
-	/*
-	public void gameLoop() throws InvalidPlayerTurnException, InvalidColorSubmissionException, InvalidValueSubmissionException, InterruptedException, InvalidSubmissionFinisherException
-	{
-		while (model.getPlayers()[model.getCurrentPlayerCounter()].isHuman() == false)
-		{
-			model.submitAICard();
-			model.gameOverCheck();
-			TimeUnit.SECONDS.sleep(10L);
-		}	
-		if (model.getPlayers()[model.getCurrentPlayerCounter()].isHuman())
-		{
-			wait();
-		}
-	}
-	*/
 	
 
 	private void jButton1ActionPerformed(ActionEvent evt) 
@@ -365,10 +349,11 @@ public class GameController
 	
 	private void drawCardButtonActionPerformed(ActionEvent evt)
 	{
+		int y = model.getCurrentPlayerCounter();
 		try
 		{
 			if (model.getCurrentPlayer().isHuman())
-				model.submitDraw(model.getCurrentPlayer());
+				model.submitDraw(model.getHumanPlayer());
 		}
 		catch (InvalidPlayerTurnException ex)
 		{

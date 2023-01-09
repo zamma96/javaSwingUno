@@ -19,6 +19,7 @@ import model.Game;
 import model.InvalidColorSubmissionException;
 import model.InvalidPlayerTurnException;
 import model.InvalidValueSubmissionException;
+import model.Model;
 
 /**
  *
@@ -28,13 +29,13 @@ public class PopUp extends JFrame implements Observer
 {
 
     private String cardImage = "";
-    private Game game;
+    private Model game;
     private ArrayList<Card> playerHand;
     private int choice;
     private ArrayList<JButton> cardButtons;
-    private GameStage gameStage;
+    private View gameStage;
     private Card.Color validColor;
-    private Card choosenCard;
+    private Card lastStockPileCard;
     
     
     /**
@@ -48,7 +49,7 @@ public class PopUp extends JFrame implements Observer
      * Constructor, sets class fields to the params specified 
      * 
      */
-    public PopUp(String cardName, Game game, ArrayList<JButton> cardButtons, GameStage gameStage) 
+    public PopUp(String cardName, Model game, ArrayList<JButton> cardButtons, View gameStage) 
     {
         initComponents();
         this.validColor = game.getValidColor();
@@ -104,9 +105,9 @@ public class PopUp extends JFrame implements Observer
 		return choice;
 	}
 	
-	public Card getChoosenCard()
+	public Card getLastStockPileCard()
 	{
-		return choosenCard;
+		return lastStockPileCard;
 	}
 	
 	/**
@@ -181,6 +182,6 @@ public class PopUp extends JFrame implements Observer
 		if (arg.getClass().getName().equals("java.lang.Integer"))
 			this.choice = (Integer)arg;
 		if (arg.getClass().getName().equals("model.Card"))
-				this.choosenCard = (Card)arg;
+			this.lastStockPileCard = (Card)arg;
 	}
 }
